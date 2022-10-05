@@ -3,10 +3,10 @@ import Navlink from "./Navlink.astro";
 
 
 ---
-<div class="flex justify-between items-center">
+<header class="flex justify-between items-center">
     <h1 class="text-2xl text-black font-title">Leda</h1>
-    <ul class="flex gap-2">
-        <li><Navlink title="Projects" link="#projects" /></li>
-        <li><Navlink title="Contact" link="#contact" /></li>
-    </ul>
-</div>
+    <nav class="flex gap-2">
+        <Navlink title="Projects" link="#projects" />
+        <Navlink title="Contact" link="#contact" />
+    </nav>
+</header>
