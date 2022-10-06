@@ -4,7 +4,7 @@ import type { IProjects } from '../lib/interfaces/Projects';
 import ErrorWrapper from './ErrorWrapper.astro';
 import Project from './Project.astro';
 
-const response = await fetch(`${import.meta.env.API_ENDPOINT}/api/projects`, {
+const response = await fetch(`${import.meta.env.API_ENDPOINT}/api/projects?populate=%2A`, {
   headers: {
     Authorization: `Bearer ${import.meta.env.API_TOKEN}`,
   },
@@ -13,8 +13,14 @@ const response = await fetch(`${import.meta.env.API_ENDPOINT}/api/projects`, {
 const data: IProjects | ErrorResponse = await response.json();
 ---
 
-<section>
-  <ErrorWrapper response={data}>
-    {data.data!.map((project) => <Project project={project} />)}
-  </ErrorWrapper>
+<section class="flex flex-col gap-3">
+  <header>
+    <h2 class="text-4xl font-title py-2">What I'm working on</h2>
+    <p>The following are what I enjoyed and learned from the most. They're projects I'm passionate about!</p>
+  </header>
+  <div class="grid auto-cols-fr gap-5">
+    <ErrorWrapper response={data}>
+      {data.data!.map((project) => <Project project={project} />)}
+    </ErrorWrapper>
+  </div>
 </section>

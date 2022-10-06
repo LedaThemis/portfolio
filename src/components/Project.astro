@@ -1,14 +1,89 @@
 ---
+import NewTabIcon from '../icons/NewTabIcon.astro';
+import RightArrowIcon from '../icons/RightArrowIcon.astro';
 import type { IProject } from '../lib/interfaces/Project';
+import APIURL from '../lib/utils/APIURL';
 
 export interface Props {
   project: IProject['data'];
 }
 
 const { project } = Astro.props;
+
+const defaultImageParams = {
+  format: 'webp',
+  quality: '100',
+};
+
+const imageAPIURL = (url: string, width: string, defaultParams: Record<string, string> = defaultImageParams) =>
+  APIURL(
+    url,
+    new URLSearchParams({
+      width,
+      ...defaultParams,
+    })
+  );
+
+const constructImageSrcSet = (image: IProject['data']['attributes']['cover']) => {
+  return [
+    `${imageAPIURL(image.data.attributes.url, '1920')} 1920w`,
+    `${imageAPIURL(image.data.attributes.url, '960')} 960w`,
+    `${imageAPIURL(image.data.attributes.url, '480')} 480w`,
+  ].join(', ');
+};
 ---
 
 <div>
-  <h3>{project.attributes.name}</h3>
+  <div class="my-4 group relative max-w-max">
+    <img
+      src={APIURL(project.attributes.cover.data.attributes.url, new URLSearchParams(defaultImageParams))}
+      srcset={constructImageSrcSet(project.attributes.cover)}
+      alt={project.attributes.cover.data.attributes.alternativeText}
+      class="max-w-32 cursor-pointer group-hover:brightness-50 transition-all duration-200 ease-in"
+      width={project.attributes.cover.data.attributes.width}
+      height={project.attributes.cover.data.attributes.height}
+    />
+    <div class="absolute inset-0 grid place-items-center group">
+      <div
+        class="flex gap-1 p-2 border-1 rounded-md text-white opacity-0 group-hover:opacity-100 transition-opacity duration-150 ease-in"
+      >
+        <a href={project.attributes.demo} target="_blank" rel="noreferrer noopener" class="flex gap-1"
+          ><p class="text-xl hover-underline-animation after:bg-white">
+            Launch Demo <span class="sr-only">for {project.attributes.name}</span>
+          </p>
+          <NewTabIcon />
+        </a>
+      </div>
+    </div>
+  </div>
+  <h3 class="text-2xl font-bold tracking-wide font-title">{project.attributes.name}</h3>
   <p>{project.attributes.description}</p>
+  <a href={`/project/${project.id}`} class="flex gap-1 pt-2 group text-black transition duration-300"
+    ><p class="hover-underline-animation after:bg-black">View Project</p>
+    <RightArrowIcon />
+  </a>
 </div>
+
+<style>
+  .hover-underline-animation {
+    display: inline-block;
+    position: relative;
+  }
+
+  .hover-underline-animation:after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    transform-origin: bottom left;
+    transition: transform 0.3s ease-out;
+  }
+
+  .hover-underline-animation:hover:after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+  }
+</style>

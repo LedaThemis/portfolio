@@ -3,6 +3,7 @@ lockfileVersion: 5.4
 specifiers:
   '@astrojs/tailwind': ^2.0.2
   '@astrojs/vercel': ^2.1.0
+  '@fontsource/nunito-sans': ^4.5.10
   '@fontsource/raleway': ^4.5.11
   astro: ^1.4.4
   astro-icon: ^0.7.3
@@ -11,6 +12,7 @@ specifiers:
 dependencies:
   '@astrojs/tailwind': 2.0.2_tailwindcss@3.1.8
   '@astrojs/vercel': 2.1.0
+  '@fontsource/nunito-sans': 4.5.10
   '@fontsource/raleway': 4.5.11
   astro: 1.4.4
   astro-icon: 0.7.3
@@ -419,6 +421,10 @@ packages:
     requiresBuild: true
     dev: false
     optional: true
+
+  /@fontsource/nunito-sans/4.5.10:
+    resolution: {integrity: sha512-GVKc3mEfnk3fLEuiQXNYhlP/Z9SrCgD831xZJ7J+6OgFzEf6LNnyHPiqWfjW671sAmOBQTLgm/21z78K/beWEw==}
+    dev: false
 
   /@fontsource/raleway/4.5.11:
     resolution: {integrity: sha512-WrFuS5q3tPqNci4iDwIf7lnkHY5jrkWswy6B007W//cAB7Iiw2NuxBNxrCetYpe3efPbEoFPcoKeTPqDzoWQ3A==}
