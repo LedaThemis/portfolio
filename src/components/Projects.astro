@@ -1,0 +1,20 @@
+---
+import type { ErrorResponse } from '../lib/interfaces/Error';
+import type { IProjects } from '../lib/interfaces/Projects';
+import ErrorWrapper from './ErrorWrapper.astro';
+import Project from './Project.astro';
+
+const response = await fetch(`${import.meta.env.API_ENDPOINT}/api/projects`, {
+  headers: {
+    Authorization: `Bearer ${import.meta.env.API_TOKEN}`,
+  },
+});
+
+const data: IProjects | ErrorResponse = await response.json();
+---
+
+<section>
+  <ErrorWrapper response={data}>
+    {data.data!.map((project) => <Project project={project} />)}
+  </ErrorWrapper>
+</section>

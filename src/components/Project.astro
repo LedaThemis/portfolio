@@ -1,0 +1,14 @@
+---
+import type { IProject } from '../lib/interfaces/Project';
+
+export interface Props {
+  project: IProject['data'];
+}
+
+const { project } = Astro.props;
+---
+
+<div>
+  <h3>{project.attributes.name}</h3>
+  <p>{project.attributes.description}</p>
+</div>
