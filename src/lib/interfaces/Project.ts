@@ -36,10 +36,12 @@ export interface IProject {
     id: number;
     attributes: {
       name: string;
+      summary: string;
       description: string;
       technologies: string;
       demo: string;
       cover: IProjectCover;
+      content: string;
       createdAt: string;
       updatedAt: string;
       publishedAt: string;

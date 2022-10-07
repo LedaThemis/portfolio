@@ -1,0 +1,18 @@
+---
+import type { IProject } from '../../lib/interfaces/Project';
+import APIURL from '../../lib/utils/APIURL';
+import { constructImageSrcSet, defaultImageParams } from '../../lib/utils/projectImage';
+import ProjectTechnologies from './ProjectTechnologies.astro';
+
+export interface Props {
+  name: IProject['data']['attributes']['name'];
+  description: IProject['data']['attributes']['description'];
+}
+
+const { name, description } = Astro.props;
+---
+
+<header>
+  <h2 class="text-6xl font-title font-bold">{name}</h2>
+  <p class="font-body">{description}</p>
+</header>

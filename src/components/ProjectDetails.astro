@@ -1,0 +1,18 @@
+---
+import type { IProject } from '../lib/interfaces/Project';
+import ProjectContent from './ProjectDetail/ProjectContent.astro';
+import ProjectHeader from './ProjectDetail/ProjectHeader.astro';
+import ProjectTechnologies from './ProjectDetail/ProjectTechnologies.astro';
+
+export interface Props {
+  project: IProject['data'];
+}
+
+const { project } = Astro.props;
+---
+
+<section class="mt-8 flex flex-col gap-6">
+  <ProjectHeader name={project.attributes.name} description={project.attributes.description} />
+  <ProjectTechnologies technologies={project.attributes.technologies} />
+  <ProjectContent content={project.attributes.content} />
+</section>

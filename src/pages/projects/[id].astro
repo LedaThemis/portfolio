@@ -1,0 +1,32 @@
+---
+import ErrorWrapper from '../../components/ErrorWrapper.astro';
+import Navbar from '../../components/Navbar.astro';
+import ProjectDetails from '../../components/ProjectDetails.astro';
+import Layout from '../../layouts/Layout.astro';
+import type { ErrorResponse } from '../../lib/interfaces/Error';
+import type { IProject } from '../../lib/interfaces/Project';
+
+const { id } = Astro.params;
+
+const response = await fetch(`${import.meta.env.API_ENDPOINT}/api/projects/${id}?populate=%2A`, {
+  headers: {
+    Authorization: `Bearer ${import.meta.env.API_TOKEN}`,
+  },
+});
+
+const data: IProject | ErrorResponse = await response.json();
+
+const pageTitle = `${data.data!.attributes.name} | Leda`;
+const pageDesc = `Details on the implementation, the why behind and technologies of ${
+  data.data!.attributes.name
+} by Leda`;
+---
+
+<ErrorWrapper response={data}>
+  <Layout title={pageTitle} description={pageDesc}>
+    <main>
+      <Navbar />
+      <ProjectDetails project={data.data!} />
+    </main>
+  </Layout>
+</ErrorWrapper>
