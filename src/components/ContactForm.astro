@@ -1,0 +1,56 @@
+---
+import RequiredFieldIcon from '../icons/RequiredFieldIcon.astro';
+---
+
+<form class="flex flex-col gap-2">
+  <div class="flex flex-col">
+    <label for="firstName">First Name<RequiredFieldIcon /></label>
+    <input
+      id="firstName"
+      name="firstName"
+      placeholder="Joe"
+      type="text"
+      class="p-1 rounded outline outline-2 outline-violet-200 focus:outline-violet-700"
+      aria-required="true"
+      required
+    />
+  </div>
+  <div class="flex flex-col">
+    <label for="lastName">Last Name<RequiredFieldIcon /></label>
+    <input
+      id="lastName"
+      name="lastName"
+      placeholder="Doe"
+      type="text"
+      class="p-1 rounded outline outline-2 outline-violet-200 focus:outline-violet-700"
+      aria-required="true"
+      required
+    />
+  </div>
+  <div class="flex flex-col">
+    <label for="email">Email<RequiredFieldIcon /></label>
+    <input
+      id="email"
+      name="email"
+      placeholder="john.doe@example.com"
+      type="email"
+      class="p-1 rounded outline outline-2 outline-violet-200 focus:outline-violet-700"
+      aria-required="true"
+      required
+    />
+  </div>
+  <div class="flex flex-col">
+    <label for="content">Content<RequiredFieldIcon /></label>
+    <textarea
+      name="content"
+      id="content"
+      cols="30"
+      rows="10"
+      class="p-1 resize-none rounded outline outline-2 outline-violet-200 focus:outline-violet-700"
+      required
+      aria-required="true"></textarea>
+  </div>
+  <button type="submit" class="bg-violet-600 text-white font-bold rounded p-2 outline outline-2 outline-violet-600 focus:outline-violet-200"
+    >Send</button
+  >
+</form>
