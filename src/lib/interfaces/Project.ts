@@ -40,6 +40,7 @@ export interface IProject {
       description: string;
       technologies: string;
       demo: string;
+      source: string;
       cover: IProjectCover;
       content: string;
       createdAt: string;

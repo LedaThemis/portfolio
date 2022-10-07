@@ -1,0 +1,66 @@
+---
+import type { IProject } from '../../lib/interfaces/Project';
+
+export interface Props {
+  name: IProject['data']['attributes']['name'];
+  source: IProject['data']['attributes']['source'];
+  demo: IProject['data']['attributes']['demo'];
+}
+
+const { name, source, demo } = Astro.props;
+---
+
+<div class="flex flex-col gap-4">
+  <h3 class="text-2xl font-title font-bold">Links</h3>
+  <div class="flex gap-3">
+    <a
+      class="flex items-center font-body text-xl external after:h-3 after:w-3"
+      href={source}
+      target="_blank"
+      rel="noreferrer noopener"
+      ><p class="hover-underline-animation after:bg-violet-400">Github</p>
+      <span class="sr-only">for {name}</span>
+    </a>
+    <a
+      class="flex items-center font-body text-xl external after:h-3 after:w-3"
+      href={demo}
+      target="_blank"
+      rel="noreferrer noopener"
+      ><p class="hover-underline-animation after:bg-violet-400">Website</p>
+      <span class="sr-only"> for {name}</span>
+    </a>
+  </div>
+</div>
+
+<style>
+  .hover-underline-animation {
+    display: inline-block;
+    position: relative;
+  }
+
+  .hover-underline-animation:after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    transform-origin: bottom left;
+    transition: transform 0.3s ease-out;
+  }
+
+  .hover-underline-animation:hover:after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+  }
+
+  .external::after {
+    background-color: grey;
+    content: '';
+    display: inline-flex;
+    margin-left: 4px;
+    mask-image: url(/assets/external.svg);
+    mask-size: cover;
+  }
+</style>
