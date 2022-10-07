@@ -35,7 +35,7 @@ const IconInfoList = techList.map((name) => getTechIcon(getTechName(name)));
       IconInfoList.map(({ title, svg, fillStyle }) => (
         <div class="flex items-center gap-2">
           <span class="w-6" style={fillStyle} set:html={svg} />
-          <p class="font-body">{title}</p>
+          <p class="font-title">{title}</p>
         </div>
       ))
     }
