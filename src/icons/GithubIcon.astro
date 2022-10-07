@@ -1,8 +1,9 @@
 ---
 import { Icon } from 'astro-icon';
+import config from '../config';
 ---
 
-<a title="Github" href="https://github.com/LedaThemis" target="_blank" rel="noreferrer noopener"
+<a title="Github" href={config.personal.github} target="_blank" rel="noreferrer noopener"
   ><Icon
     pack="bi"
     name="github"
