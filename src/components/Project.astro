@@ -26,9 +26,12 @@ const imageAPIURL = (url: string, width: string, defaultParams: Record<string, s
 
 const constructImageSrcSet = (image: IProject['data']['attributes']['cover']) => {
   return [
-    `${imageAPIURL(image.data.attributes.url, '1920')} 1920w`,
-    `${imageAPIURL(image.data.attributes.url, '960')} 960w`,
+    `${imageAPIURL(image.data.attributes.url, '2160')} 2160w`,
+    `${imageAPIURL(image.data.attributes.url, '1440')} 1440w`,
+    `${imageAPIURL(image.data.attributes.url, '1080')} 1080w`,
+    `${imageAPIURL(image.data.attributes.url, '720')} 720w`,
     `${imageAPIURL(image.data.attributes.url, '480')} 480w`,
+    `${imageAPIURL(image.data.attributes.url, '360')} 360w`,
   ].join(', ');
 };
 ---
@@ -39,7 +42,7 @@ const constructImageSrcSet = (image: IProject['data']['attributes']['cover']) =>
       src={APIURL(project.attributes.cover.data.attributes.url, new URLSearchParams(defaultImageParams))}
       srcset={constructImageSrcSet(project.attributes.cover)}
       alt={project.attributes.cover.data.attributes.alternativeText}
-      class="max-w-32 cursor-pointer group-hover:brightness-50 transition-all duration-200 ease-in"
+      class="cursor-pointer group-hover:brightness-50 transition-all duration-200 ease-in"
       width={project.attributes.cover.data.attributes.width}
       height={project.attributes.cover.data.attributes.height}
     />
