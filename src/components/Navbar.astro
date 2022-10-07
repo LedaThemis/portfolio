@@ -1,12 +1,11 @@
 ---
-import Navlink from "./Navlink.astro";
-
-
+import Navlink from './Navlink.astro';
 ---
+
 <header class="flex justify-between items-center">
-    <h1 class="text-2xl text-black font-title">Leda</h1>
-    <nav class="flex gap-3">
-        <Navlink title="Projects" link="#projects" />
-        <Navlink title="Contact" link="#contact" />
-    </nav>
+  <h1 class="text-2xl text-black font-title"><a href="/">Leda</a></h1>
+  <nav class="flex gap-3">
+    <Navlink title="Projects" link="#projects" />
+    <Navlink title="Contact" link="#contact" />
+  </nav>
 </header>
