@@ -61,7 +61,7 @@ const constructImageSrcSet = (image: IProject['data']['attributes']['cover']) =>
   </div>
   <h3 class="text-2xl font-bold tracking-wide font-title">{project.attributes.name}</h3>
   <p>{project.attributes.description}</p>
-  <a href={`/project/${project.id}`} class="flex gap-1 pt-2 group text-black transition duration-300"
+  <a href={`/project/${project.id}`} class="flex gap-1 pt-2 group text-black transition duration-300 max-w-max"
     ><p class="hover-underline-animation after:bg-black">
       More details <span class="sr-only">about {project.attributes.name}</span>
     </p>
