@@ -7,6 +7,7 @@ module.exports = {
     extend: {
       fontFamily: {
         title: ['"Nunito Sans"', ...defaultTheme.fontFamily.sans],
+        body: ['Roboto', ...defaultTheme.fontFamily.sans],
       },
     },
   },
