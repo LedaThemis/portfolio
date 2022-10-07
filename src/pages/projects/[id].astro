@@ -24,9 +24,15 @@ const pageDesc = `Details on the implementation, the why behind and technologies
 
 <ErrorWrapper response={data}>
   <Layout title={pageTitle} description={pageDesc}>
-    <main>
+    <main class="mx-auto">
       <Navbar />
       <ProjectDetails project={data.data!} />
     </main>
   </Layout>
 </ErrorWrapper>
+
+<style>
+  main {
+    max-width: 1080px;
+  }
+</style>
