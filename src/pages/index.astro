@@ -6,9 +6,15 @@ import Projects from '../components/Projects.astro';
 ---
 
 <Layout title="Leda — Web Developer" description="Personal website of Leda Themis">
-  <main class="flex flex-col gap-5">
+  <main class="flex flex-col gap-5 mx-auto">
     <Navbar />
     <Welcome />
     <Projects />
   </main>
 </Layout>
+
+<style>
+  main {
+    max-width: 1080px;
+  }
+</style>

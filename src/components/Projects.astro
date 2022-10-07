@@ -18,7 +18,7 @@ const data: IProjects | ErrorResponse = await response.json();
     <h2 class="text-4xl font-title py-2">What I'm working on</h2>
     <p>The following are what I enjoyed and learned from the most. They're projects I'm passionate about!</p>
   </header>
-  <div class="grid auto-cols-fr gap-5">
+  <div class="grid gap-5">
     <ErrorWrapper response={data}>
       {data.data!.map((project) => <Project project={project} />)}
     </ErrorWrapper>
