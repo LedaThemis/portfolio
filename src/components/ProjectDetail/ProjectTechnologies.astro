@@ -4,9 +4,40 @@ export interface Props {
 }
 
 const { technologies } = Astro.props;
+
+import * as si from 'simple-icons/icons';
+
+type IconStringsType = keyof typeof si;
+
+const parseTechnologies = (technologies: string) => technologies.split(' ');
+
+const capitalizeFirstLetter = (str: string) => str[0].toUpperCase() + str.substring(1);
+
+const getTechName = (name: string) => ('si' + capitalizeFirstLetter(name)) as IconStringsType;
+
+const getTechIcon = (techName: IconStringsType) => {
+  const icon = si[techName];
+
+  const fillStyle = `fill: #${icon.hex};`;
+
+  return { title: icon.title, svg: icon.svg, fillStyle };
+};
+
+const techList = parseTechnologies(technologies);
+
+const IconInfoList = techList.map((name) => getTechIcon(getTechName(name)));
 ---
 
-<div>
+<div class="flex flex-col gap-4">
   <h3 class="text-2xl font-title font-bold">Technologies Used</h3>
-  <p class="font-body">{technologies}</p>
+  <div class="flex gap-3 flex-wrap">
+    {
+      IconInfoList.map(({ title, svg, fillStyle }) => (
+        <div class="flex items-center gap-2">
+          <span class="w-6" style={fillStyle} set:html={svg} />
+          <p class="font-body">{title}</p>
+        </div>
+      ))
+    }
+  </div>
 </div>

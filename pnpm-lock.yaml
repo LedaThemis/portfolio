@@ -10,6 +10,7 @@ specifiers:
   astro: ^1.4.4
   astro-icon: ^0.7.3
   markdown-it: ^13.0.1
+  simple-icons: ^7.14.0
   tailwindcss: ^3.0.24
 
 dependencies:
@@ -20,6 +21,7 @@ dependencies:
   astro: 1.4.4
   astro-icon: 0.7.3
   markdown-it: 13.0.1
+  simple-icons: 7.14.0
   tailwindcss: 3.1.8
 
 devDependencies:
@@ -3939,6 +3941,11 @@ packages:
 
   /signal-exit/3.0.7:
     resolution: {integrity: sha512-wnD2ZE+l+SPC/uoS0vXeE9L1+0wuaMqKlfz9AMUo38JsyLSBWSFcHR1Rri62LZc12vLr1gb3jl7iwQhgwpAbGQ==}
+    dev: false
+
+  /simple-icons/7.14.0:
+    resolution: {integrity: sha512-peojKZtdmNlM4ofTERoJWwP5p/R3mRBtFf9ERTaEmnepXQxdealNZOyjPQie9M1gKQYuy0xD5ckwUWvNFK/fNQ==}
+    engines: {node: '>=0.12.18'}
     dev: false
 
   /sirv/2.0.2:
