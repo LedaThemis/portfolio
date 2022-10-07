@@ -18,7 +18,7 @@ const { project } = Astro.props;
       src={APIURL(project.attributes.cover.data.attributes.url, new URLSearchParams(defaultImageParams))}
       srcset={constructImageSrcSet(project.attributes.cover)}
       alt={project.attributes.cover.data.attributes.alternativeText}
-      class="cursor-pointer group-hover:brightness-50 transition-all duration-200 ease-in"
+      class="cursor-pointer group-hover:brightness-[30%] transition-all duration-200 ease-in"
       width={project.attributes.cover.data.attributes.width}
       height={project.attributes.cover.data.attributes.height}
     />
