@@ -2,8 +2,7 @@
 import NewTabIcon from '../icons/NewTabIcon.astro';
 import RightArrowIcon from '../icons/RightArrowIcon.astro';
 import type { IProject } from '../lib/interfaces/Project';
-import APIURL from '../lib/utils/APIURL';
-import { constructImageSrcSet, defaultImageParams } from '../lib/utils/projectImage';
+import { constructImageSrcSet } from '../lib/utils/projectImage';
 
 export interface Props {
   project: IProject['data'];
@@ -15,10 +14,10 @@ const { project } = Astro.props;
 <div>
   <div class="my-4 group relative max-w-max">
     <img
-      src={APIURL(project.attributes.cover.data.attributes.url, new URLSearchParams(defaultImageParams))}
+      src={project.attributes.cover.data.attributes.url}
       srcset={constructImageSrcSet(project.attributes.cover)}
       alt={project.attributes.cover.data.attributes.alternativeText}
-      class="cursor-pointer group-hover:brightness-[30%] transition-all duration-200 ease-in"
+      class="cursor-pointer group-hover:brightness-[30%] transition-all duration-200 ease-in w-full"
       width={project.attributes.cover.data.attributes.width}
       height={project.attributes.cover.data.attributes.height}
     />
