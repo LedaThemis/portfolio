@@ -1,5 +1,7 @@
 ---
 import type { IProject } from '../lib/interfaces/Project';
+import Contact from './Contact.astro';
+import Footer from './Footer.astro';
 import ProjectContent from './ProjectDetail/ProjectContent.astro';
 import ProjectHeader from './ProjectDetail/ProjectHeader.astro';
 import ProjectLinks from './ProjectDetail/ProjectLinks.astro';
@@ -17,4 +19,6 @@ const { project } = Astro.props;
   <ProjectTechnologies technologies={project.attributes.technologies} />
   <ProjectLinks name={project.attributes.name} source={project.attributes.source} demo={project.attributes.demo} />
   <ProjectContent content={project.attributes.content} />
+  <Contact />
+  <Footer />
 </section>
