@@ -16,6 +16,7 @@ const { project } = Astro.props;
     <img
       src={project.attributes.cover.data.attributes.url}
       srcset={constructImageSrcSet(project.attributes.cover)}
+      sizes="(min-width: 1080px) 1080px, 100vw"
       alt={project.attributes.cover.data.attributes.alternativeText}
       class="cursor-pointer group-hover:brightness-[30%] transition-all duration-200 ease-in w-full"
       width={project.attributes.cover.data.attributes.width}
