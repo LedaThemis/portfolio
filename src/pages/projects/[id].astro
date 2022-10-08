@@ -1,4 +1,5 @@
 ---
+import Contact from '../../components/Contact.astro';
 import ErrorWrapper from '../../components/ErrorWrapper.astro';
 import Navbar from '../../components/Navbar.astro';
 import ProjectDetails from '../../components/ProjectDetails.astro';
@@ -24,15 +25,10 @@ const pageDesc = `Details on the implementation, the why behind and technologies
 
 <ErrorWrapper response={data}>
   <Layout title={pageTitle} description={pageDesc}>
-    <main class="mx-auto">
+    <main>
       <Navbar />
       <ProjectDetails project={data.data!} />
+      <Contact />
     </main>
   </Layout>
 </ErrorWrapper>
-
-<style>
-  main {
-    max-width: 1080px;
-  }
-</style>
