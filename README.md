@@ -5,8 +5,6 @@
     <br>
 </h1>
 
----
-
 <p align="center">My current personal portfolio</p>
 
 ## Related Repositories
