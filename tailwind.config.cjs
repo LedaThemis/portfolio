@@ -2,10 +2,12 @@ const defaultTheme = require('tailwindcss/defaultTheme');
 
 const fontTitle = ['"Nunito Sans"', ...defaultTheme.fontFamily.sans];
 const fontBody = ['Roboto', ...defaultTheme.fontFamily.sans];
-
 const customTypographyCSS = (theme) => ({
   css: [
     {
+      a: {
+        color: '#0000EE',
+      },
       p: {
         fontFamily: `${theme('fontFamily.body')}`,
       },
