@@ -4,7 +4,7 @@ import type { IProjects } from '../lib/interfaces/Projects';
 import ErrorWrapper from './ErrorWrapper.astro';
 import Project from './Project.astro';
 
-const response = await fetch(`${import.meta.env.API_ENDPOINT}/api/projects?populate=%2A`, {
+const response = await fetch(`${import.meta.env.API_ENDPOINT}/api/projects?populate=%2A&sort=id`, {
   headers: {
     Authorization: `Bearer ${import.meta.env.API_TOKEN}`,
   },
