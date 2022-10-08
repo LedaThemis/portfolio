@@ -20,7 +20,7 @@ const getTechIcon = (techName: IconStringsType) => {
 
   const fillStyle = `fill: #${icon.hex};`;
 
-  return { title: icon.title, svg: icon.svg, fillStyle };
+  return { title: icon.title, path: icon.path, fillStyle };
 };
 
 const techList = parseTechnologies(technologies);
@@ -32,9 +32,12 @@ const IconInfoList = techList.map((name) => getTechIcon(getTechName(name)));
   <h3 class="text-2xl font-title font-bold">Technologies Used</h3>
   <div class="flex gap-3 flex-wrap">
     {
-      IconInfoList.map(({ title, svg, fillStyle }) => (
+      IconInfoList.map(({ title, path, fillStyle }) => (
         <div class="flex items-center gap-2">
-          <span class="w-6" style={fillStyle} set:html={svg} />
+          <svg class="w-6" style={fillStyle} aria-hidden="true" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <title>{title}</title>
+            <path d={path} />
+          </svg>
           <p class="font-title">{title}</p>
         </div>
       ))
