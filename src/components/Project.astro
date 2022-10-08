@@ -26,8 +26,8 @@ const { project } = Astro.props;
       <div
         class="flex gap-1 p-2 border-1 rounded-md text-white opacity-0 group-hover:opacity-100 transition-opacity duration-150 ease-in"
       >
-        <a href={project.attributes.demo} target="_blank" rel="noreferrer noopener" class="flex gap-1"
-          ><p class="font-body text-xl hover-underline-animation after:bg-violet-300">
+        <a href={project.attributes.demo} target="_blank" rel="noreferrer noopener" class="block"
+          ><p class="align-middle font-body text-xl hover-underline-animation after:bg-violet-300">
             Website <span class="sr-only">for {project.attributes.name}</span>
           </p>
           <NewTabIcon />
@@ -37,9 +37,10 @@ const { project } = Astro.props;
   </div>
   <h3 class="text-2xl font-bold tracking-wide font-title">{project.attributes.name}</h3>
   <p class="font-body">{project.attributes.summary}</p>
-  <a href={`/projects/${project.id}`} class="flex gap-1 pt-2 group text-black transition duration-300 max-w-max"
-    ><p class="font-body hover-underline-animation after:bg-violet-400">
-      More details <span class="sr-only">about {project.attributes.name}</span>
+  <a href={`/projects/${project.id}`} class="block mt-2 group text-black transition duration-300 max-w-max"
+    ><p class="align-middle font-body hover-underline-animation after:bg-violet-400">
+      More details
+      <span class="sr-only">about {project.attributes.name}</span>
     </p>
     <RightArrowIcon />
   </a>
