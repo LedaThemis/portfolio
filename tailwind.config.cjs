@@ -29,6 +29,9 @@ module.exports = {
         title: fontTitle,
         body: fontBody,
       },
+      screens: {
+        mm: '300px',
+      },
       typography: (theme) => ({
         DEFAULT: customTypographyCSS(theme),
         lg: customTypographyCSS(theme),
