@@ -6,10 +6,8 @@ specifiers:
   '@fontsource/nunito-sans': ^4.5.10
   '@fontsource/roboto': ^4.5.8
   '@tailwindcss/typography': ^0.5.7
-  '@types/markdown-it': ^12.2.3
   astro: ^1.4.4
   astro-icon: ^0.7.3
-  markdown-it: ^13.0.1
   simple-icons: ^7.14.0
   tailwindcss: ^3.0.24
 
@@ -20,13 +18,11 @@ dependencies:
   '@fontsource/roboto': 4.5.8
   astro: 1.4.4
   astro-icon: 0.7.3
-  markdown-it: 13.0.1
   simple-icons: 7.14.0
   tailwindcss: 3.1.8
 
 devDependencies:
   '@tailwindcss/typography': 0.5.7_tailwindcss@3.1.8
-  '@types/markdown-it': 12.2.3
 
 packages:
 
@@ -638,26 +634,11 @@ packages:
     resolution: {integrity: sha512-sqm9g7mHlPY/43fcSNrCYfOeX9zkTTK+euO5E6+CVijSMm5tTjkVdwdqRkY3ljjIAf8679vps5jKUoJBCLsMDA==}
     dev: false
 
-  /@types/linkify-it/3.0.2:
-    resolution: {integrity: sha512-HZQYqbiFVWufzCwexrvh694SOim8z2d+xJl5UNamcvQFejLY/2YUtzXHYi3cHdI7PMlS8ejH2slRAOJQ32aNbA==}
-    dev: true
-
-  /@types/markdown-it/12.2.3:
-    resolution: {integrity: sha512-GKMHFfv3458yYy+v/N8gjufHO6MSZKCOXpZc5GXIWWy8uldwfmPn98vp81gZ5f9SVw8YYBctgfJ22a2d7AOMeQ==}
-    dependencies:
-      '@types/linkify-it': 3.0.2
-      '@types/mdurl': 1.0.2
-    dev: true
-
   /@types/mdast/3.0.10:
     resolution: {integrity: sha512-W864tg/Osz1+9f4lrGTZpCSO5/z4608eUp19tbozkq2HJK6i3z1kT0H9tlADXuYIb1YYOBByU4Jsqkk75q48qA==}
     dependencies:
       '@types/unist': 2.0.6
     dev: false
-
-  /@types/mdurl/1.0.2:
-    resolution: {integrity: sha512-eC4U9MlIcu2q0KQmXszyn5Akca/0jrQmwDRgpAMJai7qBWq4amIQhZyNau4VYGtCeALvW1/NtjzJJ567aZxfKA==}
-    dev: true
 
   /@types/ms/0.7.31:
     resolution: {integrity: sha512-iiUgKzV9AuaEkZqkOLDIvlQiL6ltuZd9tGcW3gwpnX8JbuiuhFlEGmmFXEXkN50Cvq7Os88IY2v0dkDqXYWVgA==}
@@ -836,10 +817,6 @@ packages:
     resolution: {integrity: sha512-o5Roy6tNG4SL/FOkCAN6RzjiakZS25RLYFrcMttJqbdd8BWrnA+fGz57iN5Pb06pvBGvl5gQ0B48dJlslXvoTg==}
     dependencies:
       sprintf-js: 1.0.3
-    dev: false
-
-  /argparse/2.0.1:
-    resolution: {integrity: sha512-8+9WqebbFzpX9OR+Wa6O29asIogeRMzcGtAINdpMHHyAg10f05aSFVBbcEqGf/PXw1EjAZ+q2/bEBg3DvurK3Q==}
     dev: false
 
   /array-iterate/1.1.4:
@@ -1414,11 +1391,6 @@ packages:
 
   /entities/2.2.0:
     resolution: {integrity: sha512-p92if5Nz619I0w+akJrLZH0MX0Pb5DX39XOwQTtXSdQQOaYH03S1uIQp4mhOZtAXrxq4ViO67YTiLBo2638o9A==}
-    dev: false
-
-  /entities/3.0.1:
-    resolution: {integrity: sha512-WiyBqoomrwMdFG1e0kqvASYfnlb0lp8M5o5Fw2OFq1hNZxxcNk8Ik0Xm7LxzBhuidnZB/UtBqVCgUz3kBOP51Q==}
-    engines: {node: '>=0.12'}
     dev: false
 
   /eol/0.9.1:
@@ -2507,12 +2479,6 @@ packages:
     resolution: {integrity: sha512-9JROoBW7pobfsx+Sq2JsASvCo6Pfo6WWoUW79HuB1BCoBXD4PLWJPqDF6fNj67pqBYTbAHkE57M1kS/+L1neOg==}
     engines: {node: '>=10'}
 
-  /linkify-it/4.0.1:
-    resolution: {integrity: sha512-C7bfi1UZmoj8+PQx22XyeXCuBlokoyWQL5pWSP+EI6nzRylyThouddufc2c1NDIcP9k5agmN9fLpA7VNJfIiqw==}
-    dependencies:
-      uc.micro: 1.0.6
-    dev: false
-
   /load-yaml-file/0.2.0:
     resolution: {integrity: sha512-OfCBkGEw4nN6JLtgRidPX6QxjBQGQf72q3si2uvqyFEMbycSFFHwAZeXx6cJgFM9wmLrf9zBwCP3Ivqa+LLZPw==}
     engines: {node: '>=6'}
@@ -2579,17 +2545,6 @@ packages:
     engines: {node: '>=8'}
     dependencies:
       semver: 6.3.0
-    dev: false
-
-  /markdown-it/13.0.1:
-    resolution: {integrity: sha512-lTlxriVoy2criHP0JKRhO2VDG9c2ypWCsT237eDiLqi09rmbKoUetyGHq2uOIRoRS//kfoJckS0eUzzkDR+k2Q==}
-    hasBin: true
-    dependencies:
-      argparse: 2.0.1
-      entities: 3.0.1
-      linkify-it: 4.0.1
-      mdurl: 1.0.1
-      uc.micro: 1.0.6
     dev: false
 
   /markdown-table/3.0.2:
@@ -2751,10 +2706,6 @@ packages:
 
   /mdn-data/2.0.14:
     resolution: {integrity: sha512-dn6wd0uw5GsdswPFfsgMp5NSB0/aDe6fK94YJV/AJDYXL6HVLWBsxeq7js7Ad+mU2K9LAlwpk6kN2D5mwCPVow==}
-    dev: false
-
-  /mdurl/1.0.1:
-    resolution: {integrity: sha512-/sKlQJCBYVY9Ers9hqzKou4H6V5UWc/M59TH2dvkt+84itfnq7uFOMLpOiOS4ujvHP4etln18fmIxA5R5fll0g==}
     dev: false
 
   /merge-stream/2.0.0:
@@ -4278,10 +4229,6 @@ packages:
     resolution: {integrity: sha512-QCh+85mCy+h0IGff8r5XWzOVSbBO+KfeYrMQh7NJ58QujwcE22u+NUSmUxqF+un70P9GXKxa2HCNiTTMJknyjQ==}
     engines: {node: '>=4.2.0'}
     hasBin: true
-    dev: false
-
-  /uc.micro/1.0.6:
-    resolution: {integrity: sha512-8Y75pvTYkLJW2hWQHXxoqRgV7qb9B+9vFEtidML+7koHUFapnVJAZ6cKs+Qjz5Aw3aZWHMC6u0wJE3At+nSGwA==}
     dev: false
 
   /unherit/3.0.0:

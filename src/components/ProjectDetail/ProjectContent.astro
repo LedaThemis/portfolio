@@ -3,12 +3,7 @@ export interface Props {
   content: string;
 }
 
-import MarkdownIt from 'markdown-it';
-const md = new MarkdownIt();
-
 const { content } = Astro.props;
-
-const parsedMD = md.render(content);
 ---
 
-<div class="prose-lg" set:html={parsedMD}></div>
+<div class="prose" set:html={content}></div>
