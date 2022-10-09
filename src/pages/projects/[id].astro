@@ -17,7 +17,7 @@ const response = await fetch(`${import.meta.env.API_ENDPOINT}/api/projects/${id}
 
 const data: IProject | ErrorResponse = await response.json();
 
-const pageTitle = `${data.data!.attributes.name} | Leda`;
+const pageTitle = `${data.data!.attributes.name} - Leda`;
 const pageDesc = `Details on the implementation, the why behind and technologies of ${
   data.data!.attributes.name
 } by Leda`;
