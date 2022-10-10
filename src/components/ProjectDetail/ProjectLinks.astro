@@ -54,13 +54,4 @@ const { name, source, demo } = Astro.props;
     transform: scaleX(1);
     transform-origin: bottom left;
   }
-
-  .external::after {
-    background-color: grey;
-    content: '';
-    display: inline-flex;
-    margin-left: 4px;
-    mask-image: url(/assets/external.svg);
-    mask-size: cover;
-  }
 </style>
