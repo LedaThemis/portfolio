@@ -26,7 +26,6 @@ const pageDesc = `Details on the implementation, the why behind and technologies
 <ErrorWrapper response={data}>
   <Layout title={pageTitle} description={pageDesc}>
     <main class="flex flex-col gap-5">
-      <Navbar />
       <ProjectDetails project={data.data!} />
       <Contact />
     </main>

@@ -5,6 +5,7 @@ import '@fontsource/roboto';
 
 // Components
 import Footer from '../components/Footer.astro';
+import Navbar from '../components/Navbar.astro';
 
 export interface Props {
   title: string;
@@ -31,7 +32,10 @@ const { title, description } = Astro.props;
     <title>{title}</title>
   </head>
   <body class="flex flex-col gap-5 px-0 mm:px-10 max-w-[1080px] mx-auto justify-between min-h-screen">
-    <slot />
+    <div>
+      <Navbar />
+      <slot />
+    </div>
     <Footer />
     <style is:global>
       .external::after {
