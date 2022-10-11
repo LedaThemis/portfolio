@@ -11,7 +11,7 @@ export default defineConfig({
   integrations: [
     tailwind(),
     sitemap({
-      customPages: ['https://leda.dev'],
+      customPages: ['https://www.leda.dev'],
     }),
   ],
   adapter: vercel(),
