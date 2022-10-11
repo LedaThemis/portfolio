@@ -1,12 +1,15 @@
 ---
-import Layout from '../../layouts/Layout.astro';
+import Layout from "../../layouts/Layout.astro";
 
-const errorText = Astro.url.searchParams.get('errorText');
+const errorText = Astro.url.searchParams.get("errorText");
 ---
 
-<Layout title="Form submission failed - Leda" description="Contact form submit failed">
+<Layout
+  title="Form submission failed - Leda"
+  description="Contact form submit failed"
+>
   <main class="grid place-items-center mt-5">
     <p class="text-3xl text-red-600">An error occurred!</p>
-    {errorText?.split(';').map((v) => <p>{v}</p>)}
+    {errorText?.split(";").map((v) => <p>{v}</p>)}
   </main>
 </Layout>

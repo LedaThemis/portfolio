@@ -1,7 +1,7 @@
-import type { IProject } from './Project';
+import type { IProject } from "./Project";
 
 export interface IProjects {
-  data: IProject['data'][];
+  data: IProject["data"][];
   meta: {
     pagination: {
       page: number;

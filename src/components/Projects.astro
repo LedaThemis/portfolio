@@ -1,14 +1,17 @@
 ---
-import type { ErrorResponse } from '../lib/interfaces/Error';
-import type { IProjects } from '../lib/interfaces/Projects';
-import ErrorWrapper from './ErrorWrapper.astro';
-import Project from './Project.astro';
+import type { ErrorResponse } from "../lib/interfaces/Error";
+import type { IProjects } from "../lib/interfaces/Projects";
+import ErrorWrapper from "./ErrorWrapper.astro";
+import Project from "./Project.astro";
 
-const response = await fetch(`${import.meta.env.API_ENDPOINT}/api/projects?populate=%2A&sort=id`, {
-  headers: {
-    Authorization: `Bearer ${import.meta.env.API_TOKEN}`,
-  },
-});
+const response = await fetch(
+  `${import.meta.env.API_ENDPOINT}/api/projects?populate=%2A&sort=id`,
+  {
+    headers: {
+      Authorization: `Bearer ${import.meta.env.API_TOKEN}`,
+    },
+  }
+);
 
 const data: IProjects | ErrorResponse = await response.json();
 ---
@@ -17,7 +20,8 @@ const data: IProjects | ErrorResponse = await response.json();
   <header>
     <h2 class="text-4xl font-title font-bold py-2">What I'm working on</h2>
     <p class="font-body">
-      The following are what I enjoyed and learned from the most. They're projects I'm passionate about!
+      The following are what I enjoyed and learned from the most. They're
+      projects I'm passionate about!
     </p>
   </header>
   <div class="grid gap-5">

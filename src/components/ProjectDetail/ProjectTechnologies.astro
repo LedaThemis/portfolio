@@ -5,15 +5,17 @@ export interface Props {
 
 const { technologies } = Astro.props;
 
-import * as si from 'simple-icons/icons';
+import * as si from "simple-icons/icons";
 
 type IconStringsType = keyof typeof si;
 
-const parseTechnologies = (technologies: string) => technologies.split(' ');
+const parseTechnologies = (technologies: string) => technologies.split(" ");
 
-const capitalizeFirstLetter = (str: string) => str[0].toUpperCase() + str.substring(1);
+const capitalizeFirstLetter = (str: string) =>
+  str[0].toUpperCase() + str.substring(1);
 
-const getTechName = (name: string) => ('si' + capitalizeFirstLetter(name)) as IconStringsType;
+const getTechName = (name: string) =>
+  ("si" + capitalizeFirstLetter(name)) as IconStringsType;
 
 const getTechIcon = (techName: IconStringsType) => {
   const icon = si[techName];
@@ -34,7 +36,13 @@ const IconInfoList = techList.map((name) => getTechIcon(getTechName(name)));
     {
       IconInfoList.map(({ title, path, fillStyle }) => (
         <div class="flex items-center gap-2">
-          <svg class="w-6" style={fillStyle} aria-hidden="true" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <svg
+            class="w-6"
+            style={fillStyle}
+            aria-hidden="true"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
             <title>{title}</title>
             <path d={path} />
           </svg>

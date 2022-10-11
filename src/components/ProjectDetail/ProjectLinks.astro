@@ -1,10 +1,10 @@
 ---
-import type { IProject } from '../../lib/interfaces/Project';
+import type { IProject } from "../../lib/interfaces/Project";
 
 export interface Props {
-  name: IProject['data']['attributes']['name'];
-  source: IProject['data']['attributes']['source'];
-  demo: IProject['data']['attributes']['demo'];
+  name: IProject["data"]["attributes"]["name"];
+  source: IProject["data"]["attributes"]["source"];
+  demo: IProject["data"]["attributes"]["demo"];
 }
 
 const { name, source, demo } = Astro.props;
@@ -39,7 +39,7 @@ const { name, source, demo } = Astro.props;
   }
 
   .hover-underline-animation:after {
-    content: '';
+    content: "";
     position: absolute;
     width: 100%;
     transform: scaleX(0);

@@ -1,5 +1,5 @@
 ---
-import type { ErrorResponse, SuccessResponse } from '../lib/interfaces/Error';
+import type { ErrorResponse, SuccessResponse } from "../lib/interfaces/Error";
 
 export interface Props {
   response: SuccessResponse | ErrorResponse;
@@ -8,14 +8,12 @@ export interface Props {
 const { response } = Astro.props;
 ---
 
-<>
-  {
-    response.data === null ? (
-      <p>
-        {response.error.name} ({response.error.status}): {response.error.message}
-      </p>
-    ) : (
-      <slot />
-    )
-  }
-</>
+{
+  response.data === null ? (
+    <p>
+      {response.error.name} ({response.error.status}): {response.error.message}
+    </p>
+  ) : (
+    <slot />
+  )
+}
