@@ -1,6 +1,18 @@
 ---
 import config from "../config";
 import ContactForm from "./ContactForm.astro";
+
+let isFormServerAlive = false;
+
+try {
+  await fetch(import.meta.env.FORM_API_ENDPOINT);
+} catch {
+  isFormServerAlive = true;
+}
+
+const useFormText = isFormServerAlive
+  ? ""
+  : ", or if you prefer you can use the form below:";
 ---
 
 <section id="contact" class="flex flex-col gap-5">
@@ -11,8 +23,8 @@ import ContactForm from "./ContactForm.astro";
         href={`mailto:${config.personal.email}`}
         class="underline underline-offset-4 font-semibold"
         >{config.personal.email}</a
-      >, or if you prefer you can use the form below:
+      >{useFormText}
     </p>
   </header>
-  <ContactForm />
+  {!isFormServerAlive && <ContactForm />}
 </section>
