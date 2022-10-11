@@ -2,55 +2,58 @@
 import RequiredFieldIcon from '../icons/RequiredFieldIcon.astro';
 ---
 
-<form class="flex flex-col gap-2">
-  <div class="flex flex-col">
-    <label for="firstName">First Name<RequiredFieldIcon /></label>
-    <input
-      id="firstName"
-      name="firstName"
-      placeholder="Joe"
-      type="text"
-      class="p-1 rounded outline outline-2 outline-violet-200 focus:outline-violet-700"
-      aria-required="true"
-      required
-    />
-  </div>
-  <div class="flex flex-col">
-    <label for="lastName">Last Name<RequiredFieldIcon /></label>
-    <input
-      id="lastName"
-      name="lastName"
-      placeholder="Doe"
-      type="text"
-      class="p-1 rounded outline outline-2 outline-violet-200 focus:outline-violet-700"
-      aria-required="true"
-      required
-    />
-  </div>
-  <div class="flex flex-col">
-    <label for="email">Email<RequiredFieldIcon /></label>
-    <input
-      id="email"
-      name="email"
-      placeholder="john.doe@example.com"
-      type="email"
-      class="p-1 rounded outline outline-2 outline-violet-200 focus:outline-violet-700"
-      aria-required="true"
-      required
-    />
-  </div>
-  <div class="flex flex-col">
-    <label for="content">Content<RequiredFieldIcon /></label>
-    <textarea
-      name="content"
-      id="content"
-      cols="30"
-      rows="10"
-      class="p-1 resize-none rounded outline outline-2 outline-violet-200 focus:outline-violet-700"
-      required
-      aria-required="true"></textarea>
-  </div>
-  <button type="submit" class="bg-violet-600 text-white font-bold rounded p-2 outline outline-2 outline-violet-600 focus:outline-violet-200"
-    >Send</button
-  >
-</form>
+<div class="mt-5 md:col-span-2 md:mt-0">
+  <form action={import.meta.env['FORM_API_ENDPOINT'] + '/contact'} method="POST">
+    <div class="overflow-hidden shadow sm:rounded-md">
+      <div class="bg-white px-4 py-5 sm:p-6">
+        <div class="grid grid-cols-2 gap-6">
+          <div class="col-span-2 sm:col-span-1">
+            <label for="name" class="block text-sm font-medium text-gray-700">Full name <RequiredFieldIcon /></label>
+            <input
+              type="text"
+              name="name"
+              placeholder=""
+              id="name"
+              class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-violet-500 focus:ring-violet-500 sm:text-sm"
+              required
+              aria-required="true"
+            />
+          </div>
+
+          <div class="col-span-2 sm:col-span-1">
+            <label for="email" class="block text-sm font-medium text-gray-700">Email address <RequiredFieldIcon /></label>
+            <input
+              type="text"
+              name="email"
+              id="email"
+              autocomplete="email"
+              class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-violet-500 focus:ring-violet-500 sm:text-sm"
+              required
+              aria-required="true"
+            />
+          </div>
+
+          <div class="col-span-2">
+            <label for="content" class="block text-sm font-medium text-gray-700">Message <RequiredFieldIcon /></label>
+            <div class="mt-1">
+              <textarea
+                id="content"
+                name="content"
+                rows="3"
+                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-violet-500 focus:ring-violet-500 sm:text-sm"
+                required
+                aria-required="true"></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="px-4 py-3 text-right sm:px-6">
+        <button
+          type="submit"
+          class="inline-flex justify-center rounded-md border border-transparent bg-violet-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-violet-700 focus:outline-none focus:ring-2 focus:ring-violet-600 focus:ring-offset-2"
+          >Send</button
+        >
+      </div>
+    </div>
+  </form>
+</div>
