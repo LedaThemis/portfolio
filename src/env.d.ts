@@ -1,6 +1,7 @@
 /// <reference types="astro/client" />
 
 interface ImportMetaEnv {
-    readonly API_ENDPOINT: string;
-    readonly API_TOKEN: string;
+  readonly API_ENDPOINT: string;
+  readonly API_TOKEN: string;
+  readonly FORM_API_ENDPOINT: string;
 }
