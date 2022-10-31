@@ -1,5 +1,6 @@
 ---
 import TwemojiSwan from "../icons/TwemojiSwan.astro";
+import ExternalLink from "./ExternalLink.astro";
 ---
 
 <section>
@@ -8,64 +9,31 @@ import TwemojiSwan from "../icons/TwemojiSwan.astro";
     <p class="font-body flex flex-col gap-3.5">
       <span
         >It all started with
-        <a
-          class="inline-block text-[#0000EE] underline"
-          href="https://unity.com/"
-          target="_blank"
-          rel="noreferrer noopener"
-          ><span
-            ><span class="external after:h-3 after:w-3">Unity</span><span
-              class="sr-only">(opens in new tab)</span
-            >
-          </span>
-        </a>, a game engine I built games with following tutorials (Thanks to <a
-          class="inline-block text-[#0000EE] underline"
-          href="https://youtube.com/channel/UCYbK_tjZ2OrIZFBvU6CCMiA"
-          target="_blank"
-          rel="noreferrer noopener"
-          ><span
-            ><span class="external after:h-3 after:w-3">Brackeys</span><span
-              class="sr-only">(opens in new tab)</span
-            >
-          </span>
-        </a>)</span
+        <ExternalLink name="Unity" url="https://unity.com" />
+        , a game engine I built games with following tutorials (Thanks to
+        <ExternalLink
+          name="Brackeys"
+          url="https://youtube.com/channel/UCYbK_tjZ2OrIZFBvU6CCMiA"
+        />)</span
       >
       <span>
         And over the years, I kept learning (even diving into low-level
-        programming, <a
-          class="inline-block text-[#0000EE] underline"
-          href="https://en.wikipedia.org/wiki/MOS_Technology_6502"
-          target="_blank"
-          rel="noreferrer noopener"
-          ><span
-            ><span class="external after:h-3 after:w-3">6502 - Wikipedia</span
-            ><span class="sr-only">(opens in new tab)</span>
-          </span>
-        </a>) until I stumbled on Web Development, from which I discovered my
-        love for building things!
+        programming, <ExternalLink
+          name="6502 - Wikipedia"
+          url="https://en.wikipedia.org/wiki/MOS_Technology_6502"
+        />) until I stumbled on Web Development, from which I discovered my love
+        for building things!
       </span>
       <span
         >Outside of coding, I play chess and table tennis (ping-pong). <em
-          ><a
-            class="external after:h-3 after:w-3 text-[#0000EE] underline"
-            href="https://www.youtube.com/watch?v=8pqkVXsk6Pw"
-            target="_blank"
-            rel="noreferrer noopener"
-            >Backspin serve!<span class="sr-only">(opens in new tab)</span>
-          </a>
+          ><ExternalLink
+            name="Backspin serve!"
+            url="https://www.youtube.com/watch?v=8pqkVXsk6Pw"
+          />
         </em>
       </span>
       <span>
-        Wondering about the <TwemojiSwan />? It is a reference to <a
-          class="inline-block text-[#0000EE] underline"
-          href="https://en.wikipedia.org/wiki/Leda_and_the_Swan"
-          target="_blank"
-          rel="noreferrer noopener"
-          ><span
-            ><span class="external after:h-3 after:w-3">Leda and the Swan</span
-            ><span class="sr-only">(opens in new tab)</span>
-          </span>
-        </a>
+        Wondering about the <TwemojiSwan />? It is a reference to <ExternalLink name="Leda and the Swan" url="https://en.wikipedia.org/wiki/Leda_and_the_Swan" />
       </span>
     </p>
   </header>

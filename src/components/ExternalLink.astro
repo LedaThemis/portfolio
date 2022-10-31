@@ -1,0 +1,22 @@
+---
+export interface Props {
+  url: string;
+  name: string;
+  altText?: string;
+  class?: string;
+}
+
+const { url, name, altText = "", ...props } = Astro.props;
+---
+
+<a
+  class={`inline-flex items-center text-blue-700 underline underline-offset-2 external after:h-3 after:w-3 ${
+    props.class ?? ""
+  }`}
+  href={url}
+  target="_blank"
+  rel="noreferrer noopener"
+>
+  {name}
+  <span class="sr-only">{altText} (opens in a new tab)</span>
+</a>

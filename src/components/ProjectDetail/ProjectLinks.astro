@@ -1,5 +1,6 @@
 ---
 import type { ProjectDetailsMDXProps } from "../../lib/interfaces/ProjectDetails";
+import ExternalLink from "../ExternalLink.astro";
 
 export interface Props {
   name: ProjectDetailsMDXProps["projectName"];
@@ -13,22 +14,18 @@ const { name, source, demo } = Astro.props;
 <div class="flex flex-col gap-4">
   <h3 class="text-2xl font-title font-bold">Links</h3>
   <div class="flex gap-3">
-    <a
-      class="flex items-center font-body text-xl text-blue-700 underline underline-offset-2 external after:h-3 after:w-3"
-      href={source}
-      target="_blank"
-      rel="noreferrer noopener"
-      >Github
-      <span class="sr-only">for {name} (opens in a new tab)</span>
-    </a>
-    <a
-      class="flex items-center font-body text-xl text-blue-700 underline underline-offset-2 external after:h-3 after:w-3"
-      href={demo}
-      target="_blank"
-      rel="noreferrer noopener"
-      >Website
-      <span class="sr-only"> for {name} (opens in a new tab)</span>
-    </a>
+    <ExternalLink
+      name="Github"
+      class="font-body text-xl"
+      altText={`for ${name}`}
+      url={source}
+    />
+    <ExternalLink
+      name="Website"
+      class="font-body text-xl"
+      altText={`for ${name}`}
+      url={demo}
+    />
   </div>
 </div>
 

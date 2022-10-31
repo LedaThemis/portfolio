@@ -2,7 +2,8 @@
 layout: ../../layouts/ProjectDetailsLayout.astro
 projectName: "Odinbook"
 projectSummary: "A place to share moments and chat with friends."
-projectCover: { name: "odinbook_home_318fe8e362", width: "1920", height: "944", alt: "" }
+projectCover:
+  { name: "odinbook_home_318fe8e362", width: "1920", height: "944", alt: "" }
 projectDescription: "A social media app that allows you to share moments of your life, and gives you the ability to chat with friends."
 projectTechnologies: "express react mongodb socketdotio typescript styledcomponents jest testinglibrary"
 projectSource: "https://github.com/LedaThemis/odin-book"
@@ -10,6 +11,7 @@ projectDemo: "https://leda-odin-book.web.app"
 ---
 
 import CldImage from "../../components/CldImage.astro";
+import ExternalLink from "../../components/ExternalLink.astro";
 
 ### Notable Features
 
@@ -26,13 +28,13 @@ import CldImage from "../../components/CldImage.astro";
 
 I've always wanted a way to privately share moments of life with close ones, and this project was the result.
 
-Note: this project was also part of [_The Odin Project_](https://www.theodinproject.com/)
+Note: this project was also part of <ExternalLink name="The Odin Project" url="https://www.theodinproject.com/" altText="" />
 
 ### Real-time updates of the home feed
 
 Implementing this had its challenges, most notably synchronizing the state between the client and server.
 
-The initial implementation had two states, one for posts fetched from the Express server (and posts from the current user) and the other for the [Socket.IO](https://socket.io/) ones (to have real-time updates), which wasn't pleasant to work with.
+The initial implementation had two states, one for posts fetched from the Express server (and posts from the current user) and the other for the <ExternalLink name="Socket.IO" url="https://socket.io/" altText="" /> ones (to have real-time updates), which wasn't pleasant to work with.
 
 <CldImage
   src="odinbook_initial_sync_structure_d2ec9cfc5b"
@@ -43,25 +45,25 @@ The initial implementation had two states, one for posts fetched from the Expres
 />
 Diagram: showing the old structure of synchronizing state in Odinbook
 
-As you can see we have two sources of posts, one from the Socket.IO server and the other from the [Express](https://expressjs.com/) server. To get the complete timeline, we need to concatenate them while keeping in mind each post's publishing date, which could introduce bugs.
+As you can see we have two sources of posts, one from the Socket.IO server and the other from the <ExternalLink name="Express" url="https://expressjs.com/" altText="" /> server. To get the complete timeline, we need to concatenate them while keeping in mind each post's publishing date, which could introduce bugs.
 
 But! it does not have to be this way.
 
-Enter [Query Invalidation](https://tanstack.com/query/v4/docs/guides/query-invalidation)
+Enter <ExternalLink name="Query Invalidation" url="https://tanstack.com/query/v4/docs/guides/query-invalidation" altText="" />
 
-As the app uses [Tanstack Query](https://tanstack.com/query/v4) for its data fetching, switching to [Query Invalidation](https://tanstack.com/query/v4/docs/guides/query-invalidation) was super easy, we just invalidate the timeline
+As the app uses <ExternalLink name="Tanstack Query" url="https://tanstack.com/query/v4" altText="" /> for its data fetching, switching to <ExternalLink name="Query Invalidation" url="https://tanstack.com/query/v4/docs/guides/query-invalidation" altText="" /> was super easy, we just invalidate the timeline
 
 - If a friend creates a post
 - If a friend updates a post
 - If a friend deletes a post
 
-The above we would receive from the [Socket.IO](https://socket.io/) server
+The above we would receive from the <ExternalLink name="Socket.IO" url="https://socket.io/" altText="" /> server
 
 - If the current user creates a post
 - If the current user friend updates a post
 - If the current user deletes a post
 
-And after the above we invalidate the timeline in `onSuccess` function of the [mutation](https://tanstack.com/query/v4/docs/guides/mutations).
+And after the above we invalidate the timeline in `onSuccess` function of the <ExternalLink name="mutation" url="https://tanstack.com/query/v4/docs/guides/mutations" altText="" />
 
 <CldImage
   src="odinbook_new_invalidate_query_sync_structure_d7c13fd302"
@@ -72,10 +74,12 @@ And after the above we invalidate the timeline in `onSuccess` function of the [m
 />
 Diagram: showing the new structure of synchronizing state in Odinbook
 
-The diagram might look more complex compared to the old one, but what matters is that there is only one state! (see [Single source of truth](https://en.wikipedia.org/wiki/Single_source_of_truth))
+The diagram might look more complex compared to the old one, 
+
+but what matters is that there is only one state! (see <ExternalLink name="Single source of truth" url="https://en.wikipedia.org/wiki/Single_source_of_truth" altText="" />)
 
 ### Lessons Learned
 
-One of the most important lessons learned from this project was utilizing [Tanstack Query](https://tanstack.com/query/v4) to make custom hooks and use those anywhere in the code to get the data needed.
+One of the most important lessons learned from this project was utilizing <ExternalLink name="Tanstack Query" url="https://tanstack.com/query/v4" altText="" /> to make custom hooks and use those anywhere in the code to get the data needed.
 
 In addition to that, project structure was also a valuable lesson.
