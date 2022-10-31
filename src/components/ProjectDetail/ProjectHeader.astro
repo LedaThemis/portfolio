@@ -1,9 +1,9 @@
 ---
-import type { IProject } from "../../lib/interfaces/Project";
+import type { ProjectDetailsMDXProps } from "../../lib/interfaces/ProjectDetails";
 
 export interface Props {
-  name: IProject["data"]["attributes"]["name"];
-  description: IProject["data"]["attributes"]["description"];
+  name: ProjectDetailsMDXProps["projectName"];
+  description: ProjectDetailsMDXProps["projectDescription"];
 }
 
 const { name, description } = Astro.props;

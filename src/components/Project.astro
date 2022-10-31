@@ -1,40 +1,38 @@
 ---
 import NewTabIcon from "../icons/NewTabIcon.astro";
 import RightArrowIcon from "../icons/RightArrowIcon.astro";
-import type { IProject } from "../lib/interfaces/Project";
-import { constructImageSrcSet } from "../lib/utils/projectImage";
+import type {
+  ProjectDetailsMDXProps,
+  ProjectDetailsProps,
+} from "../lib/interfaces/ProjectDetails";
 
 export interface Props {
-  project: IProject["data"];
+  mdxProps: ProjectDetailsMDXProps;
+  url: ProjectDetailsProps["url"];
 }
 
-const { project } = Astro.props;
+const { mdxProps, url } = Astro.props;
 ---
 
 <div>
   <div class="my-4 group relative max-w-max">
     <img
-      src={project.attributes.cover.data.attributes.url}
-      srcset={constructImageSrcSet(project.attributes.cover)}
-      sizes="(min-width: 1080px) 1080px, 100vw"
-      alt={project.attributes.cover.data.attributes.alternativeText}
+      src={mdxProps.projectCover}
       class="cursor-pointer group-hover:brightness-[30%] transition-all duration-200 ease-in w-full"
-      width={project.attributes.cover.data.attributes.width}
-      height={project.attributes.cover.data.attributes.height}
     />
     <div class="absolute inset-0 grid place-items-center group">
       <div
         class="flex gap-1 p-2 border-1 rounded-md text-white opacity-0 group-hover:opacity-100 transition-opacity duration-150 ease-in"
       >
         <a
-          href={project.attributes.demo}
+          href={mdxProps.projectDemo}
           target="_blank"
           rel="noreferrer noopener"
           class="block"
           ><p
             class="align-middle font-body text-xl hover-underline-animation after:bg-violet-300"
           >
-            Website <span class="sr-only">for {project.attributes.name}</span>
+            Website <span class="sr-only">for {mdxProps.projectName}</span>
           </p>
           <NewTabIcon />
         </a>
@@ -42,17 +40,17 @@ const { project } = Astro.props;
     </div>
   </div>
   <h3 class="text-2xl font-bold tracking-wide font-title">
-    {project.attributes.name}
+    {mdxProps.projectName}
   </h3>
-  <p class="font-body">{project.attributes.summary}</p>
+  <p class="font-body">{mdxProps.projectSummary}</p>
   <a
-    href={`/projects/${project.id}`}
+    href={url ?? ""}
     class="block mt-2 group text-black transition duration-300 max-w-max"
     ><p
       class="align-middle font-body hover-underline-animation after:bg-violet-400"
     >
       More details
-      <span class="sr-only">about {project.attributes.name}</span>
+      <span class="sr-only">about {mdxProps.projectName}</span>
     </p>
     <RightArrowIcon />
   </a>

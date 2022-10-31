@@ -1,19 +1,10 @@
 ---
-import type { ErrorResponse } from "../lib/interfaces/Error";
-import type { IProjects } from "../lib/interfaces/Projects";
-import ErrorWrapper from "./ErrorWrapper.astro";
+import type { ProjectDetailsMDXProps } from "../lib/interfaces/ProjectDetails";
 import Project from "./Project.astro";
 
-const response = await fetch(
-  `${import.meta.env.API_ENDPOINT}/api/projects?populate=%2A&sort=id`,
-  {
-    headers: {
-      Authorization: `Bearer ${import.meta.env.API_TOKEN}`,
-    },
-  }
+const projects = await Astro.glob<ProjectDetailsMDXProps>(
+  "../pages/projects/*.mdx"
 );
-
-const data: IProjects | ErrorResponse = await response.json();
 ---
 
 <section id="projects" class="flex flex-col gap-3">
@@ -25,8 +16,10 @@ const data: IProjects | ErrorResponse = await response.json();
     </p>
   </header>
   <div class="grid gap-5">
-    <ErrorWrapper response={data}>
-      {data.data!.map((project) => <Project project={project} />)}
-    </ErrorWrapper>
+    {
+      projects.map((project) => (
+        <Project mdxProps={project.frontmatter} url={project.url} />
+      ))
+    }
   </div>
 </section>

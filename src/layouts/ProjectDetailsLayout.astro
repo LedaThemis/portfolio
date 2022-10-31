@@ -1,0 +1,36 @@
+---
+import Layout from "./Layout.astro";
+import Contact from "../components/Contact.astro";
+import ProjectLinks from "../components/ProjectDetail/ProjectLinks.astro";
+import ProjectTechnologies from "../components/ProjectDetail/ProjectTechnologies.astro";
+import ProjectHeader from "../components/ProjectDetail/ProjectHeader.astro";
+import type { ProjectDetailsProps } from "../lib/interfaces/ProjectDetails";
+
+const { frontmatter } = Astro.props;
+
+type Props = ProjectDetailsProps;
+
+const pageTitle = `${frontmatter.projectName} — Leda`;
+const pageDesc = `Details on the implementation, the why behind and technologies of ${frontmatter.projectName} by Leda`;
+---
+
+<Layout title={pageTitle} description={pageDesc}>
+  <main class="flex flex-col gap-5">
+    <article class="mt-8 flex flex-col gap-6">
+      <ProjectHeader
+        name={frontmatter.projectName}
+        description={frontmatter.projectDescription}
+      />
+      <ProjectTechnologies technologies={frontmatter.projectTechnologies} />
+      <ProjectLinks
+        name={frontmatter.projectName}
+        source={frontmatter.projectSource}
+        demo={frontmatter.projectDemo}
+      />
+      <div class="min-w-full prose prose-img:ml-auto prose-img:mr-auto">
+        <slot />
+      </div>
+    </article>
+    <Contact />
+  </main>
+</Layout>

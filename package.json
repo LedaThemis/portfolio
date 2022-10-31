@@ -12,6 +12,7 @@
     "format": "prettier -w --plugin-search-dir=. ."
   },
   "dependencies": {
+    "@astrojs/mdx": "^0.11.5",
     "@astrojs/sitemap": "^1.0.0",
     "@astrojs/tailwind": "^2.0.2",
     "@astrojs/vercel": "^2.1.0",
