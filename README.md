@@ -5,17 +5,7 @@
     <br>
 </h1>
 
-<p align="center">My current personal portfolio, built with <a
-      href="https://astro.build"
-      target="_blank"
-      rel="noreferrer noopener"
-      >Astro
-    </a> and <a
-      href="https://mdxjs.com"
-      target="_blank"
-      rel="noreferrer noopener"
-      >MDX
-    </a></p>
+<p align="center">My current personal portfolio, built with <a href="https://astro.build" target="_blank" rel="noreferrer noopener" >Astro</a> and <a href="https://mdxjs.com" target="_blank" rel="noreferrer noopener">MDX</a></p>
 
 ## Writing a Project Details Page
 
