@@ -1,0 +1,44 @@
+---
+// Credits @colbyfayock
+import { Cloudinary, CloudinaryImage } from "@cloudinary/url-gen";
+import { fit } from "@cloudinary/url-gen/actions/resize";
+
+const cld = new Cloudinary({
+  cloud: {
+    cloudName: import.meta.env.PUBLIC_CLOUDINARY_CLOUD_NAME,
+  },
+});
+
+const constructImageSrcSet = (image: CloudinaryImage) => {
+  return [
+    `${image.resize(fit("1080")).toURL()} 1080w`,
+    `${image.resize(fit("720")).toURL()} 720w`,
+    `${image.resize(fit("480")).toURL()} 480w`,
+    `${image.resize(fit("360")).toURL()} 360w`,
+  ].join(", ");
+};
+
+const { src, ...props } = Astro.props;
+let cldSrc = cld.image(src).format("auto").quality("auto");
+
+if (src.startsWith("https://")) {
+  cldSrc.setDeliveryType("fetch");
+}
+
+interface Props {
+  src: string;
+  width: string;
+  height: string;
+  alt: string;
+  class: string;
+  optimize: boolean;
+}
+---
+
+<img
+  src={cldSrc.toURL()}
+  srcset={props.optimize ? constructImageSrcSet(cldSrc) : null}
+  sizes="(min-width: 1080px) 1080px, 100vw"
+  loading="lazy"
+  {...props}
+/>

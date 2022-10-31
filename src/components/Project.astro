@@ -5,6 +5,7 @@ import type {
   ProjectDetailsMDXProps,
   ProjectDetailsProps,
 } from "../lib/interfaces/ProjectDetails";
+import CldImage from "./CldImage.astro";
 
 export interface Props {
   mdxProps: ProjectDetailsMDXProps;
@@ -16,9 +17,13 @@ const { mdxProps, url } = Astro.props;
 
 <div>
   <div class="my-4 group relative max-w-max">
-    <img
-      src={mdxProps.projectCover}
-      class="cursor-pointer group-hover:brightness-[30%] transition-all duration-200 ease-in w-full"
+    <CldImage
+      src={mdxProps.projectCover.name}
+      width={mdxProps.projectCover.width}
+      height={mdxProps.projectCover.height}
+      alt={mdxProps.projectCover.alt}
+      optimize={true}
+      class="cursor-pointer group-hover:brightness-[30%] transition-all duration-200 ease-in"
     />
     <div class="absolute inset-0 grid place-items-center group">
       <div

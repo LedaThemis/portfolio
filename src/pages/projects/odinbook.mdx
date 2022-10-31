@@ -2,12 +2,14 @@
 layout: ../../layouts/ProjectDetailsLayout.astro
 projectName: "Odinbook"
 projectSummary: "A place to share moments and chat with friends."
-projectCover: "https://res.cloudinary.com/dj08db9y2/image/upload/v1665245191/odinbook_home_318fe8e362.png"
+projectCover: { name: "odinbook_home_318fe8e362", width: "1920", height: "944", alt: "" }
 projectDescription: "A social media app that allows you to share moments of your life, and gives you the ability to chat with friends."
 projectTechnologies: "express react mongodb socketdotio typescript styledcomponents jest testinglibrary"
 projectSource: "https://github.com/LedaThemis/odin-book"
 projectDemo: "https://leda-odin-book.web.app"
 ---
+
+import CldImage from "../../components/CldImage.astro";
 
 ### Notable Features
 
@@ -32,9 +34,12 @@ Implementing this had its challenges, most notably synchronizing the state betwe
 
 The initial implementation had two states, one for posts fetched from the Express server (and posts from the current user) and the other for the [Socket.IO](https://socket.io/) ones (to have real-time updates), which wasn't pleasant to work with.
 
-<img
-  src="https://res.cloudinary.com/dj08db9y2/image/upload/v1665245188/odinbook_initial_sync_structure_d2ec9cfc5b.png"
+<CldImage
+  src="odinbook_initial_sync_structure_d2ec9cfc5b"
+  width="381"
+  height="402"
   alt=""
+  optimize={false}
 />
 Diagram: showing the old structure of synchronizing state in Odinbook
 
@@ -58,9 +63,12 @@ The above we would receive from the [Socket.IO](https://socket.io/) server
 
 And after the above we invalidate the timeline in `onSuccess` function of the [mutation](https://tanstack.com/query/v4/docs/guides/mutations).
 
-<img
-  src="https://res.cloudinary.com/dj08db9y2/image/upload/v1665245188/odinbook_new_invalidate_query_sync_structure_d7c13fd302.png"
+<CldImage
+  src="odinbook_new_invalidate_query_sync_structure_d7c13fd302"
+  width="531"
+  height="401"
   alt=""
+  optimize={false}
 />
 Diagram: showing the new structure of synchronizing state in Odinbook
 

@@ -5,6 +5,7 @@ specifiers:
   "@astrojs/sitemap": ^1.0.0
   "@astrojs/tailwind": ^2.0.2
   "@astrojs/vercel": ^2.1.0
+  "@cloudinary/url-gen": ^1.8.6
   "@fontsource/nunito-sans": ^4.5.10
   "@fontsource/roboto": ^4.5.8
   "@tailwindcss/forms": ^0.5.3
@@ -20,6 +21,7 @@ dependencies:
   "@astrojs/sitemap": 1.0.0
   "@astrojs/tailwind": 2.0.2_tailwindcss@3.1.8
   "@astrojs/vercel": 2.1.0
+  "@cloudinary/url-gen": 1.8.6
   "@fontsource/nunito-sans": 4.5.10
   "@fontsource/roboto": 4.5.8
   astro: 1.4.4
@@ -535,6 +537,24 @@ packages:
       "@babel/helper-string-parser": 7.18.10
       "@babel/helper-validator-identifier": 7.19.1
       to-fast-properties: 2.0.0
+    dev: false
+
+  /@cloudinary/transformation-builder-sdk/1.1.0:
+    resolution:
+      {
+        integrity: sha512-BqhTqIwPTyQ4hE0NjKXf/bF7VAjwe2ZHNuypdG6oQ6bDoiLTOSzdAZsg0jFndureQiVPavBKOzQTjHImp45z/g==,
+      }
+    dependencies:
+      "@cloudinary/url-gen": 1.8.6
+    dev: false
+
+  /@cloudinary/url-gen/1.8.6:
+    resolution:
+      {
+        integrity: sha512-BZUHOns1+ECmZTGlcWWZ1mM7Fu5TsSWqbknGCVtmhgX2g82kwZa3W3LhICMu/xyPjuQmz8ykjXHAkRw5kRZf+w==,
+      }
+    dependencies:
+      "@cloudinary/transformation-builder-sdk": 1.1.0
     dev: false
 
   /@emmetio/abbreviation/2.2.3:
