@@ -27,6 +27,8 @@ jobs:
       run: pnpm build
     - name: Run Playwright tests
       run: pnpm dlx playwright test
+      env:
+        PUBLIC_CLOUDINARY_CLOUD_NAME: ${{ secrets.PUBLIC_CLOUDINARY_CLOUD_NAME }}
     - uses: actions/upload-artifact@v3
       if: always()
       with:
