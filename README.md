@@ -1,6 +1,6 @@
 <h1 align="center">
     <br>
-    <img src="https://i.imgur.com/jIL25nn.png" alt="">
+    <img src="preview.png" alt="">
     <a href="https://leda.dev">Personal Portfolio</a>
     <br>
 </h1>
