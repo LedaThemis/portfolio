@@ -17,6 +17,7 @@ jobs:
         with:
           node-version: 16
           cache: "pnpm"
+      - uses: puppeteer/puppeteer@latest
       - name: Install dependencies
         run: pnpm install
       - name: Run Script
