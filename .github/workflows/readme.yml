@@ -1,0 +1,25 @@
+name: Update README.md Screenshot
+on:
+  push:
+    branches: [production]
+    paths-ignore:
+      - "preview.png"
+
+jobs:
+  update-readme:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: pnpm/action-setup@v2.2.4
+        with:
+          version: 7
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          cache: "pnpm"
+      - name: Install dependencies
+        run: pnpm install
+      - name: Run Script
+        run: pnpm run readme
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
