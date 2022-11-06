@@ -23,7 +23,7 @@ import ExternalLink from "../../components/ExternalLink.astro";
 - Track various body measurements
 - Track weight
 - Sign up with Email, Google, or Github
-- Sign up as a guest
+- Sign up as a guest [Coming Soon]
 - Set goals and see how far off you are from them
 - View progress as a graph
 - View past entries as list in table as rows
@@ -35,7 +35,7 @@ I've always wanted an app that I can track my progress with, and view that progr
 
 ### Generating Charts
 
-Using <ExternalLink name="Chart.js" url="https://www.chartjs.org/" altText="" /> to generate charts was straight-forward.
+Using <ExternalLink name="Chart.js" url="https://www.chartjs.org/" /> to generate charts was straight-forward.
 
 We simply generate labels from each data entry, and supply that to the `Line` component of <ExternalLink name="react-chartjs" url="https://react-chartjs-2.js.org/" />
 
@@ -45,3 +45,7 @@ We simply generate labels from each data entry, and supply that to the `Line` co
 - Generate an array with `lineCount` length
 - Use array to generate `div` elements
 - Make line darker for each line, `filter: brightness(calculatedBrightess)`
+
+### Lessons Learned
+
+Learning about <ExternalLink name="Chart.js" url="https://www.chartjs.org/" /> to plot charts, <ExternalLink name="NextAuth" url="https://nextauth.org" /> for managing authentication, and <ExternalLink name="Prisma" url="example.com" /> for DB operations.
