@@ -13,6 +13,7 @@ export type ProjectDetailsMDXProps = {
   projectTechnologies: string;
   projectSource: string;
   projectDemo: string;
+  draft: boolean;
 };
 
 export type ProjectDetailsProps = MarkdownLayoutProps<ProjectDetailsMDXProps>;

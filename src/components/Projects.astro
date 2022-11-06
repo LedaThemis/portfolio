@@ -5,6 +5,8 @@ import Project from "./Project.astro";
 const projects = await Astro.glob<ProjectDetailsMDXProps>(
   "../pages/projects/*.mdx"
 );
+
+const publishedProjects = projects.filter((project) => !project.frontmatter.draft);
 ---
 
 <section id="projects" class="flex flex-col gap-3">
@@ -17,7 +19,7 @@ const projects = await Astro.glob<ProjectDetailsMDXProps>(
   </header>
   <div class="grid gap-5">
     {
-      projects.map((project) => (
+      publishedProjects.map((project) => (
         <Project mdxProps={project.frontmatter} url={project.url} />
       ))
     }
