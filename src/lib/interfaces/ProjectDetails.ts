@@ -14,6 +14,7 @@ export type ProjectDetailsMDXProps = {
   projectSource: string;
   projectDemo: string;
   draft: boolean;
+  order: number;
 };
 
 export type ProjectDetailsProps = MarkdownLayoutProps<ProjectDetailsMDXProps>;

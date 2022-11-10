@@ -13,9 +13,10 @@ projectDescription: "An app used to keep track of body measurements, set goals, 
 projectTechnologies: "nextdotjs trpc prisma chartdotjs tailwindcss typescript"
 projectSource: "https://github.com/LedaThemis/measura"
 projectDemo: "https://measura.vercel.app"
-draft: true
+order: 2
 ---
 
+import CldImage from "../../components/CldImage.astro";
 import ExternalLink from "../../components/ExternalLink.astro";
 
 ### Notable Features
@@ -23,11 +24,10 @@ import ExternalLink from "../../components/ExternalLink.astro";
 - Track various body measurements
 - Track weight
 - Sign up with Email, Google, or Github
-- Sign up as a guest [Coming Soon]
 - Set goals and see how far off you are from them
 - View progress as a graph
 - View past entries as list in table as rows
-- Create recurring reminders (biweekly, weekly, monthly) [Coming Soon]
+- Create recurring reminders (daily, biweekly, weekly, monthly, yearly)
 
 ### Why was this built
 
@@ -46,6 +46,24 @@ We simply generate labels from each data entry, and supply that to the `Line` co
 - Use array to generate `div` elements
 - Make line darker for each line, `filter: brightness(calculatedBrightess)`
 
+### Creating Reminders
+
+Explored a few options, and the first was creating a <ExternalLink name="custom Next.js server" url="https://nextjs.org/docs/advanced-features/custom-server" />, but it turns out that wasn't recommended.
+
+So I turned into creating a <ExternalLink name="separate microservice" url="https://github.com/LedaThemis/measura-reminders-webserver" altText="(reminders webserver)" /> which depends on <ExternalLink name="node-cron" url="https://github.com/node-cron/node-cron" /> to make recurring jobs, <ExternalLink name="cron-parser" url="https://github.com/harrisiirak/cron-parser" /> to compute next due date, and <ExternalLink name="hyper-express" url="https://github.com/kartikk221/hyper-express" /> as a backend framework.
+
+<CldImage
+  src="measura_reminders_architecture_diagram"
+  width="361"
+  height="521"
+  alt="1. User creates reminder 2. Server stores it in DB 3. Server was started before 4. Server checks for due reminders 5. Server sends reminder email only if due date is today 6. Server updates reminder due date"
+  optimize={false}
+/>
+
+Diagram: showing the current architecture of the reminders microservice
+
 ### Lessons Learned
 
 Learning about <ExternalLink name="Chart.js" url="https://www.chartjs.org/" /> to plot charts, <ExternalLink name="NextAuth" url="https://nextauth.org" /> for managing authentication, and <ExternalLink name="Prisma" url="example.com" /> for DB operations.
+
+In addition to that, learning about scheduling jobs and recurring tasks.

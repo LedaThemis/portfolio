@@ -6,7 +6,9 @@ const projects = await Astro.glob<ProjectDetailsMDXProps>(
   "../pages/projects/*.mdx"
 );
 
-const publishedProjects = projects.filter((project) => !project.frontmatter.draft);
+const publishedProjects = projects
+  .filter((project) => !project.frontmatter.draft)
+  .sort((a, b) => a.frontmatter.order - b.frontmatter.order);
 ---
 
 <section id="projects" class="flex flex-col gap-3">
