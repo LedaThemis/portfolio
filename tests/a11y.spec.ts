@@ -12,6 +12,17 @@ test("homepage is accessible (axe-core)", async ({ page }) => {
   expect(accessibilityScanResults.violations).toEqual([]);
 });
 
+test("projects page is accessible (axe-core)", async ({ page }) => {
+  await page.goto("/projects");
+
+  // @ts-ignore
+  const accessibilityScanResults = await new AxeBuilder.default({
+    page,
+  }).analyze();
+
+  expect(accessibilityScanResults.violations).toEqual([]);
+});
+
 test("form success page is accessible (axe-core)", async ({ page }) => {
   await page.goto("/form/success");
 
@@ -47,6 +58,17 @@ test("404 page is accessible (axe-core)", async ({ page }) => {
 
 test("odinbook project page is accessible (axe-core)", async ({ page }) => {
   await page.goto("/projects/odinbook");
+
+  // @ts-ignore
+  const accessibilityScanResults = await new AxeBuilder.default({
+    page,
+  }).analyze();
+
+  expect(accessibilityScanResults.violations).toEqual([]);
+});
+
+test("portfolio project page is accessible (axe-core)", async ({ page }) => {
+  await page.goto("/projects/portfolio");
 
   // @ts-ignore
   const accessibilityScanResults = await new AxeBuilder.default({
