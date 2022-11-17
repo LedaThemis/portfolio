@@ -1,0 +1,71 @@
+---
+layout: ../../layouts/ProjectDetailsLayout.astro
+projectName: "Personal Portfolio"
+projectSummary: "My current personal portfolio, built with Astro and MDX"
+projectCover:
+  {
+    name: "https://raw.githubusercontent.com/LedaThemis/portfolio/main/preview.png",
+    width: "2560",
+    height: "1600",
+    alt: "",
+  }
+projectDescription: "My current personal portfolio, built with Astro and MDX."
+projectTechnologies: "astro mdx playwright githubactions tailwindcss typescript"
+projectSource: "https://github.com/LedaThemis/portfolio"
+projectDemo: "https://www.leda.dev"
+featured: false
+order: 3
+---
+
+import CldImage from "../../components/CldImage.astro";
+import ExternalLink from "../../components/ExternalLink.astro";
+
+### Notable Features
+
+- Statically generated at build time for CDN-level latency
+- Automatically-updating README with Github workflows
+- Automated a11y testing with Playwright
+- Optimized images with Cloudinary
+- Ease in adding new articles with MDX
+
+### Integrating MDX
+
+Using <ExternalLink name="@astrojs/mdx" url="https://docs.astro.build/en/guides/integrations-guide/mdx/" /> to add MDX support was straight-forward.
+
+All that was needed was installing and configuring the integration, and done! (Thanks Astro team!)
+
+### Automated Testing
+
+Thanks to <ExternalLink name="@axe-core/playwright" url="" />, A11Y testing with playwright was super easy.
+
+You can see <ExternalLink name="my current a11y tests file" url="https://github.com/LedaThemis/portfolio/blob/c13927767d3e46b47a7d9487bd0099f8f792358b/tests/a11y.spec.ts" /> which asserts that every page in the website is accessible using the `AxeBuilder.analyze` method, and <ExternalLink name="my current Github worflow setup" url="https://github.com/LedaThemis/portfolio/blob/c13927767d3e46b47a7d9487bd0099f8f792358b/.github/workflows/playwright.yml" /> which sets up a node environment and runs the tests using `pnpm dlx playwright test`
+
+### Optimzied Images
+
+You can view <ExternalLink name="my current optimized image component" url="https://github.com/LedaThemis/portfolio/blob/c13927767d3e46b47a7d9487bd0099f8f792358b/src/components/CldImage.astro" /> which I can import to MDX.
+
+In this component, I basically check whether the link provided is external or internal, and apply the following optimizations:
+
+- Set the delivery type to `fetch` (if it's external)
+- Construct an image source set for the image
+- Resize each image to fit the current viewport width
+
+### Automatically-Updating README
+
+Updating the README preview image every time I make a visual change to the website is inefficient and time-consuming, so I looked into ways of automating it.
+
+What I currently do is:
+
+- Capture an image of the current website using <ExternalLink name="capture-website - npm" url="https://www.npmjs.com/package/capture-website" />
+
+- Compare to see whether the current image is different than the previous one
+
+- Stop if they're the same
+
+- Otherwise, update the current preview image using the `request` method of <ExternalLink name="@octokit/core - npm" url="https://www.npmjs.com/package/@octokit/core" />
+
+And I run the above script on every push to the `production` branch (<ExternalLink name="view my current workflow" url="https://github.com/LedaThemis/portfolio/blob/c13927767d3e46b47a7d9487bd0099f8f792358b/.github/workflows/readme.yml" altText="for automatically updating preview images in README" />)
+
+### Lessons Learned
+
+Learned a lot about Github Actions and Github Workflows, also Astro and MDX, and finally image optimizations.
