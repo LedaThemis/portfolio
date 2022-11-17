@@ -15,7 +15,6 @@ specifiers:
   astro: ^1.4.4
   capture-website: ^3.2.0
   dotenv: ^16.0.3
-  playwright: '>= 1.0.0'
   prettier: ^2.7.1
   prettier-plugin-astro: ^0.5.5
   simple-icons: ^7.14.0
@@ -33,14 +32,13 @@ dependencies:
   tailwindcss: 3.1.8
 
 devDependencies:
-  '@axe-core/playwright': 4.5.0_playwright@1.27.1
+  '@axe-core/playwright': 4.5.0
   '@octokit/core': 4.1.0
   '@playwright/test': 1.27.1
   '@tailwindcss/forms': 0.5.3_tailwindcss@3.1.8
   '@tailwindcss/typography': 0.5.7_tailwindcss@3.1.8
   capture-website: 3.2.0
   dotenv: 16.0.3
-  playwright: 1.27.1
   prettier: 2.7.1
   prettier-plugin-astro: 0.5.5
 
@@ -197,13 +195,12 @@ packages:
       node-fetch: 3.2.10
     dev: false
 
-  /@axe-core/playwright/4.5.0_playwright@1.27.1:
+  /@axe-core/playwright/4.5.0:
     resolution: {integrity: sha512-YBkSBuxeSXb9FRUZU7NsZZFU/sTluZt71YqTRLrS/1eycZqIYMIALo9D/s17zPoBsFwJRKPkKvQy+dmDHHy4yQ==}
     peerDependencies:
       playwright: '>= 1.0.0'
     dependencies:
       axe-core: 4.5.1
-      playwright: 1.27.1
     dev: true
 
   /@babel/code-frame/7.18.6:
@@ -3624,15 +3621,6 @@ packages:
     resolution: {integrity: sha512-9EmeXDncC2Pmp/z+teoVYlvmPWUC6ejSSYZUln7YaP89Z6lpAaiaAnqroUt/BoLo8tn7WYShcfaCh+xofZa44Q==}
     engines: {node: '>=14'}
     hasBin: true
-    dev: true
-
-  /playwright/1.27.1:
-    resolution: {integrity: sha512-xXYZ7m36yTtC+oFgqH0eTgullGztKSRMb4yuwLPl8IYSmgBM88QiB+3IWb1mRIC9/NNwcgbG0RwtFlg+EAFQHQ==}
-    engines: {node: '>=14'}
-    hasBin: true
-    requiresBuild: true
-    dependencies:
-      playwright-core: 1.27.1
     dev: true
 
   /postcss-import/14.1.0_postcss@8.4.17:
