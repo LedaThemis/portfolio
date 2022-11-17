@@ -1,0 +1,35 @@
+---
+import type { ProjectDetailsMDXProps } from "../lib/interfaces/ProjectDetails";
+import Project from "../components/Project.astro";
+import Layout from "../layouts/Layout.astro";
+import Contact from "../components/Contact.astro";
+
+const projects = await Astro.glob<ProjectDetailsMDXProps>(
+  "../pages/projects/*.mdx"
+);
+
+const publishedProjects = projects
+  .filter((project) => !project.frontmatter.draft)
+  .sort((a, b) => a.frontmatter.order - b.frontmatter.order);
+---
+
+<Layout title="Leda — Web Developer" description="Personal website of Leda">
+  <main class="flex flex-col gap-5 mx-auto">
+    <section id="projects" class="flex flex-col gap-3 mt-10">
+      <header>
+        <h2 class="text-4xl font-title font-bold py-2">Projects</h2>
+        <p class="font-body">
+          Below is a list of all my projects that I've written about:
+        </p>
+      </header>
+      <div class="grid gap-5">
+        {
+          publishedProjects.map((project) => (
+            <Project mdxProps={project.frontmatter} url={project.url} />
+          ))
+        }
+      </div>
+    </section>
+    <Contact />
+  </main>
+</Layout>

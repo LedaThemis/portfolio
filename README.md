@@ -12,15 +12,15 @@
 Information that must be supplied in frontmatter:
 
 - Project name
-- Project summary (applicable if featured)
-- Project cover (applicable if featured)
+- Project summary
+- Project cover
 - Project description
 - Project technologies (https://github.com/simple-icons/simple-icons/blob/master/slugs.md)
 - Project source
 - Project demo
 - Draft (boolean)
 - Featured (boolean)
-- Order (order on homepage, applicable if featured)
+- Order (order on homepage and projects page)
 
 ## Related Repositories
 
