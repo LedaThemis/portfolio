@@ -6,8 +6,12 @@ const projects = await Astro.glob<ProjectDetailsMDXProps>(
   "../pages/projects/*.mdx"
 );
 
-const publishedProjects = projects
-  .filter((project) => !project.frontmatter.draft)
+const publishedProjects = projects.filter(
+  (project) => !project.frontmatter.draft
+);
+
+const featuredProjects = publishedProjects
+  .filter((project) => project.frontmatter.featured)
   .sort((a, b) => a.frontmatter.order - b.frontmatter.order);
 ---
 
@@ -21,7 +25,7 @@ const publishedProjects = projects
   </header>
   <div class="grid gap-5">
     {
-      publishedProjects.map((project) => (
+      featuredProjects.map((project) => (
         <Project mdxProps={project.frontmatter} url={project.url} />
       ))
     }

@@ -14,6 +14,7 @@ export type ProjectDetailsMDXProps = {
   projectSource: string;
   projectDemo: string;
   draft: boolean;
+  featured: boolean;
   order: number;
 };
 
