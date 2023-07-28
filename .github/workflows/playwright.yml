@@ -24,13 +24,13 @@ jobs:
     - name: Install dependencies
       run: pnpm install
     - name: Install Playwright Browsers
-      run: pnpm dlx playwright install --with-deps
+      run: npx playwright install --with-deps
     - name: Build Project
       env:
         PUBLIC_CLOUDINARY_CLOUD_NAME: ${{ secrets.PUBLIC_CLOUDINARY_CLOUD_NAME }}
       run: pnpm build
     - name: Run Playwright tests
-      run: pnpm dlx playwright test
+      run: npx playwright test
       env:
         PUBLIC_CLOUDINARY_CLOUD_NAME: ${{ secrets.PUBLIC_CLOUDINARY_CLOUD_NAME }}
     - uses: actions/upload-artifact@v3
