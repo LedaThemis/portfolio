@@ -14,11 +14,16 @@ const { panoramaSrc } = Astro.props;
 	</head>
 	<body>
     <div id="info">
-      <a href="./catholic-church">Catholic Church</a>
-      <a href="./catholic-church-upfront">Catholic Church (Upfront)</a>
-      <a href="./catholic-church-middle">Catholic Church (Middle)</a>
-      <a href="./catholic-church-back">Catholic Church (Back)</a>
-      <a href="./orthodox-church">Orthodox Church (Destroyed)</a>
+      <div>
+        <h1 class="text-lg mb-2">Navigation</h1>
+      </div>
+      <div>
+        <a href="./catholic-church">Catholic Church</a>
+        <a href="./catholic-church-upfront">Catholic Church (Upfront)</a>
+        <a href="./catholic-church-middle">Catholic Church (Middle)</a>
+        <a href="./catholic-church-back">Catholic Church (Back)</a>
+        <a href="./orthodox-church">Orthodox Church (Destroyed)</a>
+      </div>
     </div>
     <panorama-image data-panoramasrc={ panoramaSrc }></panorama-image>
 		<div id="container"></div>
@@ -196,6 +201,7 @@ const { panoramaSrc } = Astro.props;
         user-select: none;
         pointer-events: none;
         z-index: 1; /* TODO Solve this in HTML */
+        background-color: rgba(0, 0, 0, 0.5);
       }
 
       a, button, input, select {
