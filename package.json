@@ -20,6 +20,7 @@
     "@fontsource/nunito-sans": "^4.5.10",
     "@fontsource/roboto": "^4.5.8",
     "astro": "^1.6.9",
+    "headbreaker": "^3.0.0",
     "simple-icons": "^7.19.0",
     "tailwindcss": "^3.2.4",
     "three": "^0.171.0"

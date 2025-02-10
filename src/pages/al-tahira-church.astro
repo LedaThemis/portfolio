@@ -1,0 +1,86 @@
+---
+import TahiraLayout from "../layouts/TahiraLayout.astro";
+---
+
+<TahiraLayout>
+    <div class="mt-8">
+        <p><span class="">Al-Tahira Churches</span> are a collection of churches that date back to 1862 CE, this
+            project aims to digitalize two churches, the orthodox church (1895 CE) and the catholic
+            church (1862 CE).</p>
+    </div>
+
+
+    <div class="flex justify-center">
+        <div id="jigsaw-canvas">
+    </div>
+
+    </div>
+    <script is:inline src="https://flbulgarelli.github.io/headbreaker/js/headbreaker.js"></script>
+    <script is:inline>
+        // @ts-ignore
+        var audio = new Audio('assets/connect.wav');
+let berni = new Image();
+berni.src = 'assets/church_side_altar.jpeg';
+const initialWidth = 800;
+berni.onload = () => {
+    // @ts-ignore
+  const jigsaw = new headbreaker.Canvas('jigsaw-canvas', {
+    width: 800, height: 650,
+    pieceSize: 150, proximity: 20,
+    borderFill: 20, strokeWidth: 1.5,
+    lineSoftness: 0.18, image: berni,
+    strokeColor: 'black',
+  });
+
+  jigsaw.adjustImagesToPuzzleHeight();
+  jigsaw.autogenerate({
+    horizontalPiecesCount: 3,
+    verticalPiecesCount: 3,
+    // @ts-ignore
+    insertsGenerator: headbreaker.generators.random
+  });
+
+  jigsaw.shuffleGrid();
+
+  jigsaw.draw();
+
+// @ts-ignore
+  jigsaw.onConnect((_piece, figure, _target, targetFigure) => {
+    // play jigsaw
+    audio.play();
+
+    // paint borders on click
+    // of conecting and conected figures
+    figure.shape.stroke('yellow');
+    targetFigure.shape.stroke('yellow');
+    jigsaw.redraw();
+
+    setTimeout(() => {
+      // restore border colors
+      // later
+      figure.shape.stroke('black');
+      targetFigure.shape.stroke('black');
+      jigsaw.redraw();
+    }, 200);
+  });
+
+// @ts-ignore
+  jigsaw.onDisconnect((it) => {
+    audio.play();
+  });
+
+
+['resize', 'DOMContentLoaded'].forEach((event) => {
+  window.addEventListener(event, () => {
+    var container = document.getElementById('jigsaw-canvas');
+    jigsaw.resize(container.offsetWidth, container.scrollHeight);
+    if (container.offsetWidth / initialWidth > 1) return; // If width increases, don't scale puzzle
+    jigsaw.scale(container.offsetWidth / initialWidth);
+    jigsaw.redraw();
+  });
+});
+}
+
+
+    </script>
+</TahiraLayout>
