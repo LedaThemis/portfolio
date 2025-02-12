@@ -10,7 +10,7 @@ import TahiraLayout from "../layouts/TahiraLayout.astro";
     </div>
 
 
-    <div class="flex justify-center">
+    <div>
         <div id="jigsaw-canvas">
     </div>
 
@@ -22,10 +22,11 @@ import TahiraLayout from "../layouts/TahiraLayout.astro";
 let berni = new Image();
 berni.src = 'assets/church_side_altar.jpeg';
 const initialWidth = 800;
+const initialHeight = 650;
 berni.onload = () => {
     // @ts-ignore
   const jigsaw = new headbreaker.Canvas('jigsaw-canvas', {
-    width: 800, height: 650,
+    width: initialWidth, height: initialHeight,
     pieceSize: 150, proximity: 20,
     borderFill: 20, strokeWidth: 1.5,
     lineSoftness: 0.18, image: berni,
@@ -70,15 +71,21 @@ berni.onload = () => {
   });
 
 
-['resize', 'DOMContentLoaded'].forEach((event) => {
-  window.addEventListener(event, () => {
-    var container = document.getElementById('jigsaw-canvas');
-    jigsaw.resize(container.offsetWidth, container.scrollHeight);
-    if (container.offsetWidth / initialWidth > 1) return; // If width increases, don't scale puzzle
-    jigsaw.scale(container.offsetWidth / initialWidth);
-    jigsaw.redraw();
-  });
+  rescaleCanvas(jigsaw, initialWidth, initialHeight);
+
+  ['resize', 'DOMContentLoaded'].forEach((event) => {
+    window.addEventListener(event, () => {
+      rescaleCanvas(jigsaw, initialWidth, initialHeight);
+    });
 });
+
+  function rescaleCanvas(jigsaw, initialWidth, initialHeight) {
+    const container = document.getElementById('jigsaw-canvas');
+    const factor = container.offsetWidth / initialWidth
+    jigsaw.resize(container.offsetWidth, initialHeight * factor);
+    jigsaw.scale(factor, factor);
+    jigsaw.redraw();
+  }
 }
 
 
