@@ -1,4 +1,6 @@
 ---
+import Footer from "../../components/OldTown/Footer.astro";
+
 ---
 <!DOCTYPE html>
 <html lang="en">
@@ -10,7 +12,7 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Hentaigana:wght@200..900&display=swap" rel="stylesheet">        
 	</head>
-	<body>
+	<body class="min-h-screen flex flex-col">
         <nav>
             <div class="px-8 py-4 flex flex-col gap-4 md:flex-row justify-between items-center">
                 <div>
@@ -45,9 +47,12 @@
                 </div>
             </div>
         </nav>
-        <main class="px-8">
-            <slot />
-        </main>
+        <div class="grow flex flex-col justify-between">
+            <main class="px-8">
+                <slot />
+            </main>
+            <Footer />
+        </div>
         <style>
             body {
                 font-family: 'Noto Serif Hentaigana', Arial, Helvetica, sans-serif;
