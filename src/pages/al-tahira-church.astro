@@ -81,8 +81,10 @@ berni.onload = () => {
 
   function rescaleCanvas(jigsaw, initialWidth, initialHeight) {
     const container = document.getElementById('jigsaw-canvas');
-    const factor = container.offsetWidth / initialWidth
-    jigsaw.resize(container.offsetWidth, initialHeight * factor);
+    const factorX = container.offsetWidth / initialWidth;
+    const factorY = container.offsetHeight / initialHeight;
+    const factor = Math.min(factorX, factorY);
+    jigsaw.resize(container.offsetWidth, container.offsetHeight);
     jigsaw.scale(factor, factor);
     jigsaw.redraw();
   }
