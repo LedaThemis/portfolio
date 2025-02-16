@@ -66,6 +66,7 @@ import OldTownLayout from "../../layouts/OldTown/OldTownLayout.astro";
             "showZoomCtrl": false,
             "showFullscreenCtrl": true,
             "compass": false,
+            "hotSpotDebug": true,
         },
         "scenes": {
             "s1": {
@@ -84,10 +85,7 @@ import OldTownLayout from "../../layouts/OldTown/OldTownLayout.astro";
                 ]
             },
             "s2": {
-                "minPitch": -55,
-                "maxPitch": 35,
-                "hfov": 90,
-                "maxHfov": 90,
+                "hfov": 110,
                 "yaw": 20,
                 "type": "equirectangular",
                 "panorama": "https://res.cloudinary.com/dj08db9y2/image/upload/old-town/scenes/s2",
@@ -142,9 +140,9 @@ import OldTownLayout from "../../layouts/OldTown/OldTownLayout.astro";
                     },
                     {
                         "pitch": 8,
-                        "yaw": -192,
+                        "yaw": -186,
                         "type": "scene",
-                        "sceneId": "s5",
+                        "sceneId": "s6",
                     }
                 ]
             },
@@ -157,9 +155,30 @@ import OldTownLayout from "../../layouts/OldTown/OldTownLayout.astro";
                 "hotSpots": [
                     {
                         "pitch": 6,
-                        "yaw": -105,
+                        "yaw": -130,
+                        "type": "scene",
+                        "sceneId": "s6",
+                    }
+                ]
+            },
+            "s6": {
+                "hfov": 110,
+                "pitch": -8,
+                "yaw": -266,
+                "type": "equirectangular",
+                "panorama": "https://res.cloudinary.com/dj08db9y2/image/upload/old-town/scenes/s6",
+                "hotSpots": [
+                    {
+                        "pitch": -11,
+                        "yaw": -88,
                         "type": "scene",
                         "sceneId": "s4",
+                    },
+                    {
+                        "pitch": -9,
+                        "yaw": 41,
+                        "type": "scene",
+                        "sceneId": "s5",
                     }
                 ]
             },
