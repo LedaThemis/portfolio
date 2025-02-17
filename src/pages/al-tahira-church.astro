@@ -1,0 +1,128 @@
+---
+import TahiraLayout from "../layouts/Tahira/TahiraLayout.astro";
+---
+
+<TahiraLayout showFooter={false}>
+  <div id="home-container" class="grow grid grid-cols-5 grid-rows-5">
+    <div class="flex items-center col-span-3 col-start-2 row-span-1 row-start-3">
+      <h2 class="text-center secondary-font font-medium text-2xl sm:text-4xl md:text-5xl lg:text-6xl z-10">
+        Digitalizing Al-Tahira Churches Collection 1862 CE
+      </h2>
+    </div>
+    <div class="hidden xl:flex items-end col-span-2 col-start-1 row-span-2 row-start-4">
+      <p class="z-10">
+        Al-Tahira Churches are a collection of churches that date back to 1862 CE, this project aims to digitalize two churches, the orthodox church (1895 CE) and the catholic church (1862 CE).
+      </p>
+    </div>
+  </div>
+   
+<div id="jigsaw-container" class="absolute left-0 w-screen blur transition-all ease-in">
+    <div id="jigsaw-canvas">
+</div>
+
+    <script is:inline src="https://flbulgarelli.github.io/headbreaker/js/headbreaker.js"></script>
+    <script is:inline>
+        // @ts-ignore
+        var audio = new Audio('assets/connect.wav');
+let berni = new Image();
+berni.src = 'assets/church_side_altar.jpeg';
+const pieceSize = 150;
+const initialWidth = window.innerWidth - pieceSize;
+const initialHeight = window.innerHeight - pieceSize;
+berni.onload = () => {
+    // @ts-ignore
+  const jigsaw = new headbreaker.Canvas('jigsaw-canvas', {
+    width: initialWidth, height: initialHeight,
+    pieceSize: pieceSize, proximity: 30,
+    borderFill: 15, strokeWidth: 1.5,
+    lineSoftness: 0.18, image: berni,
+    strokeColor: 'black',
+  });
+
+  jigsaw.adjustImagesToPuzzleHeight();
+  jigsaw.autogenerate({
+    horizontalPiecesCount: 3,
+    verticalPiecesCount: 3,
+    // @ts-ignore
+    insertsGenerator: headbreaker.generators.random
+  });
+
+  jigsaw.shuffle();
+
+  jigsaw.draw();
+  jigsaw.attachSolvedValidator();
+
+// @ts-ignore
+  jigsaw.onConnect((_piece, figure, _target, targetFigure) => {
+    // play jigsaw
+    audio.play();
+
+    // paint borders on click
+    // of conecting and conected figures
+    figure.shape.stroke('yellow');
+    targetFigure.shape.stroke('yellow');
+    jigsaw.redraw();
+
+    setTimeout(() => {
+      // restore border colors
+      // later
+      figure.shape.stroke('black');
+      targetFigure.shape.stroke('black');
+      jigsaw.redraw();
+    }, 200);
+  });
+
+// @ts-ignore
+  jigsaw.onDisconnect((it) => {
+    audio.play();
+  });
+
+  // @ts-ignore
+  jigsaw.onValid(() => {
+    completePuzzle();
+  });
+
+
+  rescaleCanvas(jigsaw, initialWidth, initialHeight);
+
+  ['resize', 'DOMContentLoaded'].forEach((event) => {
+    window.addEventListener(event, () => {
+      rescaleCanvas(jigsaw, initialWidth, initialHeight);
+    });
+});
+
+  function rescaleCanvas(jigsaw, initialWidth, initialHeight) {
+    const container = document.getElementById('jigsaw-canvas');
+    const factorX = container.offsetWidth / initialWidth;
+    const factorY = container.offsetHeight / initialHeight;
+    const factor = Math.min(factorX, factorY);
+    jigsaw.resize(container.offsetWidth, container.offsetHeight);
+    jigsaw.scale(factor, factor);
+    jigsaw.redraw();
+  }
+  const jigsawContainer = document.getElementById('jigsaw-container');
+
+  ['mousedown', 'touchstart'].forEach((event) => {
+    jigsawContainer.addEventListener(event, (() => showPuzzle()))
+  });
+
+  function showPuzzle() {
+    if (jigsaw.valid) return;
+    const jigsawContainer = document.getElementById('jigsaw-container');
+    jigsawContainer.classList.remove('blur');
+    jigsawContainer.style.zIndex = 100;
+    const homeContainer = document.getElementById('home-container');
+    homeContainer.style.display = 'none';
+  }
+
+  function completePuzzle() {
+    const jigsawContainer = document.getElementById('jigsaw-container');
+    jigsawContainer.style.zIndex = null;
+    const homeContainer = document.getElementById('home-container');
+    homeContainer.style.display = '';
+  }
+}
+
+
+    </script>
+</TahiraLayout>

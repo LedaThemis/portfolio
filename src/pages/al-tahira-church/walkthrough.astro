@@ -1,0 +1,57 @@
+---
+import TahiraLayout from "../../layouts/Tahira/TahiraLayout.astro";
+---
+
+<TahiraLayout>
+    <div class="flex flex-col w-full mb-8">
+        <div>
+            <h2 class="text-3xl text-center my-8">Walkthrough</h2>
+        </div>
+        
+        <div class="flex flex-col items-center">
+            <iframe id="panorama" src="https://www.theasys.io/viewer/dC5F12cx9lhrvTmtYKzOu53nJo38pg" allowfullscreen="true" frameborder="0" scrolling="no" allow="vr;gyroscope;accelerometer" style="border:none;"></iframe>
+        </div>
+    </div>
+
+    <style>
+        #panorama {
+            width: 300px;
+            height: 225px;
+        }
+    
+        @media (min-width: 420px) {
+            #panorama {
+                width: 400px;   
+                height: 300px;   
+            }
+        }
+    
+        @media (min-width: 640px) {
+            #panorama {
+                width: 600px;   
+                height: 450px;   
+            }
+        }
+    
+        @media (min-width: 640px) {
+            #panorama {
+                width: 600px;   
+                height: 450px;   
+            }
+        }
+    
+        @media (min-width: 768px) {
+            #panorama {
+                width: 700px;   
+                height: 525px;   
+            }
+        }
+    
+        @media (min-width: 1024px) {
+            #panorama {
+                width: 800px;   
+                height: 600px;   
+            }
+        }
+    </style>
+</TahiraLayout>

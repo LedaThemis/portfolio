@@ -1,0 +1,192 @@
+---
+import OldTownLayout from "../../layouts/OldTown/OldTownLayout.astro";
+---
+
+<OldTownLayout>
+    <div class="flex flex-col w-full mb-8">
+        <div>
+            <h2 class="text-3xl text-center my-8">Walkthrough</h2>
+        </div>
+        
+        <div class="flex flex-col items-center">
+            <div id="panorama"></div>
+        </div>
+    </div>
+
+    <style>
+    #panorama {
+        width: 300px;
+        height: 225px;
+    }
+
+    @media (min-width: 420px) {
+        #panorama {
+            width: 400px;   
+            height: 300px;   
+        }
+    }
+
+    @media (min-width: 640px) {
+        #panorama {
+            width: 600px;   
+            height: 450px;   
+        }
+    }
+
+    @media (min-width: 640px) {
+        #panorama {
+            width: 600px;   
+            height: 450px;   
+        }
+    }
+
+    @media (min-width: 768px) {
+        #panorama {
+            width: 700px;   
+            height: 525px;   
+        }
+    }
+
+    @media (min-width: 1024px) {
+        #panorama {
+            width: 800px;   
+            height: 600px;   
+        }
+    }
+    </style>
+    
+    <script>
+    // @ts-ignore
+    pannellum.viewer('panorama', {   
+        "default": {
+            "firstScene": "s4",
+            "author": "Adil Al Qaba",
+            "sceneFadeDuration": 1000,
+            "autoLoad": true,
+            "showZoomCtrl": false,
+            "showFullscreenCtrl": true,
+            "compass": false,
+            "hotSpotDebug": true,
+        },
+        "scenes": {
+            "s1": {
+                "hfov": 110,
+                "pitch": -3,
+                "yaw": -10,
+                "type": "equirectangular",
+                "panorama": "https://res.cloudinary.com/dj08db9y2/image/upload/old-town/scenes/s1",
+                "hotSpots": [
+                    {
+                        "pitch": -2.1,
+                        "yaw": -20,
+                        "type": "scene",
+                        "sceneId": "s4",
+                    }
+                ]
+            },
+            "s2": {
+                "hfov": 110,
+                "yaw": 20,
+                "type": "equirectangular",
+                "panorama": "https://res.cloudinary.com/dj08db9y2/image/upload/old-town/scenes/s2",
+                "hotSpots": [
+                    {
+                        "pitch": -0.6,
+                        "yaw": 20,
+                        "type": "scene",
+                        "sceneId": "s3",
+                        "targetYaw": -260,
+                    },
+                ]
+            },
+            "s3": {
+                "hfov": 110,
+                "yaw": -80,
+                "type": "equirectangular",
+                "panorama": "https://res.cloudinary.com/dj08db9y2/image/upload/old-town/scenes/s3",
+                "hotSpots": [
+                    {
+                        "pitch": -0.6,
+                        "yaw": -80,
+                        "type": "scene",
+                        "sceneId": "s2",
+                    },
+                    {
+                        "pitch": -0.6,
+                        "yaw": 100,
+                        "type": "scene",
+                        "sceneId": "s4",
+                    }
+                ]
+            },
+            "s4": {
+                "hfov": 110,
+                "pitch": 8,
+                "yaw": -184,
+                "type": "equirectangular",
+                "panorama": "https://res.cloudinary.com/dj08db9y2/image/upload/old-town/scenes/s4",
+                "hotSpots": [
+                    {
+                        "pitch": 14,
+                        "yaw": -18,
+                        "type": "scene",
+                        "sceneId": "s1",
+                    },
+                    {
+                        "pitch": 8,
+                        "yaw": -78,
+                        "type": "scene",
+                        "sceneId": "s3",
+                    },
+                    {
+                        "pitch": 8,
+                        "yaw": -186,
+                        "type": "scene",
+                        "sceneId": "s6",
+                    }
+                ]
+            },
+            "s5": {
+                "hfov": 110,
+                "pitch": 5,
+                "yaw": -180,
+                "type": "equirectangular",
+                "panorama": "https://res.cloudinary.com/dj08db9y2/image/upload/old-town/scenes/s5",
+                "hotSpots": [
+                    {
+                        "pitch": 6,
+                        "yaw": -130,
+                        "type": "scene",
+                        "sceneId": "s6",
+                    }
+                ]
+            },
+            "s6": {
+                "hfov": 110,
+                "pitch": -8,
+                "yaw": -266,
+                "type": "equirectangular",
+                "panorama": "https://res.cloudinary.com/dj08db9y2/image/upload/old-town/scenes/s6",
+                "hotSpots": [
+                    {
+                        "pitch": -11,
+                        "yaw": -88,
+                        "type": "scene",
+                        "sceneId": "s4",
+                    },
+                    {
+                        "pitch": -9,
+                        "yaw": 41,
+                        "type": "scene",
+                        "sceneId": "s5",
+                    }
+                ]
+            },
+        }
+    });
+    </script>    
+
+    <!-- Pannellum -->
+    <script is:inline src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css">
+</OldTownLayout>
