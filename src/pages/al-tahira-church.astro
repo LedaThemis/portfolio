@@ -50,12 +50,7 @@ berni.onload = () => {
   jigsaw.shuffle();
 
   jigsaw.draw();
-
-  // @ts-ignore
-  jigsaw.onTranslate((_piece, figure, dx, dy) => {
-    console.log({_piece})
-    showPuzzle();
-  });
+  jigsaw.attachSolvedValidator();
 
 // @ts-ignore
   jigsaw.onConnect((_piece, figure, _target, targetFigure) => {
@@ -80,6 +75,11 @@ berni.onload = () => {
 // @ts-ignore
   jigsaw.onDisconnect((it) => {
     audio.play();
+  });
+
+  // @ts-ignore
+  jigsaw.onValid(() => {
+    completePuzzle();
   });
 
 
@@ -107,9 +107,19 @@ berni.onload = () => {
   });
 
   function showPuzzle() {
+    if (jigsaw.valid) return;
     const jigsawContainer = document.getElementById('jigsaw-container');
     jigsawContainer.classList.remove('blur');
     jigsawContainer.style.zIndex = 100;
+    const homeContainer = document.getElementById('home-container');
+    homeContainer.style.display = 'none';
+  }
+
+  function completePuzzle() {
+    const jigsawContainer = document.getElementById('jigsaw-container');
+    jigsawContainer.style.zIndex = null;
+    const homeContainer = document.getElementById('home-container');
+    homeContainer.style.display = '';
   }
 }
 
