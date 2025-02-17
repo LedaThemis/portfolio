@@ -3,6 +3,11 @@ import Footer from "../../components/Tahira/Footer.astro";
 import HoshAlBayaaSVG from "../../components/Tahira/HoshAlBayaaSVG.astro";
 import HoshAlBayaaDarkSVG from "../../components/Tahira/HoshAlBayaaDarkSVG.astro";
 
+export interface Props {
+    showFooter?: boolean;
+}
+
+const { showFooter = true } = Astro.props;
 ---
 <!DOCTYPE html>
 <html lang="en">
@@ -73,7 +78,7 @@ import HoshAlBayaaDarkSVG from "../../components/Tahira/HoshAlBayaaDarkSVG.astro
                             </div>
                             <div class="flex flex-col gap-10 lg:col-start-3">
                                 <div class="flex flex-col gap-6">
-                                    <p class="font-secondary text-2xl font-medium">
+                                    <p class="secondary-font text-2xl font-medium">
                                         Digitalizing Al-Tahira Churches Collection 1862 CE
                                     </p>
                                     <p>
@@ -102,13 +107,16 @@ import HoshAlBayaaDarkSVG from "../../components/Tahira/HoshAlBayaaDarkSVG.astro
             <main class="grow flex flex-col">
                 <slot />
             </main>
+            { showFooter && <Footer /> }
         </div>
         <style>
             :root {
                 --bg-dark: #121212;
                 --bg-primary: #ECEAE4;
+                --bg-secondary: #DBD8CE;
                 --padding-main: 42px;
                 --border-main: #2A2929;
+                --text-secondary: #9E9D9B;
                 font-family: Inter, sans-serif;
                 font-feature-settings: 'liga' 1, 'calt' 1; /* fix for Chrome */
             }
