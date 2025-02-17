@@ -3,32 +3,38 @@ import TahiraLayout from "../layouts/Tahira/TahiraLayout.astro";
 ---
 
 <TahiraLayout>
-    <div class="mt-8">
-        <p><span class="">Al-Tahira Churches</span> are a collection of churches that date back to 1862 CE, this
-            project aims to digitalize two churches, the orthodox church (1895 CE) and the catholic
-            church (1862 CE).</p>
+  <div id="home-container" class="grow grid grid-cols-5 grid-rows-5">
+    <div class="flex items-center col-span-3 col-start-2 row-span-1 row-start-3">
+      <h2 class="text-center font-secondary font-medium text-2xl sm:text-4xl md:text-5xl lg:text-6xl z-10">
+        Digitalizing Al-Tahira Churches Collection 1862 CE
+      </h2>
     </div>
-
-
-    <div>
-        <div id="jigsaw-canvas">
+    <div class="hidden xl:flex items-end col-span-2 col-start-1 row-span-2 row-start-4">
+      <p class="z-10">
+        Al-Tahira Churches are a collection of churches that date back to 1862 CE, this project aims to digitalize two churches, the orthodox church (1895 CE) and the catholic church (1862 CE).
+      </p>
     </div>
+  </div>
+   
+<div id="jigsaw-container" class="absolute left-0 w-screen blur transition-all ease-in">
+    <div id="jigsaw-canvas">
+</div>
 
-    </div>
     <script is:inline src="https://flbulgarelli.github.io/headbreaker/js/headbreaker.js"></script>
     <script is:inline>
         // @ts-ignore
         var audio = new Audio('assets/connect.wav');
 let berni = new Image();
 berni.src = 'assets/church_side_altar.jpeg';
-const initialWidth = 800;
-const initialHeight = 650;
+const pieceSize = 150;
+const initialWidth = window.innerWidth - pieceSize;
+const initialHeight = window.innerHeight - pieceSize;
 berni.onload = () => {
     // @ts-ignore
   const jigsaw = new headbreaker.Canvas('jigsaw-canvas', {
     width: initialWidth, height: initialHeight,
-    pieceSize: 150, proximity: 20,
-    borderFill: 20, strokeWidth: 1.5,
+    pieceSize: pieceSize, proximity: 30,
+    borderFill: 15, strokeWidth: 1.5,
     lineSoftness: 0.18, image: berni,
     strokeColor: 'black',
   });
@@ -41,9 +47,15 @@ berni.onload = () => {
     insertsGenerator: headbreaker.generators.random
   });
 
-  jigsaw.shuffleGrid();
+  jigsaw.shuffle();
 
   jigsaw.draw();
+
+  // @ts-ignore
+  jigsaw.onTranslate((_piece, figure, dx, dy) => {
+    console.log({_piece})
+    showPuzzle();
+  });
 
 // @ts-ignore
   jigsaw.onConnect((_piece, figure, _target, targetFigure) => {
@@ -87,6 +99,17 @@ berni.onload = () => {
     jigsaw.resize(container.offsetWidth, container.offsetHeight);
     jigsaw.scale(factor, factor);
     jigsaw.redraw();
+  }
+  const jigsawContainer = document.getElementById('jigsaw-container');
+
+  ['mousedown', 'touchstart'].forEach((event) => {
+    jigsawContainer.addEventListener(event, (() => showPuzzle()))
+  });
+
+  function showPuzzle() {
+    const jigsawContainer = document.getElementById('jigsaw-container');
+    jigsawContainer.classList.remove('blur');
+    jigsawContainer.style.zIndex = 100;
   }
 }
 
