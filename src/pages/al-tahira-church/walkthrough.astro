@@ -7,48 +7,65 @@ import TahiraLayout from "../../layouts/Tahira/TahiraLayout.astro";
         <div>
             <h2 class="text-3xl text-center my-8">Walkthrough</h2>
         </div>
-        
-        <div class="flex flex-col items-center">
-            <iframe id="panorama" src="https://www.theasys.io/viewer/dC5F12cx9lhrvTmtYKzOu53nJo38pg" allowfullscreen="true" frameborder="0" scrolling="no" allow="vr;gyroscope;accelerometer" style="border:none;"></iframe>
+
+        <ul class="nav nav-pills nav-fill gap-4 mb-4" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+              <button class="nav-link active" id="catholic-tab" data-bs-toggle="tab" data-bs-target="#catholic" type="button" role="tab" aria-controls="catholic" aria-selected="true">Catholic Church</button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link" id="orthodox-tab" data-bs-toggle="tab" data-bs-target="#orthodox" type="button" role="tab" aria-controls="orthodox" aria-selected="false">Orthodox Church</button>
+            </li>
+        </ul>
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="catholic" role="tabpanel" aria-labelledby="catholic-tab">
+                <div class="flex flex-col items-center">
+                    <iframe class="panorama" src="https://www.theasys.io/viewer/dC5F12cx9lhrvTmtYKzOu53nJo38pg" allowfullscreen="true" frameborder="0" scrolling="no" allow="vr;gyroscope;accelerometer" style="border:none;"></iframe>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="orthodox" role="tabpanel" aria-labelledby="orthodox-tab">        
+                <div class="flex flex-col items-center">
+                    <iframe class="panorama" src="https://www.theasys.io/viewer/tDzlAVq8bPx3LRXLJLAmLXrU8mLD9N" allowfullscreen="true" frameborder="0" scrolling="no" allow="vr;gyroscope;accelerometer" style="border:none;"></iframe>
+                </div>
+            </div>
         </div>
     </div>
 
     <style>
-        #panorama {
+        .panorama {
             width: 300px;
             height: 225px;
         }
     
         @media (min-width: 420px) {
-            #panorama {
+            .panorama {
                 width: 400px;   
                 height: 300px;   
             }
         }
     
         @media (min-width: 640px) {
-            #panorama {
+            .panorama {
                 width: 600px;   
                 height: 450px;   
             }
         }
     
         @media (min-width: 640px) {
-            #panorama {
+            .panorama {
                 width: 600px;   
                 height: 450px;   
             }
         }
     
         @media (min-width: 768px) {
-            #panorama {
+            .panorama {
                 width: 700px;   
                 height: 525px;   
             }
         }
     
         @media (min-width: 1024px) {
-            #panorama {
+            .panorama {
                 width: 800px;   
                 height: 600px;   
             }
