@@ -27,7 +27,7 @@ const { showFooter = true } = Astro.props;
 	</head>
 	<body class="min-h-screen flex flex-col p-[var(--padding-main)]">
         <nav>
-            <div class="flex flex-row gap-4 justify-between items-center">
+            <div class="flex flex-row gap-4 justify-between items-center h-[var(--navbar-height)]">
                 <div>
                     <a href="/al-tahira-church">
                         <HoshAlBayaaSVG />
@@ -119,6 +119,7 @@ const { showFooter = true } = Astro.props;
                 --bg-primary: #ECEAE4;
                 --bg-secondary: #DBD8CE;
                 --padding-main: 42px;
+                --navbar-height: 46px;
                 --border-main: #2A2929;
                 --text-secondary: #9E9D9B;
                 font-family: Inter, sans-serif;
