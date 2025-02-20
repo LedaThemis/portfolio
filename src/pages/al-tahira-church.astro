@@ -3,148 +3,188 @@ import TahiraLayout from "../layouts/Tahira/TahiraLayout.astro";
 ---
 
 <TahiraLayout showFooter={false}>
-  <div id="home-container" class="grow grid grid-cols-5 grid-rows-5 max-h-[calc(100vh-2*var(--padding-main)-var(--navbar-height))]">
-    <div class="flex items-center col-span-3 col-start-2 row-span-1 row-start-3">
-      <h2 class="text-center secondary-font font-medium text-2xl sm:text-4xl md:text-5xl lg:text-6xl z-10">
+  <div
+    id="home-container"
+    class="grow grid grid-cols-5 grid-rows-5 max-h-[calc(100vh-2*var(--padding-main)-var(--navbar-height))]"
+  >
+    <div
+      class="flex items-center col-span-3 col-start-2 row-span-1 row-start-3"
+    >
+      <h2
+        class="text-center secondary-font font-medium text-2xl sm:text-4xl md:text-5xl lg:text-6xl z-10"
+      >
         Digitalizing Al-Tahira Churches Collection 1862 CE
       </h2>
     </div>
-    <div class="hidden lg:flex items-end col-span-2 col-start-1 row-span-2 row-start-4">
+    <div
+      class="hidden lg:flex items-end col-span-2 col-start-1 row-span-2 row-start-4"
+    >
       <p class="z-10">
-        Al-Tahira Churches are a collection of churches that date back to 1862 CE, this project aims to digitalize two churches, the orthodox church (1895 CE) and the catholic church (1862 CE).
+        Al-Tahira Churches are a collection of churches that date back to 1862
+        CE, this project aims to digitalize two churches, the orthodox church
+        (1895 CE) and the catholic church (1862 CE).
       </p>
     </div>
   </div>
-   
-<div id="jigsaw-container" class="absolute left-0 w-screen max-w-full blur transition-all ease-in">
-    <div id="jigsaw-canvas">
-</div>
 
-    <script is:inline src="https://flbulgarelli.github.io/headbreaker/js/headbreaker.js"></script>
+  <div
+    id="jigsaw-container"
+    class="absolute left-0 w-screen max-w-full blur transition-all ease-in"
+  >
+    <div id="jigsaw-canvas"></div>
+
+    <script
+      is:inline
+      src="https://flbulgarelli.github.io/headbreaker/js/headbreaker.js"
+    ></script>
     <script is:inline>
-        // @ts-ignore
-        var audio = new Audio('assets/connect.wav');
-let berni = new Image();
-berni.src = 'assets/church_side_altar.jpeg';
+      // @ts-ignore
+      var audio = new Audio("assets/connect.wav");
+      let berni = new Image();
+      berni.src = "assets/church_side_altar.jpeg";
 
       const getProperties = () => {
-        const jigsawContainer = document.getElementById('jigsaw-container');
+        const jigsawContainer = document.getElementById("jigsaw-container");
 
-        const bodyPadding = parseInt(window.getComputedStyle(document.body).getPropertyValue('--padding-main') || 0);
-        const navHeight = parseInt(window.getComputedStyle(document.body).getPropertyValue('--navbar-height') || 0);
+        const bodyPadding = parseInt(
+          window
+            .getComputedStyle(document.body)
+            .getPropertyValue("--padding-main") || 0
+        );
+        const navHeight = parseInt(
+          window
+            .getComputedStyle(document.body)
+            .getPropertyValue("--navbar-height") || 0
+        );
         const heightPadding = bodyPadding + navHeight;
 
         const defaultPieceCount = 3;
         const mobileWidth = 600;
         const mobilePieceCount = 3;
-        const getPiecesCount = () => window.innerWidth > mobileWidth ? defaultPieceCount : mobilePieceCount;
+        const getPiecesCount = () =>
+          window.innerWidth > mobileWidth
+            ? defaultPieceCount
+            : mobilePieceCount;
 
         const initialWidth = jigsawContainer.offsetWidth;
         const initialHeight = window.innerHeight - heightPadding;
 
-        const pieceSizeW = 0.5 * initialWidth / getPiecesCount();
-        const pieceSizeH = 0.8 * initialHeight / getPiecesCount();
+        const pieceSizeW = (0.5 * initialWidth) / getPiecesCount();
+        const pieceSizeH = (0.8 * initialHeight) / getPiecesCount();
         const pieceSize = Math.min(pieceSizeH, pieceSizeW);
 
         return [getPiecesCount(), initialWidth, initialHeight, pieceSize];
       };
 
-  const [piecesCount, initialWidth, initialHeight, pieceSize] = getProperties();
+      const [piecesCount, initialWidth, initialHeight, pieceSize] =
+        getProperties();
 
+      berni.onload = () => {
+        // @ts-ignore
+        const jigsaw = new headbreaker.Canvas("jigsaw-canvas", {
+          width: initialWidth,
+          height: initialHeight,
+          pieceSize: pieceSize,
+          proximity: pieceSize / 5,
+          borderFill: pieceSize / 10,
+          strokeWidth: 1.5,
+          lineSoftness: 0.18,
+          image: berni,
+          strokeColor: "black",
+        });
 
-berni.onload = () => {
-    // @ts-ignore
-  const jigsaw = new headbreaker.Canvas('jigsaw-canvas', {
-    width: initialWidth, height: initialHeight,
-    pieceSize: pieceSize,
-    proximity: pieceSize / 5,
-    borderFill: pieceSize / 10,
-    strokeWidth: 1.5,
-    lineSoftness: 0.18, image: berni,
-    strokeColor: 'black',
-  });
+        jigsaw.adjustImagesToPuzzleHeight();
+        jigsaw.autogenerate({
+          horizontalPiecesCount: piecesCount,
+          verticalPiecesCount: piecesCount,
+          // @ts-ignore
+          insertsGenerator: headbreaker.generators.random,
+        });
 
-  jigsaw.adjustImagesToPuzzleHeight();
-  jigsaw.autogenerate({
-    horizontalPiecesCount: piecesCount,
-    verticalPiecesCount: piecesCount,
-    // @ts-ignore
-    insertsGenerator: headbreaker.generators.random
-  });
+        jigsaw.shuffle();
 
-  jigsaw.shuffle();
+        jigsaw.draw();
+        jigsaw.attachSolvedValidator();
 
-  jigsaw.draw();
-  jigsaw.attachSolvedValidator();
+        // @ts-ignore
+        jigsaw.onConnect((_piece, figure, _target, targetFigure) => {
+          // play jigsaw
+          audio.play();
 
-// @ts-ignore
-  jigsaw.onConnect((_piece, figure, _target, targetFigure) => {
-    // play jigsaw
-    audio.play();
+          // paint borders on click
+          // of conecting and conected figures
+          figure.shape.stroke("yellow");
+          targetFigure.shape.stroke("yellow");
+          jigsaw.redraw();
 
-    // paint borders on click
-    // of conecting and conected figures
-    figure.shape.stroke('yellow');
-    targetFigure.shape.stroke('yellow');
-    jigsaw.redraw();
+          setTimeout(() => {
+            // restore border colors
+            // later
+            figure.shape.stroke("black");
+            targetFigure.shape.stroke("black");
+            jigsaw.redraw();
+          }, 200);
+        });
 
-    setTimeout(() => {
-      // restore border colors
-      // later
-      figure.shape.stroke('black');
-      targetFigure.shape.stroke('black');
-      jigsaw.redraw();
-    }, 200);
-  });
+        // @ts-ignore
+        jigsaw.onDisconnect((it) => {
+          audio.play();
+        });
 
-// @ts-ignore
-  jigsaw.onDisconnect((it) => {
-    audio.play();
-  });
+        // @ts-ignore
+        jigsaw.onValid(() => {
+          completePuzzle();
+        });
 
-  // @ts-ignore
-  jigsaw.onValid(() => {
-    completePuzzle();
-  });
+        ["resize", "DOMContentLoaded"].forEach((event) => {
+          window.addEventListener(event, () => {
+            rescaleCanvas(
+              jigsaw,
+              piecesCount,
+              initialWidth,
+              initialHeight,
+              pieceSize
+            );
+          });
+        });
 
+        function rescaleCanvas(
+          jigsaw,
+          piecesCount,
+          initialWidth,
+          initialHeight,
+          pieceSize
+        ) {
+          const [newPiecesCount, newWidth, newHeight, newPieceSize] =
+            getProperties();
 
-  ['resize', 'DOMContentLoaded'].forEach((event) => {
-    window.addEventListener(event, () => {
-      rescaleCanvas(jigsaw, piecesCount, initialWidth, initialHeight, pieceSize);
-    });
-});
+          const factor = newPieceSize / pieceSize;
+          jigsaw.resize(newWidth, newHeight);
+          jigsaw.scale(factor);
+          jigsaw.redraw();
+        }
+        const jigsawContainer = document.getElementById("jigsaw-container");
 
-  function rescaleCanvas(jigsaw, piecesCount, initialWidth, initialHeight, pieceSize) {
-    const [newPiecesCount, newWidth, newHeight, newPieceSize] = getProperties();
-    
-    const factor = newPieceSize / pieceSize;
-    jigsaw.resize(newWidth, newHeight);
-    jigsaw.scale(factor);
-    jigsaw.redraw();
-  }
-  const jigsawContainer = document.getElementById('jigsaw-container');
+        ["mousedown", "touchstart"].forEach((event) => {
+          jigsawContainer.addEventListener(event, () => showPuzzle());
+        });
 
-  ['mousedown', 'touchstart'].forEach((event) => {
-    jigsawContainer.addEventListener(event, (() => showPuzzle()))
-  });
+        function showPuzzle() {
+          if (jigsaw.valid) return;
+          const jigsawContainer = document.getElementById("jigsaw-container");
+          jigsawContainer.classList.remove("blur");
+          jigsawContainer.style.zIndex = 100;
+          const homeContainer = document.getElementById("home-container");
+          homeContainer.style.display = "none";
+        }
 
-  function showPuzzle() {
-    if (jigsaw.valid) return;
-    const jigsawContainer = document.getElementById('jigsaw-container');
-    jigsawContainer.classList.remove('blur');
-    jigsawContainer.style.zIndex = 100;
-    const homeContainer = document.getElementById('home-container');
-    homeContainer.style.display = 'none';
-  }
-
-  function completePuzzle() {
-    const jigsawContainer = document.getElementById('jigsaw-container');
-    jigsawContainer.style.zIndex = null;
-    const homeContainer = document.getElementById('home-container');
-    homeContainer.style.display = '';
-  }
-}
-
-
+        function completePuzzle() {
+          const jigsawContainer = document.getElementById("jigsaw-container");
+          jigsawContainer.style.zIndex = null;
+          const homeContainer = document.getElementById("home-container");
+          homeContainer.style.display = "";
+        }
+      };
     </script>
+  </div>
 </TahiraLayout>
