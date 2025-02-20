@@ -1,64 +1,62 @@
 ---
 import Footer from "../../components/OldTown/Footer.astro";
-
 ---
+
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<title>Old City of Mosul</title>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Hentaigana:wght@200..900&display=swap" rel="stylesheet">        
-	</head>
-	<body class="min-h-screen flex flex-col">
-        <nav>
-            <div class="px-8 py-4 flex flex-col gap-4 md:flex-row justify-between items-center">
-                <div>
-                    <h1 class="text-4xl font-bold">Old City of Mosul</h1>
-                </div>
-                <div class="flex flex-col gap-2 sm:flex-row items-center sm:gap-4">
-                    <div>
-                        <a href="/old-town">
-                            Home
-                        </a>
-                    </div>
-                    <div>
-                        <a href="/old-town/timeline">
-                            Timeline
-                        </a>
-                    </div>
-                    <div>
-                        <a href="/old-town/models">
-                            Models
-                        </a>
-                    </div>
-                    <div>
-                        <a href="/old-town/walkthrough">
-                            Virtual Walkthrough
-                        </a>
-                    </div>
-                    <div>
-                        <a href="/old-town/about">
-                            About
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </nav>
-        <div class="grow flex flex-col justify-between">
-            <main class="px-8">
-                <slot />
-            </main>
-            <Footer />
+  <head>
+    <title>Old City of Mosul</title>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Serif+Hentaigana:wght@200..900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="min-h-screen flex flex-col">
+    <nav>
+      <div
+        class="px-8 py-4 flex flex-col gap-4 md:flex-row justify-between items-center"
+      >
+        <div>
+          <h1 class="text-4xl font-bold">Old City of Mosul</h1>
         </div>
-        <style>
-            body {
-                font-family: 'Noto Serif Hentaigana', Arial, Helvetica, sans-serif;
-                background-color: #fdfce4;
-            }
-        </style>
-        <script is:inline defer src="/_vercel/insights/script.js"></script>
-	</body>
+        <div class="flex flex-col gap-2 sm:flex-row items-center sm:gap-4">
+          <div>
+            <a href="/old-town"> Home</a>
+          </div>
+          <div>
+            <a href="/old-town/timeline"> Timeline</a>
+          </div>
+          <div>
+            <a href="/old-town/models"> Models</a>
+          </div>
+          <div>
+            <a href="/old-town/walkthrough"> Virtual Walkthrough</a>
+          </div>
+          <div>
+            <a href="/old-town/about"> About</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <div class="grow flex flex-col justify-between">
+      <main class="px-8">
+        <slot />
+      </main>
+      <Footer />
+    </div>
+    <style>
+      body {
+        font-family: "Noto Serif Hentaigana", Arial, Helvetica, sans-serif;
+        background-color: #fdfce4;
+      }
+    </style>
+    <script is:inline defer src="/_vercel/insights/script.js"></script>
+  </body>
 </html>

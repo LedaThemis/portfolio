@@ -5,13 +5,26 @@ export interface Props {
   frameTitle?: string;
 }
 
-const { caption, embedUrl, frameTitle = '' } = Astro.props;
+const { caption, embedUrl, frameTitle = "" } = Astro.props;
 
 const url = `${embedUrl}?autospin=1&transparent=1`;
 ---
+
 <div>
-    <div class="sketchfab-embed-wrapper flex flex-col items-center">
-        <iframe class="w-[250px] sm:w-[400px] sm:h-[300px] md:w-[500px] md:h-[375px] lg:w-[800px] lg:h-[600px]" title={frameTitle} frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share src={url}></iframe>
-    </div>
-    <h3 class="my-2 italic text-center">{ caption }</h3>
+  <div class="sketchfab-embed-wrapper flex flex-col items-center">
+    <iframe
+      class="w-[250px] sm:w-[400px] sm:h-[300px] md:w-[500px] md:h-[375px] lg:w-[800px] lg:h-[600px]"
+      title={frameTitle}
+      frameborder="0"
+      allowfullscreen
+      mozallowfullscreen="true"
+      webkitallowfullscreen="true"
+      allow="autoplay; fullscreen; xr-spatial-tracking"
+      xr-spatial-tracking
+      execution-while-out-of-viewport
+      execution-while-not-rendered
+      web-share
+      src={url}></iframe>
+  </div>
+  <h3 class="my-2 italic text-center">{caption}</h3>
 </div>

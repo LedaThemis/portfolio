@@ -5,14 +5,18 @@ export interface Props {
 
 const { panoramaSrc } = Astro.props;
 ---
+
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<title>Al-Tahira Churches</title>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-	</head>
-	<body>
+  <head>
+    <title>Al-Tahira Churches</title>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
+    />
+  </head>
+  <body>
     <div id="info">
       <div>
         <h1 class="text-lg mb-2">Navigation</h1>
@@ -25,20 +29,24 @@ const { panoramaSrc } = Astro.props;
         <a href="./orthodox-church">Orthodox Church (Destroyed)</a>
       </div>
     </div>
-    <panorama-image data-panoramasrc={ panoramaSrc }></panorama-image>
-		<div id="container"></div>
+    <panorama-image data-panoramasrc={panoramaSrc}></panorama-image>
+    <div id="container"></div>
 
-		<script>
+    <script>
       // @ts-nocheck
-			import * as THREE from 'three';
+      import * as THREE from "three";
 
-			let camera, scene, renderer;
+      let camera, scene, renderer;
 
-			let isUserInteracting = false,
-				onPointerDownMouseX = 0, onPointerDownMouseY = 0,
-				lon = 0, onPointerDownLon = 0,
-				lat = 0, onPointerDownLat = 0,
-				phi = 0, theta = 0;
+      let isUserInteracting = false,
+        onPointerDownMouseX = 0,
+        onPointerDownMouseY = 0,
+        lon = 0,
+        onPointerDownLon = 0,
+        lat = 0,
+        onPointerDownLat = 0,
+        phi = 0,
+        theta = 0;
 
       class PanoramaImage extends HTMLElement {
         connectedCallback() {
@@ -47,122 +55,110 @@ const { panoramaSrc } = Astro.props;
         }
       }
 
-      customElements.define('panorama-image', PanoramaImage);
+      customElements.define("panorama-image", PanoramaImage);
 
-			function init(panoramaSrc) {
+      function init(panoramaSrc) {
+        const container = document.getElementById("container");
 
-				const container = document.getElementById( 'container' );
+        camera = new THREE.PerspectiveCamera(
+          75,
+          window.innerWidth / window.innerHeight,
+          1,
+          1100
+        );
 
-				camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 1100 );
+        scene = new THREE.Scene();
 
-				scene = new THREE.Scene();
+        const geometry = new THREE.SphereGeometry(500, 60, 40);
+        // invert the geometry on the x-axis so that all of the faces point inward
+        geometry.scale(-1, 1, 1);
 
-				const geometry = new THREE.SphereGeometry( 500, 60, 40 );
-				// invert the geometry on the x-axis so that all of the faces point inward
-				geometry.scale( - 1, 1, 1 );
+        const texture = new THREE.TextureLoader().load(panoramaSrc);
+        texture.colorSpace = THREE.SRGBColorSpace;
+        const material = new THREE.MeshBasicMaterial({ map: texture });
 
-				const texture = new THREE.TextureLoader().load( panoramaSrc );
-				texture.colorSpace = THREE.SRGBColorSpace;
-				const material = new THREE.MeshBasicMaterial( { map: texture } );
+        const mesh = new THREE.Mesh(geometry, material);
 
-				const mesh = new THREE.Mesh( geometry, material );
+        scene.add(mesh);
 
-				scene.add( mesh );
+        renderer = new THREE.WebGLRenderer();
+        renderer.setPixelRatio(window.devicePixelRatio);
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setAnimationLoop(animate);
+        container.appendChild(renderer.domElement);
 
-				renderer = new THREE.WebGLRenderer();
-				renderer.setPixelRatio( window.devicePixelRatio );
-				renderer.setSize( window.innerWidth, window.innerHeight );
-				renderer.setAnimationLoop( animate );
-				container.appendChild( renderer.domElement );
+        container.style.touchAction = "none";
+        container.addEventListener("pointerdown", onPointerDown);
 
-				container.style.touchAction = 'none';
-				container.addEventListener( 'pointerdown', onPointerDown );
+        document.addEventListener("wheel", onDocumentMouseWheel);
 
-				document.addEventListener( 'wheel', onDocumentMouseWheel );
+        window.addEventListener("resize", onWindowResize);
+      }
 
-				window.addEventListener( 'resize', onWindowResize );
+      function onWindowResize() {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
 
-			}
+        renderer.setSize(window.innerWidth, window.innerHeight);
+      }
 
-			function onWindowResize() {
+      function onPointerDown(event) {
+        if (event.isPrimary === false) return;
 
-				camera.aspect = window.innerWidth / window.innerHeight;
-				camera.updateProjectionMatrix();
+        isUserInteracting = true;
 
-				renderer.setSize( window.innerWidth, window.innerHeight );
+        onPointerDownMouseX = event.clientX;
+        onPointerDownMouseY = event.clientY;
 
-			}
+        onPointerDownLon = lon;
+        onPointerDownLat = lat;
 
-			function onPointerDown( event ) {
+        document.addEventListener("pointermove", onPointerMove);
+        document.addEventListener("pointerup", onPointerUp);
+      }
 
-				if ( event.isPrimary === false ) return;
+      function onPointerMove(event) {
+        if (event.isPrimary === false) return;
 
-				isUserInteracting = true;
+        lon = (onPointerDownMouseX - event.clientX) * 0.1 + onPointerDownLon;
+        lat = (event.clientY - onPointerDownMouseY) * 0.1 + onPointerDownLat;
+      }
 
-				onPointerDownMouseX = event.clientX;
-				onPointerDownMouseY = event.clientY;
+      function onPointerUp() {
+        if (event.isPrimary === false) return;
 
-				onPointerDownLon = lon;
-				onPointerDownLat = lat;
+        isUserInteracting = false;
 
-				document.addEventListener( 'pointermove', onPointerMove );
-				document.addEventListener( 'pointerup', onPointerUp );
+        document.removeEventListener("pointermove", onPointerMove);
+        document.removeEventListener("pointerup", onPointerUp);
+      }
 
-			}
+      function onDocumentMouseWheel(event) {
+        const fov = camera.fov + event.deltaY * 0.05;
 
-			function onPointerMove( event ) {
+        camera.fov = THREE.MathUtils.clamp(fov, 10, 75);
 
-				if ( event.isPrimary === false ) return;
+        camera.updateProjectionMatrix();
+      }
 
-				lon = ( onPointerDownMouseX - event.clientX ) * 0.1 + onPointerDownLon;
-				lat = ( event.clientY - onPointerDownMouseY ) * 0.1 + onPointerDownLat;
+      function animate() {
+        if (isUserInteracting === false) {
+          lon += 0.1;
+        }
 
-			}
+        lat = Math.max(-85, Math.min(85, lat));
+        phi = THREE.MathUtils.degToRad(90 - lat);
+        theta = THREE.MathUtils.degToRad(lon);
 
-			function onPointerUp() {
+        const x = 500 * Math.sin(phi) * Math.cos(theta);
+        const y = 500 * Math.cos(phi);
+        const z = 500 * Math.sin(phi) * Math.sin(theta);
 
-				if ( event.isPrimary === false ) return;
+        camera.lookAt(x, y, z);
 
-				isUserInteracting = false;
-
-				document.removeEventListener( 'pointermove', onPointerMove );
-				document.removeEventListener( 'pointerup', onPointerUp );
-
-			}
-
-			function onDocumentMouseWheel( event ) {
-
-				const fov = camera.fov + event.deltaY * 0.05;
-
-				camera.fov = THREE.MathUtils.clamp( fov, 10, 75 );
-
-				camera.updateProjectionMatrix();
-
-			}
-
-			function animate() {
-
-				if ( isUserInteracting === false ) {
-
-					lon += 0.1;
-
-				}
-
-				lat = Math.max( - 85, Math.min( 85, lat ) );
-				phi = THREE.MathUtils.degToRad( 90 - lat );
-				theta = THREE.MathUtils.degToRad( lon );
-
-				const x = 500 * Math.sin( phi ) * Math.cos( theta );
-				const y = 500 * Math.cos( phi );
-				const z = 500 * Math.sin( phi ) * Math.sin( theta );
-
-				camera.lookAt( x, y, z );
-
-				renderer.render( scene, camera );
-
-			}
-
-		</script>
+        renderer.render(scene, camera);
+      }
+    </script>
     <style>
       body {
         margin: 0;
@@ -204,7 +200,10 @@ const { panoramaSrc } = Astro.props;
         background-color: rgba(0, 0, 0, 0.5);
       }
 
-      a, button, input, select {
+      a,
+      button,
+      input,
+      select {
         pointer-events: auto;
       }
 
@@ -212,8 +211,8 @@ const { panoramaSrc } = Astro.props;
         z-index: 2 !important; /* TODO Solve this in HTML */
       }
 
-      @media all and ( max-width: 640px ) {
-        .lil-gui.root { 
+      @media all and (max-width: 640px) {
+        .lil-gui.root {
           right: auto;
           top: auto;
           max-height: 50%;
@@ -235,19 +234,19 @@ const { panoramaSrc } = Astro.props;
         align-items: center;
         justify-content: center;
         flex-direction: column;
-        background: rgba(0,0,0,0.7);
+        background: rgba(0, 0, 0, 0.7);
       }
 
-        #overlay button {
-          background: transparent;
-          border: 0;
-          border: 1px solid rgb(255, 255, 255);
-          border-radius: 4px;
-          color: #ffffff;
-          padding: 12px 18px;
-          text-transform: uppercase;
-          cursor: pointer;
-        }
+      #overlay button {
+        background: transparent;
+        border: 0;
+        border: 1px solid rgb(255, 255, 255);
+        border-radius: 4px;
+        color: #ffffff;
+        padding: 12px 18px;
+        text-transform: uppercase;
+        cursor: pointer;
+      }
 
       #notSupported {
         width: 50%;
@@ -256,7 +255,6 @@ const { panoramaSrc } = Astro.props;
         margin-top: 20px;
         padding: 10px;
       }
-
     </style>
-	</body>
+  </body>
 </html>
