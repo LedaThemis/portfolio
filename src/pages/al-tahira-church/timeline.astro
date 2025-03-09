@@ -3,5 +3,27 @@ import TahiraLayout from "../../layouts/Tahira/TahiraLayout.astro";
 ---
 
 <TahiraLayout>
-  <p>Timeline</p>
+  <div class="flex flex-col w-full mt-10 mb-40">
+    <div class="grid grid-cols-1 my-20 gap-10 md:grid-cols-2">
+      <h2 class="text-4xl secondary-font">TIMELINE</h2>
+      <p class="primary-font text-secondary">From being almost fully destroyed in 2017, to being visited by Pope Francis in 2023.</p>
+    </div>
+    <div class="flex flex-col gap-40">
+      <div class="py-40 bg-[var(--bg-secondary)] mx-[calc(var(--padding-main)*-1)]">
+        <h3 class="text-5xl text-center secondary-font">Beginnings (1959 CE - 1962 CE)</h3>
+      </div>
+      <div class="py-40 bg-[var(--bg-secondary)] mx-[calc(var(--padding-main)*-1)]">
+        <h3 class="text-5xl text-center secondary-font">ISIS War & Destruction (2017 CE)</h3>
+      </div>
+      <div class="py-40 bg-[var(--bg-secondary)] mx-[calc(var(--padding-main)*-1)]">
+        <h3 class="text-5xl text-center secondary-font">Reconstruction Efforts (2020 CE)</h3>
+      </div>
+      <div class="py-40 bg-[var(--bg-secondary)] mx-[calc(var(--padding-main)*-1)]">
+        <h3 class="text-5xl text-center secondary-font">Pope Francis Visit (2021 CE)</h3>
+      </div>
+      <div class="py-40 bg-[var(--bg-secondary)] mx-[calc(var(--padding-main)*-1)]">
+        <h3 class="text-5xl text-center secondary-font">Reconstruction Complete (2023 CE)</h3>
+      </div>
+    </div>
+  </div>
 </TahiraLayout>
