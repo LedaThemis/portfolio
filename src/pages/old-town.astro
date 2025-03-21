@@ -1,13 +1,14 @@
 ---
 import OldTownLayout from "../layouts/OldTown/OldTownLayout.astro";
 ---
-
 <OldTownLayout>
-  <div class="mt-8">
-    <p>
-      Mosul is a major city in northern Iraq, serving as the capital of Nineveh
-      Governorate. The city is considered the second-largest city in Iraq in
-      terms of population and area after the capital Baghdad.
-    </p>
+  <div class="grow flex flex-col items-center justify-center">
+    <p class="text-4xl font-bold">Loading Interative Map...</p>
+  </div>
+  <div class="left-0 top-0 absolute w-full h-full">
+      <!-- NEEDLE -->
+      <script type="module" src="https://cdn.leda.dev/portfolio/old-town/needle/assets/index.js"></script>
+      <needle-engine src="https://cdn.leda.dev/portfolio/old-town/needle/assets/Sandbox.glb"></needle-engine>
+      <!-- NEEDLE END -->
   </div>
 </OldTownLayout>

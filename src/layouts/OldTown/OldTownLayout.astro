@@ -19,7 +19,7 @@ import Footer from "../../components/OldTown/Footer.astro";
     />
   </head>
   <body class="min-h-screen flex flex-col">
-    <nav>
+    <nav class="z-10">
       <div
         class="px-8 py-4 flex flex-col gap-4 md:flex-row justify-between items-center"
       >
@@ -46,7 +46,7 @@ import Footer from "../../components/OldTown/Footer.astro";
       </div>
     </nav>
     <div class="grow flex flex-col justify-between">
-      <main class="px-8">
+      <main class="px-8 grow flex flex-col">
         <slot />
       </main>
       <Footer />
