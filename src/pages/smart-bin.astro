@@ -29,7 +29,6 @@
     <div class="image-grid">
       <div>
         <img src="assets/smart-bin/diagram.png" alt="Working Diagram" />
-        <p>How It Works</p>
       </div>
     </div>
   </section>
@@ -37,9 +36,10 @@
   <section class="video-section">
     <h2>Demo Video</h2>
     <div class="video-wrapper">
-      <iframe width="560" height="315" src="https://www.youtube.com/embed/LfoYs-MzXIs" 
-        title="Smart Bin Demo Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; 
-        encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      <video width="100%" height="auto" autoplay>
+        <source src="assets/smart-bin/smart-bin-demo.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
     </div>
   </section>
 
@@ -156,6 +156,7 @@
     }
 
     .image-grid img {
+    width: 800px;
     border-radius: 8px;
     border: 2px solid #cce7d0;
     }
