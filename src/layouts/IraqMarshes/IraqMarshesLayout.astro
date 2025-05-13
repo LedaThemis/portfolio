@@ -1,0 +1,81 @@
+---
+import Footer from "../../components/IraqMarshes/Footer.astro";
+
+
+export interface Props {
+  showFooter?: boolean;
+}
+
+const { showFooter = true } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Iraq Marshlands</title>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Boldonse&family=Readex+Pro:wght@160..700&display=swap" rel="stylesheet">
+  </head>
+  <body class="min-h-screen flex flex-col">
+    <nav class="z-10">
+      <div
+        class="px-8 py-4 flex flex-col gap-4 md:flex-row justify-between items-center"
+      >
+        <div>
+          <h1 class="mt-2 flex gap-4 items-center">
+            <img src="/assets/iraq-marshes/iraq-marshes-logo3.png" class="w-16" alt="">
+            <div class="flex flex-col gap-1">
+              <p class="primary-font text-4xl font-bold">Iraq Marshlands</p>
+              <div class="relative h-0">
+                <h2 class="absolute top-0 left-0 flex items-center gap-1">
+                  <img src="/assets/iraq-marshes/unesco.png" class="w-8" alt="">
+                  <p class="text-sm">UNESCO WORLD HERITAGE SITE</p>
+                </h2>
+              </div>
+            </div>
+          </h1>
+        </div>
+        <div class="flex flex-col gap-2 sm:flex-row items-center sm:gap-4">
+          <div>
+            <a href="/iraq-marshes"> Home</a>
+          </div>
+          <!-- <div>
+            <a href="/iraq-marshes/timeline"> Timeline</a>
+          </div> -->
+          <div>
+            <a href="/iraq-marshes/models"> Models</a>
+          </div>
+          <!-- <div>
+            <a href="/iraq-marshes/walkthrough"> Virtual Walkthrough</a>
+          </div> -->
+          <div>
+            <a href="/iraq-marshes/about"> About</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <div class="grow flex flex-col justify-between">
+      <main class="px-8 grow flex flex-col">
+        <slot />
+      </main>
+      {showFooter && <Footer />}
+    </div>
+    <style>
+      body {
+        font-family: "Readex Pro", Arial, Helvetica, sans-serif;
+        background-color: #e9dfe0;
+      }
+
+      .primary-font {
+        font-family: 'Readex Pro';
+      }
+    </style>
+    <script is:inline defer src="/_vercel/insights/script.js"></script>
+  </body>
+</html>
