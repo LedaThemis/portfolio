@@ -1,0 +1,46 @@
+---
+import ModelView from "../../components/IraqMarshes/ModelView.astro";
+import IraqMarshesLayout from "../../layouts/IraqMarshes/IraqMarshesLayout.astro";
+---
+
+<IraqMarshesLayout>
+  <div class="flex flex-col w-full mb-8">
+    <div>
+      <h2 class="text-3xl text-center my-8">Gallery</h2>
+    </div>
+    <div>
+      <h3 class="text-2xl text-center my-6">Before and After</h3>
+    </div>
+    <div class="flex flex-col items-center">
+      <img-comparison-slider>
+      <img class="max-w-5xl w-full" slot="first" src="https://res.cloudinary.com/dj08db9y2/image/upload/f_auto,q_auto/v1/iraq-marshes/gallery/oj60ve75qrunspwsji3a" />
+      <img class="max-w-5xl w-full" slot="second" src="https://res.cloudinary.com/dj08db9y2/image/upload/f_auto,q_auto/v1/iraq-marshes/gallery/tlaz9ozti6qvgvzmymua" />
+      </img-comparison-slider>
+    </div>
+    <div>
+      <h3 class="text-2xl text-center my-6">Biodiversity</h3>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div>
+        <img class="h-auto max-w-full" src="https://res.cloudinary.com/dj08db9y2/image/upload/f_auto,q_auto/v1/iraq-marshes/gallery/u440dypcbljwjf3ffmem" alt="">
+      </div>
+      <div>
+        <img class="h-auto max-w-full" src="https://res.cloudinary.com/dj08db9y2/image/upload/f_auto,q_auto/v1/iraq-marshes/gallery/i6mq2pftlrie1xynyxga" alt="">
+      </div>
+      <div>
+        <img class="h-auto max-w-full" src="https://res.cloudinary.com/dj08db9y2/image/upload/f_auto,q_auto/v1/iraq-marshes/gallery/fclunmf2ayavoc3nwrwj" alt="">
+      </div>
+      <div>
+        <img class="h-auto max-w-full" src="https://res.cloudinary.com/dj08db9y2/image/upload/f_auto,q_auto/v1/iraq-marshes/gallery/gp5fovglzb0zlvzaxgzg" alt="">
+      </div>
+    </div>
+  </div>
+  <script
+  defer
+  src="https://cdn.jsdelivr.net/npm/img-comparison-slider@8/dist/index.js"
+  ></script>
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/img-comparison-slider@8/dist/styles.css"
+  />
+</IraqMarshesLayout>
