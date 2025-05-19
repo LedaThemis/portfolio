@@ -1,6 +1,7 @@
 export default {
   personal: {
     github: "https://github.com/LedaThemis",
+    linkedin: "https://linkedin.com/in/alqaba",
     email: "contact@leda.dev",
   },
   portfolio: {
