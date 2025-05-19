@@ -9,9 +9,9 @@ const octokit = new Octokit({
 });
 
 const main = async () => {
-  const base64image = await captureWebsite.base64("https://www.leda.dev", {
+  const base64image = (await captureWebsite.base64("https://www.leda.dev", {
     delay: 2,
-  });
+  })).toBase64();
 
   const previewImage = await octokit.request(
     "GET /repos/{owner}/{repo}/contents/{path}",
