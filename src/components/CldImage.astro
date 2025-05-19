@@ -18,6 +18,8 @@ const constructImageSrcSet = (image: CloudinaryImage) => {
   ].join(", ");
 };
 
+const fallbackImageUrl = "/assets/fallback.svg";
+
 const { src, ...props } = Astro.props;
 let cldSrc = cld.image(src).format("auto").quality("auto");
 
@@ -40,5 +42,6 @@ interface Props {
   srcset={props.optimize ? constructImageSrcSet(cldSrc) : null}
   sizes="(min-width: 1080px) 1080px, 100vw"
   loading="lazy"
+  onerror={`this.onerror=null;this.src='${fallbackImageUrl}';this.removeAttribute('srcset');`}
   {...props}
 />
