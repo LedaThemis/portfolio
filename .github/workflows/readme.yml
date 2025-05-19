@@ -15,11 +15,14 @@ jobs:
         with:
           node-version: 22
           cache: "pnpm"
-      - name: Install dependencies
-        run: pnpm install
       - name: Install capture-website dependencies
         run: cd node_modules/capture-website && pnpm install
-      - name: Run Script
-        run: pnpm run readme
+      - name: Install dependencies
+        run: pnpm install
+      - uses: tj-actions/puppeteer@v5
+        id: puppeteer
+        with:
+          files: |
+            updatePreviewScreenshot.js
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
