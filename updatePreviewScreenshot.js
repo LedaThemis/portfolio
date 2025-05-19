@@ -12,8 +12,8 @@ const main = async () => {
   const base64imageraw = await captureWebsite.base64("https://www.leda.dev", { delay: 2 });
 
   const base64image = Buffer.from(new Uint8Array(base64imageraw)).toString('base64');
-  console.log(base64imageraw);
-  console.log(base64image);
+  console.log(typeof base64imageraw);
+  console.log(typeof base64image);
 
   const previewImage = await octokit.request(
     "GET /repos/{owner}/{repo}/contents/{path}",
