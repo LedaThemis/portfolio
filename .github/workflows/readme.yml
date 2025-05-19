@@ -7,7 +7,7 @@ on:
 
 jobs:
   update-readme:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v3
       - uses: pnpm/action-setup@v4.1.0
@@ -15,14 +15,13 @@ jobs:
         with:
           node-version: 22
           cache: "pnpm"
+      - name: Install Puppeteer Dependencies
+        run: sudo apt-get update -y -q && sudo apt-get install -y -q libasound2 libatk-bridge2.0-0 libatk1.0-0 libatspi2.0-0 libc6 libcairo2 libcups2 libdbus-1-3 libdrm2 libexpat1 libgbm1 libglib2.0-0 libnspr4 libnss3 libpango-1.0-0 libpangocairo-1.0-0 libstdc++6 libudev1 libuuid1 libx11-6 libx11-xcb1 libxcb-dri3-0 libxcb1 libxcomposite1 libxcursor1 libxdamage1 libxext6 libxfixes3 libxi6 libxkbcommon0 libxrandr2 libxrender1 libxshmfence1 libxss1 libxtst6
       - name: Install dependencies
         run: pnpm install
       - name: Install capture-website dependencies
         run: cd node_modules/capture-website && pnpm install
-      - uses: tj-actions/puppeteer@v5
-        id: puppeteer
-        with:
-          files: |
-            updatePreviewScreenshot.js
+      - name: Run Script
+        run: pnpm run readme
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
