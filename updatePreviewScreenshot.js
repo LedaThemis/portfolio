@@ -10,9 +10,7 @@ const octokit = new Octokit({
 
 const main = async () => {
   const base64image = Buffer.from(
-    new Uint8Array(
-      (await captureWebsite.base64("https://www.leda.dev", { delay: 2 }))
-    )
+    new Uint8Array((await captureWebsite.base64("https://www.leda.dev", { delay: 2 })))
   ).toString('base64');
 
   const previewImage = await octokit.request(
