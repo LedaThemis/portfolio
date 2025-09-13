@@ -33,6 +33,18 @@ import TahiraLayout from "../../layouts/Tahira/TahiraLayout.astro";
           aria-selected="false">Orthodox Church</button
         >
       </li>
+      <li class="nav-item" role="presentation">
+        <button
+          class="nav-link"
+          id="armenian-tab"
+          data-bs-toggle="tab"
+          data-bs-target="#armenian"
+          type="button"
+          role="tab"
+          aria-controls="armenian"
+          aria-selected="false">Armenian Church</button
+        >
+      </li>
     </ul>
     <div class="tab-content" id="myTabContent">
       <div
@@ -62,6 +74,23 @@ import TahiraLayout from "../../layouts/Tahira/TahiraLayout.astro";
           <iframe
             class="panorama"
             src="https://www.theasys.io/viewer/tDzlAVq8bPx3LRXLJLAmLXrU8mLD9N"
+            allowfullscreen="true"
+            frameborder="0"
+            scrolling="no"
+            allow="vr;gyroscope;accelerometer"
+            style="border:none;"></iframe>
+        </div>
+      </div>
+      <div
+        class="tab-pane fade"
+        id="armenian"
+        role="tabpanel"
+        aria-labelledby="armenian-tab"
+      >
+        <div class="flex flex-col items-center">
+          <iframe
+            class="panorama"
+            src="https://www.theasys.io/viewer/9Skq4fGazKh0Q9oA68Lj2sIZFgfckz"
             allowfullscreen="true"
             frameborder="0"
             scrolling="no"
