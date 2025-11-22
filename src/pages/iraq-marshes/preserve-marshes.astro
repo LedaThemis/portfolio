@@ -1,0 +1,257 @@
+---
+import IraqMarshesLayout from "../../layouts/IraqMarshes/IraqMarshesLayout.astro";
+---
+
+<IraqMarshesLayout>
+  <div class="flex flex-col items-center justify-center w-full grow py-8">
+    <div class="text-center mb-8">
+      <h2 class="text-4xl font-bold mb-4">Preserve the Marshes</h2>
+      <p class="text-lg text-gray-700">Help preserve Iraq's precious marshlands - every drop counts!</p>
+    </div>
+
+    <div class="bg-white rounded-lg shadow-xl p-8 max-w-md w-full">
+      <!-- Water Bucket Icon -->
+      <div class="flex justify-center mb-6">
+        <svg id="water-bucket" class="w-32 h-32 transition-transform duration-200" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Bucket body -->
+          <path d="M25 35 L20 85 C20 90 25 95 30 95 L70 95 C75 95 80 90 80 85 L75 35 Z" fill="#8B7355" stroke="#654321" stroke-width="2"/>
+          <!-- Bucket rim -->
+          <ellipse cx="50" cy="35" rx="25" ry="5" fill="#A0826D" stroke="#654321" stroke-width="2"/>
+          <!-- Bucket handle -->
+          <path d="M30 35 Q50 20 70 35" stroke="#654321" stroke-width="2" fill="none"/>
+          <!-- Water inside -->
+          <path id="water-fill" d="M26 40 L22 80 C22 83 26 86 30 86 L70 86 C74 86 78 83 78 80 L74 40 Z" fill="#4A90E2" opacity="0.7"/>
+          <!-- Water surface waves -->
+          <ellipse cx="50" cy="40" rx="23" ry="4" fill="#6BB6FF" opacity="0.8"/>
+        </svg>
+      </div>
+
+      <!-- Counter Display -->
+      <div class="text-center mb-6">
+        <div class="text-5xl font-bold text-blue-600 mb-2">
+          <span id="counter">Loading...</span>
+        </div>
+        <div class="text-xl text-gray-600">Liters Preserved</div>
+      </div>
+
+      <!-- Contribute Button -->
+      <button
+        id="contribute-btn"
+        class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-6 rounded-lg transition-colors duration-200 text-xl shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed"
+      >
+        <span id="btn-text">💧 Contribute 1 Liter</span>
+        <span id="btn-loading" class="hidden">Processing...</span>
+      </button>
+
+      <!-- Success Message -->
+      <div id="success-msg" class="hidden mt-4 p-3 bg-green-100 text-green-800 rounded-lg text-center">
+        Thank you for your contribution! 🌊
+      </div>
+
+      <!-- Error Message -->
+      <div id="error-msg" class="hidden mt-4 p-3 bg-red-100 text-red-800 rounded-lg text-center">
+        <span id="error-text"></span>
+      </div>
+    </div>
+
+    <div class="mt-8 text-center text-sm text-gray-600 max-w-md">
+      <p>Join our global effort to preserve the UNESCO World Heritage Al-Chibayish's Marshes. Each contribution helps raise awareness about this precious ecosystem.</p>
+    </div>
+  </div>
+</IraqMarshesLayout>
+
+<script>
+  import { createClient } from '@supabase/supabase-js';
+
+  // Initialize Supabase client
+  const supabaseUrl = import.meta.env.PUBLIC_SUPABASE_URL || '';
+  const supabaseKey = import.meta.env.PUBLIC_SUPABASE_ANON_KEY || '';
+  
+  let supabase: any = null;
+  let isSupabaseConfigured = false;
+
+  if (supabaseUrl && supabaseKey) {
+    supabase = createClient(supabaseUrl, supabaseKey);
+    isSupabaseConfigured = true;
+  }
+
+  // DOM Elements
+  const counterElement = document.getElementById('counter');
+  const contributeBtn = document.getElementById('contribute-btn') as HTMLButtonElement;
+  const btnText = document.getElementById('btn-text');
+  const btnLoading = document.getElementById('btn-loading');
+  const successMsg = document.getElementById('success-msg');
+  const errorMsg = document.getElementById('error-msg');
+  const errorText = document.getElementById('error-text');
+  const waterBucket = document.getElementById('water-bucket');
+
+  // Function to fetch current counter value
+  async function fetchCounter() {
+    if (!isSupabaseConfigured) {
+      console.warn('Supabase not configured. Please check your environment variables.');
+      if (counterElement) {
+        counterElement.textContent = '0';
+      }
+      showError('Supabase is not configured. Check the console for details.');
+      return;
+    }
+
+    try {
+      console.log('Fetching counter from Supabase...');
+      const { data, error } = await supabase
+        .from('marsh_counter')
+        .select('count')
+        .single();
+
+      if (error) {
+        console.error('Error fetching counter:', error);
+        console.error('Error details:', JSON.stringify(error, null, 2));
+        if (counterElement) {
+          counterElement.textContent = '0';
+        }
+        showError(`Database error: ${error.message || 'Failed to fetch counter'}`);
+      } else {
+        console.log('Counter data received:', data);
+        if (counterElement) {
+          counterElement.textContent = (data?.count || 0).toLocaleString();
+        }
+      }
+    } catch (err) {
+      console.error('Error:', err);
+      if (counterElement) {
+        counterElement.textContent = '0';
+      }
+      showError('Failed to connect to database. Check console for details.');
+    }
+  }
+
+  // Function to increment counter
+  async function incrementCounter() {
+    if (!isSupabaseConfigured) {
+      showError('Supabase is not configured. Please add your Supabase credentials to environment variables.');
+      return;
+    }
+
+    // Disable button and show loading state
+    if (contributeBtn) contributeBtn.disabled = true;
+    if (btnText) btnText.classList.add('hidden');
+    if (btnLoading) btnLoading.classList.remove('hidden');
+    
+    // Hide previous messages
+    if (successMsg) successMsg.classList.add('hidden');
+    if (errorMsg) errorMsg.classList.add('hidden');
+
+    try {
+      console.log('Calling increment_marsh_counter RPC function...');
+      // Call Supabase RPC function to increment counter
+      const { data, error } = await supabase.rpc('increment_marsh_counter');
+
+      console.log('RPC response - data:', data, 'error:', error);
+
+      if (error) {
+        console.error('Error incrementing counter:', error);
+        console.error('Error details:', JSON.stringify(error, null, 2));
+        
+        // Provide more specific error messages
+        if (error.message?.includes('does not exist')) {
+          showError('Database not set up. Please run the SQL setup scripts first.');
+        } else if (error.message?.includes('permission denied')) {
+          showError('Permission denied. Check your RLS policies.');
+        } else {
+          showError(`Failed to contribute: ${error.message || 'Unknown error'}`);
+        }
+      } else {
+        console.log('Counter incremented successfully. New value:', data);
+        
+        // If data is null, fetch the current count from the table
+        if (data === null || data === undefined) {
+          console.log('RPC returned null, fetching counter from table...');
+          const { data: fetchData, error: fetchError } = await supabase
+            .from('marsh_counter')
+            .select('count')
+            .single();
+          
+          if (!fetchError && fetchData) {
+            console.log('Fetched counter value:', fetchData.count);
+            if (counterElement) {
+              counterElement.textContent = (fetchData.count || 0).toLocaleString();
+            }
+          }
+        } else {
+          // Update counter display with returned value
+          if (counterElement) {
+            counterElement.textContent = (data || 0).toLocaleString();
+          }
+        }
+        
+        // Show success message
+        if (successMsg) {
+          successMsg.classList.remove('hidden');
+          setTimeout(() => {
+            successMsg.classList.add('hidden');
+          }, 3000);
+        }
+
+        // Animate bucket
+        if (waterBucket) {
+          waterBucket.classList.add('scale-110');
+          setTimeout(() => {
+            waterBucket.classList.remove('scale-110');
+          }, 300);
+        }
+      }
+    } catch (err) {
+      console.error('Unexpected error:', err);
+      showError('An unexpected error occurred. Check console for details.');
+    } finally {
+      // Re-enable button
+      if (contributeBtn) contributeBtn.disabled = false;
+      if (btnText) btnText.classList.remove('hidden');
+      if (btnLoading) btnLoading.classList.add('hidden');
+    }
+  }
+
+  // Function to show error message
+  function showError(message: string) {
+    if (errorText) errorText.textContent = message;
+    if (errorMsg) {
+      errorMsg.classList.remove('hidden');
+      setTimeout(() => {
+        errorMsg.classList.add('hidden');
+      }, 5000);
+    }
+  }
+
+  // Event listener for contribute button
+  if (contributeBtn) {
+    contributeBtn.addEventListener('click', incrementCounter);
+  }
+
+  // Subscribe to real-time updates
+  if (isSupabaseConfigured && supabase) {
+    supabase
+      .channel('marsh_counter_changes')
+      .on('postgres_changes', 
+        { event: '*', schema: 'public', table: 'marsh_counter' }, 
+        (payload: any) => {
+          if (counterElement && payload.new?.count) {
+            counterElement.textContent = payload.new.count.toLocaleString();
+          }
+        }
+      )
+      .subscribe();
+  }
+
+  // Initial fetch
+  fetchCounter();
+</script>
+
+<style>
+  #water-bucket {
+    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
+  }
+  
+  #water-bucket:hover {
+    filter: drop-shadow(0 6px 8px rgba(0, 0, 0, 0.15));
+  }
+</style>

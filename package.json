@@ -19,6 +19,7 @@
     "@cloudinary/url-gen": "^1.8.6",
     "@fontsource/nunito-sans": "^4.5.10",
     "@fontsource/roboto": "^4.5.8",
+    "@supabase/supabase-js": "^2.84.0",
     "astro": "^1.6.9",
     "headbreaker": "^3.0.0",
     "simple-icons": "^7.19.0",
