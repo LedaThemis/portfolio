@@ -22,28 +22,22 @@ import IraqMarshesLayout from "../../layouts/IraqMarshes/IraqMarshesLayout.astro
 
     <!-- Milestones Display -->
     <div class="flex gap-4 mb-4 z-10">
-      <div id="milestone-25" class="milestone-badge bg-white/90 backdrop-blur rounded-lg shadow-lg px-4 py-2 transition-all duration-500" data-threshold="25">
+      <div id="milestone-10" class="milestone-badge bg-white/90 backdrop-blur rounded-lg shadow-lg px-4 py-2 transition-all duration-500" data-threshold="10">
         <div class="text-center">
           <div class="text-3xl mb-1">🏅</div>
-          <div class="text-xs text-gray-600">25L</div>
-        </div>
-      </div>
-      <div id="milestone-50" class="milestone-badge bg-white/90 backdrop-blur rounded-lg shadow-lg px-4 py-2 transition-all duration-500" data-threshold="50">
-        <div class="text-center">
-          <div class="text-3xl mb-1">🏅</div>
-          <div class="text-xs text-gray-600">50L</div>
-        </div>
-      </div>
-      <div id="milestone-75" class="milestone-badge bg-white/90 backdrop-blur rounded-lg shadow-lg px-4 py-2 transition-all duration-500" data-threshold="75">
-        <div class="text-center">
-          <div class="text-3xl mb-1">🏅</div>
-          <div class="text-xs text-gray-600">75L</div>
+          <div class="text-xs text-gray-600">10L</div>
         </div>
       </div>
       <div id="milestone-100" class="milestone-badge bg-white/90 backdrop-blur rounded-lg shadow-lg px-4 py-2 transition-all duration-500" data-threshold="100">
         <div class="text-center">
           <div class="text-3xl mb-1">🏅</div>
           <div class="text-xs text-gray-600">100L</div>
+        </div>
+      </div>
+      <div id="milestone-1000" class="milestone-badge bg-white/90 backdrop-blur rounded-lg shadow-lg px-4 py-2 transition-all duration-500" data-threshold="1000">
+        <div class="text-center">
+          <div class="text-3xl mb-1">🏅</div>
+          <div class="text-xs text-gray-600">1000L</div>
         </div>
       </div>
     </div>
@@ -74,23 +68,15 @@ import IraqMarshesLayout from "../../layouts/IraqMarshes/IraqMarshesLayout.astro
       </div>
     </div>
 
-    <!-- Leaderboard Toggle Button -->
-    <button id="leaderboard-toggle" class="mb-4 z-10 px-4 py-2 bg-white/90 backdrop-blur rounded-lg shadow-lg hover:bg-white transition-colors">
-      🏆 View Leaderboard
-    </button>
-
-    <!-- Leaderboard Modal -->
-    <div id="leaderboard-modal" class="hidden fixed inset-0 bg-black/50 z-50 p-4" style="display: none;">
-      <div class="flex items-center justify-center w-full h-full">
-        <div class="bg-white rounded-lg shadow-2xl max-w-md w-full max-h-[80vh] overflow-hidden">
-          <div class="p-6 border-b border-gray-200 flex justify-between items-center">
-            <h3 class="text-2xl font-bold text-gray-800">🏆 Leaderboard</h3>
-            <button id="close-leaderboard" class="text-gray-500 hover:text-gray-700 text-2xl leading-none">&times;</button>
-          </div>
-          <div class="p-6 overflow-y-auto max-h-[60vh]">
-            <div id="leaderboard-list" class="space-y-3">
-              <div class="text-center text-gray-500 py-8">Loading...</div>
-            </div>
+    <!-- Leaderboard Display -->
+    <div class="mb-4 z-10 w-full max-w-md">
+      <div class="bg-white/90 backdrop-blur rounded-lg shadow-lg overflow-hidden">
+        <div class="p-4 bg-gradient-to-r from-yellow-400 to-yellow-500 border-b border-yellow-600">
+          <h3 class="text-xl font-bold text-gray-800 text-center">🏆 Leaderboard</h3>
+        </div>
+        <div class="p-4 max-h-[300px] overflow-y-auto">
+          <div id="leaderboard-list" class="space-y-2">
+            <div class="text-center text-gray-500 py-4 text-sm">Loading...</div>
           </div>
         </div>
       </div>
@@ -183,9 +169,6 @@ import IraqMarshesLayout from "../../layouts/IraqMarshes/IraqMarshesLayout.astro
   const userContributionSpan = document.getElementById('user-contribution');
   
   // Leaderboard elements
-  const leaderboardToggle = document.getElementById('leaderboard-toggle');
-  const leaderboardModal = document.getElementById('leaderboard-modal');
-  const closeLeaderboard = document.getElementById('close-leaderboard');
   const leaderboardList = document.getElementById('leaderboard-list');
 
   let isThrottled = false;
@@ -195,6 +178,25 @@ import IraqMarshesLayout from "../../layouts/IraqMarshes/IraqMarshesLayout.astro
   let currentUsername: string | null = null;
   let userContribution = 0;
 
+  // Random username generation
+  const adjectives = [
+    'Sweet', 'Cool', 'Happy', 'Brave', 'Clever', 'Gentle', 'Swift', 'Bright', 
+    'Mighty', 'Noble', 'Wise', 'Jolly', 'Fierce', 'Silent', 'Golden', 'Silver',
+    'Mystic', 'Ancient', 'Royal', 'Wild', 'Free', 'Bold', 'Cosmic', 'Lucky'
+  ];
+  
+  const nouns = [
+    'Corn', 'Fox', 'Eagle', 'Wolf', 'Bear', 'Tiger', 'Lion', 'Hawk', 
+    'Dolphin', 'Falcon', 'Phoenix', 'Dragon', 'Raven', 'Owl', 'Panther', 'Lynx',
+    'Sparrow', 'Otter', 'Deer', 'Crane', 'Swan', 'Heron', 'Whale', 'Seal'
+  ];
+
+  function generateRandomUsername(): string {
+    const adjective = adjectives[Math.floor(Math.random() * adjectives.length)];
+    const noun = nouns[Math.floor(Math.random() * nouns.length)];
+    return `${adjective} ${noun}`;
+  }
+
   // Load username from localStorage
   function loadUsername() {
     const saved = localStorage.getItem('marsh_username');
@@ -203,6 +205,15 @@ import IraqMarshesLayout from "../../layouts/IraqMarshes/IraqMarshesLayout.astro
       if (usernameInput) usernameInput.classList.add('hidden');
       if (usernameDisplay) usernameDisplay.classList.remove('hidden');
       if (currentUsernameSpan) currentUsernameSpan.textContent = saved;
+      fetchUserContribution();
+    } else {
+      // Generate and set a random username automatically
+      const randomUsername = generateRandomUsername();
+      currentUsername = randomUsername;
+      localStorage.setItem('marsh_username', randomUsername);
+      if (usernameInput) usernameInput.classList.add('hidden');
+      if (usernameDisplay) usernameDisplay.classList.remove('hidden');
+      if (currentUsernameSpan) currentUsernameSpan.textContent = randomUsername;
       fetchUserContribution();
     }
   }
@@ -263,59 +274,43 @@ import IraqMarshesLayout from "../../layouts/IraqMarshes/IraqMarshesLayout.astro
   async function fetchLeaderboard() {
     if (!isSupabaseConfigured || !leaderboardList) return;
     
-    leaderboardList.innerHTML = '<div class="text-center text-gray-500 py-8">Loading...</div>';
-    
     try {
       const { data, error } = await supabase
         .from('marsh_contributions')
         .select('username, contribution')
-        .order('contribution', { ascending: false })
-        .limit(10);
+        .order('contribution', { ascending: false });
       
       if (error) {
         console.error('Error fetching leaderboard:', error);
-        leaderboardList.innerHTML = '<div class="text-center text-red-500 py-8">Failed to load leaderboard</div>';
+        leaderboardList.innerHTML = '<div class="text-center text-red-500 py-4 text-sm">Failed to load</div>';
       } else if (!data || data.length === 0) {
-        leaderboardList.innerHTML = '<div class="text-center text-gray-500 py-8">No contributions yet. Be the first!</div>';
+        leaderboardList.innerHTML = '<div class="text-center text-gray-500 py-4 text-sm">No contributions yet!</div>';
       } else {
         leaderboardList.innerHTML = data.map((entry: any, index: number) => {
           const medal = index === 0 ? '🥇' : index === 1 ? '🥈' : index === 2 ? '🥉' : `${index + 1}.`;
           const isCurrentUser = entry.username === currentUsername;
           return `
-            <div class="flex items-center justify-between p-3 rounded-lg ${isCurrentUser ? 'bg-blue-50 border-2 border-blue-300' : 'bg-gray-50'}">
-              <div class="flex items-center gap-3">
-                <span class="text-2xl w-8">${medal}</span>
-                <span class="font-semibold ${isCurrentUser ? 'text-blue-600' : 'text-gray-800'}">${entry.username}</span>
+            <div class="flex items-center justify-between p-2 rounded-lg ${isCurrentUser ? 'bg-blue-50 border-2 border-blue-300' : 'bg-gray-50'}">
+              <div class="flex items-center gap-2">
+                <span class="text-lg w-6">${medal}</span>
+                <span class="font-semibold text-sm ${isCurrentUser ? 'text-blue-600' : 'text-gray-800'}">${entry.username}</span>
               </div>
-              <span class="font-bold text-green-600">${entry.contribution}L</span>
+              <span class="font-bold text-green-600 text-sm">${entry.contribution}L</span>
             </div>
           `;
         }).join('');
       }
     } catch (err) {
       console.error('Error:', err);
-      leaderboardList.innerHTML = '<div class="text-center text-red-500 py-8">Failed to load leaderboard</div>';
-    }
-  }
-
-  // Show/hide leaderboard
-  function toggleLeaderboard() {
-    if (!leaderboardModal) return;
-    
-    if (leaderboardModal.style.display === 'none') {
-      leaderboardModal.style.display = 'block';
-      fetchLeaderboard();
-    } else {
-      leaderboardModal.style.display = 'none';
+      leaderboardList.innerHTML = '<div class="text-center text-red-500 py-4 text-sm">Failed to load</div>';
     }
   }
 
   // Milestones configuration
   const milestones = [
-    { id: 'milestone-25', threshold: 25, achieved: false },
-    { id: 'milestone-50', threshold: 50, achieved: false },
-    { id: 'milestone-75', threshold: 75, achieved: false },
-    { id: 'milestone-100', threshold: 100, achieved: false }
+    { id: 'milestone-10', threshold: 10, achieved: false },
+    { id: 'milestone-100', threshold: 100, achieved: false },
+    { id: 'milestone-1000', threshold: 1000, achieved: false }
   ];
 
   // Function to update milestones based on count
@@ -411,7 +406,7 @@ import IraqMarshesLayout from "../../layouts/IraqMarshes/IraqMarshesLayout.astro
     currentCount = count;
     
     // Calculate water level percentage (e.g., 1 liter = 0.5%, cap at 100%)
-    const percentage = Math.min((count * 1), 100);
+    const percentage = Math.min((count * (1/500) * 100), 100);
     waterLevel.style.height = `${percentage}%`;
     
     // Change water color as it rises
@@ -616,7 +611,7 @@ import IraqMarshesLayout from "../../layouts/IraqMarshes/IraqMarshesLayout.astro
       // Throttle for 500ms
       setTimeout(() => {
         isThrottled = false;
-      }, 500);
+      }, 0);
     }
   }
 
@@ -660,25 +655,9 @@ import IraqMarshesLayout from "../../layouts/IraqMarshes/IraqMarshesLayout.astro
     changeUsernameBtn.addEventListener('click', changeUsername);
   }
 
-  // Leaderboard event listeners
-  if (leaderboardToggle) {
-    leaderboardToggle.addEventListener('click', toggleLeaderboard);
-  }
-  
-  if (closeLeaderboard) {
-    closeLeaderboard.addEventListener('click', toggleLeaderboard);
-  }
-  
-  if (leaderboardModal) {
-    leaderboardModal.addEventListener('click', (e: MouseEvent) => {
-      if (e.target === leaderboardModal) {
-        toggleLeaderboard();
-      }
-    });
-  }
-
   // Subscribe to real-time updates
   if (isSupabaseConfigured && supabase) {
+    // Subscribe to counter changes
     supabase
       .channel('marsh_counter_changes')
       .on('postgres_changes', 
@@ -690,6 +669,7 @@ import IraqMarshesLayout from "../../layouts/IraqMarshes/IraqMarshesLayout.astro
               counterElement.textContent = count.toLocaleString();
             }
             updateWaterLevel(count);
+            fetchLeaderboard();
           }
         }
       )
@@ -699,6 +679,7 @@ import IraqMarshesLayout from "../../layouts/IraqMarshes/IraqMarshesLayout.astro
   // Initial setup
   loadUsername();
   fetchCounter();
+  fetchLeaderboard();
 </script>
 
 <style>
