@@ -115,7 +115,7 @@ import IraqMarshesLayout from "../../layouts/IraqMarshes/IraqMarshesLayout.astro
       
       <!-- Objects will be spawned here -->
       <div class="absolute inset-0 flex items-center justify-center text-gray-400 text-lg pointer-events-none" id="instruction">
-        <p class="bg-white/70 px-4 py-2 rounded-lg">👆 Click to add marsh elements</p>
+        <p class="bg-white/70 px-4 py-2 rounded-lg">👆 Click to contribute water</p>
       </div>
     </div>
 
@@ -231,12 +231,80 @@ import IraqMarshesLayout from "../../layouts/IraqMarshes/IraqMarshesLayout.astro
       return;
     }
     
+    const oldUsername = currentUsername;
     currentUsername = username;
     localStorage.setItem('marsh_username', username);
     if (usernameInput) usernameInput.classList.add('hidden');
     if (usernameDisplay) usernameDisplay.classList.remove('hidden');
     if (currentUsernameSpan) currentUsernameSpan.textContent = username;
-    fetchUserContribution();
+    
+    // Transfer contributions from old username to new one if applicable
+    if (oldUsername && oldUsername !== username) {
+      transferContributions(oldUsername, username);
+    } else {
+      fetchUserContribution();
+    }
+  }
+
+  // Transfer contributions from old username to new username
+  async function transferContributions(oldUsername: string, newUsername: string) {
+    if (!isSupabaseConfigured) {
+      fetchUserContribution();
+      return;
+    }
+
+    try {
+      // Check if new username exists and has contributions
+      const { data: newUserData, error: newUserError } = await supabase
+        .from('marsh_contributions')
+        .select('contribution')
+        .eq('username', newUsername)
+        .single();
+
+      // Check old username contributions
+      const { data: oldUserData, error: oldUserError } = await supabase
+        .from('marsh_contributions')
+        .select('contribution')
+        .eq('username', oldUsername)
+        .single();
+
+      const newUserContribution = newUserData?.contribution || 0;
+      const oldUserContribution = oldUserData?.contribution || 0;
+
+      // Only transfer if new user has 0 contributions and old user has contributions
+      if (newUserContribution === 0 && oldUserContribution > 0) {
+        // Update or insert new username with old contributions
+        const { error: upsertError } = await supabase
+          .from('marsh_contributions')
+          .upsert({
+            username: newUsername,
+            contribution: oldUserContribution,
+            updated_at: new Date().toISOString()
+          });
+
+        if (upsertError) {
+          console.error('Error transferring contributions:', upsertError);
+        } else {
+          // Delete old username entry
+          const { error: deleteError } = await supabase
+            .from('marsh_contributions')
+            .delete()
+            .eq('username', oldUsername);
+
+          if (deleteError) {
+            console.error('Error deleting old username:', deleteError);
+          } else {
+            console.log(`Transferred ${oldUserContribution} liters from ${oldUsername} to ${newUsername}`);
+          }
+        }
+      }
+
+      // Fetch the current user's contribution after transfer
+      fetchUserContribution();
+    } catch (err) {
+      console.error('Error in transfer process:', err);
+      fetchUserContribution();
+    }
   }
 
   // Change username
@@ -467,7 +535,6 @@ import IraqMarshesLayout from "../../layouts/IraqMarshes/IraqMarshesLayout.astro
   function spawnObject(x: number, y: number) {
     if (!marshCanvas) return;
 
-    const obj = getRandomMarshObject();
     const objElement = document.createElement('div');
     
     objElement.className = 'absolute pointer-events-none transition-all duration-1000';
@@ -475,7 +542,8 @@ import IraqMarshesLayout from "../../layouts/IraqMarshes/IraqMarshesLayout.astro
     objElement.style.top = `${y}px`;
     objElement.style.transform = 'translate(-50%, -50%) scale(0)';
     objElement.style.opacity = '0';
-    objElement.innerHTML = `<img src="${obj.image}" alt="${obj.name}" class="${obj.class}" />`;
+    objElement.style.fontSize = '48px';
+    objElement.textContent = '💧';
 
     marshCanvas.appendChild(objElement);
 
