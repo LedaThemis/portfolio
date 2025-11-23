@@ -3,59 +3,70 @@ import IraqMarshesLayout from "../../layouts/IraqMarshes/IraqMarshesLayout.astro
 ---
 
 <IraqMarshesLayout>
-  <div class="flex flex-col items-center justify-center w-full grow py-8">
-    <div class="text-center mb-8">
-      <h2 class="text-4xl font-bold mb-4">Preserve the Marshes</h2>
-      <p class="text-lg text-gray-700">Help preserve Iraq's precious marshlands - every drop counts!</p>
+  <div class="flex flex-col items-center w-full grow py-4 relative">
+    <!-- Header -->
+    <div class="text-center mb-4 z-10">
+      <h2 class="text-4xl font-bold mb-2">Preserve the Marshes</h2>
+      <p class="text-lg text-gray-700 mb-2">Click anywhere to help preserve Iraq's precious marshlands!</p>
     </div>
 
-    <div class="bg-white rounded-lg shadow-xl p-8 max-w-md w-full">
-      <!-- Water Bucket Icon -->
-      <div class="flex justify-center mb-6">
-        <svg id="water-bucket" class="w-32 h-32 transition-transform duration-200" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <!-- Bucket body -->
-          <path d="M25 35 L20 85 C20 90 25 95 30 95 L70 95 C75 95 80 90 80 85 L75 35 Z" fill="#8B7355" stroke="#654321" stroke-width="2"/>
-          <!-- Bucket rim -->
-          <ellipse cx="50" cy="35" rx="25" ry="5" fill="#A0826D" stroke="#654321" stroke-width="2"/>
-          <!-- Bucket handle -->
-          <path d="M30 35 Q50 20 70 35" stroke="#654321" stroke-width="2" fill="none"/>
-          <!-- Water inside -->
-          <path id="water-fill" d="M26 40 L22 80 C22 83 26 86 30 86 L70 86 C74 86 78 83 78 80 L74 40 Z" fill="#4A90E2" opacity="0.7"/>
-          <!-- Water surface waves -->
-          <ellipse cx="50" cy="40" rx="23" ry="4" fill="#6BB6FF" opacity="0.8"/>
-        </svg>
-      </div>
-
-      <!-- Counter Display -->
-      <div class="text-center mb-6">
-        <div class="text-5xl font-bold text-blue-600 mb-2">
+    <!-- Counter Display - Fixed at top -->
+    <div class="text-center mb-4 z-10">
+      <div class="bg-white/90 backdrop-blur rounded-lg shadow-lg px-6 py-3 inline-block">
+        <div class="text-4xl font-bold text-blue-600">
           <span id="counter">Loading...</span>
         </div>
-        <div class="text-xl text-gray-600">Liters Preserved</div>
-      </div>
-
-      <!-- Contribute Button -->
-      <button
-        id="contribute-btn"
-        class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-6 rounded-lg transition-colors duration-200 text-xl shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed"
-      >
-        <span id="btn-text">💧 Contribute 1 Liter</span>
-        <span id="btn-loading" class="hidden">Processing...</span>
-      </button>
-
-      <!-- Success Message -->
-      <div id="success-msg" class="hidden mt-4 p-3 bg-green-100 text-green-800 rounded-lg text-center">
-        Thank you for your contribution! 🌊
-      </div>
-
-      <!-- Error Message -->
-      <div id="error-msg" class="hidden mt-4 p-3 bg-red-100 text-red-800 rounded-lg text-center">
-        <span id="error-text"></span>
+        <div class="text-sm text-gray-600">Liters Preserved</div>
       </div>
     </div>
 
-    <div class="mt-8 text-center text-sm text-gray-600 max-w-md">
-      <p>Join our global effort to preserve the UNESCO World Heritage Al-Chibayish's Marshes. Each contribution helps raise awareness about this precious ecosystem.</p>
+    <!-- Interactive Canvas Area -->
+    <div id="marsh-canvas" class="relative w-full grow bg-gradient-to-b from-sky-200 to-green-100 rounded-lg overflow-hidden cursor-pointer shadow-xl">
+      <!-- Water Level Background -->
+      <div id="water-level" class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-blue-400/60 to-blue-300/40 transition-all duration-1000 ease-out" style="height: 0%;">
+        <!-- Fish swimming in the water -->
+        <div id="water-fish" class="absolute inset-0 overflow-hidden pointer-events-none">
+          <!-- Fish will be added here dynamically -->
+        </div>
+        
+        <!-- Water waves animation -->
+        <div class="absolute top-0 left-0 w-full h-8 overflow-hidden">
+          <svg class="absolute w-full h-full" viewBox="0 0 1200 100" preserveAspectRatio="none">
+            <path d="M0,50 Q150,30 300,50 T600,50 T900,50 T1200,50 L1200,100 L0,100 Z" fill="rgba(59, 130, 246, 0.3)">
+              <animate attributeName="d" 
+                dur="5s" 
+                repeatCount="indefinite"
+                values="
+                  M0,50 Q150,30 300,50 T600,50 T900,50 T1200,50 L1200,100 L0,100 Z;
+                  M0,50 Q150,70 300,50 T600,50 T900,50 T1200,50 L1200,100 L0,100 Z;
+                  M0,50 Q150,30 300,50 T600,50 T900,50 T1200,50 L1200,100 L0,100 Z
+                "/>
+            </path>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Reeds at the bottom -->
+      <div id="marsh-reeds" class="absolute bottom-0 left-0 w-full pointer-events-none">
+        <!-- Reeds will be added here dynamically -->
+      </div>
+      
+      <!-- Objects will be spawned here -->
+      <div class="absolute inset-0 flex items-center justify-center text-gray-400 text-lg pointer-events-none" id="instruction">
+        <p class="bg-white/70 px-4 py-2 rounded-lg">👆 Click to add marsh elements</p>
+      </div>
+    </div>
+
+    <!-- Success Message -->
+    <div id="success-msg" class="hidden fixed bottom-8 left-1/2 transform -translate-x-1/2 z-50 px-6 py-3 bg-green-500 text-white rounded-lg shadow-lg animate-bounce">
+      +1 Liter! 🌊
+    </div>
+
+    <!-- Error Message -->
+    <div id="error-msg" class="hidden fixed top-20 left-1/2 transform -translate-x-1/2 z-50 max-w-md">
+      <div class="p-4 bg-red-100 text-red-800 rounded-lg shadow-lg text-center">
+        <span id="error-text"></span>
+      </div>
     </div>
   </div>
 </IraqMarshesLayout>
@@ -77,27 +88,184 @@ import IraqMarshesLayout from "../../layouts/IraqMarshes/IraqMarshesLayout.astro
 
   // DOM Elements
   const counterElement = document.getElementById('counter');
-  const contributeBtn = document.getElementById('contribute-btn') as HTMLButtonElement;
-  const btnText = document.getElementById('btn-text');
-  const btnLoading = document.getElementById('btn-loading');
+  const marshCanvas = document.getElementById('marsh-canvas');
+  const waterLevel = document.getElementById('water-level');
+  const waterFish = document.getElementById('water-fish');
+  const marshReeds = document.getElementById('marsh-reeds');
   const successMsg = document.getElementById('success-msg');
   const errorMsg = document.getElementById('error-msg');
   const errorText = document.getElementById('error-text');
-  const waterBucket = document.getElementById('water-bucket');
+  const instruction = document.getElementById('instruction');
+
+  let isThrottled = false;
+  let currentCount = 0;
+  let lastFishCount = 0;
+  let lastReedCount = 0;
+
+  // Function to add a permanent fish to the water
+  function addFish() {
+    if (!waterFish || !marshCanvas) return;
+    
+    const canvasWidth = marshCanvas.offsetWidth;
+    const fishElement = document.createElement('div');
+    
+    const startX = Math.random() > 0.5 ? -50 : canvasWidth + 50;
+    const yPos = 20 + Math.random() * 60; // Random depth in percentage
+    const duration = 8 + Math.random() * 8; // 8-16 seconds
+    const direction = startX < 0 ? 1 : -1;
+    
+    fishElement.className = 'absolute transition-none';
+    fishElement.style.left = `${startX}px`;
+    fishElement.style.top = `${yPos}%`;
+    fishElement.style.transform = direction === 1 ? 'scaleX(-1)' : '';
+    fishElement.innerHTML = `<img src="/assets/iraq-marshes/preserve-marshes/fish.png" alt="fish" class="w-16 h-auto opacity-80" />`;
+
+    waterFish.appendChild(fishElement);
+
+    // Animate fish swimming
+    const endX = direction > 0 ? canvasWidth + 50 : -50;
+    fishElement.style.transition = `left ${duration}s linear`;
+    setTimeout(() => {
+      fishElement.style.left = `${endX}px`;
+    }, 50);
+
+    // Remove fish after animation and add a new one
+    setTimeout(() => {
+      fishElement.remove();
+      if (waterLevel && parseFloat(waterLevel.style.height) > 5) {
+        addFish();
+      }
+    }, duration * 1000 + 100);
+  }
+
+  // Function to add a permanent reed
+  function addReed() {
+    if (!marshReeds || !marshCanvas) return;
+    
+    const canvasWidth = marshCanvas.offsetWidth;
+    const xPos = Math.random() * canvasWidth;
+    const height = 60 + Math.random() * 80; // 60-140px tall
+    const sway = Math.random() * 3 + 2; // 2-5 seconds sway
+    
+    const reedElement = document.createElement('div');
+    reedElement.className = 'absolute bottom-0';
+    reedElement.style.left = `${xPos}px`;
+    reedElement.style.transformOrigin = 'bottom center';
+    reedElement.style.animation = `sway ${sway}s ease-in-out infinite`;
+    reedElement.innerHTML = `<img src="/assets/iraq-marshes/preserve-marshes/grass.png" alt="reed" style="height: ${height}px; width: auto;" />`;
+
+    marshReeds.appendChild(reedElement);
+  }
+
+  // Function to update water level based on count
+  function updateWaterLevel(count: number) {
+    if (!waterLevel) return;
+    
+    const oldCount = currentCount;
+    currentCount = count;
+    
+    // Calculate water level percentage (e.g., 1 liter = 0.5%, cap at 100%)
+    const percentage = Math.min((count * 1), 100);
+    waterLevel.style.height = `${percentage}%`;
+    
+    // Change water color as it rises
+    if (percentage > 75) {
+      waterLevel.style.background = 'linear-gradient(to top, rgba(59, 130, 246, 0.8), rgba(96, 165, 250, 0.6))';
+    } else if (percentage > 50) {
+      waterLevel.style.background = 'linear-gradient(to top, rgba(59, 130, 246, 0.7), rgba(96, 165, 250, 0.5))';
+    } else if (percentage > 25) {
+      waterLevel.style.background = 'linear-gradient(to top, rgba(59, 130, 246, 0.6), rgba(96, 165, 250, 0.4))';
+    }
+
+    // Add fish as water level increases (1 fish per 10 liters)
+    const fishToAdd = Math.floor(count / 10) - lastFishCount;
+    for (let i = 0; i < fishToAdd; i++) {
+      setTimeout(() => addFish(), i * 500);
+    }
+    lastFishCount = Math.floor(count / 10);
+
+    // Add reeds as water level increases (1 reed per 5 liters)
+    const reedsToAdd = Math.floor(count / 5) - lastReedCount;
+    for (let i = 0; i < reedsToAdd; i++) {
+      setTimeout(() => addReed(), i * 300);
+    }
+    lastReedCount = Math.floor(count / 5);
+  }
+
+  // Marsh objects definitions with images
+  const marshObjects = [
+    {
+      name: 'reed',
+      emoji: '🌾',
+      image: '/assets/iraq-marshes/preserve-marshes/grass.png',
+      class: 'w-12 h-auto'
+    },
+    {
+      name: 'mudhif',
+      emoji: '🏛️',
+      image: '/assets/iraq-marshes/preserve-marshes/mudhif.png',
+      class: 'w-20 h-auto'
+    },
+    {
+      name: 'fish',
+      emoji: '🐟',
+      image: '/assets/iraq-marshes/preserve-marshes/fish.png',
+      class: 'w-16 h-auto'
+    }
+  ];
+
+  // Function to get random marsh object
+  function getRandomMarshObject() {
+    return marshObjects[Math.floor(Math.random() * marshObjects.length)];
+  }
+
+  // Function to spawn object at position
+  function spawnObject(x: number, y: number) {
+    if (!marshCanvas) return;
+
+    const obj = getRandomMarshObject();
+    const objElement = document.createElement('div');
+    
+    objElement.className = 'absolute pointer-events-none transition-all duration-1000';
+    objElement.style.left = `${x}px`;
+    objElement.style.top = `${y}px`;
+    objElement.style.transform = 'translate(-50%, -50%) scale(0)';
+    objElement.style.opacity = '0';
+    objElement.innerHTML = `<img src="${obj.image}" alt="${obj.name}" class="${obj.class}" />`;
+
+    marshCanvas.appendChild(objElement);
+
+    // Hide instruction after first click
+    if (instruction) {
+      instruction.style.display = 'none';
+    }
+
+    // Animate in
+    setTimeout(() => {
+      objElement.style.transform = 'translate(-50%, -50%) scale(1)';
+      objElement.style.opacity = '1';
+    }, 10);
+
+    // Animate out and remove after 3 seconds
+    setTimeout(() => {
+      objElement.style.transform = 'translate(-50%, -50%) scale(0) rotate(360deg)';
+      objElement.style.opacity = '0';
+      setTimeout(() => {
+        objElement.remove();
+      }, 1000);
+    }, 2000);
+  }
 
   // Function to fetch current counter value
   async function fetchCounter() {
     if (!isSupabaseConfigured) {
-      console.warn('Supabase not configured. Please check your environment variables.');
       if (counterElement) {
         counterElement.textContent = '0';
       }
-      showError('Supabase is not configured. Check the console for details.');
       return;
     }
 
     try {
-      console.log('Fetching counter from Supabase...');
       const { data, error } = await supabase
         .from('marsh_counter')
         .select('count')
@@ -105,83 +273,62 @@ import IraqMarshesLayout from "../../layouts/IraqMarshes/IraqMarshesLayout.astro
 
       if (error) {
         console.error('Error fetching counter:', error);
-        console.error('Error details:', JSON.stringify(error, null, 2));
         if (counterElement) {
           counterElement.textContent = '0';
         }
-        showError(`Database error: ${error.message || 'Failed to fetch counter'}`);
+        updateWaterLevel(0);
       } else {
-        console.log('Counter data received:', data);
+        const count = data?.count || 0;
         if (counterElement) {
-          counterElement.textContent = (data?.count || 0).toLocaleString();
+          counterElement.textContent = count.toLocaleString();
         }
+        updateWaterLevel(count);
       }
     } catch (err) {
       console.error('Error:', err);
       if (counterElement) {
         counterElement.textContent = '0';
       }
-      showError('Failed to connect to database. Check console for details.');
+      updateWaterLevel(0);
     }
   }
 
   // Function to increment counter
   async function incrementCounter() {
     if (!isSupabaseConfigured) {
-      showError('Supabase is not configured. Please add your Supabase credentials to environment variables.');
+      showError('Supabase is not configured.');
       return;
     }
 
-    // Disable button and show loading state
-    if (contributeBtn) contributeBtn.disabled = true;
-    if (btnText) btnText.classList.add('hidden');
-    if (btnLoading) btnLoading.classList.remove('hidden');
-    
-    // Hide previous messages
-    if (successMsg) successMsg.classList.add('hidden');
-    if (errorMsg) errorMsg.classList.add('hidden');
+    if (isThrottled) return;
+    isThrottled = true;
 
     try {
-      console.log('Calling increment_marsh_counter RPC function...');
-      // Call Supabase RPC function to increment counter
       const { data, error } = await supabase.rpc('increment_marsh_counter');
-
-      console.log('RPC response - data:', data, 'error:', error);
 
       if (error) {
         console.error('Error incrementing counter:', error);
-        console.error('Error details:', JSON.stringify(error, null, 2));
-        
-        // Provide more specific error messages
-        if (error.message?.includes('does not exist')) {
-          showError('Database not set up. Please run the SQL setup scripts first.');
-        } else if (error.message?.includes('permission denied')) {
-          showError('Permission denied. Check your RLS policies.');
-        } else {
-          showError(`Failed to contribute: ${error.message || 'Unknown error'}`);
-        }
+        showError('Failed to contribute.');
       } else {
-        console.log('Counter incremented successfully. New value:', data);
-        
         // If data is null, fetch the current count from the table
         if (data === null || data === undefined) {
-          console.log('RPC returned null, fetching counter from table...');
           const { data: fetchData, error: fetchError } = await supabase
             .from('marsh_counter')
             .select('count')
             .single();
           
           if (!fetchError && fetchData) {
-            console.log('Fetched counter value:', fetchData.count);
+            const count = fetchData.count || 0;
             if (counterElement) {
-              counterElement.textContent = (fetchData.count || 0).toLocaleString();
+              counterElement.textContent = count.toLocaleString();
             }
+            updateWaterLevel(count);
           }
         } else {
-          // Update counter display with returned value
           if (counterElement) {
             counterElement.textContent = (data || 0).toLocaleString();
           }
+          updateWaterLevel(data || 0);
         }
         
         // Show success message
@@ -189,25 +336,17 @@ import IraqMarshesLayout from "../../layouts/IraqMarshes/IraqMarshesLayout.astro
           successMsg.classList.remove('hidden');
           setTimeout(() => {
             successMsg.classList.add('hidden');
-          }, 3000);
-        }
-
-        // Animate bucket
-        if (waterBucket) {
-          waterBucket.classList.add('scale-110');
-          setTimeout(() => {
-            waterBucket.classList.remove('scale-110');
-          }, 300);
+          }, 1500);
         }
       }
     } catch (err) {
       console.error('Unexpected error:', err);
-      showError('An unexpected error occurred. Check console for details.');
+      showError('An error occurred.');
     } finally {
-      // Re-enable button
-      if (contributeBtn) contributeBtn.disabled = false;
-      if (btnText) btnText.classList.remove('hidden');
-      if (btnLoading) btnLoading.classList.add('hidden');
+      // Throttle for 500ms
+      setTimeout(() => {
+        isThrottled = false;
+      }, 500);
     }
   }
 
@@ -218,13 +357,20 @@ import IraqMarshesLayout from "../../layouts/IraqMarshes/IraqMarshesLayout.astro
       errorMsg.classList.remove('hidden');
       setTimeout(() => {
         errorMsg.classList.add('hidden');
-      }, 5000);
+      }, 3000);
     }
   }
 
-  // Event listener for contribute button
-  if (contributeBtn) {
-    contributeBtn.addEventListener('click', incrementCounter);
+  // Event listener for canvas clicks
+  if (marshCanvas) {
+    marshCanvas.addEventListener('click', (e: MouseEvent) => {
+      const rect = marshCanvas.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      
+      spawnObject(x, y);
+      incrementCounter();
+    });
   }
 
   // Subscribe to real-time updates
@@ -234,8 +380,12 @@ import IraqMarshesLayout from "../../layouts/IraqMarshes/IraqMarshesLayout.astro
       .on('postgres_changes', 
         { event: '*', schema: 'public', table: 'marsh_counter' }, 
         (payload: any) => {
-          if (counterElement && payload.new?.count) {
-            counterElement.textContent = payload.new.count.toLocaleString();
+          if (payload.new?.count !== undefined) {
+            const count = payload.new.count;
+            if (counterElement) {
+              counterElement.textContent = count.toLocaleString();
+            }
+            updateWaterLevel(count);
           }
         }
       )
@@ -247,11 +397,20 @@ import IraqMarshesLayout from "../../layouts/IraqMarshes/IraqMarshesLayout.astro
 </script>
 
 <style>
-  #water-bucket {
-    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
+  #marsh-canvas {
+    min-height: 400px;
+    background-image: 
+      radial-gradient(circle at 20% 80%, rgba(34, 139, 34, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 80% 60%, rgba(70, 130, 180, 0.1) 0%, transparent 50%);
   }
   
-  #water-bucket:hover {
-    filter: drop-shadow(0 6px 8px rgba(0, 0, 0, 0.15));
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+  }
+
+  @keyframes sway {
+    0%, 100% { transform: rotate(-2deg); }
+    50% { transform: rotate(2deg); }
   }
 </style>
