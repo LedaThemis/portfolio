@@ -20,6 +20,34 @@ import IraqMarshesLayout from "../../layouts/IraqMarshes/IraqMarshesLayout.astro
       </div>
     </div>
 
+    <!-- Milestones Display -->
+    <div class="flex gap-4 mb-4 z-10">
+      <div id="milestone-25" class="milestone-badge bg-white/90 backdrop-blur rounded-lg shadow-lg px-4 py-2 transition-all duration-500" data-threshold="25">
+        <div class="text-center">
+          <div class="text-3xl mb-1">🏅</div>
+          <div class="text-xs text-gray-600">25L</div>
+        </div>
+      </div>
+      <div id="milestone-50" class="milestone-badge bg-white/90 backdrop-blur rounded-lg shadow-lg px-4 py-2 transition-all duration-500" data-threshold="50">
+        <div class="text-center">
+          <div class="text-3xl mb-1">🏅</div>
+          <div class="text-xs text-gray-600">50L</div>
+        </div>
+      </div>
+      <div id="milestone-75" class="milestone-badge bg-white/90 backdrop-blur rounded-lg shadow-lg px-4 py-2 transition-all duration-500" data-threshold="75">
+        <div class="text-center">
+          <div class="text-3xl mb-1">🏅</div>
+          <div class="text-xs text-gray-600">75L</div>
+        </div>
+      </div>
+      <div id="milestone-100" class="milestone-badge bg-white/90 backdrop-blur rounded-lg shadow-lg px-4 py-2 transition-all duration-500" data-threshold="100">
+        <div class="text-center">
+          <div class="text-3xl mb-1">🏅</div>
+          <div class="text-xs text-gray-600">100L</div>
+        </div>
+      </div>
+    </div>
+
     <!-- Interactive Canvas Area -->
     <div id="marsh-canvas" class="relative w-full grow bg-gradient-to-b from-sky-200 to-green-100 rounded-lg overflow-hidden cursor-pointer shadow-xl">
       <!-- Water Level Background -->
@@ -101,6 +129,44 @@ import IraqMarshesLayout from "../../layouts/IraqMarshes/IraqMarshesLayout.astro
   let currentCount = 0;
   let lastFishCount = 0;
   let lastReedCount = 0;
+
+  // Milestones configuration
+  const milestones = [
+    { id: 'milestone-25', threshold: 25, achieved: false },
+    { id: 'milestone-50', threshold: 50, achieved: false },
+    { id: 'milestone-75', threshold: 75, achieved: false },
+    { id: 'milestone-100', threshold: 100, achieved: false }
+  ];
+
+  // Function to update milestones based on count
+  function updateMilestones(count: number) {
+    milestones.forEach(milestone => {
+      const element = document.getElementById(milestone.id);
+      if (!element) return;
+
+      const icon = element.querySelector('.text-3xl');
+      if (!icon) return;
+
+      if (count >= milestone.threshold && !milestone.achieved) {
+        // Achieved milestone - turn into trophy
+        milestone.achieved = true;
+        icon.textContent = '🏆';
+        element.classList.add('scale-110', 'bg-yellow-100/90');
+        element.classList.remove('opacity-50');
+        
+        // Celebration animation
+        setTimeout(() => {
+          element.classList.remove('scale-110');
+        }, 500);
+      } else if (count < milestone.threshold) {
+        // Not yet achieved
+        milestone.achieved = false;
+        icon.textContent = '🏅';
+        element.classList.remove('scale-110', 'bg-yellow-100/90');
+        element.classList.add('opacity-50');
+      }
+    });
+  }
 
   // Function to add a permanent fish to the water
   function addFish() {
@@ -190,6 +256,9 @@ import IraqMarshesLayout from "../../layouts/IraqMarshes/IraqMarshesLayout.astro
       setTimeout(() => addReed(), i * 300);
     }
     lastReedCount = Math.floor(count / 5);
+    
+    // Update milestones
+    updateMilestones(count);
   }
 
   // Marsh objects definitions with images
@@ -412,5 +481,13 @@ import IraqMarshesLayout from "../../layouts/IraqMarshes/IraqMarshesLayout.astro
   @keyframes sway {
     0%, 100% { transform: rotate(-2deg); }
     50% { transform: rotate(2deg); }
+  }
+
+  .milestone-badge {
+    opacity: 0.5;
+  }
+
+  .milestone-badge.achieved {
+    opacity: 1;
   }
 </style>
