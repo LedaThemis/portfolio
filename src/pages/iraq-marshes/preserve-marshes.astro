@@ -40,6 +40,12 @@ import IraqMarshesLayout from "../../layouts/IraqMarshes/IraqMarshesLayout.astro
           <div class="text-xs text-gray-600">1000L</div>
         </div>
       </div>
+      <div id="milestone-4000" class="milestone-badge bg-white/90 backdrop-blur rounded-lg shadow-lg px-4 py-2 transition-all duration-500" data-threshold="4000">
+        <div class="text-center">
+          <div class="text-3xl mb-1">🏅</div>
+          <div class="text-xs text-gray-600">4000L</div>
+        </div>
+      </div>
     </div>
 
     <!-- Username Input Section -->
@@ -378,7 +384,8 @@ import IraqMarshesLayout from "../../layouts/IraqMarshes/IraqMarshesLayout.astro
   const milestones = [
     { id: 'milestone-10', threshold: 10, achieved: false },
     { id: 'milestone-100', threshold: 100, achieved: false },
-    { id: 'milestone-1000', threshold: 1000, achieved: false }
+    { id: 'milestone-1000', threshold: 1000, achieved: false },
+    { id: 'milestone-4000', threshold: 4000, achieved: false }
   ];
 
   // Function to update milestones based on count
@@ -494,7 +501,7 @@ import IraqMarshesLayout from "../../layouts/IraqMarshes/IraqMarshesLayout.astro
     lastFishCount = Math.floor(count / 100);
 
     // Add reeds as water level increases (1 reed per 5 liters)
-    const reedsToAdd = Math.floor(count / 5) - lastReedCount;
+    const reedsToAdd = Math.floor(count / 50) - lastReedCount;
     for (let i = 0; i < reedsToAdd; i++) {
       setTimeout(() => addReed(), i * 300);
     }
