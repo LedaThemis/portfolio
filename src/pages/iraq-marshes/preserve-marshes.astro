@@ -40,10 +40,10 @@ import IraqMarshesLayout from "../../layouts/IraqMarshes/IraqMarshesLayout.astro
           <div class="text-xs text-gray-600">1000L</div>
         </div>
       </div>
-      <div id="milestone-4000" class="milestone-badge bg-white/90 backdrop-blur rounded-lg shadow-lg px-4 py-2 transition-all duration-500" data-threshold="4000">
+      <div id="milestone-3000" class="milestone-badge bg-white/90 backdrop-blur rounded-lg shadow-lg px-4 py-2 transition-all duration-500" data-threshold="3000">
         <div class="text-center">
           <div class="text-3xl mb-1">🏅</div>
-          <div class="text-xs text-gray-600">4000L (Babylon Special)</div>
+          <div class="text-xs text-gray-600">3000L (Babylon Special)</div>
         </div>
       </div>
     </div>
@@ -150,7 +150,17 @@ import IraqMarshesLayout from "../../layouts/IraqMarshes/IraqMarshesLayout.astro
   let isSupabaseConfigured = false;
 
   if (supabaseUrl && supabaseKey) {
-    supabase = createClient(supabaseUrl, supabaseKey);
+    supabase = createClient(supabaseUrl, supabaseKey, {
+      auth: {
+        persistSession: false,
+        autoRefreshToken: false,
+      },
+      global: {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      },
+    });
     isSupabaseConfigured = true;
   }
 
@@ -385,7 +395,7 @@ import IraqMarshesLayout from "../../layouts/IraqMarshes/IraqMarshesLayout.astro
     { id: 'milestone-10', threshold: 10, achieved: false },
     { id: 'milestone-100', threshold: 100, achieved: false },
     { id: 'milestone-1000', threshold: 1000, achieved: false },
-    { id: 'milestone-4000', threshold: 4000, achieved: false }
+    { id: 'milestone-3000', threshold: 3000, achieved: false }
   ];
 
   // Function to update milestones based on count
@@ -480,8 +490,8 @@ import IraqMarshesLayout from "../../layouts/IraqMarshes/IraqMarshesLayout.astro
     const oldCount = currentCount;
     currentCount = count;
     
-    // Calculate water level percentage based on 4000L goal (1 liter = 0.025%, cap at 100%)
-    const percentage = Math.min((count / 4000) * 100, 100);
+    // Calculate water level percentage based on 3000L goal (1 liter = 0.0333%, cap at 100%)
+    const percentage = Math.min((count / 3000) * 100, 100);
     waterLevel.style.height = `${percentage}%`;
     
     // Change water color as it rises
