@@ -480,8 +480,8 @@ import IraqMarshesLayout from "../../layouts/IraqMarshes/IraqMarshesLayout.astro
     const oldCount = currentCount;
     currentCount = count;
     
-    // Calculate water level percentage (e.g., 1 liter = 0.5%, cap at 100%)
-    const percentage = Math.min((count * (1/500) * 100), 100);
+    // Calculate water level percentage based on 4000L goal (1 liter = 0.025%, cap at 100%)
+    const percentage = Math.min((count / 4000) * 100, 100);
     waterLevel.style.height = `${percentage}%`;
     
     // Change water color as it rises
