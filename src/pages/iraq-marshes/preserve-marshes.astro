@@ -486,12 +486,12 @@ import IraqMarshesLayout from "../../layouts/IraqMarshes/IraqMarshesLayout.astro
       waterLevel.style.background = 'linear-gradient(to top, rgba(59, 130, 246, 0.6), rgba(96, 165, 250, 0.4))';
     }
 
-    // Add fish as water level increases (1 fish per 10 liters)
-    const fishToAdd = Math.floor(count / 10) - lastFishCount;
+    // Add fish as water level increases (1 fish per 100 liters)
+    const fishToAdd = Math.floor(count / 100) - lastFishCount;
     for (let i = 0; i < fishToAdd; i++) {
       setTimeout(() => addFish(), i * 500);
     }
-    lastFishCount = Math.floor(count / 10);
+    lastFishCount = Math.floor(count / 100);
 
     // Add reeds as water level increases (1 reed per 5 liters)
     const reedsToAdd = Math.floor(count / 5) - lastReedCount;
