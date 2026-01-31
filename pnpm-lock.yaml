@@ -17,6 +17,12 @@ importers:
       '@astrojs/tailwind':
         specifier: ^2.1.2
         version: 2.1.2(tailwindcss@3.2.4(postcss@8.4.17))
+      '@babylonjs/core':
+        specifier: ^8.49.6
+        version: 8.49.6
+      '@babylonjs/loaders':
+        specifier: ^8.49.6
+        version: 8.49.6(@babylonjs/core@8.49.6)(babylonjs-gltf2interface@8.49.6)
       '@cloudinary/url-gen':
         specifier: ^1.8.6
         version: 1.8.6
@@ -234,6 +240,15 @@ packages:
   '@babel/types@7.19.3':
     resolution: {integrity: sha512-hGCaQzIY22DJlDh9CH7NOxgKkFjBk0Cw9xDO1Xmh2151ti7wiGfQ3LauXzL4HP1fmFlTX6XjpRETTpUcv7wQLw==}
     engines: {node: '>=6.9.0'}
+
+  '@babylonjs/core@8.49.6':
+    resolution: {integrity: sha512-Q0wsDfDQhwXhE22ltb89hL+XYaDzBLGDr/sSlKUEsHtALK+u36Ttwa8wVD0XJP30pgFpKIrd1LvdSB9FemNwzg==}
+
+  '@babylonjs/loaders@8.49.6':
+    resolution: {integrity: sha512-KsguPMqonctgvyjCcR8A3izGaoQoQrEdG3n4mZ4scX/WHskAciW5P/zsE3AUYugOAb+TL7iBW5VCb+sz/uEkVw==}
+    peerDependencies:
+      '@babylonjs/core': ^8.0.0
+      babylonjs-gltf2interface: ^8.0.0
 
   '@cloudinary/transformation-builder-sdk@1.1.0':
     resolution: {integrity: sha512-BqhTqIwPTyQ4hE0NjKXf/bF7VAjwe2ZHNuypdG6oQ6bDoiLTOSzdAZsg0jFndureQiVPavBKOzQTjHImp45z/g==}
@@ -623,6 +638,9 @@ packages:
 
   b4a@1.6.7:
     resolution: {integrity: sha512-OnAYlL5b7LEkALw87fUVafQw5rVR9RjwGd4KUwNQ6DrrNmaVaUCgLipfVlzrPQ4tWOR9P0IXGNOx50jYCCdSJg==}
+
+  babylonjs-gltf2interface@8.49.6:
+    resolution: {integrity: sha512-7qxi48GxEgX9SIZf1Eze+25YCUUY9X6ZIuoozg0rHZyY9gQBso7HUIWLznsQHeUXey19QS/zirrP1spm1PW8Vw==}
 
   bail@2.0.2:
     resolution: {integrity: sha512-0xO6mYd7JB2YesxDKplafRpsiOzPt9V02ddPCLbY1xYGPOX24NTyN50qnUxgCPcSoYMhKpAuBTjQoRZCAkUDRw==}
@@ -3058,6 +3076,13 @@ snapshots:
       '@babel/helper-validator-identifier': 7.19.1
       to-fast-properties: 2.0.0
 
+  '@babylonjs/core@8.49.6': {}
+
+  '@babylonjs/loaders@8.49.6(@babylonjs/core@8.49.6)(babylonjs-gltf2interface@8.49.6)':
+    dependencies:
+      '@babylonjs/core': 8.49.6
+      babylonjs-gltf2interface: 8.49.6
+
   '@cloudinary/transformation-builder-sdk@1.1.0':
     dependencies:
       '@cloudinary/url-gen': 1.8.6
@@ -3590,6 +3615,8 @@ snapshots:
   axe-core@4.5.2: {}
 
   b4a@1.6.7: {}
+
+  babylonjs-gltf2interface@8.49.6: {}
 
   bail@2.0.2: {}
 

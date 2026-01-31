@@ -2,13 +2,89 @@
 import IraqMarshesLayout from "../layouts/IraqMarshes/IraqMarshesLayout.astro";
 ---
 <IraqMarshesLayout showFooter={false}>
-  <div class="grow flex flex-col items-center justify-center">
-    <iframe title="Iraq Marshlands: Ahwar Al-Chibayish" class="w-full h-full grow mt-5 mb-10" frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share src="https://sketchfab.com/models/41da5e81804c49258cdcd21b0d88352f/embed?autospin=0.1&autostart=1&camera=0&transparent=1"> </iframe> 
-  </div>
   <div class="left-0 top-0 absolute w-full h-full">
-      <!-- NEEDLE -->
-      <script type="module" src="https://cdn.leda.dev/portfolio/iraq-marshes/needle/assets/index.js"></script>
-      <needle-engine src="https://cdn.leda.dev/portfolio/iraq-marshes/needle/assets/Home.glb"></needle-engine>
-      <!-- NEEDLE END -->
+    <canvas id="babylonCanvas" class="w-full h-full"></canvas>
   </div>
+
+  <script>
+    import { ImportMeshAsync, Engine, Scene, Color3, Color4, ArcRotateCamera, Vector3, HemisphericLight, DirectionalLight, TransformNode, Quaternion, SSAO2RenderingPipeline } from '@babylonjs/core';
+    import { registerBuiltInLoaders } from "@babylonjs/loaders/dynamic";
+    
+    registerBuiltInLoaders();
+    const canvas = document.getElementById('babylonCanvas') as HTMLCanvasElement;
+    const engine = new Engine(canvas, true);
+
+    const createScene = () => {
+      const scene = new Scene(engine);
+      scene.clearColor = new Color4(0, 0, 0, 0);
+
+      // Create ArcRotateCamera
+      const camera = new ArcRotateCamera(
+        'camera',
+        Math.PI, Math.PI / 2.5, 100, Vector3.Zero(),
+        scene
+      );
+      camera.lowerBetaLimit = Math.PI / 6;
+      camera.upperBetaLimit = Math.PI / 2.2;
+      camera.lowerRadiusLimit = 80;
+      camera.upperRadiusLimit = 100;
+      camera.attachControl(canvas, true);
+
+      const hemiLight = new HemisphericLight(
+        'hemiLight',
+        new Vector3(0, 0, 0),
+        scene
+      );
+      hemiLight.intensity = 1.75;
+      hemiLight.groundColor = new Color3(1, 1, 1);
+      hemiLight.diffuse = new Color3(1, 1, 1);
+      hemiLight.specular = new Color3(0, 0, 0);
+
+      // Load the model
+      (async () => {
+        const droneModel = await ImportMeshAsync(
+          'https://cdn.leda.dev/portfolio/iraq-marshes/drone.glb',
+          scene,
+        );
+
+        const meshes = droneModel.meshes;
+        const rootMesh = meshes[0];
+        
+        // Create TransformNode to control position and scaling
+        const modelRoot = new TransformNode('modelRoot', scene);
+        
+        // Parent all meshes to the TransformNode
+        meshes.forEach((mesh) => {
+          if (mesh.parent === null) {
+            mesh.parent = modelRoot;
+          }
+        });
+
+
+        if (rootMesh) {
+            // Calculate bounding box to find center
+            const boundingInfo = rootMesh.getHierarchyBoundingVectors();
+            const center = boundingInfo.max.add(boundingInfo.min).scale(0.5);
+
+            // Move model so its center is at origin
+            rootMesh.position.subtractInPlace(center);
+        }
+
+        modelRoot.rotation = new Vector3(-Math.PI/2,Math.PI/2,0);
+        modelRoot.scaling = new Vector3(0.5, 0.5, 0.5);
+      })();
+
+      return scene;
+    };
+
+    const scene = createScene();
+
+    engine.runRenderLoop(() => {
+      scene.render();
+    });
+
+    window.addEventListener('resize', () => {
+      engine.resize();
+    });
+  </script>
 </IraqMarshesLayout>
