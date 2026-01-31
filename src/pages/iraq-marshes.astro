@@ -7,7 +7,7 @@ import IraqMarshesLayout from "../layouts/IraqMarshes/IraqMarshesLayout.astro";
   </div>
 
   <script>
-    import { ImportMeshAsync, Engine, Scene, Color3, Color4, ArcRotateCamera, Vector3, HemisphericLight, DirectionalLight, TransformNode, Quaternion, SSAO2RenderingPipeline } from '@babylonjs/core';
+    import { ImportMeshAsync, Engine, Scene, Color3, Color4, ArcRotateCamera, Vector3, HemisphericLight, DirectionalLight, TransformNode, Quaternion, SSAO2RenderingPipeline, GPUParticleSystem, CylinderParticleEmitter, Texture, ParticleSystem } from '@babylonjs/core';
     import { registerBuiltInLoaders } from "@babylonjs/loaders/dynamic";
     
     registerBuiltInLoaders();
@@ -16,18 +16,18 @@ import IraqMarshesLayout from "../layouts/IraqMarshes/IraqMarshesLayout.astro";
 
     const createScene = () => {
       const scene = new Scene(engine);
-      scene.clearColor = new Color4(0, 0, 0, 0);
+    scene.clearColor = new Color4(220 / 255, 220 / 255, 220 / 255, 1);
 
       // Create ArcRotateCamera
       const camera = new ArcRotateCamera(
         'camera',
-        Math.PI / 1.1, Math.PI / 2.5, 100, Vector3.Zero(),
+        Math.PI / 1.1, Math.PI / 2.5, 90, Vector3.Zero(),
         scene
       );
       camera.lowerBetaLimit = Math.PI / 6;
       camera.upperBetaLimit = Math.PI / 2.2;
       camera.lowerRadiusLimit = 80;
-      camera.upperRadiusLimit = 100;
+      camera.upperRadiusLimit = 90;
       camera.attachControl(canvas, true);
 
       // Enable auto-rotation until user interacts
@@ -47,6 +47,48 @@ import IraqMarshesLayout from "../layouts/IraqMarshes/IraqMarshesLayout.astro";
       hemiLight.groundColor = new Color3(1, 1, 1);
       hemiLight.diffuse = new Color3(1, 1, 1);
       hemiLight.specular = new Color3(0, 0, 0);
+
+      // Create cylindrical fog wall particle system around the perimeter
+      const fogWallParticleSystem = new GPUParticleSystem("fogWallParticles", { capacity: 5000 }, scene);
+
+      // Use cylinder particle emitter type for cylindrical fog wall
+      fogWallParticleSystem.particleEmitterType = new CylinderParticleEmitter(50, 30, 2.5);
+
+      // Use a simple cloud/smoke texture
+      const fogWallTexture = new Texture("https://cdn.leda.dev/portfolio/iraq-marshes/smoke.png", scene);
+      fogWallParticleSystem.particleTexture = fogWallTexture;
+
+      // Color configuration - white/gray fog with low opacity
+      fogWallParticleSystem.color1 = new Color4(0.9, 0.9, 0.9, 0.15);
+      fogWallParticleSystem.color2 = new Color4(0.95, 0.95, 0.95, 0.2);
+      fogWallParticleSystem.colorDead = new Color4(0.85, 0.85, 0.85, 0.1);
+
+      // Size configuration - larger particles for wall effect
+      fogWallParticleSystem.minSize = 5;
+      fogWallParticleSystem.maxSize = 8;
+
+      // Lifetime - persistent fog
+      fogWallParticleSystem.minLifeTime = Number.MAX_SAFE_INTEGER;
+      fogWallParticleSystem.maxLifeTime = Number.MAX_SAFE_INTEGER;
+
+      // Emit configuration
+      fogWallParticleSystem.manualEmitCount = fogWallParticleSystem.getCapacity();
+
+      // Minimal movement - particles should mostly stay in place
+      fogWallParticleSystem.gravity = new Vector3(0, 0, 0);
+      fogWallParticleSystem.direction1 = new Vector3(0, 0, 0);
+      fogWallParticleSystem.direction2 = new Vector3(0, 0, 0);
+      fogWallParticleSystem.minAngularSpeed = 0;
+      fogWallParticleSystem.maxAngularSpeed = 0;
+      fogWallParticleSystem.minEmitPower = 0;
+      fogWallParticleSystem.maxEmitPower = 0;
+      fogWallParticleSystem.updateSpeed = 0;
+
+      // Blend mode for atmospheric effect
+      fogWallParticleSystem.blendMode = ParticleSystem.BLENDMODE_STANDARD;
+
+      // Start the fog wall
+      fogWallParticleSystem.start();
 
       // Load the model
       (async () => {
