@@ -30,6 +30,14 @@ import IraqMarshesLayout from "../layouts/IraqMarshes/IraqMarshesLayout.astro";
       camera.upperRadiusLimit = 100;
       camera.attachControl(canvas, true);
 
+      // Enable auto-rotation until user interacts
+      camera.useAutoRotationBehavior = true;
+      if (camera.autoRotationBehavior) {
+        camera.autoRotationBehavior.idleRotationSpeed = 0.05;
+        camera.autoRotationBehavior.idleRotationWaitTime = 1000;
+        camera.autoRotationBehavior.zoomStopsAnimation = true;
+      }
+
       const hemiLight = new HemisphericLight(
         'hemiLight',
         new Vector3(0, 0, 0),
