@@ -21,12 +21,12 @@ import IraqMarshesLayout from "../layouts/IraqMarshes/IraqMarshesLayout.astro";
       // Create ArcRotateCamera
       const camera = new ArcRotateCamera(
         'camera',
-        Math.PI / 1.1, Math.PI / 2.5, 90, Vector3.Zero(),
+        Math.PI / 1.1, Math.PI / 2.8, 90, Vector3.Zero(),
         scene
       );
       camera.lowerBetaLimit = Math.PI / 6;
-      camera.upperBetaLimit = Math.PI / 2.2;
-      camera.lowerRadiusLimit = 80;
+      camera.upperBetaLimit = Math.PI / 2.4;
+      camera.lowerRadiusLimit = 60;
       camera.upperRadiusLimit = 90;
       camera.attachControl(canvas, true);
 
@@ -64,8 +64,8 @@ import IraqMarshesLayout from "../layouts/IraqMarshes/IraqMarshesLayout.astro";
       fogWallParticleSystem.colorDead = new Color4(0.85, 0.85, 0.85, 0.1);
 
       // Size configuration - larger particles for wall effect
-      fogWallParticleSystem.minSize = 5;
-      fogWallParticleSystem.maxSize = 8;
+      fogWallParticleSystem.minSize = 10;
+      fogWallParticleSystem.maxSize = 8 * 4;
 
       // Lifetime - persistent fog
       fogWallParticleSystem.minLifeTime = Number.MAX_SAFE_INTEGER;
