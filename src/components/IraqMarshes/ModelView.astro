@@ -2,19 +2,24 @@
 export interface Props {
   caption: string;
   embedUrl: string;
+  description?: string;
   frameTitle?: string;
   modelId?: string;
 }
 
-const { caption, embedUrl, frameTitle = "", modelId = `${Math.random()}` } = Astro.props;
+const { caption, embedUrl, description = "", frameTitle = "", modelId = `${Math.random()}` } = Astro.props;
 
 const url = `${embedUrl}?transparent=1`;
 ---
 
 <div id={modelId}>
-  <div class="sketchfab-embed-wrapper flex flex-col items-center">
+  <div class="px-4 mb-4">
+    <h3 class="text-xl md:text-2xl text-center my-2">{caption}</h3>
+    {description && <p class="text-sm md:text-base text-center text-gray-700 max-w-3xl mx-auto">{description}</p>}
+  </div>
+  <div class="sketchfab-embed-wrapper flex flex-col items-center w-full">
     <iframe
-      class="w-[250px] sm:w-[400px] sm:h-[300px] md:w-[500px] md:h-[375px] lg:w-[800px] lg:h-[600px]"
+      class="w-full h-screen"
       title={frameTitle}
       frameborder="0"
       allowfullscreen
@@ -27,5 +32,4 @@ const url = `${embedUrl}?transparent=1`;
       web-share
       src={url}></iframe>
   </div>
-  <h3 class="my-2 italic text-center">{caption}</h3>
 </div>
