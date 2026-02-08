@@ -8,16 +8,8 @@ import IraqMarshesLayout from "../../layouts/IraqMarshes/IraqMarshesLayout.astro
       <h2 class="text-2xl md:text-3xl text-center my-8">Gallery</h2>
     </div>
     <div>
-      <h3 class="text-xl md:text-2xl text-center my-6">Before and After</h3>
-    </div>
-    <div class="flex flex-col items-center mb-8">
-      <img-comparison-slider class="w-full max-w-5xl">
-      <img class="w-full" slot="first" src="https://res.cloudinary.com/dj08db9y2/image/upload/f_auto,q_auto/v1/iraq-marshes/gallery/duhkjfzmbwhynuk3t6es" />
-      <img class="w-full" slot="second" src="https://res.cloudinary.com/dj08db9y2/image/upload/f_auto,q_auto/v1/iraq-marshes/gallery/rwkqynwp5z45bn1vtukv" />
-      </img-comparison-slider>
-    </div>
-    <div>
       <h3 class="text-xl md:text-2xl text-center my-6">Biodiversity</h3>
+      <p class="text-sm md:text-base text-center text-gray-700 mb-6 max-w-3xl mx-auto">The Iraqi Marshes are home to a rich diversity of wildlife, including migratory birds, waterfowl, and endemic species that depend on this unique wetland ecosystem.</p>
     </div>
     <div class="swiper biodiversity-carousel w-full max-w-5xl mx-auto">
       <div class="swiper-wrapper">
@@ -108,6 +100,16 @@ import IraqMarshesLayout from "../../layouts/IraqMarshes/IraqMarshesLayout.astro
       <div class="swiper-button-next"></div>
       <div class="swiper-button-prev"></div>
       <div class="swiper-pagination"></div>
+    </div>
+    <div>
+      <h3 class="text-xl md:text-2xl text-center my-6">Before and After</h3>
+      <p class="text-sm md:text-base text-center text-gray-700 mb-6 max-w-3xl mx-auto">Severe drought and water management challenges have dramatically transformed the marshes. Drag the slider to compare the landscape before and after the drought.</p>
+    </div>
+    <div class="flex flex-col items-center mb-8">
+      <img-comparison-slider class="w-full max-w-5xl">
+      <img class="w-full" slot="first" src="https://res.cloudinary.com/dj08db9y2/image/upload/f_auto,q_auto/v1/iraq-marshes/gallery/duhkjfzmbwhynuk3t6es" />
+      <img class="w-full" slot="second" src="https://res.cloudinary.com/dj08db9y2/image/upload/f_auto,q_auto/v1/iraq-marshes/gallery/rwkqynwp5z45bn1vtukv" />
+      </img-comparison-slider>
     </div>
   </div>
   <style>
