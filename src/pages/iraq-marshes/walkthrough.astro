@@ -3,12 +3,14 @@ import IraqMarshesLayout from "../../layouts/IraqMarshes/IraqMarshesLayout.astro
 ---
 
 <IraqMarshesLayout>
-  <div class="flex flex-col w-full mb-8">
-    <div>
-      <h2 class="text-2xl md:text-3xl text-center my-8">Virtual Walkthrough</h2>
-    </div>
-
-    <div class="flex flex-col items-center">
+  <div class="px-4 py-6">
+    <h2 class="text-2xl md:text-3xl text-center mb-3">Virtual Walkthrough</h2>
+    <p class="text-sm md:text-base text-center text-gray-700 max-w-3xl mx-auto">
+      Explore the Iraqi Marshes through this immersive 360° virtual tour. Navigate through different locations using hotspots and experience the unique landscape and biodiversity of this UNESCO World Heritage site.
+    </p>
+  </div>
+  <div class="flex flex-col w-full h-screen mb-16">
+    <div class="flex flex-col items-center flex-1">
       <iframe
         class="panorama"
         src="https://www.theasys.io/viewer/J1M7OJuFfVTctPA961Z3pD6kfwBvQV"
@@ -19,46 +21,10 @@ import IraqMarshesLayout from "../../layouts/IraqMarshes/IraqMarshesLayout.astro
         style="border:none;"></iframe>
     </div>
   </div>
-
   <style>
     .panorama {
-      width: 300px;
-      height: 225px;
-    }
-
-    @media (min-width: 420px) {
-      .panorama {
-        width: 400px;
-        height: 300px;
-      }
-    }
-
-    @media (min-width: 640px) {
-      .panorama {
-        width: 600px;
-        height: 450px;
-      }
-    }
-
-    @media (min-width: 768px) {
-      .panorama {
-        width: 700px;
-        height: 525px;
-      }
-    }
-
-    @media (min-width: 1024px) {
-      .panorama {
-        width: 800px;
-        height: 600px;
-      }
-    }
-
-    @media (min-width: 1280px) {
-      .panorama {
-        width: 1000px;
-        height: 750px;
-      }
+      width: 100vw;
+      height: 100vh;
     }
   </style>
 </IraqMarshesLayout>
