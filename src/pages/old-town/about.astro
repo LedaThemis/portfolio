@@ -3,15 +3,111 @@ import OldTownLayout from "../../layouts/OldTown/OldTownLayout.astro";
 ---
 
 <OldTownLayout>
-  <div class="flex flex-col w-full">
+  <div class="flex flex-col w-full max-w-4xl mx-auto px-4 mb-16">
     <div>
-      <h2 class="text-3xl text-center my-8">About</h2>
+      <h2 class="text-3xl text-center my-8">About the Project</h2>
     </div>
-  </div>
-  <div>
-    <p>
-      We're a team of students from the University of Mosul located in Iraq,
-      Nineveh.
-    </p>
+    
+    <div class="space-y-6 text-lg leading-relaxed">
+      <p>
+        The Old City of Mosul, located on the right coast of the Tigris River, represents one of the most historically significant urban centers in Iraq. For centuries, this ancient quarter was home to iconic landmarks, bustling markets, and diverse communities living in centuries-old buildings that told the story of Mesopotamian civilization.
+      </p>
+
+      <p>
+        Our mission is to digitally preserve the Old City of Mosul by documenting the destroyed buildings and architectural heritage that fell victim to conflict. Through advanced photogrammetry, 3D modeling, and digital reconstruction, we are creating a permanent record of the after-effects of war, ensuring that future generations can witness what was lost and understand the importance of protecting cultural heritage in times of conflict.
+      </p>
+
+      <p>
+        This project is led by a dedicated team of students from the University of Mosul located in Nineveh, Iraq, working alongside international heritage preservation specialists to create detailed digital records of these invaluable historical sites before, during, and after their destruction.
+      </p>
+
+      <div class="mt-8 pt-6 border-t border-gray-300">
+        <h3 class="text-2xl font-semibold mb-4 text-center">Team Members</h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
+          <div class="flex flex-col items-center text-center">
+            <div class="w-40 h-40 mb-4 rounded-full overflow-hidden bg-gray-200">
+              <img 
+                src="https://res.cloudinary.com/dj08db9y2/image/upload/v1770583902/old-town/about/jfniokujcunht6rcpqxh.jpg" 
+                alt="Adil Al Qaba" 
+                class="w-full h-full object-cover"
+              />
+            </div>
+            <h4 class="text-xl font-semibold mb-1">Adil Al Qaba</h4>
+            <p class="text-gray-600">Software Engineer</p>
+          </div>
+
+          <div class="flex flex-col items-center text-center">
+            <div class="w-40 h-40 mb-4 rounded-full overflow-hidden bg-gray-200">
+              <img 
+                src="https://res.cloudinary.com/dj08db9y2/image/upload/v1770583902/old-town/about/syhn26jowkkomi6rzk54.jpg" 
+                alt="Ameer Sadam" 
+                class="w-full h-full object-cover"
+              />
+            </div>
+            <h4 class="text-xl font-semibold mb-1">Ameer Sadam</h4>
+            <p class="text-gray-600">Photogrammetry</p>
+          </div>
+
+          <div class="flex flex-col items-center text-center">
+            <div class="w-40 h-40 mb-4 rounded-full overflow-hidden bg-gray-200">
+              <img 
+                src="https://res.cloudinary.com/dj08db9y2/image/upload/v1770583902/old-town/about/qxb7kf4tw5nwagufvkgx.jpg" 
+                alt="Mohammed Ibrahim" 
+                class="w-full h-full object-cover"
+              />
+            </div>
+            <h4 class="text-xl font-semibold mb-1">Mohammed Ibrahim</h4>
+            <p class="text-gray-600">Design</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-8 pt-6 border-t border-gray-300">
+        <h3 class="text-2xl font-semibold mb-4">Partner Organizations</h3>
+        
+        <div class="space-y-4">
+          <div>
+            <h4 class="text-xl font-medium mb-2">
+              <a href="https://pih.education" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:text-blue-800 underline">
+                PIH Education
+              </a>
+            </h4>
+            <p>
+              Project Innovation Hub (PIH) is a DAAD-funded online collaborative learning platform that enables students from MENA (Middle East and North Africa) crisis regions to participate in higher education and research in Germany. The platform focuses on digitalization of cultural heritage, using cutting-edge technologies like photogrammetry, laser-scanning, and 3D-modeling to preserve endangered heritage sites.
+            </p>
+          </div>
+
+          <div>
+            <h4 class="text-xl font-medium mb-2">
+              <a href="https://heritage.alqaba.com" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:text-blue-800 underline">
+                Heritage Iraq
+              </a>
+            </h4>
+            <p>
+              A comprehensive platform focused on preserving and showcasing Iraq's diverse heritage sites through digital documentation and interactive experiences.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-8 pt-6 border-t border-gray-300">
+        <h3 class="text-2xl font-semibold mb-4">Why This Heritage Matters</h3>
+        <ul class="list-disc list-inside space-y-2">
+          <li>Documents the devastating impact of war on cultural heritage and civilian areas</li>
+          <li>Preserves the memory of historic Mosul before its destruction</li>
+          <li>Provides a digital archive for reconstruction and urban planning efforts</li>
+          <li>Serves as evidence for heritage loss and a tool for post-conflict recovery</li>
+          <li>Educates future generations about the importance of protecting cultural sites during conflict</li>
+          <li>Honors the resilience of Mosul's communities and their determination to rebuild</li>
+        </ul>
+      </div>
+
+      <div class="mt-8 pt-6 border-t border-gray-300">
+        <h3 class="text-2xl font-semibold mb-4">Project Scope</h3>
+        <p>
+          The digitalization project focuses on the Old City of Mosul's right coast, documenting destroyed buildings, streets, and landmarks through photogrammetry and 3D reconstruction. By capturing the after-effects of war, we create a comprehensive digital record that serves both as a memorial to what was lost and as a resource for future reconstruction efforts. This work ensures that the architectural and cultural legacy of Old Mosul is not forgotten.
+        </p>
+      </div>
+    </div>
   </div>
 </OldTownLayout>
