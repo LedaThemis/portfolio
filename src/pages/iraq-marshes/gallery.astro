@@ -1,5 +1,4 @@
 ---
-import ModelView from "../../components/IraqMarshes/ModelView.astro";
 import IraqMarshesLayout from "../../layouts/IraqMarshes/IraqMarshesLayout.astro";
 ---
 
@@ -13,59 +12,141 @@ import IraqMarshesLayout from "../../layouts/IraqMarshes/IraqMarshesLayout.astro
     </div>
     <div class="flex flex-col items-center mb-8">
       <img-comparison-slider class="w-full max-w-5xl">
-      <img class="w-full" slot="first" src="/assets/iraq-marshes/IMG-20251122-WA0131.jpg" />
-      <img class="w-full" slot="second" src="/assets/iraq-marshes/33ceec44e3fd3aa00e3104cbcf38d297.jpg" />
+      <img class="w-full" slot="first" src="https://res.cloudinary.com/dj08db9y2/image/upload/f_auto,q_auto/v1/iraq-marshes/gallery/duhkjfzmbwhynuk3t6es" />
+      <img class="w-full" slot="second" src="https://res.cloudinary.com/dj08db9y2/image/upload/f_auto,q_auto/v1/iraq-marshes/gallery/rwkqynwp5z45bn1vtukv" />
       </img-comparison-slider>
     </div>
     <div>
       <h3 class="text-xl md:text-2xl text-center my-6">Biodiversity</h3>
     </div>
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
-      <div class="overflow-hidden rounded-lg">
-        <img class="h-auto w-full object-cover" src="https://res.cloudinary.com/dj08db9y2/image/upload/f_auto,q_auto/v1/iraq-marshes/gallery/u440dypcbljwjf3ffmem" alt="">
-      </div>
-      <div class="overflow-hidden rounded-lg">
-        <img class="h-auto w-full object-cover" src="https://res.cloudinary.com/dj08db9y2/image/upload/f_auto,q_auto/v1/iraq-marshes/gallery/i6mq2pftlrie1xynyxga" alt="">
-      </div>
-      <div class="overflow-hidden rounded-lg">
-        <img class="h-auto w-full object-cover" src="https://res.cloudinary.com/dj08db9y2/image/upload/f_auto,q_auto/v1/iraq-marshes/gallery/fclunmf2ayavoc3nwrwj" alt="">
-      </div>
-      <div class="overflow-hidden rounded-lg">
-        <img class="h-auto w-full object-cover" src="https://res.cloudinary.com/dj08db9y2/image/upload/f_auto,q_auto/v1/iraq-marshes/gallery/gp5fovglzb0zlvzaxgzg" alt="">
-      </div>
-      <div class="overflow-hidden rounded-lg">
-        <img class="h-auto w-full object-cover" src="/assets/iraq-marshes/IMG-20251122-WA0104.jpg" alt="Eurasian Coot">
-        <p class="text-lg md:text-2xl text-center mt-2">Eurasian Coot</p>
-      </div>
-      <div class="overflow-hidden rounded-lg">
-        <img class="h-auto w-full object-cover" src="/assets/iraq-marshes/IMG-20251122-WA0105.jpg" alt="Mallard">
-        <p class="text-lg md:text-2xl text-center mt-2">Mallard (M & F)</p>
-      </div>
-      <div class="overflow-hidden rounded-lg">
-        <div class="flex items-center w-full gap-2 md:gap-4">
-          <img class="h-auto w-1/2 object-cover" src="/assets/iraq-marshes/1000259823.webp" alt="Water Buffalo">
-          <img class="h-auto w-1/2 object-cover" src="/assets/iraq-marshes/1000259825.webp" alt="Water Buffalo">
+    <div class="swiper biodiversity-carousel w-full max-w-5xl mx-auto">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide flex flex-col items-center justify-center">
+          <div class="overflow-hidden rounded-lg w-full relative">
+            <img class="h-[300px] sm:h-[400px] md:h-[500px] w-full object-contain object-center" src="https://res.cloudinary.com/dj08db9y2/image/upload/f_auto,q_auto/v1/iraq-marshes/gallery/chlxkvfc6u6vyfghmvco" alt="Eurasian Coot">
+            <div class="absolute top-0 left-0 text-white px-2 py-1 sm:px-4 sm:py-2 bg-black bg-opacity-60 max-w-[80%]">
+              <p class="text-base sm:text-lg md:text-xl font-semibold">Eurasian Coot</p>
+              <p class="text-xs sm:text-sm md:text-base mt-1">A water bird with distinctive white frontal shield</p>
+            </div>
+          </div>
         </div>
-        <p class="text-lg md:text-2xl text-center mt-2">Water Buffalo</p>
+        <div class="swiper-slide flex flex-col items-center justify-center">
+          <div class="overflow-hidden rounded-lg w-full relative">
+            <img class="h-[300px] sm:h-[400px] md:h-[500px] w-full object-contain object-center" src="https://res.cloudinary.com/dj08db9y2/image/upload/f_auto,q_auto/v1/iraq-marshes/gallery/uinxvxdulunognbt2i3z" alt="Mallard">
+            <div class="absolute top-0 left-0 text-white px-2 py-1 sm:px-4 sm:py-2 bg-black bg-opacity-60 max-w-[80%]">
+              <p class="text-base sm:text-lg md:text-xl font-semibold">Mallard (M & F)</p>
+              <p class="text-xs sm:text-sm md:text-base mt-1">Common dabbling duck species found in wetlands</p>
+            </div>
+          </div>
+        </div>
+        <div class="swiper-slide flex flex-col items-center justify-center">
+          <div class="overflow-hidden rounded-lg w-full relative">
+            <img class="h-[300px] sm:h-[400px] md:h-[500px] w-full object-contain object-center" src="https://res.cloudinary.com/dj08db9y2/image/upload/f_auto,q_auto/v1/iraq-marshes/gallery/royl6ghh5uxzdcl7ezwc" alt="Water Buffalo">
+            <div class="absolute top-0 left-0 text-white px-2 py-1 sm:px-4 sm:py-2 bg-black bg-opacity-60 max-w-[80%]">
+              <p class="text-base sm:text-lg md:text-xl font-semibold">Water Buffalo</p>
+              <p class="text-xs sm:text-sm md:text-base mt-1">Large domesticated bovid integral to marsh life</p>
+            </div>
+          </div>
+        </div>
+        <div class="swiper-slide flex flex-col items-center justify-center">
+          <div class="overflow-hidden rounded-lg w-full relative">
+            <img class="h-[300px] sm:h-[400px] md:h-[500px] w-full object-contain object-center" src="https://res.cloudinary.com/dj08db9y2/image/upload/f_auto,q_auto/v1/iraq-marshes/gallery/vmtffuj3ha8fz0qgxqim" alt="Black Francolin">
+            <div class="absolute top-0 left-0 text-white px-2 py-1 sm:px-4 sm:py-2 bg-black bg-opacity-60 max-w-[80%]">
+              <p class="text-base sm:text-lg md:text-xl font-semibold">Black Francolin</p>
+              <p class="text-xs sm:text-sm md:text-base mt-1">Game bird species inhabiting marsh edges</p>
+            </div>
+          </div>
+        </div>
+        <div class="swiper-slide flex flex-col items-center justify-center">
+          <div class="overflow-hidden rounded-lg w-full relative">
+            <img class="h-[300px] sm:h-[400px] md:h-[500px] w-full object-contain object-center" src="https://res.cloudinary.com/dj08db9y2/image/upload/f_auto,q_auto/v1/iraq-marshes/gallery/abgqdfsavnahf4wmetgs" alt="Wigeon">
+            <div class="absolute top-0 left-0 text-white px-2 py-1 sm:px-4 sm:py-2 bg-black bg-opacity-60 max-w-[80%]">
+              <p class="text-base sm:text-lg md:text-xl font-semibold">Wigeon</p>
+              <p class="text-xs sm:text-sm md:text-base mt-1">Migratory duck species wintering in the marshes</p>
+            </div>
+          </div>
+        </div>
+        <div class="swiper-slide flex flex-col items-center justify-center">
+          <div class="overflow-hidden rounded-lg w-full relative">
+            <img class="h-[300px] sm:h-[400px] md:h-[500px] w-full object-contain object-center" src="https://res.cloudinary.com/dj08db9y2/image/upload/f_auto,q_auto/v1/iraq-marshes/gallery/ajx5dubnlycy5peuyy2f" alt="Water Hen">
+            <div class="absolute top-0 left-0 text-white px-2 py-1 sm:px-4 sm:py-2 bg-black bg-opacity-60 max-w-[80%]">
+              <p class="text-base sm:text-lg md:text-xl font-semibold">Water Hen</p>
+              <p class="text-xs sm:text-sm md:text-base mt-1">Common moorhen found in marsh vegetation</p>
+            </div>
+          </div>
+        </div>
+        <div class="swiper-slide flex flex-col items-center justify-center">
+          <div class="overflow-hidden rounded-lg w-full relative">
+            <img class="h-[300px] sm:h-[400px] md:h-[500px] w-full object-contain object-center" src="https://res.cloudinary.com/dj08db9y2/image/upload/f_auto,q_auto/v1/iraq-marshes/gallery/vmtffuj3ha8fz0qgxqim" alt="Northern Pintail">
+            <div class="absolute top-0 left-0 text-white px-2 py-1 sm:px-4 sm:py-2 bg-black bg-opacity-60 max-w-[80%]">
+              <p class="text-base sm:text-lg md:text-xl font-semibold">Northern Pintail</p>
+              <p class="text-xs sm:text-sm md:text-base mt-1">Elegant duck with distinctive long tail feathers</p>
+            </div>
+          </div>
+        </div>
+        <div class="swiper-slide flex items-center justify-center">
+          <div class="overflow-hidden rounded-lg w-full">
+            <img class="h-[300px] sm:h-[400px] md:h-[500px] w-full object-contain object-center" src="https://res.cloudinary.com/dj08db9y2/image/upload/f_auto,q_auto/v1/iraq-marshes/gallery/u440dypcbljwjf3ffmem" alt="">
+          </div>
+        </div>
+        <div class="swiper-slide flex items-center justify-center">
+          <div class="overflow-hidden rounded-lg w-full">
+            <img class="h-[300px] sm:h-[400px] md:h-[500px] w-full object-contain object-center" src="https://res.cloudinary.com/dj08db9y2/image/upload/f_auto,q_auto/v1/iraq-marshes/gallery/i6mq2pftlrie1xynyxga" alt="">
+          </div>
+        </div>
+        <div class="swiper-slide flex items-center justify-center">
+          <div class="overflow-hidden rounded-lg w-full">
+            <img class="h-[300px] sm:h-[400px] md:h-[500px] w-full object-contain object-center" src="https://res.cloudinary.com/dj08db9y2/image/upload/f_auto,q_auto/v1/iraq-marshes/gallery/fclunmf2ayavoc3nwrwj" alt="">
+          </div>
+        </div>
+        <div class="swiper-slide flex items-center justify-center">
+          <div class="overflow-hidden rounded-lg w-full">
+            <img class="h-[300px] sm:h-[400px] md:h-[500px] w-full object-contain object-center" src="https://res.cloudinary.com/dj08db9y2/image/upload/f_auto,q_auto/v1/iraq-marshes/gallery/gp5fovglzb0zlvzaxgzg" alt="">
+          </div>
+        </div>
       </div>
-      <div class="overflow-hidden rounded-lg">
-        <img class="h-auto w-full object-cover" src="/assets/iraq-marshes/IMG_20251122_115449_518.jpg" alt="Black Francolin">
-        <p class="text-lg md:text-2xl text-center mt-2">Black Francolin</p>
-      </div>
-      <div class="overflow-hidden rounded-lg">
-        <img class="h-auto w-full object-cover" src="/assets/iraq-marshes/IMG-20251122-WA0120.jpg" alt="Wigeon">
-        <p class="text-lg md:text-2xl text-center mt-2">Wigeon</p>
-      </div>
-      <div class="overflow-hidden rounded-lg">
-        <img class="h-auto w-full object-cover" src="/assets/iraq-marshes/IMG-20251122-WA0118.jpg" alt="Water Hen">
-        <p class="text-lg md:text-2xl text-center mt-2">Water Hen</p>
-      </div>
-      <div class="overflow-hidden rounded-lg">
-        <img class="h-auto w-full object-cover" src="/assets/iraq-marshes/IMG_20251122_112947_451.jpg" alt="Northern Pintail">
-        <p class="text-lg md:text-2xl text-center mt-2">Northern Pintail</p>
-      </div>
+      <div class="swiper-button-next"></div>
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-pagination"></div>
+    </div>
   </div>
+  <style>
+    .biodiversity-carousel {
+      padding: 0 40px;
+    }
+    
+    .biodiversity-carousel .swiper-button-next,
+    .biodiversity-carousel .swiper-button-prev {
+      color: black;
+    }
+    
+    .biodiversity-carousel .swiper-pagination-bullet-active {
+      background: black;
+    }
+    
+    @media (max-width: 640px) {
+      .biodiversity-carousel {
+        padding: 0 30px;
+      }
+      
+      .biodiversity-carousel .swiper-button-next,
+      .biodiversity-carousel .swiper-button-prev {
+        width: 30px;
+        height: 30px;
+      }
+      
+      .biodiversity-carousel .swiper-button-next:after,
+      .biodiversity-carousel .swiper-button-prev:after {
+        font-size: 20px;
+      }
+    }
+  </style>
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+  />
   <script
+  is:inline
   defer
   src="https://cdn.jsdelivr.net/npm/img-comparison-slider@8/dist/index.js"
   ></script>
@@ -73,4 +154,37 @@ import IraqMarshesLayout from "../../layouts/IraqMarshes/IraqMarshesLayout.astro
     rel="stylesheet"
     href="https://cdn.jsdelivr.net/npm/img-comparison-slider@8/dist/styles.css"
   />
+  <script is:inline src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script is:inline>
+    document.addEventListener('DOMContentLoaded', function() {
+      new Swiper('.biodiversity-carousel', {
+        slidesPerView: 1,
+        spaceBetween: 20,
+        loop: true,
+        autoplay: {
+          delay: 3000,
+          disableOnInteraction: true,
+          pauseOnMouseEnter: true,
+        },
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+        },
+        pagination: {
+          el: '.swiper-pagination',
+          clickable: true,
+        },
+        breakpoints: {
+          640: {
+            slidesPerView: 1,
+            spaceBetween: 20,
+          },
+          1024: {
+            slidesPerView: 1,
+            spaceBetween: 24,
+          },
+        },
+      });
+    });
+  </script>
 </IraqMarshesLayout>
