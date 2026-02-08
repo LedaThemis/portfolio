@@ -3,15 +3,112 @@ import TahiraLayout from "../../layouts/Tahira/TahiraLayout.astro";
 ---
 
 <TahiraLayout>
-  <div class="flex flex-col w-full">
+  <div class="flex flex-col w-full max-w-4xl mx-auto px-4 mb-16">
     <div>
-      <h2 class="text-3xl text-center my-8">About</h2>
+      <h2 class="text-3xl text-center my-8">About the Project</h2>
     </div>
-  </div>
-  <div>
-    <p>
-      We're a team of students from the University of Mosul located in Iraq,
-      Nineveh.
-    </p>
+    
+    <div class="space-y-6 text-lg leading-relaxed">
+      <p>
+        Hosh Al-Bay'ah is a historic Christian compound in Mosul, Iraq, home to the renowned Al-Tahira Churches. The name "Hosh" means courtyard or compound in Arabic, while "Al-Bay'ah" refers to the church. This sacred complex has served as a spiritual and cultural center for Mosul's Christian community for over 150 years, housing the Al-Tahira Orthodox Church (1895 CE), the Al-Tahira Catholic Church (1862 CE), and the historic Tahdhib School. The name "Al-Tahira," meaning "The Pure," honors the Virgin Mary and represents the enduring Christian heritage of Nineveh.
+      </p>
+
+      <p>
+        Our mission is to digitally preserve the Al-Tahira Orthodox Church (established 1895 CE) and the Al-Tahira Catholic Church (established 1862 CE) through advanced photogrammetry, 3D modeling, and virtual reality technologies. These historic churches in Mosul have witnessed centuries of history and survived numerous challenges, making their documentation crucial for future generations.
+      </p>
+
+      <p>
+        This project is led by a dedicated team of students from the University of Mosul located in Nineveh, Iraq, working alongside international heritage preservation specialists to create detailed digital records of these invaluable cultural landmarks.
+      </p>
+
+
+      <div class="mt-8 pt-6 border-t border-gray-300">
+        <h3 class="text-2xl font-semibold mb-4 text-center">Team Members</h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
+          <div class="flex flex-col items-center text-center">
+            <div class="w-40 h-40 mb-4 rounded-full overflow-hidden bg-gray-200">
+              <img 
+                src="https://res.cloudinary.com/dj08db9y2/image/upload/v1770583902/al-tahira/about/nuzdnv3vabj6qyhhqrdn.jpg" 
+                alt="Adil Al Qaba" 
+                class="w-full h-full object-cover"
+              />
+            </div>
+            <h4 class="text-xl font-semibold mb-1">Adil Al Qaba</h4>
+            <p class="text-gray-600">Software Engineer</p>
+          </div>
+
+          <div class="flex flex-col items-center text-center">
+            <div class="w-40 h-40 mb-4 rounded-full overflow-hidden bg-gray-200">
+              <img 
+                src="https://res.cloudinary.com/dj08db9y2/image/upload/v1770583902/al-tahira/about/bac6boodxusgbgkdp94i.jpg" 
+                alt="Hussein Yaseen" 
+                class="w-full h-full object-cover"
+              />
+            </div>
+            <h4 class="text-xl font-semibold mb-1">Hussein Yaseen</h4>
+            <p class="text-gray-600">3D Heritage Technician</p>
+          </div>
+
+          <div class="flex flex-col items-center text-center">
+            <div class="w-40 h-40 mb-4 rounded-full overflow-hidden bg-gray-200">
+              <img 
+                src="https://res.cloudinary.com/dj08db9y2/image/upload/v1770583902/al-tahira/about/gzdbnql1nqdksocl1mmk.jpg" 
+                alt="Somaya Al Saffar" 
+                class="w-full h-full object-cover"
+              />
+            </div>
+            <h4 class="text-xl font-semibold mb-1">Somaya Al Saffar</h4>
+            <p class="text-gray-600">Archaeology Student</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-8 pt-6 border-t border-gray-300">
+        <h3 class="text-2xl font-semibold mb-4">Partner Organizations</h3>
+        
+        <div class="space-y-4">
+          <div>
+            <h4 class="text-xl font-medium mb-2">
+              <a href="https://pih.education" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:text-blue-800 underline">
+                PIH Education
+              </a>
+            </h4>
+            <p>
+              Project Innovation Hub (PIH) is a DAAD-funded online collaborative learning platform that enables students from MENA (Middle East and North Africa) crisis regions to participate in higher education and research in Germany. The platform focuses on digitalization of cultural heritage, using cutting-edge technologies like photogrammetry, laser-scanning, and 3D-modeling to preserve endangered heritage sites.
+            </p>
+          </div>
+
+          <div>
+            <h4 class="text-xl font-medium mb-2">
+              <a href="https://heritage.alqaba.com" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:text-blue-800 underline">
+                Heritage Iraq
+              </a>
+            </h4>
+            <p>
+              A comprehensive platform focused on preserving and showcasing Iraq's diverse heritage sites through digital documentation and interactive experiences.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-8 pt-6 border-t border-gray-300">
+        <h3 class="text-2xl font-semibold mb-4">Why This Heritage Matters</h3>
+        <ul class="list-disc list-inside space-y-2">
+          <li>Represents Iraq's rich Christian heritage and religious diversity</li>
+          <li>Architectural masterpieces showcasing 19th-century ecclesiastical design</li>
+          <li>Survived decades of conflict and displacement in the Nineveh region</li>
+          <li>Part of Mosul's cultural identity and interfaith history</li>
+          <li>Houses significant religious artifacts, artwork, and architectural details</li>
+          <li>Serves as a testament to the resilience of Iraq's diverse communities</li>
+        </ul>
+      </div>
+
+      <div class="mt-8 pt-6 border-t border-gray-300">
+        <h3 class="text-2xl font-semibold mb-4">Project Scope</h3>
+        <p>
+          The digitalization project encompasses the Al-Tahira Orthodox Church, the Al-Tahira Catholic Church, and associated structures including the historic Tahdhib School. Through high-resolution 3D scanning and photogrammetry, we are creating detailed virtual models that capture the intricate architectural details, religious artwork, and spatial relationships of these sacred spaces.
+        </p>
+      </div>
+    </div>
   </div>
 </TahiraLayout>
