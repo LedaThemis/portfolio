@@ -506,18 +506,18 @@ import IraqMarshesLayout from "../../layouts/IraqMarshes/IraqMarshesLayout.astro
     }
 
     // Add fish as water level increases (1 fish per 100 liters)
-    const fishToAdd = Math.floor(count / 100) - lastFishCount;
+    const fishToAdd = Math.min(Math.floor(count / 100), 10) - lastFishCount;
     for (let i = 0; i < fishToAdd; i++) {
       setTimeout(() => addFish(), i * 500);
     }
-    lastFishCount = Math.floor(count / 100);
+    lastFishCount = Math.min(Math.floor(count / 100), 10);
 
-    // Add reeds as water level increases (1 reed per 5 liters)
-    const reedsToAdd = Math.floor(count / 50) - lastReedCount;
+    // Add reeds as water level increases (1 reed per 50 liters)
+    const reedsToAdd = Math.min(Math.floor(count / 50), 25) - lastReedCount;
     for (let i = 0; i < reedsToAdd; i++) {
       setTimeout(() => addReed(), i * 300);
     }
-    lastReedCount = Math.floor(count / 5);
+    lastReedCount = Math.min(Math.floor(count / 50), 25);
     
     // Update milestones
     updateMilestones(count);
