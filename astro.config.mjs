@@ -5,6 +5,6 @@ import mdx from "@astrojs/mdx";
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://www.leda.dev",
+  site: "https://www.alqaba.com",
   integrations: [tailwind(), sitemap(), mdx()],
 });
