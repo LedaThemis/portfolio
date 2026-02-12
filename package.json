@@ -13,31 +13,31 @@
     "readme": "node updatePreviewScreenshot.js"
   },
   "dependencies": {
-    "@astrojs/mdx": "^0.11.6",
-    "@astrojs/sitemap": "^1.0.0",
-    "@astrojs/tailwind": "^2.1.2",
-    "@babylonjs/core": "^8.49.6",
-    "@babylonjs/loaders": "^8.49.6",
-    "@cloudinary/url-gen": "^1.8.6",
-    "@fontsource/nunito-sans": "^4.5.10",
-    "@fontsource/roboto": "^4.5.8",
-    "@supabase/supabase-js": "^2.84.0",
-    "astro": "^1.6.9",
+    "@astrojs/mdx": "^4.3.13",
+    "@astrojs/sitemap": "^3.7.0",
+    "@babylonjs/core": "^8.50.5",
+    "@babylonjs/loaders": "^8.50.5",
+    "@cloudinary/url-gen": "^1.22.0",
+    "@fontsource/nunito-sans": "^5.2.7",
+    "@fontsource/roboto": "^5.2.9",
+    "@supabase/supabase-js": "^2.95.3",
+    "@tailwindcss/vite": "^4.1.18",
+    "astro": "^5.17.1",
     "headbreaker": "^3.0.0",
-    "simple-icons": "^7.19.0",
-    "tailwindcss": "^3.2.4",
-    "three": "^0.171.0"
+    "simple-icons": "^16.8.0",
+    "tailwindcss": "^4.1.18",
+    "three": "^0.182.0"
   },
   "devDependencies": {
-    "@axe-core/playwright": "^4.5.2",
-    "@octokit/core": "^4.1.0",
-    "@playwright/test": "^1.28.0",
-    "@tailwindcss/forms": "^0.5.3",
-    "@tailwindcss/typography": "^0.5.8",
-    "capture-website": "^4.2.0",
-    "dotenv": "^16.0.3",
-    "prettier": "^2.7.1",
-    "prettier-plugin-astro": "^0.7.0"
+    "@axe-core/playwright": "^4.11.1",
+    "@octokit/core": "^7.0.6",
+    "@playwright/test": "^1.58.2",
+    "@tailwindcss/forms": "^0.5.11",
+    "@tailwindcss/typography": "^0.5.19",
+    "capture-website": "^5.1.0",
+    "dotenv": "^17.2.4",
+    "prettier": "^3.8.1",
+    "prettier-plugin-astro": "^0.14.1"
   },
   "packageManager": "pnpm@9.15.0+sha512.76e2379760a4328ec4415815bcd6628dee727af3779aaa4c914e3944156c4299921a89f976381ee107d41f12cfa4b66681ca9c718f0668fa0831ed4c6d8ba56c"
 }
