@@ -1,7 +1,7 @@
 name: Update README.md Screenshot
 on:
   push:
-    branches: []
+    branches: [production]
     paths-ignore:
       - "preview.png"
 
