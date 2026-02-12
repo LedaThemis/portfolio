@@ -23,11 +23,11 @@ const { mdxProps, url } = Astro.props;
       height={mdxProps.projectCover.height}
       alt={mdxProps.projectCover.alt}
       optimize={true}
-      class="cursor-pointer group-hover:brightness-[30%] transition-all duration-200 ease-in"
+      class="cursor-pointer group-hover:brightness-30 transition-all duration-200 ease-in"
     />
     <div class="absolute inset-0 grid place-items-center group">
       <div
-        class="flex gap-1 p-2 border-1 rounded-md text-white opacity-0 group-hover:opacity-100 transition-opacity duration-150 ease-in"
+        class="flex gap-1 p-2 border rounded-md text-white opacity-0 group-hover:opacity-100 transition-opacity duration-150 ease-in"
       >
         <a
           href={mdxProps.projectDemo}

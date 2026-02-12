@@ -1,4 +1,6 @@
 ---
+import "../../styles/global.css";
+
 import Footer from "../../components/Tahira/Footer.astro";
 import HoshAlBayaaSVG from "../../components/Tahira/HoshAlBayaaSVG.astro";
 import HoshAlBayaaDarkSVG from "../../components/Tahira/HoshAlBayaaDarkSVG.astro";
@@ -40,10 +42,10 @@ const { showFooter = true } = Astro.props;
       crossorigin="anonymous"
     />
   </head>
-  <body class="min-h-screen flex flex-col p-[var(--padding-main)]">
+  <body class="min-h-screen flex flex-col p-(--padding-main)">
     <nav>
       <div
-        class="flex flex-row gap-4 justify-between items-center h-[var(--navbar-height)]"
+        class="flex flex-row gap-4 justify-between items-center h-(--navbar-height)"
       >
         <div>
           <a href="/al-tahira-church">
@@ -85,9 +87,9 @@ const { showFooter = true } = Astro.props;
           </div>
           <div>
             <div
-              class="navbar-nav justify-content-end flex-grow-1 pe-3 text-white"
+              class="navbar-nav justify-content-end grow pe-3 text-white"
             >
-              <div class="border-t border-[var(--border-main)]"></div>
+              <div class="border-t border-(--border-main)"></div>
               <div
                 class="mt-[30px] md:mt-[40px] flex flex-col lg:grid lg:grid-cols-3"
               >
@@ -134,7 +136,7 @@ const { showFooter = true } = Astro.props;
                   </div>
                 </div>
                 <div
-                  class="border-t my-[30px] md:my-[40px] border-[var(--border-main)] lg:hidden"
+                  class="border-t my-[30px] md:my-[40px] border-(--border-main) lg:hidden"
                 >
                 </div>
                 <div class="flex flex-col gap-10 lg:col-start-3">
