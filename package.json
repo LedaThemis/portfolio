@@ -10,7 +10,8 @@
     "preview": "astro preview",
     "astro": "astro",
     "format": "prettier -w --plugin-search-dir=. .",
-    "readme": "node updatePreviewScreenshot.js"
+    "readme": "node updatePreviewScreenshot.js",
+    "test:e2e": "playwright test"
   },
   "dependencies": {
     "@astrojs/mdx": "^4.3.13",
