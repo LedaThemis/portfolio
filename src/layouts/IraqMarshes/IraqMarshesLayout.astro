@@ -1,7 +1,6 @@
 ---
 import Footer from "../../components/IraqMarshes/Footer.astro";
 
-
 export interface Props {
   showFooter?: boolean;
 }
@@ -24,11 +23,11 @@ const { showFooter = true } = Astro.props;
     <link href="https://fonts.googleapis.com/css2?family=Boldonse&family=Readex+Pro:wght@160..700&display=swap" rel="stylesheet">
   </head>
   <body class="min-h-screen flex flex-col">
-    <nav class="z-10">
+    <nav class="z-10" class:list={['z-10']}>
       <div
         class="px-8 py-4 flex flex-col gap-10 justify-between items-center"
       >
-        <div>
+        <div class="sm:w-fit w-full flex justify-between items-center">
           <h1 class="mt-2 flex gap-4 items-center">
             <img src="/assets/iraq-marshes/iraq-marshes-logo3.png" class="w-16" alt="">
             <div class="flex flex-col gap-1">
@@ -47,28 +46,37 @@ const { showFooter = true } = Astro.props;
               </div>
             </div>
           </h1>
+          <button id="menuToggle" class="sm:hidden p-2 rounded-md hover:bg-black/10 transition-colors" aria-label="Toggle menu">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path class="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+              <path class="close-icon hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+          </button>
         </div>
-        <div class="flex flex-col gap-2 sm:flex-row items-center sm:gap-4">
+        <div id="navMenu" class="nav-menu hidden sm:flex flex-col gap-2 sm:flex-row items-center sm:gap-4 w-full sm:w-auto">
           <div>
-            <a href="/iraq-marshes"> Home</a>
+            <a href="/iraq-marshes" class="nav-link"> Home</a>
           </div>
           <!-- <div>
-            <a href="/iraq-marshes/timeline"> Timeline</a>
+            <a href="/iraq-marshes/timeline" class="nav-link"> Timeline</a>
           </div> -->
           <div>
-            <a href="/iraq-marshes/models"> Models</a>
+            <a href="/iraq-marshes/models" class="nav-link"> Models</a>
           </div>
           <div>
-            <a href="/iraq-marshes/gallery"> Gallery</a>
+            <a href="/iraq-marshes/gallery" class="nav-link"> Gallery</a>
           </div>
           <div>
-            <a href="/iraq-marshes/experiences"> Experiences</a>
+            <a href="/iraq-marshes/experiences" class="nav-link"> Experiences</a>
           </div>
-          <!-- <div>
-            <a href="/iraq-marshes/walkthrough"> Virtual Walkthrough</a>
-          </div> -->
           <div>
-            <a href="/iraq-marshes/about"> About</a>
+            <a href="/iraq-marshes/walkthrough" class="nav-link"> Virtual Walkthrough</a>
+          </div>
+          <div>
+            <a href="/iraq-marshes/preserve-marshes" class="nav-link"> Preserve Marshes</a>
+          </div>
+          <div>
+            <a href="/iraq-marshes/about" class="nav-link"> About</a>
           </div>
         </div>
       </div>
@@ -88,7 +96,93 @@ const { showFooter = true } = Astro.props;
       .primary-font {
         font-family: 'Readex Pro';
       }
+
+      .nav-header {
+        background-color: #872121;
+      }
+
+      .nav-link {
+        transition: all 0.2s ease-in-out;
+        text-decoration: none;
+        font-weight: 500;
+        border: 2px solid transparent;
+        position: relative;
+        display: inline-block;
+      }
+
+      .nav-link::after {
+        content: '';
+        position: absolute;
+        bottom: -0.25rem;
+        left: 50%;
+        width: 0;
+        height: 2px;
+        background-color: currentColor;
+        transition: all 0.2s ease-in-out;
+        transform: translateX(-50%);
+      }
+
+      .nav-link:hover {
+        transform: translateY(-1px);
+      }
+
+      .nav-link:hover::after {
+        width: calc(100%);
+      }
+
+      .nav-link:active {
+        transform: translateY(0);
+      }
+
+      .nav-menu {
+        max-height: 0;
+        opacity: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out, padding 0.3s ease-in-out;
+      }
+
+      @media (min-width: 640px) {
+        .nav-menu {
+          max-height: none;
+          opacity: 1;
+          overflow: visible;
+        }
+      }
+
+      #navMenu.show {
+        display: flex;
+        max-height: 500px;
+        opacity: 1;
+      }
+
+      .close-icon.show {
+        display: block;
+      }
+
+      .menu-icon.hide {
+        display: none;
+      }
+
+      .menu-icon, .close-icon {
+        transition: opacity 0.2s ease-in-out;
+      }
     </style>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const menuToggle = document.getElementById('menuToggle');
+        const navMenu = document.getElementById('navMenu');
+        const menuIcon = document.querySelector('.menu-icon');
+        const closeIcon = document.querySelector('.close-icon');
+
+        if (menuToggle && navMenu && menuIcon && closeIcon) {
+          menuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('show');
+            menuIcon.classList.toggle('hide');
+            closeIcon.classList.toggle('show');
+          });
+        }
+      });
+    </script>
     <script is:inline defer src="/_vercel/insights/script.js"></script>
   </body>
 </html>

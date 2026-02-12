@@ -2,13 +2,139 @@
 import IraqMarshesLayout from "../layouts/IraqMarshes/IraqMarshesLayout.astro";
 ---
 <IraqMarshesLayout showFooter={false}>
-  <div class="grow flex flex-col items-center justify-center">
-    <iframe title="Iraq Marshlands: Ahwar Al-Chibayish" class="w-full h-full grow mt-5 mb-10" frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share src="https://sketchfab.com/models/41da5e81804c49258cdcd21b0d88352f/embed?autospin=0.1&autostart=1&camera=0&transparent=1"> </iframe> 
-  </div>
   <div class="left-0 top-0 absolute w-full h-full">
-      <!-- NEEDLE -->
-      <script type="module" src="https://cdn.leda.dev/portfolio/iraq-marshes/needle/assets/index.js"></script>
-      <needle-engine src="https://cdn.leda.dev/portfolio/iraq-marshes/needle/assets/Home.glb"></needle-engine>
-      <!-- NEEDLE END -->
+    <canvas id="babylonCanvas" class="w-full h-full"></canvas>
   </div>
+
+  <script>
+    import { ImportMeshAsync, Engine, Scene, Color3, Color4, ArcRotateCamera, Vector3, HemisphericLight, DirectionalLight, TransformNode, Quaternion, SSAO2RenderingPipeline, GPUParticleSystem, CylinderParticleEmitter, Texture, ParticleSystem } from '@babylonjs/core';
+    import { registerBuiltInLoaders } from "@babylonjs/loaders/dynamic";
+    
+    registerBuiltInLoaders();
+    const canvas = document.getElementById('babylonCanvas') as HTMLCanvasElement;
+    const engine = new Engine(canvas, true);
+
+    const createScene = () => {
+      const scene = new Scene(engine);
+    scene.clearColor = new Color4(220 / 255, 220 / 255, 220 / 255, 1);
+
+      // Create ArcRotateCamera
+      const camera = new ArcRotateCamera(
+        'camera',
+        Math.PI / 1.1, Math.PI / 2.8, 90, Vector3.Zero(),
+        scene
+      );
+      camera.lowerBetaLimit = Math.PI / 6;
+      camera.upperBetaLimit = Math.PI / 2.4;
+      camera.lowerRadiusLimit = 60;
+      camera.upperRadiusLimit = 90;
+      camera.attachControl(canvas, true);
+
+      // Enable auto-rotation until user interacts
+      camera.useAutoRotationBehavior = true;
+      if (camera.autoRotationBehavior) {
+        camera.autoRotationBehavior.idleRotationSpeed = 0.05;
+        camera.autoRotationBehavior.idleRotationWaitTime = 1000;
+        camera.autoRotationBehavior.zoomStopsAnimation = true;
+      }
+
+      const hemiLight = new HemisphericLight(
+        'hemiLight',
+        new Vector3(0, 0, 0),
+        scene
+      );
+      hemiLight.intensity = 0.75;
+      hemiLight.groundColor = new Color3(1, 1, 1);
+      hemiLight.diffuse = new Color3(1, 1, 1);
+      hemiLight.specular = new Color3(0, 0, 0);
+
+      // Create cylindrical fog wall particle system around the perimeter
+      const fogWallParticleSystem = new GPUParticleSystem("fogWallParticles", { capacity: 5000 }, scene);
+
+      // Use cylinder particle emitter type for cylindrical fog wall
+      fogWallParticleSystem.particleEmitterType = new CylinderParticleEmitter(50, 30, 2.5);
+
+      // Use a simple cloud/smoke texture
+      const fogWallTexture = new Texture("https://cdn.leda.dev/portfolio/iraq-marshes/smoke.png", scene);
+      fogWallParticleSystem.particleTexture = fogWallTexture;
+
+      // Color configuration - white/gray fog with low opacity
+      fogWallParticleSystem.color1 = new Color4(0.9, 0.9, 0.9, 0.15);
+      fogWallParticleSystem.color2 = new Color4(0.95, 0.95, 0.95, 0.2);
+      fogWallParticleSystem.colorDead = new Color4(0.85, 0.85, 0.85, 0.1);
+
+      // Size configuration - larger particles for wall effect
+      fogWallParticleSystem.minSize = 10;
+      fogWallParticleSystem.maxSize = 8 * 4;
+
+      // Lifetime - persistent fog
+      fogWallParticleSystem.minLifeTime = Number.MAX_SAFE_INTEGER;
+      fogWallParticleSystem.maxLifeTime = Number.MAX_SAFE_INTEGER;
+
+      // Emit configuration
+      fogWallParticleSystem.manualEmitCount = fogWallParticleSystem.getCapacity();
+
+      // Minimal movement - particles should mostly stay in place
+      fogWallParticleSystem.gravity = new Vector3(0, 0, 0);
+      fogWallParticleSystem.direction1 = new Vector3(0, 0, 0);
+      fogWallParticleSystem.direction2 = new Vector3(0, 0, 0);
+      fogWallParticleSystem.minAngularSpeed = 0;
+      fogWallParticleSystem.maxAngularSpeed = 0;
+      fogWallParticleSystem.minEmitPower = 0;
+      fogWallParticleSystem.maxEmitPower = 0;
+      fogWallParticleSystem.updateSpeed = 0;
+
+      // Blend mode for atmospheric effect
+      fogWallParticleSystem.blendMode = ParticleSystem.BLENDMODE_STANDARD;
+
+      // Start the fog wall
+      fogWallParticleSystem.start();
+
+      // Load the model
+      (async () => {
+        const droneModel = await ImportMeshAsync(
+          'https://cdn.leda.dev/portfolio/iraq-marshes/drone12.glb',
+          scene,
+        );
+
+        const meshes = droneModel.meshes;
+        const rootMesh = meshes[0];
+        
+        // Create TransformNode to control position and scaling
+        const modelRoot = new TransformNode('modelRoot', scene);
+        
+        // Parent all meshes to the TransformNode
+        meshes.forEach((mesh) => {
+          if (mesh.parent === null) {
+            mesh.parent = modelRoot;
+          }
+        });
+
+
+        if (rootMesh) {
+            // Calculate bounding box to find center
+            const boundingInfo = rootMesh.getHierarchyBoundingVectors();
+            const center = boundingInfo.max.add(boundingInfo.min).scale(0.5);
+
+            // Move model so its center is at origin
+            rootMesh.position.subtractInPlace(center);
+        }
+
+        modelRoot.rotation = new Vector3(-Math.PI/2,Math.PI/2,0);
+        modelRoot.scaling = new Vector3(0.5, 0.5, 0.5);
+      })();
+
+      return scene;
+    };
+
+    const scene = createScene();
+
+    engine.runRenderLoop(() => {
+      scene.render();
+    });
+
+    window.addEventListener('resize', () => {
+      engine.resize();
+    });
+  </script>
 </IraqMarshesLayout>

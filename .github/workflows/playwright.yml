@@ -1,11 +1,11 @@
 name: Playwright Tests
 on:
   push:
-    branches: [main]
+    branches: []
     paths-ignore:
       - "preview.png"
   pull_request:
-    branches: [main]
+    branches: []
     paths-ignore:
       - "preview.png"
 jobs:

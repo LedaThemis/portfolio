@@ -1,0 +1,797 @@
+---
+import FloatingMarshObjects from "../../components/IraqMarshes/FloatingMarshObjects.astro";
+import IraqMarshesLayout from "../../layouts/IraqMarshes/IraqMarshesLayout.astro";
+---
+
+<IraqMarshesLayout>
+  <FloatingMarshObjects />
+  <div class="flex flex-col items-center w-full grow py-4 relative">
+    <!-- Header -->
+    <div class="text-center mb-4 z-10">
+      <h2 class="text-4xl font-bold mb-2">Preserve the Marshes</h2>
+      <p class="text-lg text-gray-700 mb-2">Click anywhere to help preserve Iraq's precious marshlands!</p>
+    </div>
+
+    <!-- Counter Display - Fixed at top -->
+    <div class="text-center mb-4 z-10">
+      <div class="bg-white/90 backdrop-blur rounded-lg shadow-lg px-8 py-6 inline-block">
+        <div class="text-7xl font-bold text-blue-600">
+          <span id="counter">Loading...</span>
+        </div>
+        <div class="text-lg text-gray-600 mt-2">Liters Preserved</div>
+      </div>
+    </div>
+
+    <!-- Milestones Display -->
+    <div class="flex gap-4 mb-4 z-10">
+      <div id="milestone-10" class="milestone-badge bg-white/90 backdrop-blur rounded-lg shadow-lg px-4 py-2 transition-all duration-500" data-threshold="10">
+        <div class="text-center">
+          <div class="text-3xl mb-1">🏅</div>
+          <div class="text-xs text-gray-600">10L</div>
+        </div>
+      </div>
+      <div id="milestone-100" class="milestone-badge bg-white/90 backdrop-blur rounded-lg shadow-lg px-4 py-2 transition-all duration-500" data-threshold="100">
+        <div class="text-center">
+          <div class="text-3xl mb-1">🏅</div>
+          <div class="text-xs text-gray-600">100L</div>
+        </div>
+      </div>
+      <div id="milestone-1000" class="milestone-badge bg-white/90 backdrop-blur rounded-lg shadow-lg px-4 py-2 transition-all duration-500" data-threshold="1000">
+        <div class="text-center">
+          <div class="text-3xl mb-1">🏅</div>
+          <div class="text-xs text-gray-600">1000L</div>
+        </div>
+      </div>
+      <div id="milestone-3000" class="milestone-badge bg-white/90 backdrop-blur rounded-lg shadow-lg px-4 py-2 transition-all duration-500" data-threshold="3000">
+        <div class="text-center">
+          <div class="text-3xl mb-1">🏅</div>
+          <div class="text-xs text-gray-600">3000L (Babylon Special)</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Username Input Section -->
+    <div class="mb-4 z-10">
+      <div class="bg-white/90 backdrop-blur rounded-lg shadow-lg px-6 py-3">
+        <div id="username-display" class="hidden text-center">
+          <span class="text-sm text-gray-600">Contributing as: </span>
+          <span class="font-bold text-blue-600" id="current-username"></span>
+          <span class="text-sm text-gray-600"> (</span>
+          <span class="font-bold text-green-600" id="user-contribution">0</span>
+          <span class="text-sm text-gray-600"> liters)</span>
+          <button id="change-username-btn" class="ml-3 text-xs text-gray-500 hover:text-gray-700 underline">Change</button>
+        </div>
+        <div id="username-input" class="flex gap-2">
+          <input 
+            type="text" 
+            id="username-field" 
+            placeholder="Enter your username" 
+            class="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            maxlength="20"
+          />
+          <button id="set-username-btn" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+            Start
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Leaderboard Display -->
+    <div class="mb-4 z-10 w-full max-w-md">
+      <div class="bg-white/90 backdrop-blur rounded-lg shadow-lg overflow-hidden">
+        <div class="p-4 bg-gradient-to-r from-yellow-400 to-yellow-500 border-b border-yellow-600">
+          <h3 class="text-xl font-bold text-gray-800 text-center">🏆 Leaderboard</h3>
+        </div>
+        <div class="p-4 max-h-[300px] overflow-y-auto">
+          <div id="leaderboard-list" class="space-y-2">
+            <div class="text-center text-gray-500 py-4 text-sm">Loading...</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Interactive Canvas Area -->
+    <div id="marsh-canvas" class="relative w-full grow bg-gradient-to-b from-sky-200 to-green-100 rounded-lg overflow-hidden cursor-pointer shadow-xl">
+      <!-- Water Level Background -->
+      <div id="water-level" class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-blue-400/60 to-blue-300/40 transition-all duration-1000 ease-out border-t-4 border-blue-600" style="height: 0%;">
+        <!-- Fish swimming in the water -->
+        <div id="water-fish" class="absolute inset-0 overflow-hidden pointer-events-none">
+          <!-- Fish will be added here dynamically -->
+        </div>
+        
+        <!-- Water waves animation -->
+        <div class="absolute top-0 left-0 w-full h-8 overflow-hidden">
+          <svg class="absolute w-full h-full" viewBox="0 0 1200 100" preserveAspectRatio="none">
+            <path d="M0,50 Q150,30 300,50 T600,50 T900,50 T1200,50 L1200,100 L0,100 Z" fill="rgba(59, 130, 246, 0.3)">
+              <animate attributeName="d" 
+                dur="5s" 
+                repeatCount="indefinite"
+                values="
+                  M0,50 Q150,30 300,50 T600,50 T900,50 T1200,50 L1200,100 L0,100 Z;
+                  M0,50 Q150,70 300,50 T600,50 T900,50 T1200,50 L1200,100 L0,100 Z;
+                  M0,50 Q150,30 300,50 T600,50 T900,50 T1200,50 L1200,100 L0,100 Z
+                "/>
+            </path>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Reeds at the bottom -->
+      <div id="marsh-reeds" class="absolute bottom-0 left-0 w-full pointer-events-none">
+        <!-- Reeds will be added here dynamically -->
+      </div>
+      
+      <!-- Objects will be spawned here -->
+      <div class="absolute inset-0 flex items-center justify-center text-gray-400 text-lg pointer-events-none" id="instruction">
+        <p class="bg-white/70 px-4 py-2 rounded-lg">👆 Click to contribute water</p>
+      </div>
+    </div>
+
+    <!-- Success Message -->
+    <div id="success-msg" class="hidden fixed bottom-8 left-1/2 transform -translate-x-1/2 z-50 px-6 py-3 bg-green-500 text-white rounded-lg shadow-lg animate-bounce">
+      +1 Liter! 🌊
+    </div>
+
+    <!-- Error Message -->
+    <div id="error-msg" class="hidden fixed top-20 left-1/2 transform -translate-x-1/2 z-50 max-w-md">
+      <div class="p-4 bg-red-100 text-red-800 rounded-lg shadow-lg text-center">
+        <span id="error-text"></span>
+      </div>
+    </div>
+  </div>
+</IraqMarshesLayout>
+
+<script>
+  import { createClient } from '@supabase/supabase-js';
+
+  // Initialize Supabase client
+  const supabaseUrl = import.meta.env.PUBLIC_SUPABASE_URL || '';
+  const supabaseKey = import.meta.env.PUBLIC_SUPABASE_ANON_KEY || '';
+  
+  let supabase: any = null;
+  let isSupabaseConfigured = false;
+
+  if (supabaseUrl && supabaseKey) {
+    supabase = createClient(supabaseUrl, supabaseKey, {
+      auth: {
+        persistSession: false,
+        autoRefreshToken: false,
+      },
+      global: {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      },
+    });
+    isSupabaseConfigured = true;
+  }
+
+  // DOM Elements
+  const counterElement = document.getElementById('counter');
+  const marshCanvas = document.getElementById('marsh-canvas');
+  const waterLevel = document.getElementById('water-level');
+  const waterFish = document.getElementById('water-fish');
+  const marshReeds = document.getElementById('marsh-reeds');
+  const successMsg = document.getElementById('success-msg');
+  const errorMsg = document.getElementById('error-msg');
+  const errorText = document.getElementById('error-text');
+  const instruction = document.getElementById('instruction');
+  
+  // Username elements
+  const usernameField = document.getElementById('username-field') as HTMLInputElement;
+  const setUsernameBtn = document.getElementById('set-username-btn');
+  const changeUsernameBtn = document.getElementById('change-username-btn');
+  const usernameInput = document.getElementById('username-input');
+  const usernameDisplay = document.getElementById('username-display');
+  const currentUsernameSpan = document.getElementById('current-username');
+  const userContributionSpan = document.getElementById('user-contribution');
+  
+  // Leaderboard elements
+  const leaderboardList = document.getElementById('leaderboard-list');
+
+  let isThrottled = false;
+  let currentCount = 0;
+  let lastFishCount = 0;
+  let lastReedCount = 0;
+  let currentUsername: string | null = null;
+  let userContribution = 0;
+
+  // Random username generation
+  const adjectives = [
+    'Sweet', 'Cool', 'Happy', 'Brave', 'Clever', 'Gentle', 'Swift', 'Bright', 
+    'Mighty', 'Noble', 'Wise', 'Jolly', 'Fierce', 'Silent', 'Golden', 'Silver',
+    'Mystic', 'Ancient', 'Royal', 'Wild', 'Free', 'Bold', 'Cosmic', 'Lucky'
+  ];
+  
+  const nouns = [
+    'Corn', 'Fox', 'Eagle', 'Wolf', 'Bear', 'Tiger', 'Lion', 'Hawk', 
+    'Dolphin', 'Falcon', 'Phoenix', 'Dragon', 'Raven', 'Owl', 'Panther', 'Lynx',
+    'Sparrow', 'Otter', 'Deer', 'Crane', 'Swan', 'Heron', 'Whale', 'Seal'
+  ];
+
+  function generateRandomUsername(): string {
+    const adjective = adjectives[Math.floor(Math.random() * adjectives.length)];
+    const noun = nouns[Math.floor(Math.random() * nouns.length)];
+    return `${adjective} ${noun}`;
+  }
+
+  // Load username from localStorage
+  function loadUsername() {
+    const saved = localStorage.getItem('marsh_username');
+    if (saved) {
+      currentUsername = saved;
+      if (usernameInput) usernameInput.classList.add('hidden');
+      if (usernameDisplay) usernameDisplay.classList.remove('hidden');
+      if (currentUsernameSpan) currentUsernameSpan.textContent = saved;
+      fetchUserContribution();
+    } else {
+      // Generate and set a random username automatically
+      const randomUsername = generateRandomUsername();
+      currentUsername = randomUsername;
+      localStorage.setItem('marsh_username', randomUsername);
+      if (usernameInput) usernameInput.classList.add('hidden');
+      if (usernameDisplay) usernameDisplay.classList.remove('hidden');
+      if (currentUsernameSpan) currentUsernameSpan.textContent = randomUsername;
+      fetchUserContribution();
+    }
+  }
+
+  // Set username
+  function setUsername() {
+    if (!usernameField) return;
+    const username = usernameField.value.trim();
+    if (!username) {
+      showError('Please enter a username');
+      return;
+    }
+    if (username.length > 20) {
+      showError('Username must be 20 characters or less');
+      return;
+    }
+    
+    const oldUsername = currentUsername;
+    currentUsername = username;
+    localStorage.setItem('marsh_username', username);
+    if (usernameInput) usernameInput.classList.add('hidden');
+    if (usernameDisplay) usernameDisplay.classList.remove('hidden');
+    if (currentUsernameSpan) currentUsernameSpan.textContent = username;
+    
+    // Transfer contributions from old username to new one if applicable
+    if (oldUsername && oldUsername !== username) {
+      transferContributions(oldUsername, username);
+    } else {
+      fetchUserContribution();
+    }
+  }
+
+  // Transfer contributions from old username to new username
+  async function transferContributions(oldUsername: string, newUsername: string) {
+    if (!isSupabaseConfigured) {
+      fetchUserContribution();
+      return;
+    }
+
+    try {
+      // Check if new username exists and has contributions
+      const { data: newUserData, error: newUserError } = await supabase
+        .from('marsh_contributions')
+        .select('contribution')
+        .eq('username', newUsername)
+        .single();
+
+      // Check old username contributions
+      const { data: oldUserData, error: oldUserError } = await supabase
+        .from('marsh_contributions')
+        .select('contribution')
+        .eq('username', oldUsername)
+        .single();
+
+      const newUserContribution = newUserData?.contribution || 0;
+      const oldUserContribution = oldUserData?.contribution || 0;
+
+      // Only transfer if new user has 0 contributions and old user has contributions
+      if (newUserContribution === 0 && oldUserContribution > 0) {
+        // Update or insert new username with old contributions
+        const { error: upsertError } = await supabase
+          .from('marsh_contributions')
+          .upsert({
+            username: newUsername,
+            contribution: oldUserContribution,
+            updated_at: new Date().toISOString()
+          });
+
+        if (upsertError) {
+          console.error('Error transferring contributions:', upsertError);
+        } else {
+          // Delete old username entry
+          const { error: deleteError } = await supabase
+            .from('marsh_contributions')
+            .delete()
+            .eq('username', oldUsername);
+
+          if (deleteError) {
+            console.error('Error deleting old username:', deleteError);
+          } else {
+            console.log(`Transferred ${oldUserContribution} liters from ${oldUsername} to ${newUsername}`);
+          }
+        }
+      }
+
+      // Fetch the current user's contribution after transfer
+      fetchUserContribution();
+    } catch (err) {
+      console.error('Error in transfer process:', err);
+      fetchUserContribution();
+    }
+  }
+
+  // Change username
+  function changeUsername() {
+    if (usernameInput) usernameInput.classList.remove('hidden');
+    if (usernameDisplay) usernameDisplay.classList.add('hidden');
+    if (usernameField) usernameField.value = '';
+  }
+
+  // Fetch user's contribution
+  async function fetchUserContribution() {
+    if (!isSupabaseConfigured || !currentUsername) return;
+    
+    try {
+      const { data, error } = await supabase
+        .from('marsh_contributions')
+        .select('contribution')
+        .eq('username', currentUsername)
+        .single();
+      
+      if (error && error.code !== 'PGRST116') { // PGRST116 = no rows returned
+        console.error('Error fetching user contribution:', error);
+      } else {
+        userContribution = data?.contribution || 0;
+        if (userContributionSpan) {
+          userContributionSpan.textContent = userContribution.toString();
+        }
+      }
+    } catch (err) {
+      console.error('Error:', err);
+    }
+  }
+
+  // Fetch and display leaderboard
+  async function fetchLeaderboard() {
+    if (!isSupabaseConfigured || !leaderboardList) return;
+    
+    try {
+      const { data, error } = await supabase
+        .from('marsh_contributions')
+        .select('username, contribution')
+        .order('contribution', { ascending: false });
+      
+      if (error) {
+        console.error('Error fetching leaderboard:', error);
+        leaderboardList.innerHTML = '<div class="text-center text-red-500 py-4 text-sm">Failed to load</div>';
+      } else if (!data || data.length === 0) {
+        leaderboardList.innerHTML = '<div class="text-center text-gray-500 py-4 text-sm">No contributions yet!</div>';
+      } else {
+        leaderboardList.innerHTML = data.map((entry: any, index: number) => {
+          const medal = index === 0 ? '🥇' : index === 1 ? '🥈' : index === 2 ? '🥉' : `${index + 1}.`;
+          const isCurrentUser = entry.username === currentUsername;
+          return `
+            <div class="flex items-center justify-between p-2 rounded-lg ${isCurrentUser ? 'bg-blue-50 border-2 border-blue-300' : 'bg-gray-50'}">
+              <div class="flex items-center gap-2">
+                <span class="text-lg w-6">${medal}</span>
+                <span class="font-semibold text-sm ${isCurrentUser ? 'text-blue-600' : 'text-gray-800'}">${entry.username}</span>
+              </div>
+              <span class="font-bold text-green-600 text-sm">${entry.contribution}L</span>
+            </div>
+          `;
+        }).join('');
+      }
+    } catch (err) {
+      console.error('Error:', err);
+      leaderboardList.innerHTML = '<div class="text-center text-red-500 py-4 text-sm">Failed to load</div>';
+    }
+  }
+
+  // Milestones configuration
+  const milestones = [
+    { id: 'milestone-10', threshold: 10, achieved: false },
+    { id: 'milestone-100', threshold: 100, achieved: false },
+    { id: 'milestone-1000', threshold: 1000, achieved: false },
+    { id: 'milestone-3000', threshold: 3000, achieved: false }
+  ];
+
+  // Function to update milestones based on count
+  function updateMilestones(count: number) {
+    milestones.forEach(milestone => {
+      const element = document.getElementById(milestone.id);
+      if (!element) return;
+
+      const icon = element.querySelector('.text-3xl');
+      if (!icon) return;
+
+      if (count >= milestone.threshold && !milestone.achieved) {
+        // Achieved milestone - turn into trophy
+        milestone.achieved = true;
+        icon.textContent = '🏆';
+        element.classList.add('scale-110', 'bg-yellow-100/90');
+        element.classList.remove('opacity-50');
+        
+        // Celebration animation
+        setTimeout(() => {
+          element.classList.remove('scale-110');
+        }, 500);
+      } else if (count < milestone.threshold) {
+        // Not yet achieved
+        milestone.achieved = false;
+        icon.textContent = '🏅';
+        element.classList.remove('scale-110', 'bg-yellow-100/90');
+        element.classList.add('opacity-50');
+      }
+    });
+  }
+
+  // Function to add a permanent fish to the water
+  function addFish() {
+    if (!waterFish || !marshCanvas) return;
+    
+    const canvasWidth = marshCanvas.offsetWidth;
+    const fishElement = document.createElement('div');
+    
+    const startX = Math.random() > 0.5 ? -50 : canvasWidth + 50;
+    const yPos = 20 + Math.random() * 60; // Random depth in percentage
+    const duration = 8 + Math.random() * 8; // 8-16 seconds
+    const direction = startX < 0 ? 1 : -1;
+    
+    fishElement.className = 'absolute transition-none';
+    fishElement.style.left = `${startX}px`;
+    fishElement.style.top = `${yPos}%`;
+    fishElement.style.transform = direction === 1 ? 'scaleX(-1)' : '';
+    fishElement.innerHTML = `<img src="/assets/iraq-marshes/preserve-marshes/fish.png" alt="fish" class="w-16 h-auto opacity-80" />`;
+
+    waterFish.appendChild(fishElement);
+
+    // Animate fish swimming
+    const endX = direction > 0 ? canvasWidth + 50 : -50;
+    fishElement.style.transition = `left ${duration}s linear`;
+    setTimeout(() => {
+      fishElement.style.left = `${endX}px`;
+    }, 50);
+
+    // Remove fish after animation and add a new one
+    setTimeout(() => {
+      fishElement.remove();
+      if (waterLevel && parseFloat(waterLevel.style.height) > 5) {
+        addFish();
+      }
+    }, duration * 1000 + 100);
+  }
+
+  // Function to add a permanent reed
+  function addReed() {
+    if (!marshReeds || !marshCanvas) return;
+    
+    const canvasWidth = marshCanvas.offsetWidth;
+    const xPos = Math.random() * canvasWidth;
+    const height = 60 + Math.random() * 80; // 60-140px tall
+    const sway = Math.random() * 3 + 2; // 2-5 seconds sway
+    
+    const reedElement = document.createElement('div');
+    reedElement.className = 'absolute bottom-0';
+    reedElement.style.left = `${xPos}px`;
+    reedElement.style.transformOrigin = 'bottom center';
+    reedElement.style.animation = `sway ${sway}s ease-in-out infinite`;
+    reedElement.innerHTML = `<img src="/assets/iraq-marshes/preserve-marshes/grass.png" alt="reed" style="height: ${height}px; width: auto;" />`;
+
+    marshReeds.appendChild(reedElement);
+  }
+
+  // Function to update water level based on count
+  function updateWaterLevel(count: number) {
+    if (!waterLevel) return;
+    
+    const oldCount = currentCount;
+    currentCount = count;
+    
+    // Calculate water level percentage based on 3000L goal (1 liter = 0.0333%, cap at 100%)
+    const percentage = Math.min((count / 3000) * 100, 100);
+    waterLevel.style.height = `${percentage}%`;
+    
+    // Change water color as it rises
+    if (percentage > 75) {
+      waterLevel.style.background = 'linear-gradient(to top, rgba(59, 130, 246, 0.8), rgba(96, 165, 250, 0.6))';
+    } else if (percentage > 50) {
+      waterLevel.style.background = 'linear-gradient(to top, rgba(59, 130, 246, 0.7), rgba(96, 165, 250, 0.5))';
+    } else if (percentage > 25) {
+      waterLevel.style.background = 'linear-gradient(to top, rgba(59, 130, 246, 0.6), rgba(96, 165, 250, 0.4))';
+    }
+
+    // Add fish as water level increases (1 fish per 100 liters)
+    const fishToAdd = Math.min(Math.floor(count / 100), 10) - lastFishCount;
+    for (let i = 0; i < fishToAdd; i++) {
+      setTimeout(() => addFish(), i * 500);
+    }
+    lastFishCount = Math.min(Math.floor(count / 100), 10);
+
+    // Add reeds as water level increases (1 reed per 50 liters)
+    const reedsToAdd = Math.min(Math.floor(count / 50), 25) - lastReedCount;
+    for (let i = 0; i < reedsToAdd; i++) {
+      setTimeout(() => addReed(), i * 300);
+    }
+    lastReedCount = Math.min(Math.floor(count / 50), 25);
+    
+    // Update milestones
+    updateMilestones(count);
+  }
+
+  // Marsh objects definitions with images
+  const marshObjects = [
+    {
+      name: 'reed',
+      emoji: '🌾',
+      image: '/assets/iraq-marshes/preserve-marshes/grass.png',
+      class: 'w-12 h-auto'
+    },
+    {
+      name: 'mudhif',
+      emoji: '🏛️',
+      image: '/assets/iraq-marshes/preserve-marshes/mudhif.png',
+      class: 'w-20 h-auto'
+    },
+    {
+      name: 'fish',
+      emoji: '🐟',
+      image: '/assets/iraq-marshes/preserve-marshes/fish.png',
+      class: 'w-16 h-auto'
+    }
+  ];
+
+  // Function to get random marsh object
+  function getRandomMarshObject() {
+    return marshObjects[Math.floor(Math.random() * marshObjects.length)];
+  }
+
+  // Function to spawn object at position
+  function spawnObject(x: number, y: number) {
+    if (!marshCanvas) return;
+
+    const objElement = document.createElement('div');
+    
+    objElement.className = 'absolute pointer-events-none transition-all duration-1000';
+    objElement.style.left = `${x}px`;
+    objElement.style.top = `${y}px`;
+    objElement.style.transform = 'translate(-50%, -50%) scale(0)';
+    objElement.style.opacity = '0';
+    objElement.style.fontSize = '48px';
+    objElement.textContent = '💧';
+
+    marshCanvas.appendChild(objElement);
+
+    // Hide instruction after first click
+    if (instruction) {
+      instruction.style.display = 'none';
+    }
+
+    // Animate in
+    setTimeout(() => {
+      objElement.style.transform = 'translate(-50%, -50%) scale(1)';
+      objElement.style.opacity = '1';
+    }, 10);
+
+    // Animate out and remove after 3 seconds
+    setTimeout(() => {
+      objElement.style.transform = 'translate(-50%, -50%) scale(0) rotate(360deg)';
+      objElement.style.opacity = '0';
+      setTimeout(() => {
+        objElement.remove();
+      }, 1000);
+    }, 2000);
+  }
+
+  // Function to fetch current counter value
+  async function fetchCounter() {
+    if (!isSupabaseConfigured) {
+      if (counterElement) {
+        counterElement.textContent = '0';
+      }
+      return;
+    }
+
+    try {
+      const { data, error } = await supabase
+        .from('marsh_counter')
+        .select('count')
+        .single();
+
+      if (error) {
+        console.error('Error fetching counter:', error);
+        if (counterElement) {
+          counterElement.textContent = '0';
+        }
+        updateWaterLevel(0);
+      } else {
+        const count = data?.count || 0;
+        if (counterElement) {
+          counterElement.textContent = count.toLocaleString();
+        }
+        updateWaterLevel(count);
+      }
+    } catch (err) {
+      console.error('Error:', err);
+      if (counterElement) {
+        counterElement.textContent = '0';
+      }
+      updateWaterLevel(0);
+    }
+  }
+
+  // Function to increment counter
+  async function incrementCounter() {
+    if (!isSupabaseConfigured) {
+      showError('Supabase is not configured.');
+      return;
+    }
+
+    if (!currentUsername) {
+      showError('Please enter your username first!');
+      return;
+    }
+
+    if (isThrottled) return;
+    isThrottled = true;
+
+    try {
+      const { data, error } = await supabase.rpc('increment_marsh_counter');
+
+      if (error) {
+        console.error('Error incrementing counter:', error);
+        showError('Failed to contribute.');
+      } else {
+        // Update user contribution in database
+        if (currentUsername) {
+          const { error: userError } = await supabase.rpc('increment_user_contribution', {
+            p_username: currentUsername
+          });
+          
+          if (userError) {
+            console.error('Error updating user contribution:', userError);
+          } else {
+            userContribution += 1;
+            if (userContributionSpan) {
+              userContributionSpan.textContent = userContribution.toString();
+            }
+          }
+        }
+
+        // If data is null, fetch the current count from the table
+        if (data === null || data === undefined) {
+          const { data: fetchData, error: fetchError } = await supabase
+            .from('marsh_counter')
+            .select('count')
+            .single();
+          
+          if (!fetchError && fetchData) {
+            const count = fetchData.count || 0;
+            if (counterElement) {
+              counterElement.textContent = count.toLocaleString();
+            }
+            updateWaterLevel(count);
+          }
+        } else {
+          if (counterElement) {
+            counterElement.textContent = (data || 0).toLocaleString();
+          }
+          updateWaterLevel(data || 0);
+        }
+        
+        // Show success message
+        if (successMsg) {
+          successMsg.classList.remove('hidden');
+          setTimeout(() => {
+            successMsg.classList.add('hidden');
+          }, 1500);
+        }
+      }
+    } catch (err) {
+      console.error('Unexpected error:', err);
+      showError('An error occurred.');
+    } finally {
+      // Throttle for 500ms
+      setTimeout(() => {
+        isThrottled = false;
+      }, 0);
+    }
+  }
+
+  // Function to show error message
+  function showError(message: string) {
+    if (errorText) errorText.textContent = message;
+    if (errorMsg) {
+      errorMsg.classList.remove('hidden');
+      setTimeout(() => {
+        errorMsg.classList.add('hidden');
+      }, 3000);
+    }
+  }
+
+  // Event listener for canvas clicks
+  if (marshCanvas) {
+    marshCanvas.addEventListener('click', (e: MouseEvent) => {
+      const rect = marshCanvas.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      
+      spawnObject(x, y);
+      incrementCounter();
+    });
+  }
+
+  // Username event listeners
+  if (setUsernameBtn) {
+    setUsernameBtn.addEventListener('click', setUsername);
+  }
+  
+  if (usernameField) {
+    usernameField.addEventListener('keypress', (e: KeyboardEvent) => {
+      if (e.key === 'Enter') {
+        setUsername();
+      }
+    });
+  }
+  
+  if (changeUsernameBtn) {
+    changeUsernameBtn.addEventListener('click', changeUsername);
+  }
+
+  // Subscribe to real-time updates
+  if (isSupabaseConfigured && supabase) {
+    // Subscribe to counter changes
+    supabase
+      .channel('marsh_counter_changes')
+      .on('postgres_changes', 
+        { event: '*', schema: 'public', table: 'marsh_counter' }, 
+        (payload: any) => {
+          if (payload.new?.count !== undefined) {
+            const count = payload.new.count;
+            if (counterElement) {
+              counterElement.textContent = count.toLocaleString();
+            }
+            updateWaterLevel(count);
+            fetchLeaderboard();
+          }
+        }
+      )
+      .subscribe();
+  }
+
+  // Initial setup
+  loadUsername();
+  fetchCounter();
+  fetchLeaderboard();
+</script>
+
+<style>
+  #marsh-canvas {
+    min-height: 400px;
+    background-image: 
+      radial-gradient(circle at 20% 80%, rgba(34, 139, 34, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 80% 60%, rgba(70, 130, 180, 0.1) 0%, transparent 50%);
+  }
+  
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+  }
+
+  @keyframes sway {
+    0%, 100% { transform: rotate(-2deg); }
+    50% { transform: rotate(2deg); }
+  }
+
+  .milestone-badge {
+    opacity: 0.5;
+  }
+
+  .milestone-badge.achieved {
+    opacity: 1;
+  }
+</style>

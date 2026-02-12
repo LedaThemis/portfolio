@@ -1,0 +1,162 @@
+<!-- Floating Marsh Objects -->
+<div id="floating-marsh-objects" class="absolute inset-0 pointer-events-none z-50" style="min-height: 100vh;">
+  <!-- Objects will spawn here -->
+</div>
+
+<script>
+  import { createClient } from '@supabase/supabase-js';
+
+  // Initialize Supabase client
+  const supabaseUrl = import.meta.env.PUBLIC_SUPABASE_URL || '';
+  const supabaseKey = import.meta.env.PUBLIC_SUPABASE_ANON_KEY || '';
+  
+  let supabase: any = null;
+  let isSupabaseConfigured = false;
+
+  if (supabaseUrl && supabaseKey) {
+    supabase = createClient(supabaseUrl, supabaseKey);
+    isSupabaseConfigured = true;
+  }
+
+  const container = document.getElementById('floating-marsh-objects');
+  let currentUsername: string | null = null;
+
+  // Load username from localStorage
+  currentUsername = localStorage.getItem('marsh_username');
+
+  // Marsh objects definitions
+  const marshObjects = [
+    {
+      name: 'reed',
+      image: '/assets/iraq-marshes/preserve-marshes/grass.png',
+      class: 'w-12 h-auto'
+    },
+    {
+      name: 'mudhif',
+      image: '/assets/iraq-marshes/preserve-marshes/mudhif.png',
+      class: 'w-16 h-auto'
+    },
+    {
+      name: 'fish',
+      image: '/assets/iraq-marshes/preserve-marshes/fish.png',
+      class: 'w-14 h-auto'
+    }
+  ];
+
+  function getRandomObject() {
+    return marshObjects[Math.floor(Math.random() * marshObjects.length)];
+  }
+
+  function getRandomPosition() {
+    const scrollY = window.scrollY || window.pageYOffset;
+    const viewportHeight = window.innerHeight;
+    
+    // Generate position relative to current scroll position
+    const x = Math.random() * (window.innerWidth - 100);
+    const y = scrollY + (Math.random() * viewportHeight);
+    
+    return { x, y };
+  }
+
+  async function incrementCounter() {
+    if (!isSupabaseConfigured || !currentUsername) {
+      console.log('Supabase not configured or no username');
+      return;
+    }
+
+    try {
+      // Increment global counter
+      await supabase.rpc('increment_marsh_counter');
+      
+      // Increment user contribution
+      await supabase.rpc('increment_user_contribution', {
+        p_username: currentUsername
+      });
+    } catch (err) {
+      console.error('Error incrementing counter:', err);
+    }
+  }
+
+  function createFloatingObject() {
+    if (!container) return;
+
+    const obj = getRandomObject();
+    const pos = getRandomPosition();
+    
+    const objElement = document.createElement('div');
+    objElement.className = 'absolute pointer-events-auto cursor-pointer transition-all duration-300 hover:scale-110';
+    objElement.style.left = `${pos.x}px`;
+    objElement.style.top = `${pos.y}px`;
+    objElement.style.opacity = '0';
+    objElement.innerHTML = `<img src="${obj.image}" alt="${obj.name}" class="${obj.class}" draggable="false" />`;
+
+    // Click handler
+    objElement.addEventListener('click', async () => {
+      // Animate click
+      objElement.style.transform = 'scale(1.3)';
+      objElement.style.opacity = '0';
+      
+      // Show success animation
+      const successMsg = document.createElement('div');
+      successMsg.className = 'fixed top-20 left-1/2 transform -translate-x-1/2 px-4 py-2 bg-green-500 text-white rounded-lg shadow-lg text-sm font-bold';
+      successMsg.style.zIndex = '9999';
+      successMsg.textContent = '+1 Liter! 🌊';
+      successMsg.style.animation = 'bounce 1s';
+      document.body.appendChild(successMsg);
+      
+      setTimeout(() => {
+        successMsg.remove();
+      }, 1500);
+
+      // Increment counter
+      await incrementCounter();
+      
+      // Remove object
+      setTimeout(() => {
+        objElement.remove();
+      }, 300);
+    });
+
+    container.appendChild(objElement);
+
+    // Fade in
+    setTimeout(() => {
+      objElement.style.opacity = '0.9';
+    }, 100);
+
+    // Auto-remove after 10 seconds if not clicked
+    setTimeout(() => {
+      if (objElement.parentElement) {
+        objElement.style.opacity = '0';
+        setTimeout(() => {
+          objElement.remove();
+        }, 300);
+      }
+    }, 10000);
+  }
+
+  // Spawn objects periodically
+  function startSpawning() {
+    // Spawn first object after 2 seconds
+    setTimeout(() => {
+      createFloatingObject();
+    }, 2000);
+
+    // Then spawn every 5-10 seconds
+    setInterval(() => {
+      createFloatingObject();
+    }, Math.random() * 5000 + 5000); // 5-10 seconds
+  }
+
+  // Start spawning when page loads
+  if (typeof window !== 'undefined') {
+    startSpawning();
+  }
+</script>
+
+<style>
+  @keyframes bounce {
+    0%, 100% { transform: translate(-50%, 0); }
+    50% { transform: translate(-50%, -10px); }
+  }
+</style>

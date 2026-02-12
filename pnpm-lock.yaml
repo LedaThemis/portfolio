@@ -17,6 +17,12 @@ importers:
       '@astrojs/tailwind':
         specifier: ^2.1.2
         version: 2.1.2(tailwindcss@3.2.4(postcss@8.4.17))
+      '@babylonjs/core':
+        specifier: ^8.49.6
+        version: 8.49.6
+      '@babylonjs/loaders':
+        specifier: ^8.49.6
+        version: 8.49.6(@babylonjs/core@8.49.6)(babylonjs-gltf2interface@8.49.6)
       '@cloudinary/url-gen':
         specifier: ^1.8.6
         version: 1.8.6
@@ -26,6 +32,9 @@ importers:
       '@fontsource/roboto':
         specifier: ^4.5.8
         version: 4.5.8
+      '@supabase/supabase-js':
+        specifier: ^2.84.0
+        version: 2.84.0
       astro:
         specifier: ^1.6.9
         version: 1.6.9(@types/node@22.15.19)
@@ -232,6 +241,15 @@ packages:
     resolution: {integrity: sha512-hGCaQzIY22DJlDh9CH7NOxgKkFjBk0Cw9xDO1Xmh2151ti7wiGfQ3LauXzL4HP1fmFlTX6XjpRETTpUcv7wQLw==}
     engines: {node: '>=6.9.0'}
 
+  '@babylonjs/core@8.49.6':
+    resolution: {integrity: sha512-Q0wsDfDQhwXhE22ltb89hL+XYaDzBLGDr/sSlKUEsHtALK+u36Ttwa8wVD0XJP30pgFpKIrd1LvdSB9FemNwzg==}
+
+  '@babylonjs/loaders@8.49.6':
+    resolution: {integrity: sha512-KsguPMqonctgvyjCcR8A3izGaoQoQrEdG3n4mZ4scX/WHskAciW5P/zsE3AUYugOAb+TL7iBW5VCb+sz/uEkVw==}
+    peerDependencies:
+      '@babylonjs/core': ^8.0.0
+      babylonjs-gltf2interface: ^8.0.0
+
   '@cloudinary/transformation-builder-sdk@1.1.0':
     resolution: {integrity: sha512-BqhTqIwPTyQ4hE0NjKXf/bF7VAjwe2ZHNuypdG6oQ6bDoiLTOSzdAZsg0jFndureQiVPavBKOzQTjHImp45z/g==}
 
@@ -407,6 +425,30 @@ packages:
     resolution: {integrity: sha512-iKnFXr7NkdZAIHiIWE+BX5ULi/ucVFYWD6TbAV+rZctiRTY2PL6tsIKhoIOaoskiWAkgu+VsbXgUVDNLHf+InQ==}
     engines: {node: '>= 8.0.0'}
 
+  '@supabase/auth-js@2.84.0':
+    resolution: {integrity: sha512-J6XKbqqg1HQPMfYkAT9BrC8anPpAiifl7qoVLsYhQq5B/dnu/lxab1pabnxtJEsvYG5rwI5HEVEGXMjoQ6Wz2Q==}
+    engines: {node: '>=20.0.0'}
+
+  '@supabase/functions-js@2.84.0':
+    resolution: {integrity: sha512-2oY5QBV4py/s64zMlhPEz+4RTdlwxzmfhM1k2xftD2v1DruRZKfoe7Yn9DCz1VondxX8evcvpc2udEIGzHI+VA==}
+    engines: {node: '>=20.0.0'}
+
+  '@supabase/postgrest-js@2.84.0':
+    resolution: {integrity: sha512-oplc/3jfJeVW4F0J8wqywHkjIZvOVHtqzF0RESijepDAv5Dn/LThlGW1ftysoP4+PXVIrnghAbzPHo88fNomPQ==}
+    engines: {node: '>=20.0.0'}
+
+  '@supabase/realtime-js@2.84.0':
+    resolution: {integrity: sha512-ThqjxiCwWiZAroHnYPmnNl6tZk6jxGcG2a7Hp/3kcolPcMj89kWjUTA3cHmhdIWYsP84fHp8MAQjYWMLf7HEUg==}
+    engines: {node: '>=20.0.0'}
+
+  '@supabase/storage-js@2.84.0':
+    resolution: {integrity: sha512-vXvAJ1euCuhryOhC6j60dG8ky+lk0V06ubNo+CbhuoUv+sl39PyY0lc+k+qpQhTk/VcI6SiM0OECLN83+nyJ5A==}
+    engines: {node: '>=20.0.0'}
+
+  '@supabase/supabase-js@2.84.0':
+    resolution: {integrity: sha512-byMqYBvb91sx2jcZsdp0qLpmd4Dioe80e4OU/UexXftCkpTcgrkoENXHf5dO8FCSai8SgNeq16BKg10QiDI6xg==}
+    engines: {node: '>=20.0.0'}
+
   '@tailwindcss/forms@0.5.3':
     resolution: {integrity: sha512-y5mb86JUoiUgBjY/o6FJSFZSEttfb3Q5gllE4xoKjAAD+vBrnIhE4dViwUuow3va8mpH4s9jyUbUbrRGoRdc2Q==}
     peerDependencies:
@@ -477,6 +519,9 @@ packages:
   '@types/parse5@6.0.3':
     resolution: {integrity: sha512-SuT16Q1K51EAVPz1K29DJ/sXjhSQ0zjvsypYJ6tlwVsRV9jwW5Adq2ch8Dq8kDBCkYnELS7N7VNCSB5nC56t/g==}
 
+  '@types/phoenix@1.6.6':
+    resolution: {integrity: sha512-PIzZZlEppgrpoT2QgbnDU+MMzuR6BbCjllj0bM70lWoejMeNJAxCchxnv7J3XFkI8MpygtRpzXrIlmWUBclP5A==}
+
   '@types/resolve@1.20.2':
     resolution: {integrity: sha512-60BCwRFOZCQhDncwQdxxeOEEkbc5dIMccYLwbxsS4TUNeVECQ/pBJ0j09mrHOl/JJvpRPGwO9SvE4nR2Nb/a4Q==}
 
@@ -485,6 +530,9 @@ packages:
 
   '@types/unist@2.0.6':
     resolution: {integrity: sha512-PBjIUxZHOuj0R15/xuwJYjFi+KZdNFrehocChv4g5hu6aFroHue8m0lBP0POdK2nKzbw0cgV1mws8+V/JAcEkQ==}
+
+  '@types/ws@8.18.1':
+    resolution: {integrity: sha512-ThVF6DCVhA8kUGy+aazFQ4kXQ7E1Ty7A3ypFOe0IcJV8O/M511G99AW24irKrW56Wt44yG9+ij8FaqoBGkuBXg==}
 
   '@types/yargs-parser@21.0.0':
     resolution: {integrity: sha512-iO9ZQHkZxHn4mSakYV0vFHAVDyEOIJQrV2uZ06HxEPcx+mt8swXoZHIbaaJ2crJYFfErySgktuTZ3BeLz+XmFA==}
@@ -591,6 +639,9 @@ packages:
   b4a@1.6.7:
     resolution: {integrity: sha512-OnAYlL5b7LEkALw87fUVafQw5rVR9RjwGd4KUwNQ6DrrNmaVaUCgLipfVlzrPQ4tWOR9P0IXGNOx50jYCCdSJg==}
 
+  babylonjs-gltf2interface@8.49.6:
+    resolution: {integrity: sha512-7qxi48GxEgX9SIZf1Eze+25YCUUY9X6ZIuoozg0rHZyY9gQBso7HUIWLznsQHeUXey19QS/zirrP1spm1PW8Vw==}
+
   bail@2.0.2:
     resolution: {integrity: sha512-0xO6mYd7JB2YesxDKplafRpsiOzPt9V02ddPCLbY1xYGPOX24NTyN50qnUxgCPcSoYMhKpAuBTjQoRZCAkUDRw==}
 
@@ -678,8 +729,8 @@ packages:
     resolution: {integrity: sha512-Gmy6FhYlCY7uOElZUSbxo2UCDH8owEk996gkbrpsgGtrJLM3J7jGxl9Ic7Qwwj4ivOE5AWZWRMecDdF7hqGjFA==}
     engines: {node: '>=10'}
 
-  caniuse-lite@1.0.30001416:
-    resolution: {integrity: sha512-06wzzdAkCPZO+Qm4e/eNghZBDfVNDsCgw33T27OwBH9unE9S478OYw//Q2L7Npf/zBzs7rjZOszIFQkwQKAEqA==}
+  caniuse-lite@1.0.30001769:
+    resolution: {integrity: sha512-BCfFL1sHijQlBGWBMuJyhZUhzo7wer5sVj9hqekB/7xn0Ypy+pER/edCYQm4exbXj4WiySGp40P8UuTh6w1srg==}
 
   capture-website@4.2.0:
     resolution: {integrity: sha512-EmkSn36CXTC8tUsS6aNmvvsdpfVTYYkuRp7U5bV9gcJwcDbqqA5c0Op/iskYPKtDdOkuVp61mjn/LLywX0h7cw==}
@@ -3025,6 +3076,13 @@ snapshots:
       '@babel/helper-validator-identifier': 7.19.1
       to-fast-properties: 2.0.0
 
+  '@babylonjs/core@8.49.6': {}
+
+  '@babylonjs/loaders@8.49.6(@babylonjs/core@8.49.6)(babylonjs-gltf2interface@8.49.6)':
+    dependencies:
+      '@babylonjs/core': 8.49.6
+      babylonjs-gltf2interface: 8.49.6
+
   '@cloudinary/transformation-builder-sdk@1.1.0':
     dependencies:
       '@cloudinary/url-gen': 1.8.6
@@ -3261,6 +3319,43 @@ snapshots:
       estree-walker: 2.0.2
       picomatch: 2.3.1
 
+  '@supabase/auth-js@2.84.0':
+    dependencies:
+      tslib: 2.8.1
+
+  '@supabase/functions-js@2.84.0':
+    dependencies:
+      tslib: 2.8.1
+
+  '@supabase/postgrest-js@2.84.0':
+    dependencies:
+      tslib: 2.8.1
+
+  '@supabase/realtime-js@2.84.0':
+    dependencies:
+      '@types/phoenix': 1.6.6
+      '@types/ws': 8.18.1
+      tslib: 2.8.1
+      ws: 8.18.2
+    transitivePeerDependencies:
+      - bufferutil
+      - utf-8-validate
+
+  '@supabase/storage-js@2.84.0':
+    dependencies:
+      tslib: 2.8.1
+
+  '@supabase/supabase-js@2.84.0':
+    dependencies:
+      '@supabase/auth-js': 2.84.0
+      '@supabase/functions-js': 2.84.0
+      '@supabase/postgrest-js': 2.84.0
+      '@supabase/realtime-js': 2.84.0
+      '@supabase/storage-js': 2.84.0
+    transitivePeerDependencies:
+      - bufferutil
+      - utf-8-validate
+
   '@tailwindcss/forms@0.5.3(tailwindcss@3.2.4(postcss@8.4.17))':
     dependencies:
       mini-svg-data-uri: 1.4.4
@@ -3340,9 +3435,10 @@ snapshots:
   '@types/node@22.15.19':
     dependencies:
       undici-types: 6.21.0
-    optional: true
 
   '@types/parse5@6.0.3': {}
+
+  '@types/phoenix@1.6.6': {}
 
   '@types/resolve@1.20.2': {}
 
@@ -3351,6 +3447,10 @@ snapshots:
       '@types/node': 17.0.45
 
   '@types/unist@2.0.6': {}
+
+  '@types/ws@8.18.1':
+    dependencies:
+      '@types/node': 22.15.19
 
   '@types/yargs-parser@21.0.0': {}
 
@@ -3505,7 +3605,7 @@ snapshots:
   autoprefixer@10.4.12(postcss@8.4.17):
     dependencies:
       browserslist: 4.21.4
-      caniuse-lite: 1.0.30001416
+      caniuse-lite: 1.0.30001769
       fraction.js: 4.2.0
       normalize-range: 0.1.2
       picocolors: 1.0.0
@@ -3515,6 +3615,8 @@ snapshots:
   axe-core@4.5.2: {}
 
   b4a@1.6.7: {}
+
+  babylonjs-gltf2interface@8.49.6: {}
 
   bail@2.0.2: {}
 
@@ -3576,7 +3678,7 @@ snapshots:
 
   browserslist@4.21.4:
     dependencies:
-      caniuse-lite: 1.0.30001416
+      caniuse-lite: 1.0.30001769
       electron-to-chromium: 1.4.272
       node-releases: 2.0.6
       update-browserslist-db: 1.0.9(browserslist@4.21.4)
@@ -3599,7 +3701,7 @@ snapshots:
 
   camelcase@6.3.0: {}
 
-  caniuse-lite@1.0.30001416: {}
+  caniuse-lite@1.0.30001769: {}
 
   capture-website@4.2.0:
     dependencies:
@@ -5659,8 +5761,7 @@ snapshots:
       buffer: 5.7.1
       through: 2.3.8
 
-  undici-types@6.21.0:
-    optional: true
+  undici-types@6.21.0: {}
 
   unherit@3.0.0: {}
 

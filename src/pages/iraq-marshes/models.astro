@@ -4,19 +4,68 @@ import IraqMarshesLayout from "../../layouts/IraqMarshes/IraqMarshesLayout.astro
 ---
 
 <IraqMarshesLayout>
-  <div class="flex flex-col w-full mb-8">
+  <div class="flex flex-col w-screen mx-[-32px] mb-8">
     <div>
       <h2 class="text-3xl text-center my-8">Models</h2>
+      <p class="text-sm md:text-base text-center text-gray-700 mb-6 max-w-3xl mx-auto px-4">
+        Interactive 3D models documenting the traditional architecture, artifacts, and landscape of the Iraqi Marshes. Created through photogrammetry, these models preserve the cultural heritage and unique characteristics of this UNESCO World Heritage site.
+      </p>
     </div>
+    <div class="flex flex-col gap-4">
+    <ModelView
+      modelId="summer-mudhif"
+      caption="I. Summer Mudhif (Guesthouse)"
+      description="Traditional reed guesthouse used during summer months. The mudhif serves as a communal gathering space and represents the architectural ingenuity of marsh dwellers."
+      embedUrl="https://sketchfab.com/models/92abc246e2414f3ea39397aa4ea18a4d/embed"
+    />
+    <ModelView
+      modelId="reed-house"
+      caption="II. Reed House"
+      description="A typical dwelling constructed entirely from marsh reeds. These sustainable structures demonstrate centuries-old building techniques adapted to the wetland environment."
+      embedUrl="https://sketchfab.com/models/c903d428e95e46aeadfff17bb7cfb22c/embed"
+    />
+    <ModelView
+      modelId="abandoned-house"
+      caption="III. Abandoned House"
+      description="A deteriorating structure bearing witness to the displacement and environmental challenges faced by marsh communities over recent decades."
+      embedUrl="https://sketchfab.com/models/8cfabbfb36224a92827510b0834075ae/embed"
+    />
+    <ModelView
+      modelId="summer-house"
+      caption="IV. Summer House"
+      description="Seasonal dwelling designed to provide ventilation and protection from heat while allowing inhabitants to remain close to their buffalo herds and waterways."
+      embedUrl="https://sketchfab.com/models/738b2f413a1c491d833719f2a5ae9cf7/embed"
+    />
+    <ModelView
+      modelId="buffalo-skull"
+      caption="V. Buffalo Skull"
+      description="Remains of a water buffalo, the cornerstone of marsh life providing milk, meat, and labor. These animals are integral to the ecosystem and local economy."
+      embedUrl="https://sketchfab.com/models/25d2647d9b7c46f8b7e9950dde6bfd47/embed"
+    />
+    <ModelView
+      modelId="boats"
+      caption="VI. Boats"
+      description="Traditional wooden boats (mashufs) used for transportation and fishing throughout the waterways. These vessels are essential for navigating the shallow marshes."
+      embedUrl="https://sketchfab.com/models/f5847f7a05d549aab7a637b21e990163/embed"
+    />
+    <ModelView
+      modelId="marshlands-mapping"
+      caption="VII. Marshlands Mapping"
+      description="Digital reconstruction of marsh topography showing the intricate network of waterways, islands, and vegetation that characterizes this UNESCO World Heritage site."
+      embedUrl="https://sketchfab.com/models/82f7468922244b03ab1edde746f936a3/embed"
+    />
+    <ModelView
+      modelId="marshlands-mapping-2"
+      caption="VIII. Marshlands Mapping 2"
+      description="Additional terrain mapping documenting the changing landscape and water levels across different seasons and years of environmental monitoring."
+      embedUrl="https://sketchfab.com/models/ba247df05b4e48b98d907412aabcdf9f/embed"
+    />
     <ModelView
       modelId="chibayish"
-      caption="I. Ahwar Al-Chibayish"
+      caption="IX. Ahwar Al-Chibayish"
+      description="Comprehensive model of the Al-Chibayish marshlands, one of the largest wetland areas in southern Iraq and a critical habitat for migratory birds."
       embedUrl="https://sketchfab.com/models/41da5e81804c49258cdcd21b0d88352f/embed"
     />
-    <ModelView
-      modelId="mudhif"
-      caption="II. Mudhif"
-      embedUrl="https://sketchfab.com/models/6e894da71f144d0db08a781c005745f5/embed"
-    />
+    </div>
   </div>
 </IraqMarshesLayout>
