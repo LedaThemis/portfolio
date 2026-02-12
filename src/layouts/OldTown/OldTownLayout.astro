@@ -1,5 +1,6 @@
 ---
 import "../../styles/global.css";
+import SpeedInsights from '@vercel/speed-insights/astro';
 
 import Footer from "../../components/OldTown/Footer.astro";
 
@@ -23,6 +24,7 @@ const { showFooter = true } = Astro.props;
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Boldonse&family=Readex+Pro:wght@160..700&display=swap" rel="stylesheet">
+    <SpeedInsights />
   </head>
   <body class="min-h-screen flex flex-col">
     <nav class="z-10">

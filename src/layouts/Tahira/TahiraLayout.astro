@@ -1,5 +1,6 @@
 ---
 import "../../styles/global.css";
+import SpeedInsights from '@vercel/speed-insights/astro';
 
 import Footer from "../../components/Tahira/Footer.astro";
 import HoshAlBayaaSVG from "../../components/Tahira/HoshAlBayaaSVG.astro";
@@ -41,6 +42,7 @@ const { showFooter = true } = Astro.props;
       integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
       crossorigin="anonymous"
     />
+    <SpeedInsights />
   </head>
   <body class="min-h-screen flex flex-col p-(--padding-main)">
     <nav>
