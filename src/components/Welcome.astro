@@ -1,11 +1,12 @@
 ---
 import GithubIcon from "../icons/GithubIcon.astro";
 import LinkedInIcon from "../icons/LinkedInIcon.astro";
+import CldImage from "./CldImage.astro";
 ---
 
 <div class="flex flex-col sm:flex-row gap-0 sm:gap-8 mt-10">
   <div class="mb-4 shrink-0">
-    <img class="w-32 h-32 rounded-full border border-black object-cover" src="https://res.cloudinary.com/dj08db9y2/image/upload/f_auto,q_auto/profile_picture" alt="">
+    <CldImage width={128} height={128} class="w-32 h-32 rounded-full border border-black object-cover" src="profile_picture" alt="Close-up portrait showing Adil Al Qaba's face" loading="eager" optimize={true}>
   </div>
   <div>
     <p class="text-xl sm:text-3xl font-title">Hi there &#128075; I'm a</p>

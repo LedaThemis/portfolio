@@ -5,8 +5,8 @@ export type ProjectDetailsMDXProps = {
   projectSummary: string;
   projectCover: {
     name: string;
-    width: string;
-    height: string;
+    width: number | `${number}`;
+    height: number | `${number}`;
     alt: string;
   };
   projectDescription: string;

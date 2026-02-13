@@ -2,6 +2,7 @@
 // Credits @colbyfayock
 import { Cloudinary, CloudinaryImage } from "@cloudinary/url-gen";
 import { fit } from "@cloudinary/url-gen/actions/resize";
+import { Image } from "astro:assets";
 
 const cld = new Cloudinary({
   cloud: {
@@ -20,7 +21,7 @@ const constructImageSrcSet = (image: CloudinaryImage) => {
 
 const fallbackImageUrl = "/assets/fallback.svg";
 
-const { src, ...props } = Astro.props;
+const { src, loading = "lazy", ...props } = Astro.props;
 let cldSrc = cld.image(src).format("auto").quality("auto");
 
 if (src.startsWith("https://")) {
@@ -29,19 +30,20 @@ if (src.startsWith("https://")) {
 
 interface Props {
   src: string;
-  width: string;
-  height: string;
+  width: number | `${number}`;
+  height: number | `${number}`;
   alt: string;
   class: string;
   optimize: boolean;
+  loading?: "eager" |"lazy";
 }
 ---
 
-<img
+<Image
   src={cldSrc.toURL()}
   srcset={props.optimize ? constructImageSrcSet(cldSrc) : null}
   sizes="(min-width: 1080px) 1080px, 100vw"
-  loading="lazy"
+  loading={loading}
   onerror={`this.onerror=null;this.src='${fallbackImageUrl}';this.removeAttribute('srcset');`}
   {...props}
 />
