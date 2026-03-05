@@ -24,4 +24,17 @@ const events = defineCollection({
   }),
 });
 
-export const collections = { events };
+const press = defineCollection({
+  loader: file("src/data/press.json"),
+  schema: z.object({
+    title: z.string(),
+    reference: z.string().optional(),
+    published_at: z.coerce.date(),
+    mention: z.object({
+        lang: z.string(),
+        text: z.string(),
+    }).optional(),
+  }),
+});
+
+export const collections = { events, press };

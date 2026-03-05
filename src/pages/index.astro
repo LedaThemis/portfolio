@@ -4,6 +4,7 @@ import Contact from "../components/Contact.astro";
 import { getCollection } from "astro:content";
 
 const events = await getCollection('events');
+const press = await getCollection('press');
 ---
 
 <LayoutMinimal
@@ -43,40 +44,11 @@ const events = await getCollection('events');
     <h2>Press</h2>
     <!-- TODO: Consider using <blockquote> -->
     <ul>
-      <li>
-        <a href="https://www.facebook.com/UniversityofMos/posts/492196716900670">Interview on journey in programming with University of Mosul Press</a> <span lang="ar" style="font-style: italic;">(Referred to as: "عادل")</span>
-      </li>
-      <li>
-        <a href="https://uomosul.edu.iq/719-2">Coverage of participation at Informatik Festival 2025 and AI ART Gallery by University of Mosul</a>
-      </li>
-      <li>
-        <a href="https://youtu.be/s4jbtzgbs04">Interview on participation at Informatik Festival 2025 by Karbala News</a>
-      </li>
-      <li>
-        <a href="https://youtu.be/dNlUKr9dlHg">Interview with Al-Mosuliya TV as part of Scientists and Inventors program</a> <span lang="ar" style="font-style: italic;">(Referred to as: "عادل محمد عدنان")</span>
-      </li>
-      <li>
-        <a href="https://www.facebook.com/Kossay.Alahmady/posts/991199045800226">Interview on recent competition wins with University of Mosul President / Kossay Alahmady</a> <span lang="ar" style="font-style: italic;">(Referred to as: "عادل محمد عدنان")</span>
-      </li>
-      <li>
-        <a href="https://www.facebook.com/Kossay.Alahmady/posts/793418688911597">Interview on smart waste recycling, "Study in Iraq" platform with University of Mosul President / Kossay Alahmady</a> <span lang="ar" style="font-style: italic;">(Referred to as: "عادل محمد عدنان")</span>
-      </li>
-      <li>
-        <a href="https://uomosul.edu.iq/engineering/54728-2">Honoring achievemnt at DoCH Conference by University of Mosul</a> <span lang="ar" style="font-style: italic;">(Referred to as: "عادل محمد عدنان")</span>
-      </li>
-      <li>
-        <a href="https://www.rudawarabia.net/arabic/kurdistan/271220233">Interview on experience at Huawei competition by Rudaw</a> <span lang="ar" style="font-style: italic;">(Referred to as: "عادل محمد عدنان")</span>
-      </li>
-      <li>
-        <a href="https://www.instagram.com/manaratv1/p/DDrgGW-sYyp">Interview on programming journey and winning the global finals of Huawei ICT by ManaraTV</a> <span lang="ar" style="font-style: italic;">(Referred to as: "عادل محمد")</span>
-      </li>
-      <li>
-        <a href="https://shafaq.com/ar/%D9%83%D9%88%D8%B1%D8%AF%D8%B3%D9%80%D9%80%D8%AA%D8%A7%D9%86%D9%8A%D8%A7%D8%AA/%D8%A7%D9%84%D8%AA%D8%B9%D9%84%D9%8A%D9%85-%D8%A7%D9%84%D9%83%D9%88%D8%B1%D8%AF%D8%B3%D8%AA%D8%A7%D9%86%D9%8A%D8%A9-%D8%AA-%D9%83%D8%B1-%D9%85-%D8%B7%D9%84%D8%A8%D8%A9-%D8%A7%D9%84%D8%B9%D8%B1%D8%A7%D9%82-%D8%A7%D9%84%D8%A7%D9%88%D8%A7-%D9%84-%D8%A8%D9%85%D8%B3%D8%A7%D8%A8%D9%82%D8%A7%D8%AA-%D9%87%D9%88%D8%A7%D9%88%D9%8A-%D9%84%D8%AA%D9%83%D9%86%D9%88%D9%84%D9%88%D8%AC%D9%8A%D8%A7-%D8%A7%D9%84%D9%85%D8%B9%D9%84%D9%88%D9%85%D8%A7%D8%AA-%D8%A7%D9%84%D8%AF%D9%88%D9%84%D9%8A%D8%A9"
-        >Covering award ceremony for achievemnt at Huawei Competition by Shafaq News</a> <span lang="ar" style="font-style: italic;">(Referred to as: "عادل محمد عدنان")</span>
-      </li>
-      <li>
-        <a href="https://web.archive.org/web/20240527035121/https://tech.caijing.com.cn/20240527/5014334.shtml">Interview on Huawei ICT 2023-2024 Global Final Competition by Beijing-based Caijing Magazine</a> (Referred to as: "Adil")
-      </li>
+      {press.map((entry) => (
+        <li>
+          <a href={entry.data.reference}>{entry.data.title}</a> {entry.data.mention && <span class="italic">(Mentioned as: <span lang={entry.data.mention.lang}>{entry.data.mention.text}</span>)</span>}
+        </li>
+      ))}
     </ul>
 
     <h2>Links</h2>
