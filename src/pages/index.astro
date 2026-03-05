@@ -1,4 +1,5 @@
 ---
+import config from "../config";
 import LayoutMinimal from "../layouts/LayoutMinimal.astro";
 import Contact from "../components/Contact.astro";
 import { getCollection } from "astro:content";
@@ -13,7 +14,7 @@ const featuredPress = await getCollection('press', ({ data }) => data.is_feature
 >
   <main>
     <h2>About</h2>
-    <p>I'm a software engineer and researcher interested in robotics and heritage preservation. <br>Currently studying Computer Engineering (B.Sc.) at the <a href="https://uomosul.edu.iq">University of Mosul</a>.<br>I do backend, simulations, 3d work, data analysis, and robotics.</p>
+    <p>I'm a software engineer and researcher interested in robotics and heritage preservation.<br>Currently studying Computer Engineering (B.Sc.) at the <a href="https://uomosul.edu.iq">University of Mosul</a>.<br>I do backend, simulations, 3d work, data analysis, and robotics.</p>
     <h2>Events & Awards</h2>
     <p>Selected events where I have presented, participated, or mentored:</p>
     <ul>
@@ -64,13 +65,13 @@ const featuredPress = await getCollection('press', ({ data }) => data.is_feature
     <p>Other places online where you can find me:</p>
     <ul>
       <li>
-        Check my publications on <a href="https://orcid.org/0009-0002-1924-5270">ORCID</a>, <a href="https://scholar.google.com/citations?user=YQ10EnMAAAAJ">Google Scholar</a>
+        Check my publications on <a href={config.personal.orcid}>ORCID</a>, <a href={config.personal.gscholar}>Google Scholar</a>
       </li>
       <li>
-        Check my coding work on <a href="https://github.com/LedaThemis">GitHub</a>
+        Check my coding work on <a href={config.personal.github}>GitHub</a>
       </li>
       <li>
-        Follow my professional life on <a href="https://linkedin.com/in/alqaba">LinkedIn</a> (disclaimer: rarely updated)
+        Follow my professional life on <a href={config.personal.linkedin}>LinkedIn</a> (disclaimer: rarely updated)
       </li>
     </ul>
 
