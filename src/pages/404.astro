@@ -1,14 +1,15 @@
 ---
 import config from "../config";
-import Layout from "../layouts/Layout.astro";
+import LayoutMinimal from "../layouts/LayoutMinimal.astro";
 ---
 
-<Layout
-  title="404 | Adil Al Qaba"
-  description="This page does not exist or does it?"
+<LayoutMinimal
+  title="Page not found | Adil Al Qaba - Software Engineer"
+  description="Adil Al Qaba (عادل محمد عدنان), a software engineer and published researcher, winner of many international prizes like Huawei ICT, ACPC, DoCH, Falling Walls"
 >
-  <main class="grid place-items-center gap-3 mt-8">
-    <p class="text-2xl">
+  <main style="flex: 1 0 auto;">
+    <h2>Not found</h2>
+    <p>
       Welp. looks like you found one of them... a non-existent page.
     </p>
     <p>
@@ -17,4 +18,4 @@ import Layout from "../layouts/Layout.astro";
       >
     </p>
   </main>
-</Layout>
+</LayoutMinimal>

@@ -6,8 +6,11 @@
 
 /* Credits: http://bettermotherfuckingwebsite.com */
 body {
+  display: flex;
+  flex-direction: column;
   background-color: var(--bg-color);
   margin: 40px auto;
+  min-height: calc(100vh - 80px);
   max-width: 650px;
   line-height: 1.6;
   font-size: 18px;
