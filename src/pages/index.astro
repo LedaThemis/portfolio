@@ -13,67 +13,75 @@ const featuredPress = await getCollection('press', ({ data }) => data.is_feature
   description="Adil Al Qaba (عادل محمد عدنان), a software engineer and published researcher, winner of many international prizes like Huawei ICT, ACPC, DoCH, Falling Walls"
 >
   <main>
-    <h2>About</h2>
-    <p>I'm a software engineer and researcher interested in robotics and heritage preservation.<br>Currently studying Computer Engineering (B.Sc.) at the <a href="https://uomosul.edu.iq">University of Mosul</a>.<br>I do backend, simulations, 3d work, data analysis, and robotics.</p>
-    <h2>Events & Awards</h2>
-    <p>Selected events where I have presented, participated, or mentored:</p>
-    <ul>
-      {featuredEvents.map(event => (
-        <li>{event.data.role} at {event.data.reference ? <a href={event.data.reference} target="_blank" rel="noreferrer noopener">{event.data.title}</a> : event.data.title} ({Object.values(event.data.location).join(', ')}) {event.data.mention && <span class="italic">(Mentioned as: <span lang={event.data.mention.lang}>{event.data.mention.text}</span>)</span>}</li>
-      ))}
-      <li>
-        ...and others, <a href="/events">see complete list of events & awards</a>
-      </li>
-    </ul>
-
-    <h2>Publications</h2>
-    <p>Selected publications that I have authored:</p>
-    <ul>
-      <li>
-        <a href="https://doi.org/10.18420/inf2025_56"
-          >Hosh Al-Bay'ah Collection: An Immersive Multiplayer Virtual Museum</a
-        >
-      </li>
-      <li>
-        <a href="https://doi.org/10.18420/inf2025_57"
-          >Mosul: Preserving the After-Effects of War</a
-        >
-      </li>
-      <li>
-        <a href="https://papers.ssrn.com/sol3/Delivery.cfm?abstractid=5134415"
-          >Deepfake Multi-Faces Detection Using Haar Cascades with Sift Matching
-          Algorithm</a
-        >
-      </li>
-    </ul>
-
-    <h2>Press</h2>
-    <p>Selected media mentions where my work (or myself :grin:) is featured:</p>
-    <!-- TODO: Consider using <blockquote> -->
-    <ul>
-      {featuredPress.map((entry) => (
+    <section id="about">
+      <h2>About</h2>
+      <p>I'm a software engineer and researcher interested in robotics and heritage preservation.<br>Currently studying Computer Engineering (B.Sc.) at the <a href="https://uomosul.edu.iq">University of Mosul</a>.<br>I do backend, simulations, 3d work, data analysis, and robotics.</p>
+      <h2>Events & Awards</h2>
+      <p>Selected events where I have presented, participated, or mentored:</p>
+      <ul>
+        {featuredEvents.map(event => (
+          <li>{event.data.role} at {event.data.reference ? <a href={event.data.reference} target="_blank" rel="noreferrer noopener">{event.data.title}</a> : event.data.title} ({Object.values(event.data.location).join(', ')}) {event.data.mention && <span class="italic">(Mentioned as: <span lang={event.data.mention.lang}>{event.data.mention.text}</span>)</span>}</li>
+        ))}
         <li>
-          <a href={entry.data.reference}>{entry.data.title}</a> {entry.data.mention && <span class="italic">(Mentioned as: <span lang={entry.data.mention.lang}>{entry.data.mention.text}</span>)</span>}
+          ...and others, <a href="/events">see complete list of events & awards</a>
         </li>
-      ))}
-      <li>
-        ...and others, <a href="/press">see complete list of press mentions</a>
-      </li>
-    </ul>
+      </ul>
+    </section>
 
-    <h2>Links</h2>
-    <p>Other places online where you can find me:</p>
-    <ul>
-      <li>
-        Check my publications on <a href={config.personal.orcid}>ORCID</a>, <a href={config.personal.gscholar}>Google Scholar</a>
-      </li>
-      <li>
-        Check my coding work on <a href={config.personal.github}>GitHub</a>
-      </li>
-      <li>
-        Follow my professional life on <a href={config.personal.linkedin}>LinkedIn</a> (disclaimer: rarely updated)
-      </li>
-    </ul>
+    <section id="publications">
+      <h2>Publications</h2>
+      <p>Selected publications that I have authored:</p>
+      <ul>
+        <li>
+          <a href="https://doi.org/10.18420/inf2025_56"
+            >Hosh Al-Bay'ah Collection: An Immersive Multiplayer Virtual Museum</a
+          >
+        </li>
+        <li>
+          <a href="https://doi.org/10.18420/inf2025_57"
+            >Mosul: Preserving the After-Effects of War</a
+          >
+        </li>
+        <li>
+          <a href="https://papers.ssrn.com/sol3/Delivery.cfm?abstractid=5134415"
+            >Deepfake Multi-Faces Detection Using Haar Cascades with Sift Matching
+            Algorithm</a
+          >
+        </li>
+      </ul>
+    </section>
+
+    <section id="press">
+      <h2>Press</h2>
+      <p>Selected media mentions where my work (or myself :grin:) is featured:</p>
+      <!-- TODO: Consider using <blockquote> -->
+      <ul>
+        {featuredPress.map((entry) => (
+          <li>
+            <a href={entry.data.reference}>{entry.data.title}</a> {entry.data.mention && <span class="italic">(Mentioned as: <span lang={entry.data.mention.lang}>{entry.data.mention.text}</span>)</span>}
+          </li>
+        ))}
+        <li>
+          ...and others, <a href="/press">see complete list of press mentions</a>
+        </li>
+      </ul>
+    </section>
+
+    <section id="links">
+        <h2>Links</h2>
+        <p>Other places online where you can find me:</p>
+        <ul>
+          <li>
+            Check my publications on <a href={config.personal.orcid}>ORCID</a>, <a href={config.personal.gscholar}>Google Scholar</a>
+          </li>
+          <li>
+            Check my coding work on <a href={config.personal.github}>GitHub</a>
+          </li>
+          <li>
+            Follow my professional life on <a href={config.personal.linkedin}>LinkedIn</a> (disclaimer: rarely updated)
+          </li>
+        </ul>
+    </section>
 
     <Contact />
   </main>
