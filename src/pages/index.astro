@@ -4,15 +4,22 @@ import Welcome from "../components/Welcome.astro";
 import Projects from "../components/Projects.astro";
 import Contact from "../components/Contact.astro";
 import About from "../components/About.astro";
+import CldImage from "../components/CldImage.astro";
 ---
 
 <LayoutMinimal
   title="Adil Al Qaba - Software Engineer"
   description="Adil Al Qaba (عادل محمد عدنان), a software engineer and published researcher, winner of many international prizes like Huawei ICT, ACPC, DoCH, Falling Walls"
 >
+  <header>
+    <nav>
+        <h1>Adil Al Qaba</h1>
+        <!-- <CldImage width={128} height={128} style="display: inline-block; width: 128px; height: 128px; border-radius: calc(infinity*1px); object-fit: cover;" src="profile_picture" alt="Close-up portrait showing Adil Al Qaba (عادل محمد عدنان)'s face" loading="eager" optimize={true}> -->
+    </nav>
+  </header>
   <main>
-    <h1>About</h1>
-    <p>I'm a software engineer, and researcher interested in robotics and heritage preservation. <br>Currently studying Computer Engineering (B.Sc.) at the <a href="https://uomosul.edu.iq">University of Mosul</a>.<br>I do backend, simulations, 3d work, data analysis, and robotics.</p>
+    <h2>About</h2>
+    <p>I'm a software engineer and researcher interested in robotics and heritage preservation. <br>Currently studying Computer Engineering (B.Sc.) at the <a href="https://uomosul.edu.iq">University of Mosul</a>.<br>I do backend, simulations, 3d work, data analysis, and robotics.</p>
     <h2>Events & Awards</h2>
     <ul>
       <li>
@@ -40,16 +47,31 @@ import About from "../components/About.astro";
         Finalist (2nd Place) at <a href="https://uomosul.edu.iq/engineering/54433-2">Falling Walls Lab Iraq 2025</a>
       </li>
       <li>
+        Speaker at <a href="">UOM Seed Workshop</a> (Mosul, Iraq)
+      </li>
+      <li>
         Participant at <a href="https://alnoor.edu.iq/en/archives/2025/05/26/15/10/81664">Heritage Exhibition at Alnoor University</a> (Mosul, Iraq)
       </li>
       <li>
         Speaker at <a href="https://alnoor.edu.iq/en/archives/2025/04/17/09/39/80347">Digitization of Cultural Heritage Workshop at Alnoor University</a> (Mosul, Iraq)
       </li>
       <li>
+        Mentor at <a href="">Prime Minister - Empowering Young Women in Tech</a> (Kirkuk, Iraq)
+      </li>
+      <li>
+        Participant at <a href="https://uomosul.edu.iq/news-20940-2">3rd Sustainable Development Week - University of Mosul</a> (Mosul, Iraq)
+      </li>
+      <li>
         Mentor at <a href="">HurryApp 2 Hackathon</a> (Baghdad, Iraq)
       </li>
       <li>
         Instructor at <a href="">HurryApp 2 Hackathon Workshop</a> (Baghdad, Iraq)
+      </li>
+      <li>
+        Participant at <a href="https://www.hitex.tech/pdf/HITEX_2024_Outcome_Report_Digital.pdf">HITEX 2024</a> (Erbil, Iraq)
+      </li>
+      <li>
+        Participant at <a href="https://www.kapita.iq/post/iraqs-largest-digital-transformation-summit-dti-youth-paves-way-national-digital-development">DTI Youth Conference</a> (Baghdad, Iraq)
       </li>
       <li>
         Author at <a href="https://www.pih.education/content/Program-DoCH-Conference.pdf">DoCH Conference</a> (American University of Beirut - Mediterraneo, Paphos, Cyprus)
@@ -64,7 +86,7 @@ import About from "../components/About.astro";
         Finalist at <a href="https://acpc.global/acpc2024">Africa and Arab Collegiate Programming Championship</a> (Luxor, Egypt)
       </li>
       <li>
-        Finalist at <a href="https://uomosul.edu.iq/news-10450">IALD Debates Mondial</a>(Mosul, Iraq)
+        Finalist at <a href="https://uomosul.edu.iq/news-10450">IALD Debates Mondial</a> (Mosul, Iraq)
       </li>
       <li>
         Winner Team at <a href="https://hurryapphackathon.com/previous-hackathons">HurryApp Hackathon</a> (Baghdad, Iraq)
@@ -77,6 +99,26 @@ import About from "../components/About.astro";
       </li>
       <li>
         Participant at <a href="https://uomosul.edu.iq/en/blog/2023/02/26/the-7th-international-resi-student-conference-jointly-concluded">Rethink Education and Science (RESI)</a> (Mosul, Iraq)
+      </li>
+    </ul>
+
+    <h2>Publications</h2>
+    <ul>
+      <li>
+        <a href="https://doi.org/10.18420/inf2025_56"
+          >Hosh Al-Bay'ah Collection: An Immersive Multiplayer Virtual Museum</a
+        >
+      </li>
+      <li>
+        <a href="https://doi.org/10.18420/inf2025_57"
+          >Mosul: Preserving the After-Effects of War</a
+        >
+      </li>
+      <li>
+        <a href="https://papers.ssrn.com/sol3/Delivery.cfm?abstractid=5134415"
+          >Deepfake Multi-Faces Detection Using Haar Cascades with Sift Matching
+          Algorithm</a
+        >
       </li>
     </ul>
 
@@ -116,36 +158,16 @@ import About from "../components/About.astro";
       </li>
     </ul>
 
-    <h2>Publications</h2>
-    <ul>
-      <li>
-        <a href="https://doi.org/10.18420/inf2025_56"
-          >Hosh Al-Bay'ah Collection: An Immersive Multiplayer Virtual Museum</a
-        >
-      </li>
-      <li>
-        <a href="https://doi.org/10.18420/inf2025_57"
-          >Mosul: Preserving the After-Effects of War</a
-        >
-      </li>
-      <li>
-        <a href="https://papers.ssrn.com/sol3/Delivery.cfm?abstractid=5134415"
-          >Deepfake Multi-Faces Detection Using Haar Cascades with Sift Matching
-          Algorithm</a
-        >
-      </li>
-    </ul>
-
     <h2>Links</h2>
     <ul>
       <li>
-        Check my publications at <a href="https://orcid.org/0009-0002-1924-5270">ORCID</a>, <a href="https://scholar.google.com/citations?user=YQ10EnMAAAAJ">Google Scholar</a>
+        Check my publications on <a href="https://orcid.org/0009-0002-1924-5270">ORCID</a>, <a href="https://scholar.google.com/citations?user=YQ10EnMAAAAJ">Google Scholar</a>
       </li>
       <li>
-        Check my coding work at <a href="https://github.com/LedaThemis">GitHub</a>
+        Check my coding work on <a href="https://github.com/LedaThemis">GitHub</a>
       </li>
       <li>
-        Follow my professional life at <a href="https://linkedin.com/in/alqaba">LinkedIn</a> (disclaimer: rarely updated)
+        Follow my professional life on <a href="https://linkedin.com/in/alqaba">LinkedIn</a> (disclaimer: rarely updated)
       </li>
     </ul>
 
