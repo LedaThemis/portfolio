@@ -1,0 +1,73 @@
+---
+import IraqMarshesLayout from "../../layouts/IraqMarshes/IraqMarshesLayout.astro";
+---
+
+<IraqMarshesLayout>
+  <div class="px-4 py-6">
+    <h2 class="text-2xl md:text-3xl text-center mb-3">Visual Guide</h2>
+    <p class="text-sm md:text-base text-center text-gray-700 max-w-3xl mx-auto">
+      Explore the Iraqi Marshes through this booklet! Delve into the rich
+      wildlife, and the traditional life of the marshes. Click to start!
+    </p>
+  </div>
+  <div class="flex flex-col w-full h-screen mb-16">
+    <div class="flex flex-col items-center flex-1">
+      <div
+        id="al-chibayish-booklet"
+        class="_df_thumb"
+        source="https://res.cloudinary.com/dj08db9y2/image/upload/v1772482232/iraq-marshes/documents/ozscnqgucjvnonqb2myz.pdf"
+        thumb="https://res.cloudinary.com/dj08db9y2/image/upload/f_auto,q_auto/v1772482232/iraq-marshes/documents/ozscnqgucjvnonqb2myz"
+      >
+      </div>
+      <!-- jQuery (required) -->
+      <script is:inline src="https://code.jquery.com/jquery-3.6.0.min.js"
+      ></script>
+
+      <!-- DearFlip JS Flipbook plugin -->
+      <script
+        is:inline
+        src="https://cdn.jsdelivr.net/npm/@dearhive/dearflip-jquery-flipbook@1.7.3/dflip/js/dflip.min.js"
+      ></script>
+
+      <!-- DearFlip CSS -->
+      <link
+        href="https://cdn.jsdelivr.net/npm/@dearhive/dearflip-jquery-flipbook@1.7.3/dflip/css/dflip.min.css"
+        rel="stylesheet"
+      />
+      <!-- DearFlip Icons -->
+      <link
+        href="https://cdn.jsdelivr.net/npm/@dearhive/dearflip-jquery-flipbook@1.7.3/dflip/css/themify-icons.min.css"
+        rel="stylesheet"
+      />
+    </div>
+
+    <style is:inline>
+      #al-chibayish-booklet {
+        width: 100%;
+        max-width: 457px;
+        height: auto;
+        /* TODO: Unhardcode */
+        aspect-ratio: 457 / 646.25;
+        transform: none !important;
+        perspective: none !important;
+        perspective-origin: 0;
+        transition: 0;
+      }
+      ._df_thumb:hover ._df_book-cover {
+        transform: none !important;
+      }
+      
+      @media (max-width: 768px) {
+        #al-chibayish-booklet {
+          max-width: 90vw;
+        }
+      }
+      
+      @media (max-width: 480px) {
+        #al-chibayish-booklet {
+          max-width: 95vw;
+        }
+      }
+    </style>
+  </div>
+</IraqMarshesLayout>
