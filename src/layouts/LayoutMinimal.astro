@@ -3,7 +3,7 @@
 import "../styles/minimal.css";
 
 // Components
-import Footer from "../components/Footer.astro";
+import FooterMinimal from "../components/FooterMinimal.astro";
 import NavbarMinimal from "../components/NavbarMinimal.astro";
 
 // Vercel
@@ -38,7 +38,7 @@ const { title, description } = Astro.props;
   <body>
     <NavbarMinimal />
     <slot />
-    <Footer />
+    <FooterMinimal />
     <style is:global>
       .external::after {
         background-color: grey;
