@@ -27,6 +27,7 @@ const events = defineCollection({
 const press = defineCollection({
   loader: file("src/data/press.json"),
   schema: z.object({
+    is_featured: z.boolean().optional(),
     title: z.string(),
     reference: z.string().optional(),
     published_at: z.coerce.date(),

@@ -4,7 +4,7 @@ import Contact from "../components/Contact.astro";
 import { getCollection } from "astro:content";
 
 const events = await getCollection('events');
-const press = await getCollection('press');
+const featuredPress = await getCollection('press', ({ data }) => data.is_featured);
 ---
 
 <LayoutMinimal
@@ -44,11 +44,14 @@ const press = await getCollection('press');
     <h2>Press</h2>
     <!-- TODO: Consider using <blockquote> -->
     <ul>
-      {press.map((entry) => (
+      {featuredPress.map((entry) => (
         <li>
           <a href={entry.data.reference}>{entry.data.title}</a> {entry.data.mention && <span class="italic">(Mentioned as: <span lang={entry.data.mention.lang}>{entry.data.mention.text}</span>)</span>}
         </li>
       ))}
+      <li>
+        ...and others, <a href="/press">see complete list of press mentions</a>
+      </li>
     </ul>
 
     <h2>Links</h2>
