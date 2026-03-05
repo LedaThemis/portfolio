@@ -1,0 +1,300 @@
+[
+  {
+    "slug": "success-story-under-global-entrepreneurship-week-iraq-2025",
+    "title": "Success Story under Global Entrepreneurship Week Iraq 2025",
+    "role": "Speaker",
+    "reference": "https://uomosul.edu.iq/engineering/59665-2",
+    "location": { "country": "Iraq", "city": "Mosul" },
+    "start_date": "2026-02-10",
+    "end_date": "2026-02-10",
+    "mention": {
+      "lang": "ar",
+      "text": "\"عادل محمد عدنان\""
+    }
+  },
+  {
+    "slug": "workshop-on-heritage-preservation-at-iraqi-embassy-in-berlin",
+    "title": "Workshop on Heritage Preservation at Iraqi Embassy in Berlin",
+    "role": "Participant",
+    "reference": "https://mofa.gov.iq/berlin/?p=6014",
+    "location": { "city": "Berlin", "country": "Germany" },
+    "start_date": "2025-12-23",
+    "end_date": "2025-12-23"
+  },
+  {
+    "slug": "project-week-brandenburg-state-archaelogy-museum",
+    "title": "Project Week: Brandenburg State Archaelogy Museum",
+    "role": "Student assistant",
+    "reference": "https://pih.education/brandenburg-museum",
+    "location": {
+      "venue": "Technical University Brandenburg",
+      "city": "Brandenburg an der Havel",
+      "country": "Germany"
+    },
+    "start_date": "2025-12-17",
+    "end_date": "2025-12-22"
+  },
+  {
+    "slug": "digitalization-of-cultural-heritage-workshop-at-university-of-babylon",
+    "title": "Digitalization of Cultural Heritage Workshop at University of Babylon",
+    "role": "Presenter",
+    "reference": "https://engineering.uobabylon.edu.iq/department/action_news.aspx?article=95547&cdid=4",
+    "location": { "city": "Babylon", "country": "Iraq" },
+    "start_date": "2025-11-24",
+    "end_date": "2025-11-24"
+  },
+  {
+    "slug": "immortalize-tangible-and-intangible-of-unesco-al-chibayish-marshes-world-heritage",
+    "title": "Immortalize Tangible and Intangible of UNESCO Al-Chibayish's Marshes World Heritage",
+    "role": "Student assistant",
+    "reference": "https://pih.education/al-chibayish",
+    "location": { "city": "Thi-Qar", "country": "Iraq" },
+    "start_date": "2025-11-19",
+    "end_date": "2025-11-23"
+  },
+  {
+    "slug": "development-of-discover-mosul-app",
+    "title": "Development of \"Discover Mosul\" App",
+    "role": "Awardee",
+    "reference": "https://alnoor.edu.iq/en/archives/2025/11/18/10/01/86321",
+    "location": { "city": "Mosul", "country": "Iraq" },
+    "start_date": "2025-11-18",
+    "end_date": "2025-11-18"
+  },
+  {
+    "slug": "opening-of-huawei-ict-academy-at-university-of-mosul",
+    "title": "Opening of Huawei ICT Academy at University of Mosul",
+    "role": "Presenter",
+    "reference": "https://uomosul.edu.iq/news-10756",
+    "location": { "city": "Mosul", "country": "Iraq" },
+    "start_date": "2025-10-22",
+    "end_date": "2025-10-22"
+  },
+  {
+    "slug": "talents-program-university-of-mosul",
+    "title": "Talents program - University of Mosul",
+    "role": "Presenter",
+    "reference": "https://uomosul.edu.iq/781-2",
+    "location": { "city": "Mosul", "country": "Iraq" },
+    "start_date": "2025-10-14",
+    "end_date": "2025-10-14"
+  },
+  {
+    "slug": "informatik-festival-2025",
+    "title": "Informatik Festival 2025",
+    "role": "Speaker",
+    "reference": "https://informatik2025.gi.de/Speakers.html",
+    "location": { "city": "Potsdam", "country": "Germany" },
+    "start_date": "2025-09-16",
+    "end_date": "2025-09-19"
+  },
+  {
+    "slug": "hurryapp-3-hackathon-workshop",
+    "title": "HurryApp 3 Hackathon Workshop",
+    "role": "Instructor",
+    "reference": "https://www.facebook.com/hurryapp.hackathon/posts/1104835335109356",
+    "location": { "city": "Baghdad", "country": "Iraq" },
+    "start_date": "2025-09-02",
+    "end_date": "2025-09-02"
+  },
+  {
+    "slug": "al-noor-center-for-the-preservation-of-cultural-heritage",
+    "title": "Al-Noor Center for the Preservation of Cultural Heritage",
+    "role": "Head of development",
+    "reference": "https://center.alnoor.edu.iq/en/team",
+    "location": { "city": "Mosul", "country": "Iraq" },
+    "start_date": "2025-06-01",
+    "end_date": "2025-06-01"
+  },
+  {
+    "slug": "falling-walls-lab-iraq-2025",
+    "title": "Falling Walls Lab Iraq 2025",
+    "role": "Finalist (2nd Place)",
+    "reference": "https://uomosul.edu.iq/engineering/54433-2",
+    "location": { "city": "Sulaymaniyah", "country": "Iraq" },
+    "start_date": "2025-05-29",
+    "end_date": "2025-05-29",
+    "mention": {
+      "lang": "ar",
+      "text": "\"عادل محمد عدنان\""
+    }
+  },
+  {
+    "slug": "seed-workshop-university-of-mosul",
+    "title": "Seed Workshop - University of Mosul",
+    "role": "Presenter",
+    "location": { "city": "Mosul", "country": "Iraq" },
+    "start_date": "2025-05-27",
+    "end_date": "2025-05-27"
+  },
+  {
+    "slug": "heritage-exhibition-at-alnoor-university",
+    "title": "Heritage Exhibition at Alnoor University",
+    "role": "Participant",
+    "reference": "https://alnoor.edu.iq/en/archives/2025/05/26/15/10/81664",
+    "location": { "city": "Mosul", "country": "Iraq" },
+    "start_date": "2025-05-26",
+    "end_date": "2025-05-26"
+  },
+  {
+    "slug": "3rd-sustainable-development-week-university-of-mosul",
+    "title": "3rd Sustainable Development Week - University of Mosul",
+    "role": "Participant",
+    "reference": "https://uomosul.edu.iq/news-20940-2",
+    "location": { "city": "Mosul", "country": "Iraq" },
+    "start_date": "2025-04-21",
+    "end_date": "2025-04-21"
+  },
+  {
+    "slug": "doch-conference",
+    "title": "DoCH Conference",
+    "role": "Author",
+    "reference": "https://www.pih.education/content/Program-DoCH-Conference.pdf",
+    "location": {
+      "venue": "American University of Beirut - Mediterraneo",
+      "city": "Paphos",
+      "country": "Cyprus"
+    },
+    "start_date": "2025-04-07",
+    "end_date": "2025-04-07"
+  },
+  {
+    "slug": "digitization-of-cultural-heritage-workshop-at-alnoor-university",
+    "title": "Digitization of Cultural Heritage Workshop at Alnoor University",
+    "role": "Speaker",
+    "reference": "https://alnoor.edu.iq/en/archives/2025/04/17/09/39/80347",
+    "location": { "city": "Mosul", "country": "Iraq" },
+    "start_date": "2025-04-17",
+    "end_date": "2025-04-17"
+  },
+  {
+    "slug": "cybersecurity-hackathon-university-of-mosul",
+    "title": "Cybersecurity Hackathon at University of Mosul",
+    "role": "Mentor",
+    "reference": "https://uomosul.edu.iq/news-20869",
+    "location": { "city": "Mosul", "country": "Iraq" },
+    "start_date": "2025-02-23",
+    "end_date": "2025-02-24"
+  },
+  {
+    "slug": "prime-minister-empowering-young-women-in-tech",
+    "title": "Prime Minister - Empowering Young Women in Tech",
+    "role": "Mentor",
+    "reference": "https://www.instagram.com/aswarme/p/DAMD9QMqlnk",
+    "location": { "city": "Kirkuk", "country": "Iraq" },
+    "start_date": "2024-09-22",
+    "end_date": "2024-09-24"
+  },
+  {
+    "slug": "hitex-2024",
+    "title": "HITEX 2024",
+    "role": "Participant",
+    "reference": "https://www.hitex.tech/pdf/HITEX_2024_Outcome_Report_Digital.pdf",
+    "location": { "city": "Erbil", "country": "Iraq" },
+    "start_date": "2024-09-03",
+    "end_date": "2024-09-06"
+  },
+  {
+    "slug": "dti-youth-conference",
+    "title": "DTI Youth Conference",
+    "role": "Participant",
+    "reference": "https://www.kapita.iq/post/iraqs-largest-digital-transformation-summit-dti-youth-paves-way-national-digital-development",
+    "location": { "city": "Baghdad", "country": "Iraq" },
+    "start_date": "2024-07-21",
+    "end_date": "2024-07-21"
+  },
+  {
+    "slug": "hurryapp-2-hackathon",
+    "title": "HurryApp 2 Hackathon",
+    "role": "Mentor",
+    "reference": "https://www.instagram.com/aswaracademy/p/C9FnVGqKa3x",
+    "location": { "city": "Baghdad", "country": "Iraq" },
+    "start_date": "2024-07-05",
+    "end_date": "2024-07-06"
+  },
+  {
+    "slug": "hurryapp-2-hackathon-workshop",
+    "title": "HurryApp 2 Hackathon Workshop",
+    "role": "Instructor",
+    "reference": "https://www.instagram.com/aswaracademy/p/C79xKoGqXME",
+    "location": { "city": "Baghdad", "country": "Iraq" },
+    "start_date": "2024-06-08",
+    "end_date": "2024-06-08"
+  },
+  {
+    "slug": "huawei-ict-competition-2023-2024-global-final",
+    "title": "Huawei ICT Competition 2023-2024 Global Final",
+    "role": "First Prize Winner",
+    "reference": "https://www.huawei.com/en/news/2024/5/ict-competition-talent",
+    "location": { "city": "Shenzhen", "country": "China" },
+    "start_date": "2024-05-23",
+    "end_date": "2024-05-26"
+  },
+  {
+    "slug": "creative-arts-festival-2024-software-and-computer-systems-track",
+    "title": "Creative Arts Festival 2024 - Software and Computer Systems Track",
+    "role": "First Place",
+    "reference": "https://uomosul.edu.iq/finearts/wp-content/uploads/sites/26/2024/04/%E2%80%8E%E2%81%A8%D9%86%D8%AA%D8%A7%D8%A6%D8%AC-%D8%A7%D9%84%D9%81%D9%86%D9%88%D9%86-%D8%A7%D9%84%D8%A7%D8%A8%D8%AF%D8%A7%D8%B9%D9%8A%D8%A9-2024%E2%81%A9.docx",
+    "location": { "city": "Mosul", "country": "Iraq" },
+    "start_date": "2024-05-05",
+    "end_date": "2024-05-05",
+    "mention": {
+      "lang": "ar",
+      "text": "\"عادل محمد عدنان\""
+    }
+  },
+  {
+    "slug": "africa-and-arab-collegiate-programming-championship",
+    "title": "Africa and Arab Collegiate Programming Championship",
+    "role": "Finalist",
+    "reference": "https://acpc.global/acpc2024",
+    "location": { "city": "Luxor", "country": "Egypt" },
+    "start_date": "2024-03-01",
+    "end_date": "2024-03-09"
+  },
+  {
+    "slug": "first-iald-debates-mondial",
+    "title": "1st IALD Debates Mondial",
+    "role": "Finalist",
+    "reference": "https://uomosul.edu.iq/news-10450",
+    "location": { "city": "Mosul", "country": "Iraq" },
+    "start_date": "2024-02-14",
+    "end_date": "2024-02-14"
+  },
+  {
+    "slug": "hurryapp-hackathon",
+    "title": "HurryApp Hackathon",
+    "role": "Winner Team",
+    "reference": "https://hurryapphackathon.com/previous-hackathons",
+    "location": { "city": "Baghdad", "country": "Iraq" },
+    "start_date": "2024-01-11",
+    "end_date": "2024-01-14"
+  },
+  {
+    "slug": "huawei-ict-competition-2023-2024-regional-meca",
+    "title": "Huawei ICT Competition 2023-2024 Regional (MECA)",
+    "role": "Finalist",
+    "reference": "https://jeddah24.net/technology/2312/2118",
+    "location": { "city": "Manama", "country": "Bahrain" },
+    "start_date": "2023-12-19",
+    "end_date": "2023-12-21"
+  },
+  {
+    "slug": "bestoontalk-2023",
+    "title": "BestoonTalk (2023)",
+    "role": "Participant",
+    "reference": "https://youtu.be/gXt23xPuGbM",
+    "location": { "city": "Baghdad", "country": "Iraq" },
+    "start_date": "2023-12-14",
+    "end_date": "2023-12-14"
+  },
+  {
+    "slug": "7th-rethink-education-and-science-conference-resi",
+    "title": "7th Rethink Education and Science Conference (RESI)",
+    "role": "Participant",
+    "reference": "https://uomosul.edu.iq/en/blog/2023/02/26/the-7th-international-resi-student-conference-jointly-concluded",
+    "location": { "city": "Mosul", "country": "Iraq" },
+    "start_date": "2023-02-26",
+    "end_date": "2023-02-26"
+  }
+]

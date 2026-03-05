@@ -50,3 +50,7 @@ h3 {
   text-decoration: underline;
   color: var(--link-color);
 }
+
+.italic {
+  font-style: italic;
+}
