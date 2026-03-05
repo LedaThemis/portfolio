@@ -33,7 +33,8 @@ interface Props {
   width: number | `${number}`;
   height: number | `${number}`;
   alt: string;
-  class: string;
+  class?: string;
+  style?: string;
   optimize: boolean;
   loading?: "eager" |"lazy";
 }
