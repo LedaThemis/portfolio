@@ -7,6 +7,7 @@ import { z } from "astro/zod";
 const events = defineCollection({
   loader: file("src/data/events.json"),
   schema: z.object({
+    is_featured: z.boolean().optional(),
     title: z.string(),
     role: z.string(),
     reference: z.string().optional(),

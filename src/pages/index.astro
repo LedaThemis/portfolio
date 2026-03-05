@@ -3,7 +3,7 @@ import LayoutMinimal from "../layouts/LayoutMinimal.astro";
 import Contact from "../components/Contact.astro";
 import { getCollection } from "astro:content";
 
-const events = await getCollection('events');
+const featuredEvents = await getCollection('events', ({ data }) => data.is_featured);
 const featuredPress = await getCollection('press', ({ data }) => data.is_featured);
 ---
 
@@ -16,9 +16,12 @@ const featuredPress = await getCollection('press', ({ data }) => data.is_feature
     <p>I'm a software engineer and researcher interested in robotics and heritage preservation. <br>Currently studying Computer Engineering (B.Sc.) at the <a href="https://uomosul.edu.iq">University of Mosul</a>.<br>I do backend, simulations, 3d work, data analysis, and robotics.</p>
     <h2>Events & Awards</h2>
     <ul>
-      {events.map(event => (
+      {featuredEvents.map(event => (
         <li>{event.data.role} at {event.data.reference ? <a href={event.data.reference} target="_blank" rel="noreferrer noopener">{event.data.title}</a> : event.data.title} ({Object.values(event.data.location).join(', ')}) {event.data.mention && <span class="italic">(Mentioned as: <span lang={event.data.mention.lang}>{event.data.mention.text}</span>)</span>}</li>
       ))}
+      <li>
+        ...and others, <a href="/events">see complete list of events & awards</a>
+      </li>
     </ul>
 
     <h2>Publications</h2>

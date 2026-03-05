@@ -1,5 +1,6 @@
 [
   {
+    "is_featured": true,
     "slug": "success-story-under-global-entrepreneurship-week-iraq-2025",
     "title": "Success Story under Global Entrepreneurship Week Iraq 2025",
     "role": "Speaker",
@@ -13,6 +14,7 @@
     }
   },
   {
+    "is_featured": true,
     "slug": "workshop-on-heritage-preservation-at-iraqi-embassy-in-berlin",
     "title": "Workshop on Heritage Preservation at Iraqi Embassy in Berlin",
     "role": "Participant",
@@ -22,6 +24,7 @@
     "end_date": "2025-12-23"
   },
   {
+    "is_featured": true,
     "slug": "project-week-brandenburg-state-archaelogy-museum",
     "title": "Project Week: Brandenburg State Archaelogy Museum",
     "role": "Student assistant",
@@ -35,6 +38,7 @@
     "end_date": "2025-12-22"
   },
   {
+    "is_featured": true,
     "slug": "digitalization-of-cultural-heritage-workshop-at-university-of-babylon",
     "title": "Digitalization of Cultural Heritage Workshop at University of Babylon",
     "role": "Presenter",
@@ -44,6 +48,7 @@
     "end_date": "2025-11-24"
   },
   {
+    "is_featured": true,
     "slug": "immortalize-tangible-and-intangible-of-unesco-al-chibayish-marshes-world-heritage",
     "title": "Immortalize Tangible and Intangible of UNESCO Al-Chibayish's Marshes World Heritage",
     "role": "Student assistant",
@@ -53,6 +58,7 @@
     "end_date": "2025-11-23"
   },
   {
+    "is_featured": false,
     "slug": "development-of-discover-mosul-app",
     "title": "Development of \"Discover Mosul\" App",
     "role": "Awardee",
@@ -62,6 +68,7 @@
     "end_date": "2025-11-18"
   },
   {
+    "is_featured": false,
     "slug": "opening-of-huawei-ict-academy-at-university-of-mosul",
     "title": "Opening of Huawei ICT Academy at University of Mosul",
     "role": "Presenter",
@@ -71,6 +78,7 @@
     "end_date": "2025-10-22"
   },
   {
+    "is_featured": false,
     "slug": "talents-program-university-of-mosul",
     "title": "Talents program - University of Mosul",
     "role": "Presenter",
@@ -80,6 +88,7 @@
     "end_date": "2025-10-14"
   },
   {
+    "is_featured": true,
     "slug": "informatik-festival-2025",
     "title": "Informatik Festival 2025",
     "role": "Speaker",
@@ -89,6 +98,7 @@
     "end_date": "2025-09-19"
   },
   {
+    "is_featured": false,
     "slug": "hurryapp-3-hackathon-workshop",
     "title": "HurryApp 3 Hackathon Workshop",
     "role": "Instructor",
@@ -98,6 +108,7 @@
     "end_date": "2025-09-02"
   },
   {
+    "is_featured": true,
     "slug": "al-noor-center-for-the-preservation-of-cultural-heritage",
     "title": "Al-Noor Center for the Preservation of Cultural Heritage",
     "role": "Head of development",
@@ -107,6 +118,7 @@
     "end_date": "2025-06-01"
   },
   {
+    "is_featured": true,
     "slug": "falling-walls-lab-iraq-2025",
     "title": "Falling Walls Lab Iraq 2025",
     "role": "Finalist (2nd Place)",
@@ -120,6 +132,7 @@
     }
   },
   {
+    "is_featured": false,
     "slug": "seed-workshop-university-of-mosul",
     "title": "Seed Workshop - University of Mosul",
     "role": "Presenter",
@@ -128,6 +141,7 @@
     "end_date": "2025-05-27"
   },
   {
+    "is_featured": false,
     "slug": "heritage-exhibition-at-alnoor-university",
     "title": "Heritage Exhibition at Alnoor University",
     "role": "Participant",
@@ -137,6 +151,7 @@
     "end_date": "2025-05-26"
   },
   {
+    "is_featured": false,
     "slug": "3rd-sustainable-development-week-university-of-mosul",
     "title": "3rd Sustainable Development Week - University of Mosul",
     "role": "Participant",
@@ -146,6 +161,7 @@
     "end_date": "2025-04-21"
   },
   {
+    "is_featured": true,
     "slug": "doch-conference",
     "title": "DoCH Conference",
     "role": "Author",
@@ -159,6 +175,7 @@
     "end_date": "2025-04-07"
   },
   {
+    "is_featured": false,
     "slug": "digitization-of-cultural-heritage-workshop-at-alnoor-university",
     "title": "Digitization of Cultural Heritage Workshop at Alnoor University",
     "role": "Speaker",
@@ -168,6 +185,7 @@
     "end_date": "2025-04-17"
   },
   {
+    "is_featured": false,
     "slug": "cybersecurity-hackathon-university-of-mosul",
     "title": "Cybersecurity Hackathon at University of Mosul",
     "role": "Mentor",
@@ -177,6 +195,7 @@
     "end_date": "2025-02-24"
   },
   {
+    "is_featured": false,
     "slug": "prime-minister-empowering-young-women-in-tech",
     "title": "Prime Minister - Empowering Young Women in Tech",
     "role": "Mentor",
@@ -186,6 +205,7 @@
     "end_date": "2024-09-24"
   },
   {
+    "is_featured": false,
     "slug": "hitex-2024",
     "title": "HITEX 2024",
     "role": "Participant",
@@ -204,6 +224,7 @@
     "end_date": "2024-07-21"
   },
   {
+    "is_featured": true,
     "slug": "hurryapp-2-hackathon",
     "title": "HurryApp 2 Hackathon",
     "role": "Mentor",
@@ -222,6 +243,7 @@
     "end_date": "2024-06-08"
   },
   {
+    "is_featured": true,
     "slug": "huawei-ict-competition-2023-2024-global-final",
     "title": "Huawei ICT Competition 2023-2024 Global Final",
     "role": "First Prize Winner",
@@ -231,6 +253,7 @@
     "end_date": "2024-05-26"
   },
   {
+    "is_featured": true,
     "slug": "creative-arts-festival-2024-software-and-computer-systems-track",
     "title": "Creative Arts Festival 2024 - Software and Computer Systems Track",
     "role": "First Place",
@@ -244,6 +267,7 @@
     }
   },
   {
+    "is_featured": true,
     "slug": "africa-and-arab-collegiate-programming-championship",
     "title": "Africa and Arab Collegiate Programming Championship",
     "role": "Finalist",
@@ -253,6 +277,7 @@
     "end_date": "2024-03-09"
   },
   {
+    "is_featured": true,
     "slug": "first-iald-debates-mondial",
     "title": "1st IALD Debates Mondial",
     "role": "Finalist",
@@ -262,6 +287,7 @@
     "end_date": "2024-02-14"
   },
   {
+    "is_featured": true,
     "slug": "hurryapp-hackathon",
     "title": "HurryApp Hackathon",
     "role": "Winner Team",
@@ -271,6 +297,7 @@
     "end_date": "2024-01-14"
   },
   {
+    "is_featured": false,
     "slug": "huawei-ict-competition-2023-2024-regional-meca",
     "title": "Huawei ICT Competition 2023-2024 Regional (MECA)",
     "role": "Finalist",
@@ -280,6 +307,7 @@
     "end_date": "2023-12-21"
   },
   {
+    "is_featured": false,
     "slug": "bestoontalk-2023",
     "title": "BestoonTalk (2023)",
     "role": "Participant",
@@ -289,6 +317,7 @@
     "end_date": "2023-12-14"
   },
   {
+    "is_featured": false,
     "slug": "7th-rethink-education-and-science-conference-resi",
     "title": "7th Rethink Education and Science Conference (RESI)",
     "role": "Participant",
