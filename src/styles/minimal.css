@@ -1,11 +1,17 @@
+:root {
+  --bg-color: #eee;
+  --font-color: #444;
+  --link-color: #1447e6;
+}
+
 /* Credits: http://bettermotherfuckingwebsite.com */
 body {
-  background-color: #eee;
+  background-color: var(--bg-color);
   margin: 40px auto;
   max-width: 650px;
   line-height: 1.6;
   font-size: 18px;
-  color: #444;
+  color: var(--font-color);
   padding: 0 10px;
 }
 h1,

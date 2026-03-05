@@ -4,7 +4,7 @@ import "../styles/minimal.css";
 
 // Components
 import Footer from "../components/Footer.astro";
-import Navbar from "../components/Navbar.astro";
+import NavbarMinimal from "../components/NavbarMinimal.astro";
 
 // Vercel
 import SpeedInsights from '@vercel/speed-insights/astro';
@@ -36,6 +36,7 @@ const { title, description } = Astro.props;
     <SpeedInsights />
   </head>
   <body>
+    <NavbarMinimal />
     <slot />
     <Footer />
     <style is:global>
