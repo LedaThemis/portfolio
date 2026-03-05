@@ -15,6 +15,7 @@ const featuredPress = await getCollection('press', ({ data }) => data.is_feature
     <h2>About</h2>
     <p>I'm a software engineer and researcher interested in robotics and heritage preservation. <br>Currently studying Computer Engineering (B.Sc.) at the <a href="https://uomosul.edu.iq">University of Mosul</a>.<br>I do backend, simulations, 3d work, data analysis, and robotics.</p>
     <h2>Events & Awards</h2>
+    <p>Selected events where I have presented, participated, or mentored:</p>
     <ul>
       {featuredEvents.map(event => (
         <li>{event.data.role} at {event.data.reference ? <a href={event.data.reference} target="_blank" rel="noreferrer noopener">{event.data.title}</a> : event.data.title} ({Object.values(event.data.location).join(', ')}) {event.data.mention && <span class="italic">(Mentioned as: <span lang={event.data.mention.lang}>{event.data.mention.text}</span>)</span>}</li>
@@ -25,6 +26,7 @@ const featuredPress = await getCollection('press', ({ data }) => data.is_feature
     </ul>
 
     <h2>Publications</h2>
+    <p>Selected publications that I have authored:</p>
     <ul>
       <li>
         <a href="https://doi.org/10.18420/inf2025_56"
@@ -45,6 +47,7 @@ const featuredPress = await getCollection('press', ({ data }) => data.is_feature
     </ul>
 
     <h2>Press</h2>
+    <p>Selected media mentions where my work (or myself :grin:) is featured:</p>
     <!-- TODO: Consider using <blockquote> -->
     <ul>
       {featuredPress.map((entry) => (
@@ -58,6 +61,7 @@ const featuredPress = await getCollection('press', ({ data }) => data.is_feature
     </ul>
 
     <h2>Links</h2>
+    <p>Other places online where you can find me:</p>
     <ul>
       <li>
         Check my publications on <a href="https://orcid.org/0009-0002-1924-5270">ORCID</a>, <a href="https://scholar.google.com/citations?user=YQ10EnMAAAAJ">Google Scholar</a>
