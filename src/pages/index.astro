@@ -1,16 +1,154 @@
 ---
-import Layout from "../layouts/Layout.astro";
+import LayoutMinimal from "../layouts/LayoutMinimal.astro";
 import Welcome from "../components/Welcome.astro";
 import Projects from "../components/Projects.astro";
 import Contact from "../components/Contact.astro";
 import About from "../components/About.astro";
 ---
 
-<Layout title="Adil Al Qaba — Professional Tinkerer" description="Personal website of Adil Al Qaba">
-  <main class="flex flex-col gap-5 mx-auto">
-    <Welcome />
-    <About />
-    <Projects />
+<LayoutMinimal
+  title="Adil Al Qaba - Software Engineer"
+  description="Adil Al Qaba (عادل محمد عدنان), a software engineer and published researcher, winner of many international prizes like Huawei ICT, ACPC, DoCH, Falling Walls"
+>
+  <main>
+    <h1>About</h1>
+    <p>I'm a software engineer, and researcher interested in robotics and heritage preservation. <br>Currently studying Computer Engineering (B.Sc.) at the <a href="https://uomosul.edu.iq">University of Mosul</a>.<br>I do backend, simulations, 3d work, data analysis, and robotics.</p>
+    <h2>Events & Awards</h2>
+    <ul>
+      <li>
+        Speaker at <a href="https://uomosul.edu.iq/engineering/59665-2">Success Story under Global Entrepreneurship Week Iraq 2025</a> (Mosul, Iraq) <span lang="ar" style="font-style: italic;">(Referred to as: "عادل محمد عدنان")</span>
+      </li>
+      <li>
+        Student assistant at <a href="https://pih.education/brandenburg-museum">Project Week: Brandenburg State Archaelogy Museum</a> (Technical University Brandenburg, Brandenburg an der Havel, Germany)
+      </li>
+      <li>
+        Participant at <a href="https://mofa.gov.iq/berlin/?p=6014">Workshop on Heritage Preservation at Iraqi Embassy in Berlin</a> (Berlin, Germany)
+      </li>
+      <li>
+        Student assistant at <a href="https://pih.education/al-chibayish">Immortalize Tangible and Intangible of UNESCO Al-Chibayish's Marshes World Heritage</a> (Thi-Qar, Iraq)
+      </li>
+      <li>
+        Speaker at <a href="https://informatik2025.gi.de/Speakers.html">Informatik Festival 2025</a> (Potsdam, Germany)
+      </li>
+      <li>
+        Instructor at <a href="">HurryApp 3 Hackathon Workshop</a> (Baghdad, Iraq)
+      </li>
+      <li>
+        Awardee at <a href="https://alnoor.edu.iq/en/archives/2025/11/18/10/01/86321">Development of "Discover Mosul"</a>
+      </li>
+      <li>
+        Finalist (2nd Place) at <a href="https://uomosul.edu.iq/engineering/54433-2">Falling Walls Lab Iraq 2025</a>
+      </li>
+      <li>
+        Participant at <a href="https://alnoor.edu.iq/en/archives/2025/05/26/15/10/81664">Heritage Exhibition at Alnoor University</a> (Mosul, Iraq)
+      </li>
+      <li>
+        Speaker at <a href="https://alnoor.edu.iq/en/archives/2025/04/17/09/39/80347">Digitization of Cultural Heritage Workshop at Alnoor University</a> (Mosul, Iraq)
+      </li>
+      <li>
+        Mentor at <a href="">HurryApp 2 Hackathon</a> (Baghdad, Iraq)
+      </li>
+      <li>
+        Instructor at <a href="">HurryApp 2 Hackathon Workshop</a> (Baghdad, Iraq)
+      </li>
+      <li>
+        Author at <a href="https://www.pih.education/content/Program-DoCH-Conference.pdf">DoCH Conference</a> (American University of Beirut - Mediterraneo, Paphos, Cyprus)
+      </li>
+      <li>
+        Mentor at <a href="https://uomosul.edu.iq/news-20869">UOM Cybersecurity Hackathon</a> (Mosul, Iraq)
+      </li>
+      <li>
+        First Prize Winner at <a href="https://www.huawei.com/en/news/2024/5/ict-competition-talent">Huawei ICT Competition 2023-2024 Global Final</a> (Shenzhen, China)
+      </li>
+      <li>
+        Finalist at <a href="https://acpc.global/acpc2024">Africa and Arab Collegiate Programming Championship</a> (Luxor, Egypt)
+      </li>
+      <li>
+        Finalist at <a href="https://uomosul.edu.iq/news-10450">IALD Debates Mondial</a>(Mosul, Iraq)
+      </li>
+      <li>
+        Winner Team at <a href="https://hurryapphackathon.com/previous-hackathons">HurryApp Hackathon</a> (Baghdad, Iraq)
+      </li>
+      <li>
+        Finalist at <a href="https://jeddah24.net/technology/2312/2118">Huawei ICT Competition 2023-2024 Regional (MECA)</a> (Manama, Bahrain) <span lang="ar" style="font-style: italic;">(Referred to as: "عادل محمد عدنان")</span>
+      </li>
+      <li>
+        Participant at <a href="https://youtu.be/gXt23xPuGbM">BestoonTalk (2023)</a> (Baghdad, Iraq)
+      </li>
+      <li>
+        Participant at <a href="https://uomosul.edu.iq/en/blog/2023/02/26/the-7th-international-resi-student-conference-jointly-concluded">Rethink Education and Science (RESI)</a> (Mosul, Iraq)
+      </li>
+    </ul>
+
+    <h2>Press</h2>
+    <!-- TODO: Consider using <blockquote> -->
+    <ul>
+      <li>
+        <a href="https://www.facebook.com/UniversityofMos/posts/492196716900670">Interview on journey in programming with University of Mosul Press</a> <span lang="ar" style="font-style: italic;">(Referred to as: "عادل")</span>
+      </li>
+      <li>
+        <a href="https://uomosul.edu.iq/719-2">Coverage of participation at Informatik Festival 2025 and AI ART Gallery by University of Mosul</a>
+      </li>
+      <li>
+        <a href="https://youtu.be/s4jbtzgbs04">Interview on participation at Informatik Festival 2025 by Karbala News</a>
+      </li>
+      <li>
+        <a href="https://youtu.be/dNlUKr9dlHg">Interview with Al-Mosuliya TV as part of Scientists and Inventors program</a> <span lang="ar" style="font-style: italic;">(Referred to as: "عادل محمد عدنان")</span>
+      </li>
+      <li>
+        <a href="https://www.facebook.com/Kossay.Alahmady/posts/991199045800226">Interview on recent competition wins with University of Mosul President / Kossay Alahmady</a> <span lang="ar" style="font-style: italic;">(Referred to as: "عادل محمد عدنان")</span>
+      </li>
+      <li>
+        <a href="https://www.facebook.com/Kossay.Alahmady/posts/793418688911597">Interview on smart waste recycling, "Study in Iraq" platform with University of Mosul President / Kossay Alahmady</a> <span lang="ar" style="font-style: italic;">(Referred to as: "عادل محمد عدنان")</span>
+      </li>
+      <li>
+        <a href="https://uomosul.edu.iq/engineering/54728-2">Honoring achievemnt at DoCH Conference by University of Mosul</a> <span lang="ar" style="font-style: italic;">(Referred to as: "عادل محمد عدنان")</span>
+      </li>
+      <li>
+        <a href="https://www.rudawarabia.net/arabic/kurdistan/271220233">Interview on experience at Huawei competition by Rudaw</a> <span lang="ar" style="font-style: italic;">(Referred to as: "عادل محمد عدنان")</span>
+      </li>
+      <li>
+        <a href="https://shafaq.com/ar/%D9%83%D9%88%D8%B1%D8%AF%D8%B3%D9%80%D9%80%D8%AA%D8%A7%D9%86%D9%8A%D8%A7%D8%AA/%D8%A7%D9%84%D8%AA%D8%B9%D9%84%D9%8A%D9%85-%D8%A7%D9%84%D9%83%D9%88%D8%B1%D8%AF%D8%B3%D8%AA%D8%A7%D9%86%D9%8A%D8%A9-%D8%AA-%D9%83%D8%B1-%D9%85-%D8%B7%D9%84%D8%A8%D8%A9-%D8%A7%D9%84%D8%B9%D8%B1%D8%A7%D9%82-%D8%A7%D9%84%D8%A7%D9%88%D8%A7-%D9%84-%D8%A8%D9%85%D8%B3%D8%A7%D8%A8%D9%82%D8%A7%D8%AA-%D9%87%D9%88%D8%A7%D9%88%D9%8A-%D9%84%D8%AA%D9%83%D9%86%D9%88%D9%84%D9%88%D8%AC%D9%8A%D8%A7-%D8%A7%D9%84%D9%85%D8%B9%D9%84%D9%88%D9%85%D8%A7%D8%AA-%D8%A7%D9%84%D8%AF%D9%88%D9%84%D9%8A%D8%A9"
+        >Covering award ceremony for achievemnt at Huawei Competition by Shafaq News</a> <span lang="ar" style="font-style: italic;">(Referred to as: "عادل محمد عدنان")</span>
+      </li>
+      <li>
+        <a href="https://web.archive.org/web/20240527035121/https://tech.caijing.com.cn/20240527/5014334.shtml">Interview on Huawei ICT 2023-2024 Global Final Competition by Beijing-based Caijing Magazine</a> (Referred to as: "Adil")
+      </li>
+    </ul>
+
+    <h2>Publications</h2>
+    <ul>
+      <li>
+        <a href="https://doi.org/10.18420/inf2025_56"
+          >Hosh Al-Bay'ah Collection: An Immersive Multiplayer Virtual Museum</a
+        >
+      </li>
+      <li>
+        <a href="https://doi.org/10.18420/inf2025_57"
+          >Mosul: Preserving the After-Effects of War</a
+        >
+      </li>
+      <li>
+        <a href="https://papers.ssrn.com/sol3/Delivery.cfm?abstractid=5134415"
+          >Deepfake Multi-Faces Detection Using Haar Cascades with Sift Matching
+          Algorithm</a
+        >
+      </li>
+    </ul>
+
+    <h2>Links</h2>
+    <ul>
+      <li>
+        Check my publications at <a href="https://orcid.org/0009-0002-1924-5270">ORCID</a>, <a href="https://scholar.google.com/citations?user=YQ10EnMAAAAJ">Google Scholar</a>
+      </li>
+      <li>
+        Check my coding work at <a href="https://github.com/LedaThemis">GitHub</a>
+      </li>
+      <li>
+        Follow my professional life at <a href="https://linkedin.com/in/alqaba">LinkedIn</a> (disclaimer: rarely updated)
+      </li>
+    </ul>
+
     <Contact />
   </main>
 </Layout>

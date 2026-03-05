@@ -1,0 +1,53 @@
+---
+// Shared styles
+import "../styles/minimal.css";
+
+// Components
+import Footer from "../components/Footer.astro";
+import Navbar from "../components/Navbar.astro";
+
+// Vercel
+import SpeedInsights from '@vercel/speed-insights/astro';
+
+export interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/png" href="/favicon.ico" /><link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/apple-touch-icon.png"
+    />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <meta name="generator" content={Astro.generator} />
+    <meta property="og:image" content="/assets/og.png" />
+    <title>{title}</title>
+    <SpeedInsights />
+  </head>
+  <body>
+    <slot />
+    <Footer />
+    <style is:global>
+      .external::after {
+        background-color: grey;
+        content: "";
+        display: inline-flex;
+        margin-left: 4px;
+        mask-image: url(/assets/external.svg);
+        mask-size: cover;
+      }
+    </style>
+  </body>
+  <script defer src="/_vercel/insights/script.js"></script>
+</html>
