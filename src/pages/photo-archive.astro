@@ -19,12 +19,15 @@ const photos = await getCollection("photos");
       {
         photos.map((photo) => (
             <figure style="margin: 0;" class="grid-item">
+              {/* TODO: Support browsers that don't have native lazy loading */}
                 <img
                     class="grid-item-img"
                     title={`${photo.data.title} |${photo.data.taken_at ? ` Taken: ${photo.data.taken_at.toISOString().split("T")[0]} /` : ''} Published: ${photo.data.published_at.toISOString().split("T")[0]} / Source: ${photo.data.reference_title}`}
                     src={photo.data.image}
                     alt={photo.data.title}
                     data-mirrored={photo.data.image_mirror}
+                    width={photo.data.width}
+                    height={photo.data.height}
                     loading="lazy"
                 />
                 <figcaption>
@@ -63,13 +66,6 @@ const photos = await getCollection("photos");
       display: block;
       width: 100%;
       height: auto;
-      min-height: 250px;
-      background-color: #f0f0f0;
-    }
-    
-    .grid-item-img.loaded {
-      min-height: 0;
-      background-color: transparent;
     }
 
     @media screen and (min-width: 768px) {
@@ -94,55 +90,23 @@ const photos = await getCollection("photos");
       percentPosition: true,
     });
 
-    var PLACEHOLDER_SVG = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E";
-    
-    // TODO: Research if this is best solution
-    // Replace src with placeholder for JS-enabled browsers to stop from loading
     var images = document.querySelectorAll(".grid-item-img");
     images.forEach(function(img) {
-      if (img.src && !img.dataset.lazySwapped) {
-        img.dataset.src = img.src;
-        img.src = PLACEHOLDER_SVG;
-        img.dataset.lazySwapped = "true";
-      }
-    });
-
-    // Intersection Observer for lazy loading
-    var imageObserver = new IntersectionObserver(function (entries, observer) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          var img = entry.target;
-          var src = img.dataset.src;
-          
-          if (src && img.dataset.lazySwapped === "true" && img.src === PLACEHOLDER_SVG) {
-            img.src = src;
-            img.onerror = function () {
-              if (this.dataset.mirrored) {
-                this.src = this.dataset.mirrored;
-              }
-              img.onerror = null;
-            };
-            
-            img.onload = function () {
-              img.classList.add('loaded');
-              msnry.layout();
-            };
-            
-            img.removeAttribute('data-src');
-            img.removeAttribute('data-lazy-swapped');
-          }
-          
-          observer.unobserve(img);
+      img.onerror = function () {
+        if (this.dataset.mirrored) {
+          this.src = this.dataset.mirrored;
         }
-      });
-    }, {
-      rootMargin: '100px 0px',
-      threshold: 0.01
-    });
-
-    // Observe all images
-    images.forEach(function (img) {
-      imageObserver.observe(img);
+        img.onerror = null;
+      };
+      
+      img.onload = function () {
+        msnry.layout();
+      };
+      
+      // If image already loaded, trigger layout
+      if (img.complete) {
+        msnry.layout();
+      }
     });
   </script>
 </LayoutMinimal>
