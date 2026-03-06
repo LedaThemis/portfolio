@@ -44,6 +44,9 @@ importers:
       headbreaker:
         specifier: ^3.0.0
         version: 3.0.0
+      masonry-layout:
+        specifier: ^4.2.2
+        version: 4.2.2
       simple-icons:
         specifier: ^16.8.0
         version: 16.8.0
@@ -69,6 +72,9 @@ importers:
       '@tailwindcss/typography':
         specifier: ^0.5.19
         version: 0.5.19(tailwindcss@4.1.18)
+      '@types/masonry-layout':
+        specifier: ^4.2.8
+        version: 4.2.8
       capture-website:
         specifier: ^5.1.0
         version: 5.1.0(typescript@5.9.3)
@@ -851,6 +857,12 @@ packages:
   '@types/hast@3.0.4':
     resolution: {integrity: sha512-WPs+bbQw5aCj+x6laNGWLH3wviHtoCv/P3+otBhbOhJgG8qtpdAMlTCxLtsTWA7LH1Oh/bFCHsBn0TPS5m30EQ==}
 
+  '@types/jquery@4.0.0':
+    resolution: {integrity: sha512-Z+to+A2VkaHq1DfI2oSwsoCdhCHMpTSgjWzNcbNlRGYzksDBpPUgEcAL+RQjOBJRaLoEAOHXxqDGBVP+BblBwg==}
+
+  '@types/masonry-layout@4.2.8':
+    resolution: {integrity: sha512-Et2to22C31FG1UFaHRBL6BznMOhrur3Ckr9gvR7fRVmPgxqiwCEKZtV8GpFscHyNAKhZ0QlkwXJRPnJvxZUKQw==}
+
   '@types/mdast@4.0.4':
     resolution: {integrity: sha512-kGaNbPh1k7AFzgpud/gMdvIm5xuECykRR+JnWKQno9TAXVa6WIVCGTPvYGekIDL4uwCZQSYbUxNBSb1aUo79oA==}
 
@@ -1202,6 +1214,9 @@ packages:
     resolution: {integrity: sha512-0je+qPKHEMohvfRTCEo3CrPG6cAzAYgmzKyxRiYSSDkS6eGJdyVJm7WaYA5ECaAD9wLB2T4EEeymA5aFVcYXCA==}
     engines: {node: '>=6'}
 
+  desandro-matches-selector@2.0.2:
+    resolution: {integrity: sha512-+1q0nXhdzg1IpIJdMKalUwvvskeKnYyEe3shPRwedNcWtnhEKT3ZxvFjzywHDeGcKViIxTCAoOYQWP1qD7VNyg==}
+
   destr@2.0.5:
     resolution: {integrity: sha512-ugFTXCtDZunbzasqBxrK93Ik/DRYsO6S/fedkWEMKqt04xZ4csmnmwGDBAb07QWNaGMAmnTIemsYZCksjATwsA==}
 
@@ -1342,6 +1357,9 @@ packages:
     resolution: {integrity: sha512-kVscqXk4OCp68SZ0dkgEKVi6/8ij300KBWTJq32P/dYeWTSwK41WyTxalN1eRmA5Z9UU/LX9D7FWSmV9SAYx6g==}
     engines: {node: '>=0.10.0'}
 
+  ev-emitter@1.1.1:
+    resolution: {integrity: sha512-ipiDYhdQSCZ4hSbX4rMW+XzNKMD1prg/sTvoVmSLkuQ1MVlwjJQQA+sW8tMYR3BLUr9KjodFV4pvzunvRhd33Q==}
+
   eventemitter3@5.0.4:
     resolution: {integrity: sha512-mlsTRyGaPBjPedk6Bvw+aqbsXDtoAyAzm5MO7JgU+yVRyMQ5O8bD4Kcci7BS85f93veegeCPkL8R4GLClnjLFw==}
 
@@ -1378,6 +1396,9 @@ packages:
     resolution: {integrity: sha512-vRCdScQ6j3Ku6Kd7W1kZk9c++5SqD6Xz5Jotrjr/nkY714M14RFHy/AAVA2WQvpsqVAVgTbDrYyBpU205F0cLw==}
     engines: {node: '>=12'}
 
+  fizzy-ui-utils@2.0.7:
+    resolution: {integrity: sha512-CZXDVXQ1If3/r8s0T+v+qVeMshhfcuq0rqIFgJnrtd+Bu8GmDmqMjntjUePypVtjHXKJ6V4sw9zeyox34n9aCg==}
+
   flattie@1.1.1:
     resolution: {integrity: sha512-9UbaD6XdAL97+k/n+N7JwX46K/M6Zc6KcFYskrYL8wbBV/Uyk0CTAMY0VT+qiK5PM7AIc9aTWYtq65U7T+aCNQ==}
     engines: {node: '>=8'}
@@ -1406,6 +1427,9 @@ packages:
   get-east-asian-width@1.4.0:
     resolution: {integrity: sha512-QZjmEOC+IT1uk6Rx0sX22V6uHWVwbdbxf1faPqJ1QhLdGgsRGCZoyaQBm/piRdJy/D2um6hM1UP7ZEeQ4EkP+Q==}
     engines: {node: '>=18'}
+
+  get-size@2.0.3:
+    resolution: {integrity: sha512-lXNzT/h/dTjTxRbm9BXb+SGxxzkm97h/PCIKtlN/CBCxxmkkIVV21udumMS93MuVTDX583gqc94v3RjuHmI+2Q==}
 
   get-stream@5.2.0:
     resolution: {integrity: sha512-nBF+F1rAZVCu/p7rjzgA+Yb4lfYXrpl7a6VmJrU8wF9I1CKvP/QwPNZHnOlwbTkY6dvtFIzFMSyQXbLoTQPRpA==}
@@ -1656,6 +1680,9 @@ packages:
   markdown-table@3.0.4:
     resolution: {integrity: sha512-wiYz4+JrLyb/DqW2hkFJxP7Vd7JuTDm77fvbM8VfEQdmSMqcImWeeRbHwZjBjIFki/VaMK2BhFi7oUUZeM5bqw==}
 
+  masonry-layout@4.2.2:
+    resolution: {integrity: sha512-iGtAlrpHNyxaR19CvKC3npnEcAwszXoyJiI8ARV2ePi7fmYhIud25MHK8Zx4P0LCC4d3TNO9+rFa1KoK1OEOaA==}
+
   mdast-util-definitions@6.0.0:
     resolution: {integrity: sha512-scTllyX6pnYNZH/AIp/0ePz6s4cZtARxImwoPJ7kS42n+MnVsI4XbnG6d4ibehRIldYMWM2LD7ImQblVhUejVQ==}
 
@@ -1875,6 +1902,9 @@ packages:
 
   oniguruma-to-es@4.3.4:
     resolution: {integrity: sha512-3VhUGN3w2eYxnTzHn+ikMI+fp/96KoRSVK9/kMTcFqj1NRDh2IhQCKvYxDnWePKRXY/AqH+Fuiyb7VHSzBjHfA==}
+
+  outlayer@2.1.1:
+    resolution: {integrity: sha512-+GplXsCQ3VrbGujAeHEzP9SXsBmJxzn/YdDSQZL0xqBmAWBmortu2Y9Gwdp9J0bgDQ8/YNIPMoBM13nTwZfAhw==}
 
   p-limit@6.2.0:
     resolution: {integrity: sha512-kuUqqHNUqoIWp/c467RI4X6mmyuojY5jGutNU0wVTmEOOfcuwLqyMVoAi9MKi2Ak+5i9+nhmrK4ufZE8069kHA==}
@@ -3227,6 +3257,12 @@ snapshots:
     dependencies:
       '@types/unist': 3.0.3
 
+  '@types/jquery@4.0.0': {}
+
+  '@types/masonry-layout@4.2.8':
+    dependencies:
+      '@types/jquery': 4.0.0
+
   '@types/mdast@4.0.4':
     dependencies:
       '@types/unist': 3.0.3
@@ -3609,6 +3645,8 @@ snapshots:
 
   dequal@2.0.3: {}
 
+  desandro-matches-selector@2.0.2: {}
+
   destr@2.0.5: {}
 
   detect-libc@2.1.2: {}
@@ -3772,6 +3810,8 @@ snapshots:
 
   esutils@2.0.3: {}
 
+  ev-emitter@1.1.1: {}
+
   eventemitter3@5.0.4: {}
 
   events-universal@1.0.1:
@@ -3806,6 +3846,10 @@ snapshots:
 
   file-url@4.0.0: {}
 
+  fizzy-ui-utils@2.0.7:
+    dependencies:
+      desandro-matches-selector: 2.0.2
+
   flattie@1.1.1: {}
 
   fontace@0.4.1:
@@ -3825,6 +3869,8 @@ snapshots:
   get-caller-file@2.0.5: {}
 
   get-east-asian-width@1.4.0: {}
+
+  get-size@2.0.3: {}
 
   get-stream@5.2.0:
     dependencies:
@@ -4133,6 +4179,11 @@ snapshots:
   markdown-extensions@2.0.0: {}
 
   markdown-table@3.0.4: {}
+
+  masonry-layout@4.2.2:
+    dependencies:
+      get-size: 2.0.3
+      outlayer: 2.1.1
 
   mdast-util-definitions@6.0.0:
     dependencies:
@@ -4618,6 +4669,12 @@ snapshots:
       oniguruma-parser: 0.12.1
       regex: 6.1.0
       regex-recursion: 6.0.2
+
+  outlayer@2.1.1:
+    dependencies:
+      ev-emitter: 1.1.1
+      fizzy-ui-utils: 2.0.7
+      get-size: 2.0.3
 
   p-limit@6.2.0:
     dependencies:

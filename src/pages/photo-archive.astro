@@ -98,17 +98,17 @@ const photos = (await getCollection("photos")).map((photo) => {
       }
     }
   </style>
-  <script is:inline src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
-  <script is:inline src="https://unpkg.com/imagesloaded@5/imagesloaded.pkgd.min.js"></script>
-  <script is:inline>
-    var elem = document.querySelector(".masonry-grid");
-    var msnry = new Masonry(elem, {
+  <script>
+    import Masonry from 'masonry-layout';
+
+    const elem = document.querySelector(".masonry-grid");
+    const msnry = new Masonry(elem!, {
       itemSelector: ".grid-item",
       columnWidth: ".grid-item",
       percentPosition: true,
     });
 
-    var images = document.querySelectorAll(".grid-item-img");
+    const images = document.querySelectorAll<HTMLImageElement>(".grid-item-img");
     images.forEach(function(img) {
       img.onerror = function () {
         if (this.dataset.mirrored) {
@@ -118,12 +118,12 @@ const photos = (await getCollection("photos")).map((photo) => {
       };
       
       img.onload = function () {
-        msnry.layout();
+        msnry.layout?.();
       };
       
       // If image already loaded, trigger layout
       if (img.complete) {
-        msnry.layout();
+        msnry.layout?.();
       }
     });
   </script>
