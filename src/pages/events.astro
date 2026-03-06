@@ -15,7 +15,7 @@ const events = await getCollection('events');
     <p>A complete list of events where I have presented, participated, or mentored, along awards I have received:</p>
     <ul>
       {events.map(event => (
-        <li>{event.data.role} at {event.data.reference ? <a href={event.data.reference} target="_blank" rel="noreferrer noopener">{event.data.title}</a> : event.data.title} ({Object.values(event.data.location).join(', ')}) {event.data.mention && <span class="italic">(Mentioned as: <span lang={event.data.mention.lang}>{event.data.mention.text}</span>)</span>}</li>
+        <li>{event.data.role} at {event.data.reference ? <a href={event.data.reference}>{event.data.title}</a> : event.data.title} ({Object.values(event.data.location).join(', ')}) {event.data.mention && <span class="italic">(Mentioned as: <span lang={event.data.mention.lang}>{event.data.mention.text}</span>)</span>}</li>
       ))}
     </ul>
 
