@@ -11,7 +11,8 @@
     "slug": "interview-on-participation-at-informatik-festival-2025-by-karbala news",
     "title": "Interview on participation at Informatik Festival 2025 by Karbala News",
     "reference": "https://youtu.be/s4jbtzgbs04",
-    "published_at": "2025-10-07"
+    "published_at": "2025-10-07",
+    "mention": { "lang": "ar", "text": "\"عادل محمد\"" }
   },
   {
     "is_featured": false,
@@ -30,19 +31,19 @@
   },
   {
     "is_featured": true,
-    "slug": "interview-on-journey-in-programming-with-university-of-mosul-press",
-    "title": "Interview on journey in programming with University of Mosul Press",
-    "reference": "https://www.facebook.com/UniversityofMos/posts/492196716900670",
-    "published_at": "2024-08-29",
-    "mention": { "lang": "ar", "text": "\"عادل\"" }
-  },
-  {
-    "is_featured": true,
     "slug": "interview-on-programming-journey-and-winning-the-global-finals-of-huawei-ict-by-manara-tv",
     "title": "Interview on programming journey and winning the global finals of Huawei ICT by ManaraTV",
     "reference": "https://www.instagram.com/manaratv1/p/DDrgGW-sYyp",
     "published_at": "2024-12-17",
     "mention": { "lang": "ar", "text": "\"عادل محمد\"" }
+  },
+  {
+    "is_featured": true,
+    "slug": "interview-on-journey-in-programming-with-university-of-mosul-press",
+    "title": "Interview on journey in programming with University of Mosul Press",
+    "reference": "https://www.facebook.com/UniversityofMos/posts/492196716900670",
+    "published_at": "2024-08-29",
+    "mention": { "lang": "ar", "text": "\"عادل\"" }
   },
   {
     "is_featured": true,
