@@ -50,18 +50,6 @@
   },
   {
     "is_featured": true,
-    "slug": "adil-and-hussein-capturing-museum-cloister",
-    "title": "Adil and Hussein capturing museum cloister",
-    "reference": null,
-    "reference_title": "Oliver Karachewski",
-    "width": 3414,
-    "height": 5120,
-    "image": "https://res.cloudinary.com/dj08db9y2/image/upload/f_auto,q_auto/v1/portfolio/mirror/brandenburg-museum/adil-and-hussein-capturing-museum-cloister",
-    "taken_at": "2025-12-19",
-    "published_at": "2025-12-19"
-  },
-  {
-    "is_featured": true,
     "slug": "adil-presenting-museum-project-technical-university-brandenburg",
     "title": "Adil presenting museum project at Technical University Brandenburg",
     "reference": null,
@@ -69,6 +57,18 @@
     "width": 3024,
     "height": 4032,
     "image": "https://res.cloudinary.com/dj08db9y2/image/upload/f_auto,q_auto/v1/portfolio/mirror/brandenburg-museum/adil-presenting-museum-project-technical-university-brandenburg",
+    "taken_at": "2025-12-21",
+    "published_at": "2025-12-21"
+  },
+  {
+    "is_featured": true,
+    "slug": "adil-and-hussein-capturing-museum-cloister",
+    "title": "Adil and Hussein capturing museum cloister",
+    "reference": null,
+    "reference_title": "Oliver Karachewski",
+    "width": 3414,
+    "height": 5120,
+    "image": "https://res.cloudinary.com/dj08db9y2/image/upload/f_auto,q_auto/v1/portfolio/mirror/brandenburg-museum/adil-and-hussein-capturing-museum-cloister",
     "taken_at": "2025-12-19",
     "published_at": "2025-12-19"
   },
