@@ -22,10 +22,10 @@ const photos = await getCollection("photos");
                 <img
                     class="grid-item-img"
                     title={`${photo.data.title} |${photo.data.taken_at ? ` Taken: ${photo.data.taken_at.toISOString().split("T")[0]} /` : ''} Published: ${photo.data.published_at.toISOString().split("T")[0]} / Source: ${photo.data.reference_title}`}
-                    src={photo.data.image}
+                    src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E"
+                    data-src={photo.data.image}
                     alt={photo.data.title}
                     data-mirrored={photo.data.fallback_image}
-                    loading="lazy"
                 />
                 <figcaption>
                 {photo.data.reference && (
@@ -59,6 +59,13 @@ const photos = await getCollection("photos");
       display: block;
       width: 100%;
       height: auto;
+      min-height: 200px;
+      background-color: #f0f0f0;
+    }
+    
+    .grid-item-img.loaded {
+      min-height: 0;
+      background-color: transparent;
     }
 
     @media screen and (min-width: 768px) {
@@ -76,14 +83,6 @@ const photos = await getCollection("photos");
   <script is:inline src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
   <script is:inline src="https://unpkg.com/imagesloaded@5/imagesloaded.pkgd.min.js"></script>
   <script is:inline>
-    document.querySelectorAll("img").forEach(function (img) {
-      img.onerror = function () {
-        if (this.dataset.mirrored) this.src = this.dataset.mirrored;
-        img.onerror = null;
-        // TODO: Set fallback placeholder
-      };
-    });
-
     var elem = document.querySelector(".masonry-grid");
     var msnry = new Masonry(elem, {
       itemSelector: ".grid-item",
@@ -91,8 +90,41 @@ const photos = await getCollection("photos");
       percentPosition: true,
     });
 
-    imagesLoaded(elem, function () {
-      msnry.layout();
+    // Lazy load images with Intersection Observer
+    var imageObserver = new IntersectionObserver(function (entries, observer) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          var img = entry.target;
+          var src = img.dataset.src;
+          
+          if (src) {
+            img.src = src;
+            img.onerror = function () {
+              if (this.dataset.mirrored) {
+                this.src = this.dataset.mirrored;
+              }
+              img.onerror = null;
+            };
+            
+            img.onload = function () {
+              img.classList.add('loaded');
+              msnry.layout();
+            };
+            
+            img.removeAttribute('data-src');
+          }
+          
+          observer.unobserve(img);
+        }
+      });
+    }, {
+      rootMargin: '50px 0px',
+      threshold: 0.01
+    });
+
+    // Observe all images
+    document.querySelectorAll("img[data-src]").forEach(function (img) {
+      imageObserver.observe(img);
     });
   </script>
 </LayoutMinimal>
