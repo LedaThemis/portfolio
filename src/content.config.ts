@@ -43,6 +43,7 @@ const photos = defineCollection({
   loader: file("src/data/photos.json"),
   schema: z.object({
     is_featured: z.boolean().optional(),
+    is_hidden: z.boolean().optional(),
     title: z.string(),
     reference: z.string().optional().nullable(),
     reference_title: z.string().optional(),

@@ -3,7 +3,7 @@ import LayoutMinimal from "../layouts/LayoutMinimal.astro";
 import Contact from "../components/Contact.astro";
 import { getCollection } from "astro:content";
 
-const photos = (await getCollection("photos")).map((photo) => {
+const photos = (await getCollection("photos", ({ data }) => !data.is_hidden)).map((photo) => {
   const takenDate = photo.data.taken_at 
     ? ` Taken: ${photo.data.taken_at.toISOString().split("T")[0]} /` 
     : '';
