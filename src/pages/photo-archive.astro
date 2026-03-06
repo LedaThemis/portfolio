@@ -3,7 +3,25 @@ import LayoutMinimal from "../layouts/LayoutMinimal.astro";
 import Contact from "../components/Contact.astro";
 import { getCollection } from "astro:content";
 
-const photos = await getCollection("photos");
+const photos = (await getCollection("photos")).map((photo) => {
+  const takenDate = photo.data.taken_at 
+    ? ` Taken: ${photo.data.taken_at.toISOString().split("T")[0]} /` 
+    : '';
+  
+  const publishedDate = photo.data.published_at 
+    ? ` Published: ${photo.data.published_at.toISOString().split("T")[0]} /` 
+    : '';
+  
+  const friendly_title = `${photo.data.title} |${takenDate}${publishedDate} Source: ${photo.data.reference_title}`;
+
+  return {
+    ...photo,
+    data: {
+      ...photo.data,
+      friendly_title,
+    }
+  };
+});
 ---
 
 <LayoutMinimal
@@ -22,7 +40,7 @@ const photos = await getCollection("photos");
               {/* TODO: Support browsers that don't have native lazy loading */}
                 <img
                     class="grid-item-img"
-                    title={`${photo.data.title} |${photo.data.taken_at ? ` Taken: ${photo.data.taken_at.toISOString().split("T")[0]} /` : ''} Published: ${photo.data.published_at.toISOString().split("T")[0]} / Source: ${photo.data.reference_title}`}
+                    title={photo.data.friendly_title}
                     src={photo.data.image}
                     alt={photo.data.title}
                     data-mirrored={photo.data.image_mirror}

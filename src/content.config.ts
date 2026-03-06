@@ -51,7 +51,7 @@ const photos = defineCollection({
     image: z.string(),
     image_mirror: z.string().optional(),
     taken_at: z.coerce.date().optional(),
-    published_at: z.coerce.date(),
+    published_at: z.coerce.date().optional(),
   }),
 });
 
