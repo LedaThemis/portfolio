@@ -39,4 +39,18 @@ const press = defineCollection({
   }),
 });
 
-export const collections = { events, press };
+const photos = defineCollection({
+  loader: file("src/data/photos.json"),
+  schema: z.object({
+    is_featured: z.boolean().optional(),
+    title: z.string(),
+    reference: z.string().optional().nullable(),
+    reference_title: z.string().optional(),
+    image: z.string(),
+    fallback_image: z.string().optional(),
+    taken_at: z.coerce.date().optional(),
+    published_at: z.coerce.date(),
+  }),
+});
+
+export const collections = { events, press, photos };

@@ -1,0 +1,98 @@
+---
+import LayoutMinimal from "../layouts/LayoutMinimal.astro";
+import Contact from "../components/Contact.astro";
+import { getCollection } from "astro:content";
+
+const photos = await getCollection("photos");
+---
+
+<LayoutMinimal
+  title="Photo Archive | Adil Al Qaba - Software Engineer"
+  description="Adil Al Qaba (عادل محمد عدنان), a software engineer and published researcher, winner of many international prizes like Huawei ICT, ACPC, DoCH, Falling Walls"
+>
+  <main>
+    <h2>Photo Archive</h2>
+    <p style="margin-bottom: 0;">A collection of photos that highlight various events I have been in:</p>
+    <span style="margin: 4px 0;" class="italic">note: hover over image for description (hold on phone)</span>
+    <div class="full-screen-container">
+    <div class="masonry-grid">
+      {
+        photos.map((photo) => (
+            <figure style="margin: 0;" class="grid-item">
+                <img
+                    class="grid-item-img"
+                    title={`${photo.data.title} |${photo.data.taken_at ? ` Taken: ${photo.data.taken_at.toISOString().split("T")[0]} /` : ''} Published: ${photo.data.published_at.toISOString().split("T")[0]} / Source: ${photo.data.reference_title}`}
+                    src={photo.data.image}
+                    alt={photo.data.title}
+                    data-mirrored={photo.data.fallback_image}
+                    loading="lazy"
+                />
+                <figcaption>
+                {photo.data.reference && (
+                  <span class="sr-only">Image Source: <a href={photo.data.reference}>{photo.data.reference_title}</a></span>
+                )}
+                </figcaption>
+            </figure>
+        ))
+      }
+    </div>
+    </div>
+
+    <Contact />
+  </main>
+  <style>
+    .full-screen-container {
+      width: 100vw;
+      margin-left: calc((100% - 100vw) / 2);
+    }
+
+    .masonry-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .grid-item {
+      width: 50%;
+    }
+
+    .grid-item-img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    @media screen and (min-width: 768px) {
+      .grid-item {
+        width: 33.333%;
+      }
+    }
+
+    @media screen and (min-width: 1024px) {
+      .grid-item {
+        width: 25%;
+      }
+    }
+  </style>
+  <script is:inline src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+  <script is:inline src="https://unpkg.com/imagesloaded@5/imagesloaded.pkgd.min.js"></script>
+  <script is:inline>
+    document.querySelectorAll("img").forEach(function (img) {
+      img.onerror = function () {
+        if (this.dataset.mirrored) this.src = this.dataset.mirrored;
+        img.onerror = null;
+        // TODO: Set fallback placeholder
+      };
+    });
+
+    var elem = document.querySelector(".masonry-grid");
+    var msnry = new Masonry(elem, {
+      itemSelector: ".grid-item",
+      columnWidth: ".grid-item",
+      percentPosition: true,
+    });
+
+    imagesLoaded(elem, function () {
+      msnry.layout();
+    });
+  </script>
+</LayoutMinimal>
