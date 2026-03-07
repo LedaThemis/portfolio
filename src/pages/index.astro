@@ -16,21 +16,11 @@ const featuredPress = await getCollection('press', ({ data }) => data.is_feature
     <section id="about">
       <h2>About</h2>
       <p>I'm a software engineer and researcher interested in robotics and heritage preservation.<br>Currently studying Computer Engineering (B.Sc.) at the <a href="https://uomosul.edu.iq">University of Mosul</a>.<br>I do backend, simulations, 3d work, data analysis, and robotics.</p>
-      <h2>Events & Awards</h2>
-      <p>Selected events where I have presented, participated, or mentored:</p>
-      <ul>
-        {featuredEvents.map(event => (
-          <li>{event.data.role} at {event.data.reference ? <a href={event.data.reference}>{event.data.title}</a> : event.data.title} ({Object.values(event.data.location).join(', ')}) {event.data.mention && <span class="italic">(Mentioned as: <span lang={event.data.mention.lang}>{event.data.mention.text}</span>)</span>}</li>
-        ))}
-        <li>
-          ...and others, <a href="/events">see complete list of events & awards</a>
-        </li>
-      </ul>
     </section>
 
     <section id="publications">
       <h2>Publications</h2>
-      <p>Selected publications that I have authored:</p>
+      <p>Selected publications that I have authored or co-authored:</p>
       <ul>
         <li>
           <a href="https://doi.org/10.18420/inf2025_56"
@@ -51,8 +41,21 @@ const featuredPress = await getCollection('press', ({ data }) => data.is_feature
       </ul>
     </section>
 
+    <section id="events">
+      <h2>Events & Awards</h2>
+      <p>Selected events where I have presented, participated, or mentored:</p>
+      <ul>
+        {featuredEvents.map(event => (
+          <li>{event.data.role} at {event.data.reference ? <a href={event.data.reference}>{event.data.title}</a> : event.data.title} ({Object.values(event.data.location).join(', ')}) {event.data.mention && <span class="italic">(Mentioned as: <span lang={event.data.mention.lang}>{event.data.mention.text}</span>)</span>}</li>
+        ))}
+        <li>
+          ...and others, <a href="/events">see complete list of events & awards</a>
+        </li>
+      </ul>
+    </section>
+
     <section id="press">
-      <h2>Press</h2>
+      <h2>Media mentions</h2>
       <p>Selected media mentions where my work (or myself :grin:) is featured:</p>
       <!-- TODO: Consider using <blockquote> -->
       <ul>
@@ -62,7 +65,7 @@ const featuredPress = await getCollection('press', ({ data }) => data.is_feature
           </li>
         ))}
         <li>
-          ...and others, <a href="/press">see complete list of press mentions</a>
+          ...and others, <a href="/media-mentions">see complete list of media mentions</a>
         </li>
       </ul>
     </section>
