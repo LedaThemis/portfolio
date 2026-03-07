@@ -589,7 +589,8 @@
     "reference_title": "Rudaw",
     "width": 1500,
     "height": 945,
-    "image": "https://www.rudaw.net/s3/rudaw.net/ContentFiles/773975Image1.jpg",
+    "image": "https://res.cloudinary.com/dj08db9y2/image/upload/f_auto,q_auto/v1/portfolio/mirror/huawei-ict-symposium/iraqi-team-of-huawei-ict-competition-2023-2024-at-kurdish-moe-symposium",
+    "mirror": "https://www.rudaw.net/s3/rudaw.net/ContentFiles/773975Image1.jpg",
     "published_at": "2023-12-27"
   },
   {
