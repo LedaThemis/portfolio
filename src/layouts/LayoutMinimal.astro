@@ -60,16 +60,6 @@ const { title, description } = Astro.props;
     <NavbarMinimal />
     <slot />
     <FooterMinimal />
-    <style is:global>
-      .external::after {
-        background-color: grey;
-        content: "";
-        display: inline-flex;
-        margin-left: 4px;
-        mask-image: url(/assets/external.svg);
-        mask-size: cover;
-      }
-    </style>
   </body>
   <script is:inline defer src="/_vercel/insights/script.js"></script>
 </html>
