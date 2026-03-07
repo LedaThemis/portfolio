@@ -1,0 +1,15 @@
+---
+import config from '../config';
+import LayoutMinimal from "../layouts/LayoutMinimal.astro";
+---
+
+<LayoutMinimal
+  title="Contact | Adil Al Qaba - Software Engineer"
+  description="Adil Al Qaba (عادل محمد عدنان), a software engineer and published researcher, winner of many international prizes like Huawei ICT, ACPC, DoCH, Falling Walls"
+>
+  <main style="flex: 1 0 auto;">
+    <h2>Contact</h2>
+    <p>I'd be happy to hear from you. You can reach me at <a href={`mailto:${config.personal.email}`}>{config.personal.email}</a>.</p>
+    <p>You can also connect with me on <a href={config.personal.linkedin}>LinkedIn</a>, or, if you prefer the developer way, feel free to <a href={config.portfolio.github}>open a pull request</a> with your message in the README.</p>
+  </main>
+</Layout>
