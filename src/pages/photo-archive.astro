@@ -3,6 +3,13 @@ import LayoutMinimal from "../layouts/LayoutMinimal.astro";
 import Contact from "../components/Contact.astro";
 import { getCollection } from "astro:content";
 
+const lastUpdated = new Date('2026-03-07');
+const lastUpdatedText = lastUpdated.toLocaleDateString('en-US', { 
+  year: 'numeric', 
+  month: 'long', 
+  day: 'numeric' 
+});
+
 const photos = (await getCollection("photos", ({ data }) => !data.is_hidden)).map((photo) => {
   const takenDate = photo.data.taken_at 
     ? ` Taken: ${photo.data.taken_at.toISOString().split("T")[0]} /` 
@@ -30,11 +37,14 @@ const photos = (await getCollection("photos", ({ data }) => !data.is_hidden)).ma
 >
   <main>
     <h2>Photo Archive</h2>
-    <p>A collection of photos I've found online from various events I've been part of. They're a fun (and slightly unsettling?) way to look back at some memorable moments and realize just how much of our lives is floating around out there on the internet. I'm also hoping to develop this into something automated someday, it's a curiosity of mine!</p>
+    <p>A collection of photos I've found online from various events I've been part of. They're a fun (and slightly unsettling?) way to look back at some memorable moments and realize just how much of our lives is floating around out there on the internet. I'm curious about how search engines will treat this page and whether it will be discovered. I'm also hoping to develop this into something automated someday, it's a curiosity of mine!</p>
     <aside
       style="margin: 24px 0; padding: 10px; background-color: #ffcc00; border: 1px solid #cc9900;"
     >
-      <strong>Warning:</strong> This page contains many of my event appearances. You're about to see way too much of me! (Enter at your own risk!)
+      <strong>Warning for humans:</strong> This page contains many of my event appearances. You're about to see way too much of me! (Enter at your own risk!)
+    </aside>
+    <aside>
+      <p>Last updated: <time datetime={lastUpdated.toISOString().split('T')[0]}>{lastUpdatedText}</time></p>
     </aside>
     <p class="italic">Tip: Hover over any image to see a description (or hold on phone)</p>
     <div class="full-screen-container">
