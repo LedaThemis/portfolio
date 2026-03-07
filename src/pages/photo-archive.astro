@@ -30,8 +30,13 @@ const photos = (await getCollection("photos", ({ data }) => !data.is_hidden)).ma
 >
   <main>
     <h2>Photo Archive</h2>
-    <p style="margin-bottom: 0;">A collection of photos that highlight various events I have been in:</p>
-    <span style="margin: 4px 0;" class="italic">note: hover over image for description (hold on phone)</span>
+    <p>A collection of photos I've found online from various events I've been part of. They're a fun (and slightly unsettling?) way to look back at some memorable moments and realize just how much of our lives is floating around out there on the internet. I'm also hoping to develop this into something automated someday, it's a curiosity of mine!</p>
+    <aside
+      style="margin: 24px 0; padding: 10px; background-color: #ffcc00; border: 1px solid #cc9900;"
+    >
+      <strong>Warning:</strong> This page contains many of my event appearances. You're about to see way too much of me! (Enter at your own risk!)
+    </aside>
+    <p class="italic">Tip: Hover over any image to see a description (or hold on phone)</p>
     <div class="full-screen-container">
     <div class="masonry-grid">
       {
