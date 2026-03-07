@@ -4,6 +4,10 @@
   --link-color: #1447e6;
 }
 
+html {
+  scrollbar-gutter: stable;
+}
+
 /* Credits: http://bettermotherfuckingwebsite.com */
 body {
   display: flex;
