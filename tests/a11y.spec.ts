@@ -1,72 +1,30 @@
 import { test, expect } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright"; // 1
 
-test("homepage is accessible (axe-core)", async ({ page }) => {
-  await page.goto("/");
+const pages = [
+  { url: "/", name: "homepage" },
+  { url: "/projects", name: "projects page" },
+  { url: "/writing", name: "writing page" },
+  { url: "/events", name: "events page" },
+  { url: "/contact", name: "contact page" },
+  { url: "/privacy", name: "privacy page" },
+  { url: "/press", name: "press page" },
+  { url: "/photo-archive", name: "photo archive page" },
+  { url: "/form/success", name: "form success page" },
+  { url: "/form/failed", name: "form failed page" },
+  { url: "/404", name: "404 page" },
+  { url: "/projects/odinbook", name: "odinbook project page" },
+  { url: "/projects/portfolio", name: "portfolio project page" },
+];
 
-  const accessibilityScanResults = await new AxeBuilder({
-    page,
-  }).analyze();
+for (const { url, name } of pages) {
+  test(`${name} is accessible (axe-core)`, async ({ page }) => {
+    await page.goto(url);
 
-  expect(accessibilityScanResults.violations).toEqual([]);
-});
+    const accessibilityScanResults = await new AxeBuilder({
+      page,
+    }).analyze();
 
-test("projects page is accessible (axe-core)", async ({ page }) => {
-  await page.goto("/projects");
-
-  const accessibilityScanResults = await new AxeBuilder({
-    page,
-  }).analyze();
-
-  expect(accessibilityScanResults.violations).toEqual([]);
-});
-
-test("form success page is accessible (axe-core)", async ({ page }) => {
-  await page.goto("/form/success");
-
-  const accessibilityScanResults = await new AxeBuilder({
-    page,
-  }).analyze();
-
-  expect(accessibilityScanResults.violations).toEqual([]);
-});
-
-test("form failed page is accessible (axe-core)", async ({ page }) => {
-  await page.goto("/form/failed");
-
-  const accessibilityScanResults = await new AxeBuilder({
-    page,
-  }).analyze();
-
-  expect(accessibilityScanResults.violations).toEqual([]);
-});
-
-test("404 page is accessible (axe-core)", async ({ page }) => {
-  await page.goto("/404");
-
-  const accessibilityScanResults = await new AxeBuilder({
-    page,
-  }).analyze();
-
-  expect(accessibilityScanResults.violations).toEqual([]);
-});
-
-test("odinbook project page is accessible (axe-core)", async ({ page }) => {
-  await page.goto("/projects/odinbook");
-
-  const accessibilityScanResults = await new AxeBuilder({
-    page,
-  }).analyze();
-
-  expect(accessibilityScanResults.violations).toEqual([]);
-});
-
-test("portfolio project page is accessible (axe-core)", async ({ page }) => {
-  await page.goto("/projects/portfolio");
-
-  const accessibilityScanResults = await new AxeBuilder({
-    page,
-  }).analyze();
-
-  expect(accessibilityScanResults.violations).toEqual([]);
-});
+    expect(accessibilityScanResults.violations).toEqual([]);
+  });
+}
