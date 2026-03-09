@@ -47,22 +47,6 @@ const featuredPress = await getCollection('press', ({ data }) => data.is_feature
       </ul>
     </section>
 
-    <section id="press">
-      <h2>Media mentions</h2>
-      <p>Selected media mentions where my work (or myself :grin:) is featured:</p>
-      <!-- TODO: Consider using <blockquote> -->
-      <ul>
-        {featuredPress.map((entry) => (
-          <li>
-            <a href={entry.data.reference}>{entry.data.title}</a> {entry.data.mention && <span class="italic">(Mentioned as: <span lang={entry.data.mention.lang}>{entry.data.mention.text}</span>)</span>}
-          </li>
-        ))}
-        <li>
-          ...and others, <a href="/media-mentions">see complete list of media mentions</a>
-        </li>
-      </ul>
-    </section>
-
     <section id="links">
         <h2>Links</h2>
         <p>Other places online where you can find me:</p>
