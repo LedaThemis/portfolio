@@ -1,0 +1,26 @@
+---
+import config from '../config';
+import LayoutMinimal from "../layouts/LayoutMinimal.astro";
+---
+
+<LayoutMinimal
+  title="Privacy | Adil Al Qaba - Software Engineer"
+  description="Learn what information this website records and the tracking scripts in use, and how to disable them."
+>
+  <main style="flex: 1 0 auto;">
+    <h2>Privacy</h2>
+    <p>Your privacy matters. The following are the tools and scripts that run in the background to improve my understanding of the website's traffic and performance:</p>
+    <ul>
+        <li>
+            <p>Vercel Analytics: Provides insights into how many users visit the website and what pages they navigate to.</p>    
+        </li>
+        <li>
+            <p>Vercel Speed Insights: Evaluates website performance by analyzing page load times and responsiveness.</p>
+        </li>
+        <li>
+            <p>Umami: Currently being tested as a privacy-focused alternative to Vercel Analytics. I may switch based on the results.</p>
+        </li>
+    </ul>
+    <p>You can stop all these tools by disabling JavaScript or blocking the scripts with your preferred content blocker.</p>
+  </main>
+</Layout>
