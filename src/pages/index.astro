@@ -5,7 +5,6 @@ import Contact from "../components/Contact.astro";
 import { getCollection } from "astro:content";
 
 const featuredEvents = await getCollection('events', ({ data }) => data.is_featured);
-const featuredPress = await getCollection('press', ({ data }) => data.is_featured);
 ---
 
 <LayoutMinimal
