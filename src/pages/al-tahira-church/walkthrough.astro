@@ -8,47 +8,38 @@ import TahiraLayout from "../../layouts/Tahira/TahiraLayout.astro";
       <h2 class="text-3xl text-center my-8">Walkthrough</h2>
     </div>
 
-    <ul class="nav nav-pills nav-fill gap-4 mb-4" id="myTab" role="tablist">
-      <li class="nav-item" role="presentation">
-        <button
-          class="nav-link active"
-          id="catholic-tab"
-          data-bs-toggle="tab"
-          data-bs-target="#catholic"
-          type="button"
-          role="tab"
-          aria-controls="catholic"
-          aria-selected="true">Catholic Church</button
-        >
-      </li>
-      <li class="nav-item" role="presentation">
-        <button
-          class="nav-link"
-          id="orthodox-tab"
-          data-bs-toggle="tab"
-          data-bs-target="#orthodox"
-          type="button"
-          role="tab"
-          aria-controls="orthodox"
-          aria-selected="false">Orthodox Church</button
-        >
-      </li>
-      <li class="nav-item" role="presentation">
-        <button
-          class="nav-link"
-          id="armenian-tab"
-          data-bs-toggle="tab"
-          data-bs-target="#armenian"
-          type="button"
-          role="tab"
-          aria-controls="armenian"
-          aria-selected="false">Armenian Church</button
-        >
-      </li>
-    </ul>
-    <div class="tab-content" id="myTabContent">
+    <div class="tabs-nav flex flex-col sm:flex-row gap-4 mb-8" role="tablist">
+      <button
+        class="tab-button active"
+        id="catholic-tab"
+        data-tab="catholic"
+        type="button"
+        role="tab"
+        aria-controls="catholic"
+        aria-selected="true">Catholic Church</button
+      >
+      <button
+        class="tab-button"
+        id="orthodox-tab"
+        data-tab="orthodox"
+        type="button"
+        role="tab"
+        aria-controls="orthodox"
+        aria-selected="false">Orthodox Church</button
+      >
+      <button
+        class="tab-button"
+        id="armenian-tab"
+        data-tab="armenian"
+        type="button"
+        role="tab"
+        aria-controls="armenian"
+        aria-selected="false">Armenian Church</button
+      >
+    </div>
+    <div class="tab-content">
       <div
-        class="tab-pane fade show active"
+        class="tab-panel active"
         id="catholic"
         role="tabpanel"
         aria-labelledby="catholic-tab"
@@ -65,7 +56,7 @@ import TahiraLayout from "../../layouts/Tahira/TahiraLayout.astro";
         </div>
       </div>
       <div
-        class="tab-pane fade"
+        class="tab-panel"
         id="orthodox"
         role="tabpanel"
         aria-labelledby="orthodox-tab"
@@ -82,7 +73,7 @@ import TahiraLayout from "../../layouts/Tahira/TahiraLayout.astro";
         </div>
       </div>
       <div
-        class="tab-pane fade"
+        class="tab-panel"
         id="armenian"
         role="tabpanel"
         aria-labelledby="armenian-tab"
@@ -102,6 +93,39 @@ import TahiraLayout from "../../layouts/Tahira/TahiraLayout.astro";
   </div>
 
   <style>
+    .tab-button {
+      flex: 1;
+      padding: 12px 24px;
+      font-size: 16px;
+      font-weight: 500;
+      color: #9e9d9b;
+      background-color: transparent;
+      border: 1px solid #2a2929;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .tab-button:hover {
+      color: #121212;
+      background-color: #dbd8ce;
+    }
+
+    .tab-button.active {
+      color: #eceae4;
+      background-color: #121212;
+      border-color: #121212;
+    }
+
+    .tab-panel {
+      display: none;
+      transition: all;
+    }
+
+    .tab-panel.active {
+      display: block;
+    }
+
     .panorama {
       width: 300px;
       height: 225px;
@@ -111,13 +135,6 @@ import TahiraLayout from "../../layouts/Tahira/TahiraLayout.astro";
       .panorama {
         width: 400px;
         height: 300px;
-      }
-    }
-
-    @media (min-width: 640px) {
-      .panorama {
-        width: 600px;
-        height: 450px;
       }
     }
 
@@ -142,4 +159,31 @@ import TahiraLayout from "../../layouts/Tahira/TahiraLayout.astro";
       }
     }
   </style>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const tabButtons = document.querySelectorAll('.tab-button');
+      const tabPanels = document.querySelectorAll('.tab-panel');
+
+      tabButtons.forEach(button => {
+        button.addEventListener('click', () => {
+          const targetTab = button.getAttribute('data-tab')!;
+
+          // Remove active class from all buttons and panels
+          tabButtons.forEach(btn => {
+            btn.classList.remove('active');
+            btn.setAttribute('aria-selected', 'false');
+          });
+          tabPanels.forEach(panel => {
+            panel.classList.remove('active');
+          });
+
+          // Add active class to clicked button and corresponding panel
+          button.classList.add('active');
+          button.setAttribute('aria-selected', 'true');
+          document.getElementById(targetTab)?.classList.add('active');
+        });
+      });
+    });
+  </script>
 </TahiraLayout>
