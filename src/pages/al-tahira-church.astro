@@ -33,28 +33,28 @@ import TahiraLayout from "../layouts/Tahira/TahiraLayout.astro";
   >
     <div id="jigsaw-canvas"></div>
 
-    <script
-      is:inline
-      src="https://flbulgarelli.github.io/headbreaker/js/headbreaker.js"
-    ></script>
-    <script is:inline>
+    <script>
+      // @ts-ignore - headbreaker doesn't have TypeScript declarations
+      import headbreaker from 'headbreaker';
       // @ts-ignore
+      window.headbreaker = headbreaker;
+
       var audio = new Audio("assets/connect.wav");
       let berni = new Image();
-      berni.src = "assets/jigsaw_catholic.jpg";
+      berni.src = "https://res.cloudinary.com/dj08db9y2/image/upload/f_auto,q_auto/v1/al-tahira/jigsaw/church_main_altar";
 
       const getProperties = () => {
-        const jigsawContainer = document.getElementById("jigsaw-container");
+        const jigsawContainer = document.getElementById("jigsaw-container")!;
 
         const bodyPadding = parseInt(
           window
             .getComputedStyle(document.body)
-            .getPropertyValue("--padding-main") || 0
+            .getPropertyValue("--padding-main") || "0"
         );
         const navHeight = parseInt(
           window
             .getComputedStyle(document.body)
-            .getPropertyValue("--navbar-height") || 0
+            .getPropertyValue("--navbar-height") || "0"
         );
         const heightPadding = bodyPadding + navHeight;
 
@@ -163,7 +163,7 @@ import TahiraLayout from "../layouts/Tahira/TahiraLayout.astro";
           jigsaw.scale(factor);
           jigsaw.redraw();
         }
-        const jigsawContainer = document.getElementById("jigsaw-container");
+        const jigsawContainer = document.getElementById("jigsaw-container")!;
 
         ["mousedown", "touchstart"].forEach((event) => {
           jigsawContainer.addEventListener(event, () => showPuzzle());
@@ -171,17 +171,17 @@ import TahiraLayout from "../layouts/Tahira/TahiraLayout.astro";
 
         function showPuzzle() {
           if (jigsaw.valid) return;
-          const jigsawContainer = document.getElementById("jigsaw-container");
+          const jigsawContainer = document.getElementById("jigsaw-container")!;
           jigsawContainer.classList.remove("blur");
-          jigsawContainer.style.zIndex = 100;
-          const homeContainer = document.getElementById("home-container");
+          jigsawContainer.style.zIndex = "100";
+          const homeContainer = document.getElementById("home-container")!;
           homeContainer.style.display = "none";
         }
 
         function completePuzzle() {
-          const jigsawContainer = document.getElementById("jigsaw-container");
-          jigsawContainer.style.zIndex = null;
-          const homeContainer = document.getElementById("home-container");
+          const jigsawContainer = document.getElementById("jigsaw-container")!;
+          jigsawContainer.style.zIndex = "";
+          const homeContainer = document.getElementById("home-container")!;
           homeContainer.style.display = "";
         }
       };
