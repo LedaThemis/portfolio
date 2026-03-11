@@ -3,6 +3,7 @@
 import { Cloudinary, CloudinaryImage } from "@cloudinary/url-gen";
 import { fit } from "@cloudinary/url-gen/actions/resize";
 import { Image } from "astro:assets";
+import type { ComponentProps } from "astro";
 
 const cld = new Cloudinary({
   cloud: {
@@ -28,15 +29,9 @@ if (src.startsWith("https://")) {
   cldSrc.setDeliveryType("fetch");
 }
 
-interface Props {
+interface Props extends ComponentProps<typeof Image> {
   src: string;
-  width: number | `${number}`;
-  height: number | `${number}`;
-  alt: string;
-  class?: string;
-  style?: string;
   optimize: boolean;
-  loading?: "eager" |"lazy";
 }
 ---
 
