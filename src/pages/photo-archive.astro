@@ -2,6 +2,7 @@
 import LayoutMinimal from "../layouts/LayoutMinimal.astro";
 import Contact from "../components/Contact.astro";
 import { getCollection } from "astro:content";
+import CldImage from "../components/CldImage.astro";
 
 const lastUpdated = new Date('2026-03-07');
 const lastUpdatedText = lastUpdated.toLocaleDateString('en-US', { 
@@ -52,7 +53,7 @@ const photos = (await getCollection("photos", ({ data }) => !data.is_hidden)).ma
         photos.map((photo) => (
             <figure style="margin: 0;" class="grid-item">
               {/* TODO: Support browsers that don't have native lazy loading */}
-                <img
+                <CldImage
                     class="grid-item-img"
                     title={photo.data.friendly_title}
                     src={photo.data.image}
@@ -61,6 +62,7 @@ const photos = (await getCollection("photos", ({ data }) => !data.is_hidden)).ma
                     width={photo.data.width}
                     height={photo.data.height}
                     loading="lazy"
+                    optimize={true}
                 />
                 <figcaption>
                 {photo.data.reference && (
