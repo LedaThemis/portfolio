@@ -1,0 +1,68 @@
+---
+// Shared styles
+import "../styles/minimal.css";
+
+// Components
+import FooterMinimal from "../components/FooterMinimal.astro";
+import NavbarMinimal from "../components/NavbarMinimal.astro";
+
+// Vercel
+import SpeedInsights from "@vercel/speed-insights/astro";
+
+export interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/png" href="/favicon.ico" /><link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/apple-touch-icon.png"
+    />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
+    <meta name="generator" content={Astro.generator} />
+    <meta property="og:image" content="https://res.cloudinary.com/dj08db9y2/image/upload/f_auto/q_auto/c_fit,w_1080/opengraph" />
+    <title>{title}</title>
+    <script is:inline type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Adil Al Qaba",
+        "givenName": "Adil",
+        "familyName": "Al Qaba",
+        "alternateName": "عادل محمد عدنان",
+        "email": "contact@leda.dev",
+        "jobTitle": "Software Engineer",
+        "url": "https://www.alqaba.com",
+        "image": "https://res.cloudinary.com/dj08db9y2/image/upload/profile_picture",
+        "sameAs": [
+          "https://linkedin.com/in/alqaba",
+          "https://github.com/LedaThemis",
+          "https://orcid.org/0009-0002-1924-5270",
+          "https://scholar.google.com/citations?user=YQ10EnMAAAAJ"
+        ]
+      }
+    </script>
+
+    <SpeedInsights />
+  </head>
+  <body>
+    <NavbarMinimal />
+    <slot />
+    <FooterMinimal />
+  </body>
+  <script is:inline defer src="/_vercel/insights/script.js"></script>
+  <script is:inline defer src="/stats/script.js" data-website-id="0c8d43bd-455a-40f7-a8e7-72d67dc22ccc"></script>
+</html>

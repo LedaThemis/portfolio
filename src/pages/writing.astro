@@ -1,0 +1,32 @@
+---
+import LayoutMinimal from "../layouts/LayoutMinimal.astro";
+import { getCollection } from "astro:content";
+
+const writing = await getCollection("writing", ({ data }) => data.is_published);
+---
+
+<LayoutMinimal
+  title="Writing | Adil Al Qaba - Software Engineer"
+  description="Read blog and writing by Adil Al Qaba (عادل محمد عدنان). Thoughts, experiences, and things worth sharing."
+>
+  <main style="flex: 1 0 auto;">
+    <h2>Writing</h2>
+    {
+        writing.length === 0 ? (
+          <p>If you're reading this, it means that I have not picked up my pen (keyboard) yet. This is my not-so-friendly reminder to actually start writing.</p>
+        ) :
+    (
+    <p>Writings about things I find interesting or just thoughts and everything in between:</p>
+    <ul>
+      {
+        writing.map((entry) => (
+          <li>
+            <a href={`/blog/${entry.id}`}>{entry.data.title}</a>
+          </li>
+        ))
+      }
+    </ul>
+    )}
+  </main>
+</LayoutMinimal>
+

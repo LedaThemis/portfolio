@@ -1,0 +1,146 @@
+---
+import LayoutMinimal from "../layouts/LayoutMinimal.astro";
+import Contact from "../components/Contact.astro";
+import { getCollection } from "astro:content";
+import CldImage from "../components/CldImage.astro";
+
+const lastUpdated = new Date('2026-03-07');
+const lastUpdatedText = lastUpdated.toLocaleDateString('en-US', { 
+  year: 'numeric', 
+  month: 'long', 
+  day: 'numeric' 
+});
+
+const photos = (await getCollection("photos", ({ data }) => !data.is_hidden)).map((photo) => {
+  const takenDate = photo.data.taken_at 
+    ? ` Taken: ${photo.data.taken_at.toISOString().split("T")[0]} /` 
+    : '';
+  
+  const publishedDate = photo.data.published_at 
+    ? ` Published: ${photo.data.published_at.toISOString().split("T")[0]} /` 
+    : '';
+  
+  const friendly_title = `${photo.data.title} |${takenDate}${publishedDate} Source: ${photo.data.reference_title}`;
+
+  return {
+    ...photo,
+    data: {
+      ...photo.data,
+      friendly_title,
+    }
+  };
+});
+---
+
+<LayoutMinimal
+  title="Photo Archive | Adil Al Qaba - Software Engineer"
+  description="Photos of Adil Al Qaba (عادل محمد عدنان) at conferences, competitions, interviews, and professional events from around the internet."
+>
+  <main>
+    <h2>Photo Archive</h2>
+    <p>A collection of photos I've found online from various events I've been part of. They're a fun (and slightly unsettling?) way to look back at some memorable moments and realize just how much of our lives is floating around out there on the internet. I'm curious about how search engines will treat this page and whether it will be discovered. I'm also hoping to develop this into something automated someday, it's a curiosity of mine!</p>
+    <aside
+      aria-label="Content warning"
+      style="margin: 24px 0; padding: 10px; background-color: #ffcc00; border: 1px solid #cc9900;"
+    >
+      <strong>Warning for humans:</strong> This page contains many of my event appearances. You're about to see way too much of me! (Enter at your own risk!)
+    </aside>
+    <p>Last updated: <time datetime={lastUpdated.toISOString().split('T')[0]}>{lastUpdatedText}</time></p>
+    <p class="italic">Tip: Hover over any image to see a description (or hold on phone)</p>
+    <div class="full-screen-container">
+    <div class="masonry-grid">
+      {
+        photos.map((photo) => (
+            <figure style="margin: 0;" class="grid-item">
+              {/* TODO: Support browsers that don't have native lazy loading */}
+                <CldImage
+                    class="grid-item-img"
+                    title={photo.data.friendly_title}
+                    src={photo.data.image}
+                    alt={photo.data.title}
+                    data-mirrored={photo.data.image_mirror}
+                    width={photo.data.width}
+                    height={photo.data.height}
+                    loading="lazy"
+                    optimize={true}
+                />
+                <figcaption>
+                {photo.data.reference && (
+                  <span class="sr-only">Image Source: <a href={photo.data.reference}>{photo.data.reference_title}</a></span>
+                )}
+                </figcaption>
+            </figure>
+        ))
+      }
+    </div>
+    </div>
+
+    <Contact />
+  </main>
+  <style>
+    body {
+      overflow-x: hidden;
+    }
+
+    .full-screen-container {
+      width: 100vw;
+      margin-left: calc((100% - 100vw) / 2);
+    }
+
+    .masonry-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .grid-item {
+      width: 50%;
+    }
+
+    .grid-item-img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    @media screen and (min-width: 768px) {
+      .grid-item {
+        width: 33.333%;
+      }
+    }
+
+    @media screen and (min-width: 1024px) {
+      .grid-item {
+        width: 25%;
+      }
+    }
+  </style>
+  <script>
+    import Masonry from 'masonry-layout';
+
+    const elem = document.querySelector(".masonry-grid");
+    const msnry = new Masonry(elem!, {
+      itemSelector: ".grid-item",
+      columnWidth: ".grid-item",
+      percentPosition: true,
+    });
+
+    const images = document.querySelectorAll<HTMLImageElement>(".grid-item-img");
+    images.forEach(function(img) {
+      img.onerror = function () {
+        if (this.dataset.mirrored) {
+          this.src = this.dataset.mirrored;
+        }
+        img.onerror = null;
+      };
+      
+      img.onload = function () {
+        msnry.layout?.();
+      };
+      
+      // If image already loaded, trigger layout
+      if (img.complete) {
+        msnry.layout?.();
+      }
+    });
+  </script>
+</LayoutMinimal>

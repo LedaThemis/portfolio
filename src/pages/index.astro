@@ -1,16 +1,67 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import Welcome from "../components/Welcome.astro";
-import Projects from "../components/Projects.astro";
+import config from "../config";
+import LayoutMinimal from "../layouts/LayoutMinimal.astro";
 import Contact from "../components/Contact.astro";
-import About from "../components/About.astro";
+import { getCollection } from "astro:content";
+
+const featuredEvents = await getCollection('events', ({ data }) => data.is_featured);
 ---
 
-<Layout title="Adil Al Qaba — Professional Tinkerer" description="Personal website of Adil Al Qaba">
-  <main class="flex flex-col gap-5 mx-auto">
-    <Welcome />
-    <About />
-    <Projects />
+<LayoutMinimal
+  title="Adil Al Qaba - Software Engineer"
+  description="Adil Al Qaba (عادل محمد عدنان), a software engineer and published researcher, winner of many international prizes like Huawei ICT, ACPC, DoCH, Falling Walls"
+>
+  <main>
+    <section id="about">
+      <h2>About</h2>
+      <p>I'm a software engineer and researcher interested in robotics and heritage preservation.<br>Currently studying Computer Engineering (B.Sc.) at the <a href="https://uomosul.edu.iq">University of Mosul</a>.<br>I do backend, simulations, 3d work, data analysis, and robotics.</p>
+    </section>
+
+    <section id="publications">
+      <h2>Publications</h2>
+      <p>Selected publications that I have authored or co-authored:</p>
+      <ul>
+        <li>
+          [2025] A. Al Qaba, H. Yaseen, and S. A. Saffar, <a href="https://doi.org/10.18420/inf2025_56">"Hosh Al-Bay'ah Collection: An Immersive Multiplayer Virtual Museum"</a>
+        </li>
+        <li>
+          [2025] A. Al Qaba, A. Sadam, and M. Ibrahim, <a href="https://doi.org/10.18420/inf2025_57">"Mosul: Preserving the After-Effects of War"</a>
+        </li>
+        <li>
+          [2025] O. I. Al-Sanjary, A. A. Ahmed, and A. Al-Qaba, <a href="https://papers.ssrn.com/sol3/Delivery.cfm?abstractid=5134415">"Deepfake Multi-Faces Detection Using Haar Cascades with Sift Matching Algorithm"</a>
+        </li>
+      </ul>
+    </section>
+
+    <section id="events">
+      <h2>Events & Awards</h2>
+      <p>Selected events where I have presented, participated, or mentored:</p>
+      <ul>
+        {featuredEvents.map(event => (
+          <li>{event.data.role} at {event.data.reference ? <a href={event.data.reference}>{event.data.title}</a> : event.data.title} ({Object.values(event.data.location).join(', ')}) {event.data.mention && <span class="italic">(Mentioned as: <span lang={event.data.mention.lang}>{event.data.mention.text}</span>)</span>}</li>
+        ))}
+        <li>
+          ...and others, <a href="/events">see complete list of events & awards</a>
+        </li>
+      </ul>
+    </section>
+
+    <section id="links">
+        <h2>Links</h2>
+        <p>Other places online where you can find me:</p>
+        <ul>
+          <li>
+            Check my publications on <a href={config.personal.orcid}>ORCID</a>, <a href={config.personal.gscholar}>Google Scholar</a>
+          </li>
+          <li>
+            Check my coding work on <a href={config.personal.github}>GitHub</a>
+          </li>
+          <li>
+            Follow my professional life on <a href={config.personal.linkedin}>LinkedIn</a> (disclaimer: rarely updated)
+          </li>
+        </ul>
+    </section>
+
     <Contact />
   </main>
 </Layout>

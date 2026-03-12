@@ -5,6 +5,7 @@ import ProjectLinks from "../components/ProjectDetail/ProjectLinks.astro";
 import ProjectTechnologies from "../components/ProjectDetail/ProjectTechnologies.astro";
 import ProjectHeader from "../components/ProjectDetail/ProjectHeader.astro";
 import type { ProjectDetailsProps } from "../lib/interfaces/ProjectDetails";
+import LayoutMinimal from "./LayoutMinimal.astro";
 
 const { frontmatter } = Astro.props;
 
@@ -14,9 +15,9 @@ const pageTitle = `${frontmatter.projectName} — Adil Al Qaba`;
 const pageDesc = `Details on the implementation, the why behind and technologies of ${frontmatter.projectName} by Adil Al Qaba`;
 ---
 
-<Layout title={pageTitle} description={pageDesc}>
-  <main class="flex flex-col gap-5">
-    <article class="mt-8 flex flex-col gap-6">
+<LayoutMinimal title={pageTitle} description={pageDesc}>
+  <main>
+    <article>
       <ProjectHeader
         name={frontmatter.projectName}
         description={frontmatter.projectDescription}
@@ -27,7 +28,7 @@ const pageDesc = `Details on the implementation, the why behind and technologies
         source={frontmatter.projectSource}
         demo={frontmatter.projectDemo}
       />
-      <div class="min-w-full prose prose-img:ml-auto prose-img:mr-auto">
+      <div>
         <slot />
       </div>
     </article>

@@ -23,6 +23,8 @@ const { showFooter = true } = Astro.props;
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
+    <link rel="sitemap" href="/sitemap-index.xml" />
     <link href="https://fonts.googleapis.com/css2?family=Boldonse&family=Readex+Pro:wght@160..700&display=swap" rel="stylesheet">
     <SpeedInsights />
   </head>

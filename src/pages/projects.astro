@@ -1,11 +1,11 @@
 ---
 import type { ProjectDetailsMDXProps } from "../lib/interfaces/ProjectDetails";
 import Project from "../components/Project.astro";
-import Layout from "../layouts/Layout.astro";
 import Contact from "../components/Contact.astro";
+import LayoutMinimal from "../layouts/LayoutMinimal.astro";
 
 const projects = await Astro.glob<ProjectDetailsMDXProps>(
-  "../pages/projects/*.mdx"
+  "../pages/projects/*.mdx",
 );
 
 const publishedProjects = projects
@@ -13,23 +13,25 @@ const publishedProjects = projects
   .sort((a, b) => a.frontmatter.order - b.frontmatter.order);
 ---
 
-<Layout title="Projects | Adil Al Qaba" description="Personal website of Adil">
-  <main class="flex flex-col gap-5 mx-auto">
-    <section id="projects" class="flex flex-col gap-3 mt-10">
-      <header>
-        <h2 class="text-4xl font-title font-bold py-2">Projects</h2>
-        <p class="font-body">
-          Below is a list of all my projects that I've written about:
-        </p>
-      </header>
-      <div class="grid gap-5">
-        {
-          publishedProjects.map((project) => (
-            <Project mdxProps={project.frontmatter} url={project.url} />
-          ))
-        }
-      </div>
-    </section>
+<LayoutMinimal
+  title="Projects | Adil Al Qaba - Software Engineer"
+  description="Check Adil Al Qaba's projects (عادل محمد عدنان): professional work, personal passion projects, and curiosities."
+>
+  <main>
+    <aside
+      style="margin: 24px 0; padding: 10px; background-color: #ffcc00; border: 1px solid #cc9900;"
+    >
+      <strong>Warning:</strong> This page has not been updated in a while, some information might be outdated.
+    </aside>
+    <h2>Projects</h2>
+    <p>Below is a list of all my projects that I've written about:</p>
+    <div style="display: grid; gap: 20px;">
+      {
+        publishedProjects.map((project) => (
+          <Project mdxProps={project.frontmatter} url={project.url} />
+        ))
+      }
+    </div>
     <Contact />
   </main>
-</Layout>
+</LayoutMinimal>

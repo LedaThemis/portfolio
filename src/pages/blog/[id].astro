@@ -1,0 +1,24 @@
+---
+import LayoutMinimal from "../../layouts/LayoutMinimal.astro";
+import { getCollection, render } from "astro:content";
+
+export async function getStaticPaths() {
+  const writing = await getCollection("writing");
+  return writing.map((entry) => ({
+    params: { id: entry.id },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+---
+
+<LayoutMinimal
+  title={`${entry.data.title} | Adil Al Qaba - Software Engineer`}
+  description={entry.data.description}
+>
+  <main style="flex: 1 0 auto;">
+    <Content />
+  </main>
+</LayoutMinimal>

@@ -1,0 +1,24 @@
+---
+import LayoutMinimal from "../layouts/LayoutMinimal.astro";
+import Contact from "../components/Contact.astro";
+import { getCollection } from "astro:content";
+
+const events = await getCollection('events');
+---
+
+<LayoutMinimal
+  title="Events & Awards | Adil Al Qaba - Software Engineer"
+  description="Events, presentations, and awards for Adil Al Qaba (عادل محمد عدنان), including First Prize@Huawei ICT and Best Paper@DoCH."
+>
+  <main>
+    <h2>Events & Awards</h2>
+    <p>A complete list of events where I have presented, participated, or mentored, along awards I have received:</p>
+    <ul>
+      {events.map(event => (
+        <li>{event.data.role} at {event.data.reference ? <a href={event.data.reference}>{event.data.title}</a> : event.data.title} ({Object.values(event.data.location).join(', ')}) {event.data.mention && <span class="italic">(Mentioned as: <span lang={event.data.mention.lang}>{event.data.mention.text}</span>)</span>}</li>
+      ))}
+    </ul>
+
+    <Contact />
+  </main>
+</Layout>

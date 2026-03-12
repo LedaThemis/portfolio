@@ -1,6 +1,4 @@
 ---
-import NewTabIcon from "../icons/NewTabIcon.astro";
-import RightArrowIcon from "../icons/RightArrowIcon.astro";
 import type {
   ProjectDetailsMDXProps,
   ProjectDetailsProps,
@@ -16,71 +14,32 @@ const { mdxProps, url } = Astro.props;
 ---
 
 <div>
-  <div class="my-4 group relative max-w-max">
-    <CldImage
-      src={mdxProps.projectCover.name}
-      width={mdxProps.projectCover.width}
-      height={mdxProps.projectCover.height}
-      alt={mdxProps.projectCover.alt}
-      optimize={true}
-      class="cursor-pointer group-hover:brightness-30 transition-all duration-200 ease-in"
-    />
-    <div class="absolute inset-0 grid place-items-center group">
-      <div
-        class="flex gap-1 p-2 border rounded-md text-white opacity-0 group-hover:opacity-100 transition-opacity duration-150 ease-in"
-      >
-        <a
-          href={mdxProps.projectDemo}
-          target="_blank"
-          rel="noreferrer noopener"
-          class="block"
-          ><p
-            class="align-middle font-body text-xl hover-underline-animation after:bg-violet-300"
-          >
-            Website <span class="sr-only">for {mdxProps.projectName}</span>
-          </p>
-          <NewTabIcon />
+  <CldImage
+    style="max-width: 100%; height: auto;"
+    src={mdxProps.projectCover.name}
+    width={mdxProps.projectCover.width}
+    height={mdxProps.projectCover.height}
+    alt={mdxProps.projectCover.alt}
+    optimize={true}
+  />
+  <h3 style="margin-bottom: 0;">{mdxProps.projectName}</h3>
+  <p style="margin-top: 0; margin-bottom: 0;">{mdxProps.projectSummary}</p>
+  <div style="display: flex; gap: 8px;">
+    {
+      url && (
+        <a href={url}>
+          Read more
+          <span class="sr-only">about {mdxProps.projectName}</span>
         </a>
-      </div>
-    </div>
+      )
+    }
+    {
+      mdxProps.projectDemo && (
+        <a href={mdxProps.projectDemo}>
+          Project website
+          <span class="sr-only">about {mdxProps.projectName}</span>
+        </a>
+      )
+    }
   </div>
-  <h3 class="text-2xl font-bold tracking-wide font-title">
-    {mdxProps.projectName}
-  </h3>
-  <p class="font-body">{mdxProps.projectSummary}</p>
-  <a
-    href={url ?? ""}
-    class="block mt-2 group text-black transition duration-300 max-w-max"
-    ><p
-      class="align-middle font-body hover-underline-animation after:bg-violet-400"
-    >
-      More details
-      <span class="sr-only">about {mdxProps.projectName}</span>
-    </p>
-    <RightArrowIcon />
-  </a>
 </div>
-
-<style is:inline>
-  .hover-underline-animation {
-    display: inline-block;
-    position: relative;
-  }
-
-  .hover-underline-animation:after {
-    content: "";
-    position: absolute;
-    width: 100%;
-    transform: scaleX(0);
-    height: 2px;
-    bottom: 0;
-    left: 0;
-    transform-origin: bottom left;
-    transition: transform 0.3s ease-out;
-  }
-
-  .hover-underline-animation:hover:after {
-    transform: scaleX(1);
-    transform-origin: bottom left;
-  }
-</style>

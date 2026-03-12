@@ -1,0 +1,27 @@
+---
+import LayoutMinimal from "../layouts/LayoutMinimal.astro";
+import Contact from "../components/Contact.astro";
+import { getCollection } from "astro:content";
+
+const press = await getCollection('press');
+---
+
+<LayoutMinimal
+  title="Media mentions | Adil Al Qaba - Software Engineer"
+  description="Media appearances of Adil Al Qaba (عادل محمد عدنان): interviews, TV features, and press mentions"
+>
+  <main>
+    <h2>Media mentions</h2>
+    <p>A complete list of media mentions where my work (or myself :grin:) is featured:</p>
+    <!-- TODO: Consider using <blockquote> -->
+    <ul>
+      {press.map((entry) => (
+        <li>
+          <a href={entry.data.reference}>{entry.data.title}</a> {entry.data.mention && <span class="italic">(Mentioned as: <span lang={entry.data.mention.lang}>{entry.data.mention.text}</span>)</span>}
+        </li>
+      ))}
+    </ul>
+
+    <Contact />
+  </main>
+</Layout>

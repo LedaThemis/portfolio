@@ -30,15 +30,14 @@ const techList = parseTechnologies(technologies);
 const IconInfoList = techList.map((name) => getTechIcon(getTechName(name)));
 ---
 
-<div class="flex flex-col gap-4">
-  <h3 class="text-2xl font-title font-bold">Technologies Used</h3>
-  <div class="flex gap-3 flex-wrap">
+<div>
+  <h3 style="margin-bottom: 0;">Technologies Used</h3>
+  <div style="display: flex; gap: 12px; flex-wrap: wrap;">
     {
       IconInfoList.map(({ title, path, fillStyle }) => (
-        <div class="flex items-center gap-2">
+        <div style="display: flex; align-items: center; gap: 8px">
           <svg
-            class="w-6"
-            style={fillStyle}
+            style={[fillStyle, "width: 24px"].join(' ')}
             aria-hidden="true"
             viewBox="0 0 24 24"
             xmlns="http://www.w3.org/2000/svg"
