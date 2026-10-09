@@ -1,6 +1,20 @@
 [
   {
     "is_featured": true,
+    "slug": "international-unesco-chair-conference-2026",
+    "title": "International UNESCO Chair Conference 2026",
+    "role": "Participant",
+    "reference": "https://veranstaltungen.tu-dortmund.de/en/unesco-chair-conference-2026/home/",
+    "location": {
+      "venue": "TU Dortmund University",
+      "city": "Dortmund",
+      "country": "Germany"
+    },
+    "start_date": "2026-09-30",
+    "end_date": "2026-10-02"
+  },
+  {
+    "is_featured": true,
     "slug": "success-story-under-global-entrepreneurship-week-iraq-2025",
     "title": "Success Story under Global Entrepreneurship Week Iraq 2025",
     "role": "Speaker",
