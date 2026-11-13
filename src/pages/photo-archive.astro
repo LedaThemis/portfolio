@@ -1,78 +1,87 @@
 ---
 import LayoutMinimal from "../layouts/LayoutMinimal.astro";
 import Contact from "../components/Contact.astro";
-import { getCollection } from "astro:content";
-import CldImage from "../components/CldImage.astro";
+import { getPhotos, imageObject, SUBJECT } from "../lib/photos";
 
-const lastUpdated = new Date('2026-03-07');
-const lastUpdatedText = lastUpdated.toLocaleDateString('en-US', { 
-  year: 'numeric', 
-  month: 'long', 
-  day: 'numeric' 
+const photos = await getPhotos();
+
+const lastUpdated = photos.reduce(
+  (max, p) => (p.takenISO && p.takenISO > max ? p.takenISO : max),
+  "",
+);
+const lastUpdatedText = new Date(lastUpdated).toLocaleDateString("en-US", {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
 });
 
-const photos = (await getCollection("photos", ({ data }) => !data.is_hidden)).map((photo) => {
-  const takenDate = photo.data.taken_at 
-    ? ` Taken: ${photo.data.taken_at.toISOString().split("T")[0]} /` 
-    : '';
-  
-  const publishedDate = photo.data.published_at 
-    ? ` Published: ${photo.data.published_at.toISOString().split("T")[0]} /` 
-    : '';
-  
-  const friendly_title = `${photo.data.title} |${takenDate}${publishedDate} Source: ${photo.data.reference_title}`;
-
-  return {
-    ...photo,
-    data: {
-      ...photo.data,
-      friendly_title,
-    }
-  };
-});
+const gallery = {
+  "@type": "ImageGallery",
+  "@id": new URL("/photo-archive", Astro.site).toString() + "#gallery",
+  url: new URL("/photo-archive", Astro.site).toString(),
+  name: `Photos of ${SUBJECT}`,
+  description: `Photographs of ${SUBJECT} at conferences, competitions, interviews and professional events.`,
+  about: { "@id": "https://www.alqaba.com/#person" },
+  numberOfItems: photos.length,
+  associatedMedia: photos.map((p) => imageObject(p, Astro.site)),
+};
 ---
 
 <LayoutMinimal
-  title="Photo Archive | Adil Al Qaba - Software Engineer"
-  description="Photos of Adil Al Qaba (عادل محمد عدنان) at conferences, competitions, interviews, and professional events from around the internet."
+  title={`Photos of ${SUBJECT} — Photo Archive`}
+  description={`${photos.length} photographs of ${SUBJECT} (عادل محمد عدنان) at conferences, competitions, interviews and professional events in Iraq, Germany, China, Egypt and Cyprus.`}
+  image={photos[0]?.file}
+  imageAlt={photos[0]?.alt}
+  imageWidth={photos[0]?.width}
+  imageHeight={photos[0]?.height}
+  jsonLd={gallery}
 >
   <main>
-    <h2>Photo Archive</h2>
-    <p>A collection of photos I've found online from various events I've been part of. They're a fun (and slightly unsettling?) way to look back at some memorable moments and realize just how much of our lives is floating around out there on the internet. I'm curious about how search engines will treat this page and whether it will be discovered. I'm also hoping to develop this into something automated someday, it's a curiosity of mine!</p>
-    <aside
-      aria-label="Content warning"
-      style="margin: 24px 0; padding: 10px; background-color: #ffcc00; border: 1px solid #cc9900;"
-    >
-      <strong>Warning for humans:</strong> This page contains many of my event appearances. You're about to see way too much of me! (Enter at your own risk!)
-    </aside>
-    <p>Last updated: <time datetime={lastUpdated.toISOString().split('T')[0]}>{lastUpdatedText}</time></p>
-    <p class="italic">Tip: Hover over any image to see a description (or hold on phone)</p>
+    <h2>Photos of {SUBJECT}</h2>
+    <p>
+      {photos.length} photographs of {SUBJECT} (<span lang="ar">عادل محمد عدنان</span>)
+      taken at conferences, competitions, workshops, interviews and award
+      ceremonies between 2023 and 2026 — in Iraq, Germany, China, Egypt and
+      Cyprus. Most were found online; a few are my own. Each photo has its own
+      page with the date, the event and the original source.
+    </p>
+    <p>
+      Last photo taken: <time datetime={lastUpdated}>{lastUpdatedText}</time>
+    </p>
+
     <div class="full-screen-container">
-    <div class="masonry-grid">
-      {
-        photos.map((photo) => (
-            <figure style="margin: 0;" class="grid-item">
-              {/* TODO: Support browsers that don't have native lazy loading */}
-                <CldImage
-                    class="grid-item-img"
-                    title={photo.data.friendly_title}
-                    src={photo.data.image}
-                    alt={photo.data.title}
-                    data-mirrored={photo.data.image_mirror}
-                    width={photo.data.width}
-                    height={photo.data.height}
-                    loading="lazy"
-                    optimize={true}
+      <div class="masonry-grid">
+        {
+          photos.map((photo, i) => (
+            <figure class="grid-item">
+              <a href={photo.url} aria-label={photo.alt}>
+                <img
+                  class="grid-item-img"
+                  src={photo.thumb}
+                  srcset={`${photo.thumb} 480w, ${photo.file} 1600w`}
+                  sizes="(min-width: 1024px) 300px, (min-width: 768px) 33vw, 50vw"
+                  alt={photo.alt}
+                  title={photo.title}
+                  width={photo.width}
+                  height={photo.height}
+                  loading={i < 6 ? "eager" : "lazy"}
+                  fetchpriority={i === 0 ? "high" : "auto"}
+                  decoding="async"
                 />
-                <figcaption>
-                {photo.data.reference && (
-                  <span class="sr-only">Image Source: <a href={photo.data.reference}>{photo.data.reference_title}</a></span>
+              </a>
+              <figcaption class="grid-item-caption">
+                <a href={photo.url}>{photo.title}</a>
+                {photo.takenISO && (
+                  <span class="grid-item-date">
+                    {" "}
+                    <time datetime={photo.takenISO}>{photo.takenISO}</time>
+                  </span>
                 )}
-                </figcaption>
+              </figcaption>
             </figure>
-        ))
-      }
-    </div>
+          ))
+        }
+      </div>
     </div>
 
     <Contact />
@@ -94,12 +103,35 @@ const photos = (await getCollection("photos", ({ data }) => !data.is_hidden)).ma
 
     .grid-item {
       width: 50%;
+      margin: 0;
+      padding: 0 4px 16px;
+      box-sizing: border-box;
     }
 
     .grid-item-img {
       display: block;
       width: 100%;
       height: auto;
+    }
+
+    .grid-item-caption {
+      font-size: 13px;
+      line-height: 1.35;
+      padding-top: 4px;
+    }
+
+    .grid-item-caption a {
+      color: var(--font-color);
+      text-decoration: none;
+    }
+
+    .grid-item-caption a:hover {
+      text-decoration: underline;
+      color: var(--link-color);
+    }
+
+    .grid-item-date {
+      color: #666;
     }
 
     @media screen and (min-width: 768px) {
@@ -115,7 +147,7 @@ const photos = (await getCollection("photos", ({ data }) => !data.is_hidden)).ma
     }
   </style>
   <script>
-    import Masonry from 'masonry-layout';
+    import Masonry from "masonry-layout";
 
     const elem = document.querySelector(".masonry-grid");
     const msnry = new Masonry(elem!, {
@@ -124,23 +156,11 @@ const photos = (await getCollection("photos", ({ data }) => !data.is_hidden)).ma
       percentPosition: true,
     });
 
-    const images = document.querySelectorAll<HTMLImageElement>(".grid-item-img");
-    images.forEach(function(img) {
-      img.onerror = function () {
-        if (this.dataset.mirrored) {
-          this.src = this.dataset.mirrored;
-        }
-        img.onerror = null;
-      };
-      
-      img.onload = function () {
-        msnry.layout?.();
-      };
-      
-      // If image already loaded, trigger layout
-      if (img.complete) {
-        msnry.layout?.();
-      }
-    });
+    document
+      .querySelectorAll<HTMLImageElement>(".grid-item-img")
+      .forEach((img) => {
+        if (img.complete) msnry.layout?.();
+        else img.addEventListener("load", () => msnry.layout?.());
+      });
   </script>
 </LayoutMinimal>
