@@ -5,15 +5,27 @@ import { getPhotos, imageObject, SUBJECT } from "../lib/photos";
 
 const photos = await getPhotos();
 
-const lastUpdated = photos.reduce(
-  (max, p) => (p.takenISO && p.takenISO > max ? p.takenISO : max),
-  "",
-);
-const lastUpdatedText = new Date(lastUpdated).toLocaleDateString("en-US", {
+const lastUpdated = new Date("2026-03-07");
+const lastUpdatedText = lastUpdated.toLocaleDateString("en-US", {
   year: "numeric",
   month: "long",
   day: "numeric",
 });
+
+const years = photos.map((p) => p.takenISO?.slice(0, 4)).filter(Boolean).sort();
+const ownWork = photos.filter(
+  (p) => (p.reference_title ?? "Own work") === "Own work",
+).length;
+
+const stats = [
+  ["Subject", "Adil Al Qaba"],
+  ["Photos", String(photos.length)],
+  ["Taken", `${years.at(0)}\u2013${years.at(-1)}`],
+  ["Found online", String(photos.length - ownWork)],
+  ["My own photos", String(ownWork)],
+  ["Distinct sources", String(new Set(photos.map((p) => p.reference_title ?? "Own work")).size)],
+  ["Linked to an event", String(photos.filter((p) => p.event).length)],
+];
 
 const gallery = {
   "@type": "ImageGallery",
@@ -28,8 +40,8 @@ const gallery = {
 ---
 
 <LayoutMinimal
-  title={`Photos of ${SUBJECT} — Photo Archive`}
-  description={`${photos.length} photographs of ${SUBJECT} (عادل محمد عدنان) at conferences, competitions, interviews and professional events in Iraq, Germany, China, Egypt and Cyprus.`}
+  title="Photo Archive | Adil Al Qaba - Software Engineer"
+  description="Photos of Adil Al Qaba (عادل محمد عدنان) at conferences, competitions, interviews, and professional events from around the internet."
   image={photos[0]?.file}
   imageAlt={photos[0]?.alt}
   imageWidth={photos[0]?.width}
@@ -37,17 +49,28 @@ const gallery = {
   jsonLd={gallery}
 >
   <main>
-    <h2>Photos of {SUBJECT}</h2>
-    <p>
-      {photos.length} photographs of {SUBJECT} (<span lang="ar">عادل محمد عدنان</span>)
-      taken at conferences, competitions, workshops, interviews and award
-      ceremonies between 2023 and 2026 — in Iraq, Germany, China, Egypt and
-      Cyprus. Most were found online; a few are my own. Each photo has its own
-      page with the date, the event and the original source.
-    </p>
-    <p>
-      Last photo taken: <time datetime={lastUpdated}>{lastUpdatedText}</time>
-    </p>
+    <h2>Photo Archive</h2>
+    <p>A collection of photos I've found online from various events I've been part of. They're a fun (and slightly unsettling?) way to look back at some memorable moments and realize just how much of our lives is floating around out there on the internet. I'm curious about how search engines will treat this page and whether it will be discovered. I'm also hoping to develop this into something automated someday, it's a curiosity of mine!</p>
+    <aside
+      aria-label="Content warning"
+      style="margin: 24px 0; padding: 10px; background-color: #ffcc00; border: 1px solid #cc9900;"
+    >
+      <strong>Warning for humans:</strong> This page contains many of my event appearances. You're about to see way too much of me! (Enter at your own risk!)
+    </aside>
+    <p>Last updated: <time datetime={lastUpdated.toISOString().split('T')[0]}>{lastUpdatedText}</time></p>
+    <p class="italic">Tip: Hover over any image to see a description (or hold on phone)</p>
+
+    <table class="stats">
+      <caption class="sr-only">Summary of this photo archive</caption>
+      <tbody>
+        {stats.map(([label, value]) => (
+          <tr>
+            <th scope="row">{label}</th>
+            <td>{value}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
 
     <div class="full-screen-container">
       <div class="masonry-grid">
@@ -112,6 +135,24 @@ const gallery = {
       display: block;
       width: 100%;
       height: auto;
+    }
+
+    .stats {
+      border-collapse: collapse;
+      margin: 24px 0;
+      font-size: 15px;
+    }
+
+    .stats th,
+    .stats td {
+      text-align: left;
+      padding: 4px 24px 4px 0;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .stats th {
+      font-weight: 700;
+      white-space: nowrap;
     }
 
     .grid-item-caption {
