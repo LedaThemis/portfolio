@@ -12,20 +12,6 @@ const lastUpdatedText = lastUpdated.toLocaleDateString("en-US", {
   day: "numeric",
 });
 
-const years = photos.map((p) => p.takenISO?.slice(0, 4)).filter(Boolean).sort();
-const ownWork = photos.filter(
-  (p) => (p.reference_title ?? "Own work") === "Own work",
-).length;
-
-const stats = [
-  ["Subject", "Adil Al Qaba"],
-  ["Photos", String(photos.length)],
-  ["Taken", `${years.at(0)}\u2013${years.at(-1)}`],
-  ["Found online", String(photos.length - ownWork)],
-  ["My own photos", String(ownWork)],
-  ["Distinct sources", String(new Set(photos.map((p) => p.reference_title ?? "Own work")).size)],
-  ["Linked to an event", String(photos.filter((p) => p.event).length)],
-];
 
 const gallery = {
   "@type": "ImageGallery",
@@ -59,19 +45,6 @@ const gallery = {
     </aside>
     <p>Last updated: <time datetime={lastUpdated.toISOString().split('T')[0]}>{lastUpdatedText}</time></p>
     <p class="italic">Tip: Hover over any image to see a description (or hold on phone)</p>
-
-    <table class="stats">
-      <caption class="sr-only">Summary of this photo archive</caption>
-      <tbody>
-        {stats.map(([label, value]) => (
-          <tr>
-            <th scope="row">{label}</th>
-            <td>{value}</td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
-
     <div class="full-screen-container">
       <div class="masonry-grid">
         {
@@ -135,24 +108,6 @@ const gallery = {
       display: block;
       width: 100%;
       height: auto;
-    }
-
-    .stats {
-      border-collapse: collapse;
-      margin: 24px 0;
-      font-size: 15px;
-    }
-
-    .stats th,
-    .stats td {
-      text-align: left;
-      padding: 4px 24px 4px 0;
-      border-bottom: 1px solid #ddd;
-    }
-
-    .stats th {
-      font-weight: 700;
-      white-space: nowrap;
     }
 
     .grid-item-caption {
