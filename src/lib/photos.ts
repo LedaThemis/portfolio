@@ -15,9 +15,20 @@ export type PhotoData = {
   height: number;
   taken_at?: Date;
   published_at?: Date;
+  image: string;
+  image_mirror?: string;
 };
 
 const iso = (d?: Date) => (d ? d.toISOString().split("T")[0] : undefined);
+
+// Social scrapers (LinkedIn and WhatsApp especially) are unreliable with WebP,
+// so the share card is a JPEG rendered from the Cloudinary original.
+const OG_CARD = "f_jpg,q_auto:good,c_fill,g_auto,w_1200,h_630";
+function ogCard(data: PhotoData) {
+  const src = data.image_mirror ?? data.image;
+  const kind = src.startsWith("http") ? "fetch" : "upload";
+  return `https://res.cloudinary.com/dj08db9y2/image/${kind}/${OG_CARD}/${src}`;
+}
 
 export function altFor(p: PhotoData) {
   if (p.title.includes(SUBJECT)) return p.title;
@@ -59,6 +70,7 @@ export async function getPhotos() {
       context,
       alt: altFor(data),
       thumb: data.file.replace("/photos/", "/photos/thumbs/"),
+      ogCard: ogCard(data),
       url: pageUrl(data),
       takenISO: iso(data.taken_at),
       publishedISO: iso(data.published_at),

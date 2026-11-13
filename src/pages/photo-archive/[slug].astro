@@ -39,9 +39,11 @@ const description = [
   .filter(Boolean)
   .join(". ");
 
+// Google truncates around 60 characters, so the name goes at the front
+// when the title does not already carry it.
 const pageTitle = photo.title.includes(SUBJECT)
-  ? `${photo.title} — photo`
-  : `${photo.title} — photo of ${SUBJECT}`;
+  ? photo.title
+  : `${SUBJECT}: ${photo.title}`;
 
 const jsonLd = [
   imageObject(photo, Astro.site),
@@ -75,10 +77,10 @@ const jsonLd = [
 <LayoutMinimal
   title={pageTitle}
   description={description}
-  image={photo.file}
+  image={photo.ogCard}
   imageAlt={photo.alt}
-  imageWidth={photo.width}
-  imageHeight={photo.height}
+  imageWidth={1200}
+  imageHeight={630}
   ogType="article"
   jsonLd={jsonLd}
 >
