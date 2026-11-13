@@ -30,7 +30,7 @@ for (const { url, name } of pages) {
 }
 
 test("photo detail page is accessible (axe-core)", async ({ page }) => {
-  await page.goto("/photo-archive/adil-presenting-museum-project-technical-university-brandenburg");
+  await page.goto("/photo-archive/adil-al-qaba-presenting-museum-project-technical-university-brandenburg");
   const results = await new AxeBuilder({ page }).analyze();
   expect(results.violations).toEqual([]);
 });
