@@ -44,7 +44,10 @@ const photos = defineCollection({
   schema: z.object({
     is_featured: z.boolean().optional(),
     is_hidden: z.boolean().optional(),
+    subject_in_frame: z.boolean().optional(),
+    slug: z.string(),
     title: z.string(),
+    file: z.string(),
     reference: z.string().optional().nullable(),
     reference_title: z.string().optional(),
     width: z.number().default(200),

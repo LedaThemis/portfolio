@@ -11,7 +11,8 @@
     "astro": "astro",
     "format": "prettier -w --plugin-search-dir=. .",
     "readme": "node updatePreviewScreenshot.js",
-    "test:e2e": "playwright test"
+    "test:e2e": "playwright test",
+    "photos": "node scripts/fetch-photos.mjs"
   },
   "dependencies": {
     "@astrojs/mdx": "^4.3.13",
