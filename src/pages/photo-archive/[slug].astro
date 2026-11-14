@@ -1,0 +1,192 @@
+---
+import LayoutMinimal from "../../layouts/LayoutMinimal.astro";
+import { getPhotos, imageObject, SUBJECT, type Photo } from "../../lib/photos";
+
+export async function getStaticPaths() {
+  const photos = await getPhotos();
+  return photos.map((photo, i) => ({
+    params: { slug: photo.slug },
+    props: {
+      photo,
+      prev: photos[i - 1] ?? null,
+      next: photos[i + 1] ?? null,
+    },
+  }));
+}
+
+interface Props {
+  photo: Photo;
+  prev: Photo | null;
+  next: Photo | null;
+}
+
+const { photo, prev, next } = Astro.props;
+
+const takenText = photo.takenISO
+  ? new Date(photo.takenISO).toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    })
+  : null;
+
+const description = [
+  photo.alt,
+  photo.event ? `Taken at ${photo.event.title}` : null,
+  photo.where,
+  takenText,
+]
+  .filter(Boolean)
+  .join(". ");
+
+// Google truncates around 60 characters, so the name goes at the front
+// when the title does not already carry it.
+const pageTitle = photo.title.includes(SUBJECT)
+  ? photo.title
+  : `${SUBJECT}: ${photo.title}`;
+
+const jsonLd = [
+  imageObject(photo, Astro.site),
+  {
+    "@type": "WebPage",
+    "@id": new URL(photo.url, Astro.site).toString() + "#page",
+    url: new URL(photo.url, Astro.site).toString(),
+    name: photo.title,
+    description,
+    isPartOf: { "@id": "https://www.alqaba.com/#website" },
+    primaryImageOfPage: {
+      "@id": new URL(photo.url, Astro.site).toString() + "#image",
+    },
+    ...(photo.inFrame ? { about: { "@id": "https://www.alqaba.com/#person" } } : {}),
+    breadcrumb: {
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: `Photos of ${SUBJECT}`,
+          item: new URL("/photo-archive", Astro.site).toString(),
+        },
+        { "@type": "ListItem", position: 2, name: photo.title },
+      ],
+    },
+  },
+];
+---
+
+<LayoutMinimal
+  title={pageTitle}
+  description={description}
+  image={photo.ogCard}
+  imageAlt={photo.alt}
+  imageWidth={1200}
+  imageHeight={630}
+  ogType="article"
+  jsonLd={jsonLd}
+>
+  <main>
+    <nav aria-label="Breadcrumb" class="crumbs">
+      <a href="/photo-archive">Photos of {SUBJECT}</a>
+    </nav>
+
+    <h2>{photo.title}</h2>
+
+    <figure class="photo">
+      <img
+        src={photo.file}
+        alt={photo.alt}
+        title={photo.title}
+        width={photo.width}
+        height={photo.height}
+        loading="eager"
+        fetchpriority="high"
+        decoding="async"
+      />
+      <figcaption>
+        {photo.alt}
+        {photo.inFrame && !photo.title.includes(SUBJECT) && (
+          <><br /><strong>Pictured:</strong> {SUBJECT} (<span lang="ar">عادل محمد عدنان</span>)</>
+        )}
+      </figcaption>
+    </figure>
+
+    <dl class="meta">
+      {takenText && (
+        <><dt>Taken</dt><dd><time datetime={photo.takenISO}>{takenText}</time></dd></>
+      )}
+      {photo.event && (
+        <>
+          <dt>Event</dt>
+          <dd>
+            {photo.event.reference ? (
+              <a href={photo.event.reference}>{photo.event.title}</a>
+            ) : (
+              photo.event.title
+            )}
+            {photo.event.role && <> — {photo.event.role}</>}
+          </dd>
+        </>
+      )}
+      {photo.where && (<><dt>Location</dt><dd>{photo.where}</dd></>)}
+      <dt>Source</dt>
+      <dd>
+        {photo.reference ? (
+          <a href={photo.reference} rel="nofollow">{photo.reference_title}</a>
+        ) : (
+          photo.reference_title ?? "Own work"
+        )}
+      </dd>
+    </dl>
+
+    <nav aria-label="Other photos" class="adjacent">
+      {prev && <a rel="prev" href={prev.url}>← {prev.title}</a>}
+      {next && <a rel="next" href={next.url}>{next.title} →</a>}
+    </nav>
+
+    <p class="back">
+      <a href="/photo-archive">See all photos of {SUBJECT} →</a>
+    </p>
+  </main>
+
+  <style>
+    .crumbs {
+      font-size: 14px;
+      margin-bottom: 8px;
+    }
+    .photo img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+    .photo {
+      margin: 0 0 24px;
+    }
+    .photo figcaption {
+      font-size: 14px;
+      padding-top: 8px;
+      opacity: 0.85;
+    }
+    .meta {
+      display: grid;
+      grid-template-columns: max-content 1fr;
+      gap: 4px 16px;
+      font-size: 15px;
+    }
+    .meta dt {
+      font-weight: 700;
+    }
+    .meta dd {
+      margin: 0;
+    }
+    .adjacent {
+      display: flex;
+      justify-content: space-between;
+      gap: 24px;
+      font-size: 14px;
+      margin: 32px 0 8px;
+    }
+    .adjacent a {
+      max-width: 48%;
+    }
+  </style>
+</LayoutMinimal>
