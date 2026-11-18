@@ -21,6 +21,8 @@ export interface Props {
 }
 
 const { title, description } = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site);
 ---
 
 <!DOCTYPE html>
@@ -39,7 +41,8 @@ const { title, description } = Astro.props;
     <link rel="preload" as="font" type="font/woff2" href={nunitoSansWoff2} crossorigin="anonymous" />
     <link rel="preload" as="font" type="font/woff2" href={robotoWoff2} crossorigin="anonymous" />
     <meta name="generator" content={Astro.generator} />
-    <meta property="og:image" content="/assets/og.png" />
+    <link rel="canonical" href={canonical} />
+    <meta property="og:image" content={new URL("/assets/og.png", Astro.site)} />
     <title>{title}</title>
     <SpeedInsights />
   </head>
