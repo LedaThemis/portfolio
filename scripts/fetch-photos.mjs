@@ -13,7 +13,7 @@ const SIZES = [
 
 const photos = JSON.parse(
   readFileSync(new URL("../src/data/photos.json", import.meta.url), "utf8"),
-);
+).filter((photo) => !photo.is_hidden);
 
 const sourceUrl = (p, transform) => {
   const src = p.image_mirror ?? p.image;
@@ -28,9 +28,9 @@ for (const { dir, transform } of SIZES) {
     const name = photo.file.split("/").pop();
     const response = await fetch(sourceUrl(photo, transform));
     if (!response.ok) {
-      console.error(`FAIL ${response.status} ${photo.slug}`);
-      process.exitCode = 1;
-      continue;
+      // Half a mirror is worse than none: the row stays in photos.json, so the
+      // page, the <img> and the sitemap would all point at a file never written.
+      throw new Error(`${photo.slug}: Cloudinary returned ${response.status}`);
     }
     const bytes = Buffer.from(await response.arrayBuffer());
     await writeFile(new URL(name, dir), bytes);

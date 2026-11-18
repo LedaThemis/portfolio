@@ -171,8 +171,6 @@ const ld = { "@context": "https://schema.org", "@graph": graph };
     <title>{title}</title>
     <script is:inline type="application/ld+json" set:html={JSON.stringify(ld)} />
 
-    <slot name="head" />
-
     <SpeedInsights />
   </head>
   <body>

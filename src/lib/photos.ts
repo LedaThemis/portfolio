@@ -52,7 +52,9 @@ export async function getPhotos() {
     const data = entry.data as PhotoData;
     const event = data.reference ? byReference.get(data.reference) : undefined;
     const where = event
-      ? Object.values(event.location).filter(Boolean).join(", ")
+      ? [event.location.venue, event.location.city, event.location.country]
+          .filter(Boolean)
+          .join(", ")
       : undefined;
 
     const context = [
@@ -69,6 +71,13 @@ export async function getPhotos() {
       where,
       context,
       alt: altFor(data),
+      hoverText: [
+        data.title,
+        iso(data.taken_at) && `Taken: ${iso(data.taken_at)}`,
+        `Source: ${data.reference_title ?? "Own work"}`,
+      ]
+        .filter(Boolean)
+        .join(" | "),
       thumb: data.file.replace("/photos/", "/photos/thumbs/"),
       ogCard: ogCard(data),
       url: pageUrl(data),
@@ -84,7 +93,7 @@ export async function getPhotos() {
 
 export type Photo = Awaited<ReturnType<typeof getPhotos>>[number];
 
-export function imageObject(p: Photo, site: URL | undefined) {
+export function imageObject(p: Photo, site: URL | undefined, representative = false) {
   const url = new URL(p.file, site).toString();
   return {
     "@type": "ImageObject",
@@ -96,7 +105,7 @@ export function imageObject(p: Photo, site: URL | undefined) {
     name: p.title,
     caption: p.alt,
     description: [p.alt, p.context].filter(Boolean).join(". "),
-    representativeOfPage: true,
+    ...(representative ? { representativeOfPage: true } : {}),
     ...(p.takenISO ? { dateCreated: p.takenISO } : {}),
     ...(p.publishedISO ? { uploadDate: p.publishedISO } : {}),
     ...(p.inFrame ? { about: { "@id": "https://www.alqaba.com/#person" } } : {}),

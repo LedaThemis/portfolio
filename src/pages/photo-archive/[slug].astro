@@ -24,6 +24,7 @@ const { photo, prev, next } = Astro.props;
 
 const takenText = photo.takenISO
   ? new Date(photo.takenISO).toLocaleDateString("en-US", {
+      timeZone: "UTC",
       year: "numeric",
       month: "long",
       day: "numeric",
@@ -46,7 +47,7 @@ const pageTitle = photo.title.includes(SUBJECT)
   : `${SUBJECT}: ${photo.title}`;
 
 const jsonLd = [
-  imageObject(photo, Astro.site),
+  imageObject(photo, Astro.site, true),
   {
     "@type": "WebPage",
     "@id": new URL(photo.url, Astro.site).toString() + "#page",

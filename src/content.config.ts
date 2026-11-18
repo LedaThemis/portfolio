@@ -47,7 +47,7 @@ const photos = defineCollection({
     subject_in_frame: z.boolean().optional(),
     slug: z.string(),
     title: z.string(),
-    file: z.string(),
+    file: z.string().regex(/^\/photos\/[a-z0-9-]+\.webp$/),
     reference: z.string().optional().nullable(),
     reference_title: z.string().optional(),
     width: z.number().default(200),

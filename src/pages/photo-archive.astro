@@ -54,10 +54,10 @@ const gallery = {
                 <img
                   class="grid-item-img"
                   src={photo.thumb}
-                  srcset={`${photo.thumb} 480w, ${photo.file} 1600w`}
+                  srcset={`${photo.thumb} ${Math.min(480, photo.width)}w, ${photo.file} ${photo.width}w`}
                   sizes="(min-width: 1024px) 300px, (min-width: 768px) 33vw, 50vw"
                   alt={photo.alt}
-                  title={photo.title}
+                  title={photo.hoverText}
                   width={photo.width}
                   height={photo.height}
                   loading={i < 6 ? "eager" : "lazy"}
@@ -66,6 +66,11 @@ const gallery = {
                 />
               </a>
               <figcaption class="grid-item-caption">
+                {photo.reference && (
+                  <span class="sr-only">
+                    Image source: <a href={photo.reference}>{photo.reference_title}</a>
+                  </span>
+                )}
                 <a href={photo.url}>{photo.title}</a>
                 {photo.takenISO && (
                   <span class="grid-item-date">
