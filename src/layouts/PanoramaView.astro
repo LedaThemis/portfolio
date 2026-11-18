@@ -4,11 +4,14 @@ export interface Props {
 }
 
 const { panoramaSrc } = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site);
 ---
 
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <link rel="canonical" href={canonical} />
     <title>Al-Tahira Churches - 360 Panorama Views</title>
     <meta charset="utf-8" />
     <meta

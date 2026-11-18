@@ -9,11 +9,14 @@ export interface Props {
 }
 
 const { showFooter = true } = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site);
 ---
 
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <link rel="canonical" href={canonical} />
     <title>Immortalize Tangible and Intangible of UNESCO Al-Chibayish's Marshes World Heritage</title>
     <meta charset="utf-8" />
     <meta
