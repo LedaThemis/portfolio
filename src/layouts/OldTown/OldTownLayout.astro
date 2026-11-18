@@ -7,15 +7,16 @@ import Footer from "../../components/OldTown/Footer.astro";
 
 export interface Props {
   showFooter?: boolean;
+  title?: string;
 }
 
-const { showFooter = true } = Astro.props;
+const { showFooter = true, title = "Old City of Mosul" } = Astro.props;
 ---
 
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Old City of Mosul</title>
+    <title>{title}</title>
     <meta charset="utf-8" />
     <meta
       name="viewport"

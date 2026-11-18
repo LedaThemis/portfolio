@@ -1,9 +1,10 @@
 ---
 export interface Props {
   panoramaSrc: string;
+  title?: string;
 }
 
-const { panoramaSrc } = Astro.props;
+const { panoramaSrc, title = "Al-Tahira Churches - 360 Panorama Views" } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, Astro.site);
 ---
@@ -12,7 +13,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
 <html lang="en">
   <head>
     <link rel="canonical" href={canonical} />
-    <title>Al-Tahira Churches - 360 Panorama Views</title>
+    <title>{title}</title>
     <meta charset="utf-8" />
     <meta
       name="viewport"
