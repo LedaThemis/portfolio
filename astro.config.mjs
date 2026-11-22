@@ -44,9 +44,6 @@ export default defineConfig({
           return {
             ...item,
             img: photos.map(toImg),
-            lastmod: newest,
-            priority: 0.9,
-            changefreq: "monthly",
           };
         }
 
@@ -56,9 +53,6 @@ export default defineConfig({
           return {
             ...item,
             img: [toImg(photo)],
-            lastmod: photo.taken_at,
-            priority: 0.7,
-            changefreq: "yearly",
           };
         }
 
@@ -72,8 +66,6 @@ export default defineConfig({
                 caption: `${SUBJECT}, software engineer and researcher`,
               },
             ],
-            priority: 1.0,
-            changefreq: "weekly",
           };
         }
 
