@@ -76,7 +76,8 @@
     "image": "portfolio/mirror/brandenburg-museum/adil-and-hussein-capturing-museum-cloister",
     "taken_at": "2025-12-19",
     "published_at": "2025-12-19",
-    "file": "/photos/adil-al-qaba-and-hussein-capturing-museum-cloister.webp"
+    "file": "/photos/adil-al-qaba-and-hussein-capturing-museum-cloister.webp",
+    "creator": "Oliver Karachewski"
   },
   {
     "is_featured": true,
@@ -89,7 +90,8 @@
     "image": "portfolio/mirror/brandenburg-museum/team-in-front-of-brandenburg-state-archaeology-museum",
     "taken_at": "2025-12-19",
     "published_at": "2025-12-19",
-    "file": "/photos/adil-al-qaba-iraqi-heritage-team-in-front-of-brandenburg-state-archaeology-museum.webp"
+    "file": "/photos/adil-al-qaba-iraqi-heritage-team-in-front-of-brandenburg-state-archaeology-museum.webp",
+    "creator": "Oliver Karachewski"
   },
   {
     "is_featured": true,
@@ -401,7 +403,8 @@
     "height": 1200,
     "image": "portfolio/mirror/uom-seed-workshop/adil-speaking-seed-workshop-university-of-mosul.jpg",
     "taken_at": "2025-05-27",
-    "file": "/photos/adil-al-qaba-speaking-seed-workshop-university-of-mosul.webp"
+    "file": "/photos/adil-al-qaba-speaking-seed-workshop-university-of-mosul.webp",
+    "creator": "Tawfiq Miqdad"
   },
   {
     "is_featured": true,
@@ -476,7 +479,8 @@
     "height": 565,
     "image": "portfolio/mirror/doch-conference-cyprus/adil-speaking-during-poster-session-doch-conference",
     "published_at": "2025-04-08",
-    "file": "/photos/adil-al-qaba-speaking-during-poster-session-doch-conference.webp"
+    "file": "/photos/adil-al-qaba-speaking-during-poster-session-doch-conference.webp",
+    "creator": "Sophie Bade"
   },
   {
     "is_featured": true,
@@ -597,7 +601,8 @@
     "height": 640,
     "image": "portfolio/mirror/kossay-alahmady-2nd-interview/adil-and-kossay-alahmady-holding-huawei-first-prize-medal",
     "published_at": "2024-06-29",
-    "file": "/photos/adil-al-qaba-and-kossay-alahmady-holding-huawei-first-prize-medal.webp"
+    "file": "/photos/adil-al-qaba-and-kossay-alahmady-holding-huawei-first-prize-medal.webp",
+    "creator": "Kossay Alahmady"
   },
   {
     "is_featured": true,
@@ -609,7 +614,8 @@
     "height": 640,
     "image": "portfolio/mirror/kossay-alahmady-2nd-interview/adil-explaining-competition-requirements-to-kossay-alahmady",
     "published_at": "2024-06-29",
-    "file": "/photos/adil-al-qaba-explaining-competition-requirements-to-kossay-alahmady.webp"
+    "file": "/photos/adil-al-qaba-explaining-competition-requirements-to-kossay-alahmady.webp",
+    "creator": "Kossay Alahmady"
   },
   {
     "is_featured": true,
@@ -621,7 +627,8 @@
     "height": 640,
     "image": "portfolio/mirror/kossay-alahmady-2nd-interview/adil-sitting-during-interview-with-kossay-alahmady",
     "published_at": "2024-06-29",
-    "file": "/photos/adil-al-qaba-sitting-during-interview-with-kossay-alahmady.webp"
+    "file": "/photos/adil-al-qaba-sitting-during-interview-with-kossay-alahmady.webp",
+    "creator": "Kossay Alahmady"
   },
   {
     "is_featured": true,
@@ -760,7 +767,8 @@
     "height": 640,
     "image": "portfolio/mirror/kossay-alahmady-interview/adil-shaking-hands-with-kossay-alahmady-university-president",
     "published_at": "2023-07-08",
-    "file": "/photos/adil-al-qaba-shaking-hands-with-kossay-alahmady-university-president.webp"
+    "file": "/photos/adil-al-qaba-shaking-hands-with-kossay-alahmady-university-president.webp",
+    "creator": "Kossay Alahmady"
   },
   {
     "is_featured": true,
@@ -772,6 +780,7 @@
     "height": 640,
     "image": "portfolio/mirror/kossay-alahmady-interview/adil-talking-during-interview-with-kossay-alahmady-university-president",
     "published_at": "2023-07-08",
-    "file": "/photos/adil-al-qaba-talking-during-interview-with-kossay-alahmady-university-president.webp"
+    "file": "/photos/adil-al-qaba-talking-during-interview-with-kossay-alahmady-university-president.webp",
+    "creator": "Kossay Alahmady"
   }
 ]

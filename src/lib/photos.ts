@@ -11,6 +11,7 @@ export type PhotoData = {
   file: string;
   reference?: string | null;
   reference_title?: string;
+  creator?: string;
   width: number;
   height: number;
   taken_at?: Date;
@@ -110,6 +111,7 @@ export function imageObject(p: Photo, site: URL | undefined, representative = fa
     ...(p.publishedISO ? { uploadDate: p.publishedISO } : {}),
     ...(p.inFrame ? { about: { "@id": "https://www.alqaba.com/#person" } } : {}),
     creditText: p.reference_title ?? "Own work",
+    ...(p.creator ? { creator: { "@type": "Person", name: p.creator } } : {}),
     ...(p.reference ? { isBasedOn: p.reference } : {}),
   };
 }

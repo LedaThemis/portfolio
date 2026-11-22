@@ -50,6 +50,7 @@ const photos = defineCollection({
     file: z.string().regex(/^\/photos\/[a-z0-9-]+\.webp$/),
     reference: z.string().optional().nullable(),
     reference_title: z.string().optional(),
+    creator: z.string().optional(),
     width: z.number().default(200),
     height: z.number().default(200),
     image: z.string(),
