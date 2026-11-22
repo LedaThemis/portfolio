@@ -2,9 +2,10 @@
 export interface Props {
   panoramaSrc: string;
   title?: string;
+  heading: string;
 }
 
-const { panoramaSrc, title = "Al-Tahira Churches - 360 Panorama Views" } = Astro.props;
+const { panoramaSrc, title = "Al-Tahira Churches - 360 Panorama Views", heading } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, Astro.site);
 ---
@@ -24,11 +25,14 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <div id="info">
       <div>
         <aside style="margin: 0px 0px; padding: 10px; background-color: #ffe375;">
-          <p style="color: black;">Please check out our <a href="/al-tahira-church/walkthrough" style="color: rgb(0, 102, 204);">new website for Hosh Al-Bay'ah Collection (Al-Tahira Churches)</a></p>
+          <p style="color: black;">This 360&deg; view was published in December 2024 and is kept for reference. It has been superseded by the <a href="/al-tahira-church/walkthrough" style="color: rgb(0, 102, 204);">current walkthrough of Hosh Al-Bay'ah (Al-Tahira Churches)</a>.</p>
         </aside>
       </div>
       <div>
-        <h1 class="text-lg mb-2">Navigation</h1>
+        <h1 class="text-lg mb-2">{heading}</h1>
+      </div>
+      <div>
+        <p class="text-lg mb-2">Other panoramas</p>
       </div>
       <div>
         <a href="./catholic-church">Catholic Church</a>
@@ -40,6 +44,33 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     </div>
     <panorama-image data-panoramasrc={panoramaSrc}></panorama-image>
     <div id="container"></div>
+
+    <footer id="about-panorama">
+      <h2>About this panorama</h2>
+      <p>
+        These 360&deg; views look inside Hosh Al-Bay&rsquo;ah, the Christian
+        compound in Mosul that holds the Al-Tahira churches. They went online in
+        December 2024.
+      </p>
+      <p>
+        Hosh Al-Bay&rsquo;ah has been a centre for Mosul&rsquo;s Christian
+        community for more than 150 years. It holds the Al-Tahira Orthodox
+        Church (1895 CE), the Al-Tahira Catholic Church (1862 CE) and the
+        Tahdhib School. &ldquo;Hosh&rdquo; means courtyard in Arabic.
+        &ldquo;Al-Tahira&rdquo; means The Pure, for the Virgin Mary.
+      </p>
+      <p>
+        We have since recorded the churches in far more detail, using
+        photogrammetry, 3D models and VR. That work replaced these panoramas,
+        and covers the Armenian church as well:
+      </p>
+      <ul>
+        <li><a href="/al-tahira-church/walkthrough">Walkthrough</a> &mdash; what replaced this page</li>
+        <li><a href="/al-tahira-church/models">3D models</a></li>
+        <li><a href="/al-tahira-church/timeline">Timeline</a></li>
+        <li><a href="/al-tahira-church/about">About the project</a></li>
+      </ul>
+    </footer>
 
     <script>
       // @ts-nocheck
@@ -255,6 +286,29 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
         padding: 12px 18px;
         text-transform: uppercase;
         cursor: pointer;
+      }
+
+      #about-panorama {
+        position: relative;
+        z-index: 1;
+        max-width: 42rem;
+        margin: 0 auto;
+        padding: 24px 16px 48px;
+        font-family: system-ui, sans-serif;
+        font-size: 15px;
+        line-height: 1.6;
+        color: #ddd;
+      }
+
+      #about-panorama h2 {
+        font-size: 18px;
+        margin-bottom: 8px;
+        color: #fff;
+      }
+
+      #about-panorama a {
+        color: #9cf;
+        text-decoration: underline;
       }
 
       #notSupported {

@@ -70,7 +70,10 @@ const person = {
     creditText: "Adil Al Qaba",
     license: "https://creativecommons.org/licenses/by/4.0/",
     acquireLicensePage: "https://www.alqaba.com/contact",
-    creator: { "@id": PERSON_ID },
+    // Keeps the graph link, but states the name inline: Google lists
+    // creator.name as the sub-property it reads, and a bare @id leaves it
+    // to the validator to resolve.
+    creator: { "@id": PERSON_ID, "@type": "Person", name: "Adil Al Qaba" },
     copyrightNotice: "Adil Al Qaba",
   },
   affiliation: {
