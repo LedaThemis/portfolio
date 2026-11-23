@@ -7,9 +7,10 @@ import Footer from "../../components/IraqMarshes/Footer.astro";
 export interface Props {
   showFooter?: boolean;
   title?: string;
+  description?: string;
 }
 
-const { showFooter = true, title = "Immortalize Tangible and Intangible of UNESCO Al-Chibayish's Marshes World Heritage" } = Astro.props;
+const { showFooter = true, title = "Immortalize Tangible and Intangible of UNESCO Al-Chibayish's Marshes World Heritage", description = "Immortalizing the tangible and intangible heritage of Al-Chibayish's marshes, a UNESCO World Heritage site in southern Iraq." } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, Astro.site);
 ---
@@ -19,6 +20,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
   <head>
     <link rel="canonical" href={canonical} />
     <title>{title}</title>
+    <meta name="description" content={description} />
     <meta charset="utf-8" />
     <meta
       name="viewport"

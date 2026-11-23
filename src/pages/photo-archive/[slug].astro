@@ -31,14 +31,20 @@ const takenText = photo.takenISO
     })
   : null;
 
-const description = [
+// Google truncates around 160 characters. The event name often repeats the
+// venue already named in the title, so it is the part that gets dropped.
+const descParts = [photo.alt, photo.where, takenText].filter(Boolean);
+const withEvent = [
   photo.alt,
   photo.event ? `Taken at ${photo.event.title}` : null,
   photo.where,
   takenText,
-]
-  .filter(Boolean)
-  .join(". ");
+].filter(Boolean);
+
+const description =
+  withEvent.join(". ").length <= 155
+    ? withEvent.join(". ")
+    : descParts.join(". ");
 
 // Google truncates around 60 characters, so the name goes at the front
 // when the title does not already carry it.
