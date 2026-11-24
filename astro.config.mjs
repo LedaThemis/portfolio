@@ -18,12 +18,8 @@ const caption = (p) => {
   return `${p.title} — ${SUBJECT} pictured`;
 };
 
-// Declare the file each page actually renders as its <img> src. The gallery
-// shows the 480px thumb and only offers the full size as a srcset candidate,
-// so claiming the full size there made Google treat the gallery as the home
-// of every photo and label all of them with the gallery's own title.
-const toImg = (p, { thumb = false } = {}) => ({
-  url: `${SITE}${thumb ? p.file.replace("/photos/", "/photos/thumbs/") : p.file}`,
+const toImg = (p) => ({
+  url: `${SITE}${p.file}`,
   title: p.title,
   caption: caption(p),
 });
@@ -47,7 +43,7 @@ export default defineConfig({
         if (path === "/photo-archive") {
           return {
             ...item,
-            img: photos.map((p) => toImg(p, { thumb: true })),
+            img: photos.map(toImg),
           };
         }
 
