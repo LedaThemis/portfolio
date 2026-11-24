@@ -11,15 +11,17 @@ import BiXLgSVG from "../../icons/al-tahira/x-lg.svg";
 export interface Props {
   showFooter?: boolean;
   title?: string;
+  description?: string;
 }
 
-const { showFooter = true, title = "Hosh Al-Bay'ah Collection (Al-Tahira Churches)" } = Astro.props;
+const { showFooter = true, title = "Hosh Al-Bay'ah Collection (Al-Tahira Churches)", description = "Digitally preserving the Al-Tahira Churches of Mosul, Iraq." } = Astro.props;
 ---
 
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <title>{title}</title>
+    <meta name="description" content={description} />
     <meta charset="utf-8" />
     <meta
       name="viewport"
