@@ -46,17 +46,23 @@ export async function getPhotos() {
   const photos = await getCollection("photos", ({ data }) => !data.is_hidden);
   const events = await getCollection("events");
 
+  // reference matches a photo published on the event's own page; event names
+  // the event outright, which also reaches the one event that has no URL.
   const byReference = new Map(
     events.filter((e) => e.data.reference).map((e) => [e.data.reference!, e.data]),
   );
+  const byTitle = new Map(events.map((e) => [e.data.title, e.data]));
 
   const decorated = photos.map((entry) => {
     const data = entry.data as PhotoData;
     // reference is where the photograph came from; event is which event it was
-    // taken at. They are usually the same URL, but a photo of Adil's own has a
-    // source of "Own work" and still belongs to an event.
-    const eventRef = data.event ?? data.reference;
-    const event = eventRef ? byReference.get(eventRef) : undefined;
+    // taken at. A photo of Adil's own has a source of "Own work" and still
+    // belongs to an event.
+    const event = data.event
+      ? byTitle.get(data.event)
+      : data.reference
+        ? byReference.get(data.reference)
+        : undefined;
     const where = event
       ? [event.location.venue, event.location.city, event.location.country]
           .filter(Boolean)
