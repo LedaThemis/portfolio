@@ -10,20 +10,30 @@ import BiXLgSVG from "../../icons/al-tahira/x-lg.svg";
 
 export interface Props {
   showFooter?: boolean;
+  title?: string;
+  description?: string;
 }
 
-const { showFooter = true } = Astro.props;
+const { showFooter = true, title = "Hosh Al-Bay'ah Collection (Al-Tahira Churches)", description = "Digitally preserving the Al-Tahira Churches of Mosul, Iraq." } = Astro.props;
 ---
 
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Al-Tahira Churches</title>
+    <title>{title}</title>
+    <meta name="description" content={description} />
     <meta charset="utf-8" />
     <meta
       name="viewport"
       content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
     />
+    <link rel="icon" type="image/x-icon" href="/assets/al-tahira/favicon.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/al-tahira/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/al-tahira/favicon-32x32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/al-tahira/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/assets/al-tahira/android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/assets/al-tahira/android-chrome-512x512.png">
+    <meta name="theme-color" content="#ffffff">
     <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
     <link rel="sitemap" href="/sitemap-index.xml" />
     <!-- INTER FONT -->
