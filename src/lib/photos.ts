@@ -10,6 +10,7 @@ export type PhotoData = {
   title: string;
   file: string;
   reference?: string | null;
+  event?: string;
   reference_title?: string;
   creator?: string;
   width: number;
@@ -51,7 +52,11 @@ export async function getPhotos() {
 
   const decorated = photos.map((entry) => {
     const data = entry.data as PhotoData;
-    const event = data.reference ? byReference.get(data.reference) : undefined;
+    // reference is where the photograph came from; event is which event it was
+    // taken at. They are usually the same URL, but a photo of Adil's own has a
+    // source of "Own work" and still belongs to an event.
+    const eventRef = data.event ?? data.reference;
+    const event = eventRef ? byReference.get(eventRef) : undefined;
     const where = event
       ? [event.location.venue, event.location.city, event.location.country]
           .filter(Boolean)
