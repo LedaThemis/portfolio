@@ -1,0 +1,159 @@
+---
+import LayoutMinimal from "../../layouts/LayoutMinimal.astro";
+import { SUBJECT } from "../../lib/photos";
+import { getVideos, videoObject, type Video } from "../../lib/videos";
+
+export async function getStaticPaths() {
+  const videos = await getVideos();
+  return videos.map((video, i) => ({
+    params: { slug: video.slug },
+    props: { video, prev: videos[i - 1] ?? null, next: videos[i + 1] ?? null },
+  }));
+}
+
+interface Props {
+  video: Video;
+  prev: Video | null;
+  next: Video | null;
+}
+
+const { video, prev, next } = Astro.props;
+
+const published = video.published_at.toLocaleDateString("en-US", {
+  timeZone: "UTC",
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+});
+
+const page = new URL(video.url, Astro.site).toString();
+
+const jsonLd = [
+  videoObject(video, Astro.site),
+  {
+    "@type": "WebPage",
+    "@id": `${page}#page`,
+    url: page,
+    name: video.headline,
+    description: video.summary,
+    isPartOf: { "@id": "https://www.alqaba.com/#website" },
+    about: { "@id": "https://www.alqaba.com/#person" },
+    breadcrumb: {
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Media mentions",
+          item: new URL("/press", Astro.site).toString(),
+        },
+        { "@type": "ListItem", position: 2, name: video.headline },
+      ],
+    },
+  },
+];
+---
+
+<LayoutMinimal
+  title={video.headline}
+  description={video.summary}
+  image={video.thumbUrl}
+  imageAlt={video.headline}
+  imageWidth={1280}
+  imageHeight={720}
+  ogType="video.other"
+  jsonLd={jsonLd}
+>
+  <main>
+    <nav aria-label="Breadcrumb" class="crumbs">
+      <a href="/press">Media mentions</a>
+    </nav>
+
+    <h2>{video.headline}</h2>
+
+    <div class="player">
+      <iframe
+        src={video.embedUrl}
+        title={video.headline}
+        loading="lazy"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+      ></iframe>
+    </div>
+
+    <p class="summary">{video.summary}</p>
+
+    <dl class="meta">
+      <dt>Published</dt>
+      <dd><time datetime={video.uploadDate}>{published}</time></dd>
+
+      <dt>Published by</dt>
+      <dd>{video.publisher}</dd>
+
+      <dt>Original title</dt>
+      <dd lang={video.language}>{video.original_title}</dd>
+
+      {video.mention && (
+        <>
+          <dt>Named in it as</dt>
+          <dd lang={video.mention.lang}>{video.mention.text}</dd>
+        </>
+      )}
+
+      <dt>Watch on</dt>
+      <dd><a href={video.watchUrl} rel="nofollow">YouTube</a></dd>
+    </dl>
+
+    <nav aria-label="Other media" class="adjacent">
+      {prev && <a rel="prev" href={prev.url}>← {prev.headline}</a>}
+      {next && <a rel="next" href={next.url}>{next.headline} →</a>}
+    </nav>
+
+    <p class="back"><a href="/press">All media mentions of {SUBJECT} →</a></p>
+  </main>
+
+  <style>
+    .crumbs {
+      font-size: 14px;
+      margin-bottom: 8px;
+    }
+    .player {
+      position: relative;
+      aspect-ratio: 16 / 9;
+      margin: 0 0 20px;
+      background: #000;
+    }
+    .player iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+    .summary {
+      margin: 0 0 20px;
+    }
+    .meta {
+      display: grid;
+      grid-template-columns: max-content 1fr;
+      gap: 4px 16px;
+      font-size: 15px;
+    }
+    .meta dt {
+      font-weight: 700;
+    }
+    .meta dd {
+      margin: 0;
+    }
+    .adjacent {
+      display: flex;
+      justify-content: space-between;
+      gap: 24px;
+      font-size: 14px;
+      margin: 32px 0 8px;
+    }
+    .adjacent a {
+      max-width: 48%;
+    }
+  </style>
+</LayoutMinimal>

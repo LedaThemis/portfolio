@@ -8,11 +8,21 @@
   },
   {
     "is_featured": true,
-    "slug": "interview-on-participation-at-informatik-festival-2025-by-karbala news",
+    "slug": "adil-al-qaba-interview-karbala-news-informatik-festival-2025",
     "title": "Interview on participation at Informatik Festival 2025 by Karbala News",
     "reference": "https://youtu.be/s4jbtzgbs04",
     "published_at": "2025-10-07",
-    "mention": { "lang": "ar", "text": "\"عادل محمد\"" }
+    "mention": {
+      "lang": "ar",
+      "text": "\"عادل محمد\""
+    },
+    "video": {
+      "publisher": "Karbala News",
+      "original_title": "ألمانيا   جامعة بوتسدام تقيم ورشة لرقمنة التراث الثقافي العراقي بأيدي عراقية",
+      "language": "ar",
+      "headline": "Adil Al Qaba interviewed at Informatik Festival 2025",
+      "summary": "Karbala News reports from Potsdam on the workshop for digitising Iraqi cultural heritage, and interviews Adil Al Qaba (عادل محمد عدنان) about the Mosul Heritage Team's work."
+    }
   },
   {
     "is_featured": false,
@@ -27,14 +37,24 @@
     "title": "Honoring achievemnt at DoCH Conference by University of Mosul",
     "reference": "https://uomosul.edu.iq/engineering/54728-2",
     "published_at": "2025-08-30",
-    "mention": { "lang": "ar", "text": "\"عادل محمد عدنان\"" }
+    "mention": {
+      "lang": "ar",
+      "text": "\"عادل محمد عدنان\""
+    }
   },
   {
     "is_featured": true,
-    "slug": "movie-by-sophie-bade-on-digitalization-of-cultural-heritage-conference",
+    "slug": "adil-al-qaba-doch-conference-film-hochschule-darmstadt",
     "title": "Movie by Sophie Bade on Digitalization of Cultural Heritage Conference",
     "reference": "https://www.youtube.com/watch?v=p3P21zMU8zk",
-    "published_at": "2025-04-08"
+    "published_at": "2025-04-08",
+    "video": {
+      "publisher": "Hochschule Darmstadt",
+      "original_title": "Conference on Digitalization of Cultural Heritage - Project Innovation Hub",
+      "language": "en",
+      "headline": "DoCH Conference film: where Adil Al Qaba presented",
+      "summary": "Sophie Bade's film of the Digitalization of Cultural Heritage conference in Cyprus, where Adil Al Qaba (عادل محمد عدنان) presented and the Hosh Al-Bay'ah project took the best paper award."
+    }
   },
   {
     "is_featured": true,
@@ -42,7 +62,10 @@
     "title": "Interview on programming journey and winning the global finals of Huawei ICT by ManaraTV",
     "reference": "https://www.instagram.com/manaratv1/p/DDrgGW-sYyp",
     "published_at": "2024-12-17",
-    "mention": { "lang": "ar", "text": "\"عادل محمد\"" }
+    "mention": {
+      "lang": "ar",
+      "text": "\"عادل محمد\""
+    }
   },
   {
     "is_featured": true,
@@ -50,23 +73,39 @@
     "title": "Interview on journey in programming with University of Mosul Press",
     "reference": "https://www.facebook.com/UniversityofMos/posts/492196716900670",
     "published_at": "2024-08-29",
-    "mention": { "lang": "ar", "text": "\"عادل\"" }
+    "mention": {
+      "lang": "ar",
+      "text": "\"عادل\""
+    }
   },
   {
     "is_featured": true,
-    "slug": "interview-with-al-mosuliya-tv-as-part-of-scientists-and-inventors-program",
+    "slug": "adil-al-qaba-interview-al-mosuliya-tv-scientists-and-inventors",
     "title": "Interview with Al-Mosuliya TV as part of Scientists and Inventors program",
     "reference": "https://youtu.be/dNlUKr9dlHg",
     "published_at": "2024-07-10",
-    "mention": { "lang": "ar", "text": "\"عادل محمد عدنان\"" }
+    "mention": {
+      "lang": "ar",
+      "text": "\"عادل محمد عدنان\""
+    },
+    "video": {
+      "publisher": "قناة الموصلية الفضائية (Al-Mosuliya TV)",
+      "original_title": "علماء ومخترعون - عادل محمد عدنان – طالب في كلية هندسة الحاسبات – جامعة الموصل",
+      "language": "ar",
+      "headline": "Adil Al Qaba on Al-Mosuliya TV: Scientists and Inventors",
+      "summary": "Adil Al Qaba (عادل محمد عدنان), then a computer engineering student at the University of Mosul, interviewed on Al-Mosuliya TV's Scientists and Inventors programme."
+    }
   },
   {
     "is_featured": true,
     "slug": "interview-on-recent-competition-wins-with-university-of-mosul-president-kossay-alahmady",
-   "title": "Interview on recent competition wins with University of Mosul President / Kossay Alahmady",
+    "title": "Interview on recent competition wins with University of Mosul President / Kossay Alahmady",
     "reference": "https://www.facebook.com/Kossay.Alahmady/posts/991199045800226",
     "published_at": "2024-06-29",
-    "mention": { "lang": "ar", "text": "\"عادل محمد عدنان\"" }
+    "mention": {
+      "lang": "ar",
+      "text": "\"عادل محمد عدنان\""
+    }
   },
   {
     "is_featured": false,
@@ -81,7 +120,10 @@
     "title": "Interview on Huawei ICT 2023-2024 Global Final Competition by Beijing-based Caijing Magazine",
     "reference": "https://web.archive.org/web/20240527035121/https://tech.caijing.com.cn/20240527/5014334.shtml",
     "published_at": "2024-05-27",
-    "mention": { "lang": "en", "text": "\"Adil\"" }
+    "mention": {
+      "lang": "en",
+      "text": "\"Adil\""
+    }
   },
   {
     "is_featured": true,
@@ -89,7 +131,10 @@
     "title": "Interview on experience at Huawei competition by Rudaw",
     "reference": "https://www.rudawarabia.net/arabic/kurdistan/271220233",
     "published_at": "2023-12-27",
-    "mention": { "lang": "ar", "text": "\"عادل محمد عدنان\"" }
+    "mention": {
+      "lang": "ar",
+      "text": "\"عادل محمد عدنان\""
+    }
   },
   {
     "is_featured": true,
@@ -97,7 +142,10 @@
     "title": "Covering award ceremony for achievemnt at Huawei Competition by Shafaq News",
     "reference": "https://shafaq.com/ar/%D9%83%D9%88%D8%B1%D8%AF%D8%B3%D9%80%D9%80%D8%AA%D8%A7%D9%86%D9%8A%D8%A7%D8%AA/%D8%A7%D9%84%D8%AA%D8%B9%D9%84%D9%8A%D9%85-%D8%A7%D9%84%D9%83%D9%88%D8%B1%D8%AF%D8%B3%D8%AA%D8%A7%D9%86%D9%8A%D8%A9-%D8%AA-%D9%83%D8%B1-%D9%85-%D8%B7%D9%84%D8%A8%D8%A9-%D8%A7%D9%84%D8%B9%D8%B1%D8%A7%D9%82-%D8%A7%D9%84%D8%A7%D9%88%D8%A7-%D9%84-%D8%A8%D9%85%D8%B3%D8%A7%D8%A8%D9%82%D8%A7%D8%AA-%D9%87%D9%88%D8%A7%D9%88%D9%8A-%D9%84%D8%AA%D9%83%D9%86%D9%88%D9%84%D9%88%D8%AC%D9%8A%D8%A7-%D8%A7%D9%84%D9%85%D8%B9%D9%84%D9%88%D9%85%D8%A7%D8%AA-%D8%A7%D9%84%D8%AF%D9%88%D9%84%D9%8A%D8%A9",
     "published_at": "2023-12-24",
-    "mention": { "lang": "ar", "text": "\"عادل محمد عدنان\"" }
+    "mention": {
+      "lang": "ar",
+      "text": "\"عادل محمد عدنان\""
+    }
   },
   {
     "is_featured": true,
@@ -105,6 +153,9 @@
     "title": "Interview on smart waste recycling, \"Study in Iraq\" platform with University of Mosul President / Kossay Alahmady",
     "reference": "https://www.facebook.com/Kossay.Alahmady/posts/793418688911597",
     "published_at": "2023-07-08",
-    "mention": { "lang": "ar", "text": "\"عادل محمد عدنان\"" }
+    "mention": {
+      "lang": "ar",
+      "text": "\"عادل محمد عدنان\""
+    }
   }
 ]
