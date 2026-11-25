@@ -1,5 +1,6 @@
 ---
 import LayoutMinimal from "../../layouts/LayoutMinimal.astro";
+import { SUBJECT } from "../../lib/photos";
 import { getFeatures, videoObject, RTL, type Feature } from "../../lib/press";
 
 export async function getStaticPaths() {
@@ -152,7 +153,7 @@ const jsonLd = [
       {next && <a rel="next" href={next.url}>{next.headline} →</a>}
     </nav>
 
-    <p class="back"><a href="/press">All my media mentions →</a></p>
+    <p class="back"><a href="/press">All media mentions of {SUBJECT} →</a></p>
   </main>
 
   <style>
