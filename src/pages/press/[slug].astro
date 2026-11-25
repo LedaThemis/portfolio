@@ -1,6 +1,5 @@
 ---
 import LayoutMinimal from "../../layouts/LayoutMinimal.astro";
-import { SUBJECT } from "../../lib/photos";
 import { getFeatures, videoObject, RTL, type Feature } from "../../lib/press";
 
 export async function getStaticPaths() {
@@ -8,7 +7,7 @@ export async function getStaticPaths() {
   return features.map((feature, i) => ({
     params: { slug: feature.slug },
     props: {
-      video: feature,
+      feature,
       prev: features[i - 1] ?? null,
       next: features[i + 1] ?? null,
     },
@@ -16,30 +15,30 @@ export async function getStaticPaths() {
 }
 
 interface Props {
-  video: Feature;
+  feature: Feature;
   prev: Feature | null;
   next: Feature | null;
 }
 
-const { video, prev, next } = Astro.props;
+const { feature, prev, next } = Astro.props;
 
-const published = video.published_at.toLocaleDateString("en-US", {
+const published = feature.published_at.toLocaleDateString("en-US", {
   timeZone: "UTC",
   year: "numeric",
   month: "long",
   day: "numeric",
 });
 
-const page = new URL(video.url, Astro.site).toString();
+const page = new URL(feature.url, Astro.site).toString();
 
 const jsonLd = [
-  ...(video.embedUrl ? [videoObject(video, Astro.site)] : []),
+  ...(feature.embedUrl ? [videoObject(feature, Astro.site)] : []),
   {
     "@type": "WebPage",
     "@id": `${page}#page`,
     url: page,
-    name: video.headline,
-    description: video.summary,
+    name: feature.headline,
+    description: feature.summary,
     isPartOf: { "@id": "https://www.alqaba.com/#website" },
     about: { "@id": "https://www.alqaba.com/#person" },
     breadcrumb: {
@@ -51,7 +50,7 @@ const jsonLd = [
           name: "Media mentions",
           item: new URL("/press", Astro.site).toString(),
         },
-        { "@type": "ListItem", position: 2, name: video.headline },
+        { "@type": "ListItem", position: 2, name: feature.headline },
       ],
     },
   },
@@ -59,13 +58,13 @@ const jsonLd = [
 ---
 
 <LayoutMinimal
-  title={video.headline}
-  description={video.summary}
-  image={video.thumbUrl}
-  imageAlt={video.thumbUrl ? video.headline : undefined}
-  imageWidth={video.thumbUrl ? 1280 : undefined}
-  imageHeight={video.thumbUrl ? 720 : undefined}
-  ogType="video.other"
+  title={feature.headline}
+  description={feature.summary}
+  image={feature.thumbUrl}
+  imageAlt={feature.thumbUrl ? feature.headline : undefined}
+  imageWidth={feature.thumbUrl ? 1280 : undefined}
+  imageHeight={feature.thumbUrl ? 720 : undefined}
+  ogType={feature.kind === "video" ? "video.other" : "article"}
   jsonLd={jsonLd}
 >
   <main>
@@ -73,65 +72,79 @@ const jsonLd = [
       <a href="/press">Media mentions</a>
     </nav>
 
-    <h2>{video.headline}</h2>
+    <h2>{feature.headline}</h2>
 
-    {video.embedUrl ? (
+    {feature.embedUrl ? (
       <div class="player">
         <iframe
-          src={video.embedUrl}
-          title={video.headline}
+          src={feature.embedUrl}
+          title={feature.headline}
           loading="lazy"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowfullscreen
         ></iframe>
       </div>
-    ) : video.kind === "video" ? (
-      <p class="offsite">
-        <a href={video.watchUrl}>Watch it on {video.platform}</a>
-      </p>
     ) : null}
 
-    <p class="summary">{video.summary}</p>
+    <p class="summary">{feature.summary}</p>
 
-    {video.quote && (
+    {!feature.embedUrl && feature.kind === "video" && (
+      <p class="offsite">
+        <a href={feature.watchUrl}>Watch it on {feature.platform}</a>
+      </p>
+    )}
+
+    {feature.quote && (
       <figure class="quote">
         <blockquote
-          lang={video.language}
-          dir={RTL.has(video.language) ? "rtl" : undefined}
-          cite={video.watchUrl}
+          lang={feature.language}
+          dir={RTL.has(feature.language) ? "rtl" : undefined}
+          cite={feature.watchUrl}
         >
-          {video.quote.original}
+          {feature.quote.original}
         </blockquote>
-        <p class="translation">{video.quote.translation}</p>
+        <p class="translation">{feature.quote.translation}</p>
         <figcaption>
-          <cite><a href={video.watchUrl}>{video.publisher}</a></cite>, {published}
+          <cite><a href={feature.watchUrl}>{feature.publisher}</a></cite>, {published}
         </figcaption>
       </figure>
     )}
 
     <dl class="meta">
-      <dt>Published</dt>
-      <dd><time datetime={video.uploadDate}>{published}</time></dd>
-
-      <dt>Published by</dt>
-      <dd>{video.publisher}</dd>
-
-      {video.original_title && (
+      {!feature.quote && (
         <>
-          <dt>{video.platform === "YouTube" ? "Original title" : "Original post"}</dt>
-          <dd lang={video.language}>{video.original_title}</dd>
+          <dt>Published</dt>
+          <dd><time datetime={feature.uploadDate}>{published}</time></dd>
+
+          <dt>Published by</dt>
+          <dd>
+            {feature.kind === "video"
+              ? feature.publisher
+              : <a href={feature.watchUrl}>{feature.publisher}</a>}
+          </dd>
         </>
       )}
 
-      {video.mention && (
+      {feature.original_title && (
+        <>
+          <dt>{feature.platform === "YouTube" ? "Original title" : "Original post"}</dt>
+          <dd lang={feature.language}>{feature.original_title}</dd>
+        </>
+      )}
+
+      {feature.mention && (
         <>
           <dt>Named in it as</dt>
-          <dd lang={video.mention.lang}>{video.mention.text}</dd>
+          <dd lang={feature.mention.lang}>{feature.mention.text}</dd>
         </>
       )}
 
-      <dt>{video.kind === "video" ? "Watch on" : "Read at"}</dt>
-      <dd><a href={video.watchUrl}>{video.platform}</a></dd>
+      {feature.embedUrl && (
+        <>
+          <dt>Watch on</dt>
+          <dd><a href={feature.watchUrl}>{feature.platform}</a></dd>
+        </>
+      )}
     </dl>
 
     <nav aria-label="Other media" class="adjacent">
@@ -139,7 +152,7 @@ const jsonLd = [
       {next && <a rel="next" href={next.url}>{next.headline} →</a>}
     </nav>
 
-    <p class="back"><a href="/press">All media mentions of {SUBJECT} →</a></p>
+    <p class="back"><a href="/press">All my media mentions →</a></p>
   </main>
 
   <style>

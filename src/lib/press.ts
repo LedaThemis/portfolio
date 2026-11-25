@@ -1,9 +1,8 @@
 import { getCollection } from "astro:content";
-import { SUBJECT } from "./photos";
 
 const YOUTUBE = /(?:youtu\.be\/|youtube\.com\/watch\?v=)([A-Za-z0-9_-]{11})/;
 
-export function youtubeId(url?: string) {
+function youtubeId(url?: string) {
   return url?.match(YOUTUBE)?.[1];
 }
 
@@ -23,9 +22,10 @@ export async function getFeatures() {
     .flatMap((entry) => {
       if (!entry.data.feature) return [];
       const { feature, ...data } = entry.data;
-      // Only YouTube is embedded. Facebook offers no cookie-free player and no
-      // thumbnail URL that stays valid, so those pages carry the interview's
-      // details and a link out, and no VideoObject: marking up a video the
+      // Only YouTube is embedded. facebook.com/plugins/video.php returns
+      // "video not available" for all four Facebook posts and they expose no
+      // video id, so there is nothing to embed, cookie-free or otherwise.
+      // Those pages link out and carry no VideoObject: marking up a video the
       // page cannot play would be a claim the page does not support.
       const id = youtubeId(data.reference);
       return [{
