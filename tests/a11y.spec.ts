@@ -64,6 +64,19 @@ test("an off-site interview page says so, and claims no video (axe-core)", async
   expect(results.violations).toEqual([]);
 });
 
+test("a quoted article page carries the quote, in its own script (axe-core)", async ({ page }) => {
+  const res = await page.goto("/press/adil-al-qaba-quoted-by-rudaw-huawei-honouring");
+  expect(res?.status()).toBe(200);
+  // the quote is the page's reason to exist: Arabic, right-to-left, cited
+  const quote = page.locator("blockquote[lang=ar][dir=rtl]");
+  await expect(quote).toHaveCount(1);
+  await expect(quote).toContainText("تكريم عالمي");
+  await expect(quote).toHaveAttribute("cite", /rudawarabia\.net/);
+  await expect(page.locator("cite")).toContainText("Rudaw");
+  const results = await new AxeBuilder({ page }).analyze();
+  expect(results.violations).toEqual([]);
+});
+
 test("photo detail page is accessible (axe-core)", async ({ page }) => {
   const res = await page.goto(
     "/photo-archive/adil-al-qaba-presenting-museum-project-technical-university-brandenburg",

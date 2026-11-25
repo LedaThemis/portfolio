@@ -32,12 +32,16 @@ const press = defineCollection({
     slug: z.string(),
     title: z.string(),
     reference: z.string().optional(),
-    video: z.object({
+    feature: z.object({
       publisher: z.string(),
       original_title: z.string().optional(),
       language: z.string(),
       headline: z.string(),
       summary: z.string(),
+      quote: z.object({
+        original: z.string(),
+        translation: z.string(),
+      }).optional(),
     }).optional(),
     published_at: z.coerce.date(),
     mention: z.object({

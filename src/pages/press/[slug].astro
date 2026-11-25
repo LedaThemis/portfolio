@@ -1,20 +1,24 @@
 ---
 import LayoutMinimal from "../../layouts/LayoutMinimal.astro";
 import { SUBJECT } from "../../lib/photos";
-import { getVideos, videoObject, type Video } from "../../lib/videos";
+import { getFeatures, videoObject, RTL, type Feature } from "../../lib/press";
 
 export async function getStaticPaths() {
-  const videos = await getVideos();
-  return videos.map((video, i) => ({
-    params: { slug: video.slug },
-    props: { video, prev: videos[i - 1] ?? null, next: videos[i + 1] ?? null },
+  const features = await getFeatures();
+  return features.map((feature, i) => ({
+    params: { slug: feature.slug },
+    props: {
+      video: feature,
+      prev: features[i - 1] ?? null,
+      next: features[i + 1] ?? null,
+    },
   }));
 }
 
 interface Props {
-  video: Video;
-  prev: Video | null;
-  next: Video | null;
+  video: Feature;
+  prev: Feature | null;
+  next: Feature | null;
 }
 
 const { video, prev, next } = Astro.props;
@@ -84,11 +88,27 @@ const jsonLd = [
     ) : (
       <p class="offsite">
         This recording is on {video.platform} and cannot be played here.
-        <a href={video.watchUrl} rel="nofollow">Watch it on {video.platform}</a>.
+        <a href={video.watchUrl}>Watch it on {video.platform}</a>.
       </p>
     )}
 
     <p class="summary">{video.summary}</p>
+
+    {video.quote && (
+      <figure class="quote">
+        <blockquote
+          lang={video.language}
+          dir={RTL.has(video.language) ? "rtl" : undefined}
+          cite={video.watchUrl}
+        >
+          {video.quote.original}
+        </blockquote>
+        <p class="translation">{video.quote.translation}</p>
+        <figcaption>
+          <cite>{video.publisher}</cite>, {published}
+        </figcaption>
+      </figure>
+    )}
 
     <dl class="meta">
       <dt>Published</dt>
@@ -112,7 +132,7 @@ const jsonLd = [
       )}
 
       <dt>Watch on</dt>
-      <dd><a href={video.watchUrl} rel="nofollow">{video.platform}</a></dd>
+      <dd><a href={video.watchUrl}>{video.platform}</a></dd>
     </dl>
 
     <nav aria-label="Other media" class="adjacent">
@@ -143,6 +163,30 @@ const jsonLd = [
     }
     .summary {
       margin: 0 0 20px;
+    }
+    .quote {
+      margin: 0 0 24px;
+      padding: 0;
+    }
+    .quote blockquote {
+      margin: 0;
+      padding: 12px 18px;
+      border-left: 3px solid currentColor;
+      font-size: 17px;
+      line-height: 1.6;
+    }
+    .quote blockquote[dir="rtl"] {
+      border-left: 0;
+      border-right: 3px solid currentColor;
+    }
+    .quote .translation {
+      margin: 10px 0 6px;
+      font-size: 15px;
+      opacity: 0.9;
+    }
+    .quote figcaption {
+      font-size: 14px;
+      opacity: 0.85;
     }
     .offsite {
       margin: 0 0 20px;

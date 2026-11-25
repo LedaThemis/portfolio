@@ -17,12 +17,12 @@ function platformOf(url: string) {
   return PLATFORMS.find(([re]) => re.test(url))?.[1] ?? new URL(url).hostname;
 }
 
-export async function getVideos() {
+export async function getFeatures() {
   const press = await getCollection("press");
   return press
     .flatMap((entry) => {
-      if (!entry.data.video) return [];
-      const { video, ...data } = entry.data;
+      if (!entry.data.feature) return [];
+      const { feature, ...data } = entry.data;
       // Only YouTube is embedded. Facebook offers no cookie-free player and no
       // thumbnail URL that stays valid, so those pages carry the interview's
       // details and a link out, and no VideoObject: marking up a video the
@@ -30,7 +30,7 @@ export async function getVideos() {
       const id = youtubeId(data.reference);
       return [{
         ...data,
-        ...video,
+        ...feature,
         id,
         url: `/press/${data.slug}`,
         // nocookie serves the same player without setting tracking cookies
@@ -45,9 +45,11 @@ export async function getVideos() {
     .sort((a, b) => b.published_at.getTime() - a.published_at.getTime());
 }
 
-export type Video = Awaited<ReturnType<typeof getVideos>>[number];
+export const RTL = new Set(["ar", "fa", "he", "ur"]);
 
-export function videoObject(v: Video, site: URL | undefined) {
+export type Feature = Awaited<ReturnType<typeof getFeatures>>[number];
+
+export function videoObject(v: Feature, site: URL | undefined) {
   const page = new URL(v.url, site).toString();
   return {
     "@type": "VideoObject",

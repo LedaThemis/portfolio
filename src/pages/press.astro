@@ -2,10 +2,10 @@
 import LayoutMinimal from "../layouts/LayoutMinimal.astro";
 import Contact from "../components/Contact.astro";
 import { getCollection } from "astro:content";
-import { getVideos } from "../lib/videos";
+import { getFeatures } from "../lib/press";
 
 const press = await getCollection('press');
-const videoPage = new Map((await getVideos()).map((v) => [v.slug, v]));
+const featurePage = new Map((await getFeatures()).map((f) => [f.slug, f]));
 ---
 
 <LayoutMinimal
@@ -19,7 +19,7 @@ const videoPage = new Map((await getVideos()).map((v) => [v.slug, v]));
     <ul>
       {press.map((entry) => (
         <li>
-          <a href={videoPage.get(entry.data.slug)?.url ?? entry.data.reference}>{entry.data.title}</a> {entry.data.mention && <span class="italic">(Mentioned as: <span lang={entry.data.mention.lang}>{entry.data.mention.text}</span>)</span>}
+          <a href={featurePage.get(entry.data.slug)?.url ?? entry.data.reference}>{entry.data.title}</a> {entry.data.mention && <span class="italic">(Mentioned as: <span lang={entry.data.mention.lang}>{entry.data.mention.text}</span>)</span>}
         </li>
       ))}
     </ul>
