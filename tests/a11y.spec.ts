@@ -59,7 +59,9 @@ test("an off-site interview page says so, and claims no video (axe-core)", async
   await expect(page.locator("iframe")).toHaveCount(0);
   const ld = await page.locator('script[type="application/ld+json"]').allTextContents();
   expect(ld.join("")).not.toContain("VideoObject");
-  await expect(page.getByText(/cannot be played here/)).toBeVisible();
+  await expect(
+    page.getByRole("link", { name: "Watch it on Facebook" }),
+  ).toBeVisible();
   const results = await new AxeBuilder({ page }).analyze();
   expect(results.violations).toEqual([]);
 });

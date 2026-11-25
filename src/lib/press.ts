@@ -13,8 +13,8 @@ const PLATFORMS: [RegExp, string][] = [
   [/instagram\.com/, "Instagram"],
 ];
 
-function platformOf(url: string) {
-  return PLATFORMS.find(([re]) => re.test(url))?.[1] ?? new URL(url).hostname;
+function platformOf(url: string, fallback: string) {
+  return PLATFORMS.find(([re]) => re.test(url))?.[1] ?? fallback;
 }
 
 export async function getFeatures() {
@@ -38,7 +38,7 @@ export async function getFeatures() {
         embedUrl: id ? `https://www.youtube-nocookie.com/embed/${id}` : undefined,
         thumbUrl: id ? `https://i.ytimg.com/vi/${id}/maxresdefault.jpg` : undefined,
         watchUrl: data.reference,
-        platform: platformOf(data.reference),
+        platform: platformOf(data.reference, feature.publisher),
         uploadDate: data.published_at.toISOString().split("T")[0],
       }];
     })

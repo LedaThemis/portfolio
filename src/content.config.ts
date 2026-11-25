@@ -33,6 +33,7 @@ const press = defineCollection({
     title: z.string(),
     reference: z.string().optional(),
     feature: z.object({
+      kind: z.enum(["video", "article"]),
       publisher: z.string(),
       original_title: z.string().optional(),
       language: z.string(),

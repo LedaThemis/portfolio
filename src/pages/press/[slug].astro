@@ -85,12 +85,11 @@ const jsonLd = [
           allowfullscreen
         ></iframe>
       </div>
-    ) : (
+    ) : video.kind === "video" ? (
       <p class="offsite">
-        This recording is on {video.platform} and cannot be played here.
-        <a href={video.watchUrl}>Watch it on {video.platform}</a>.
+        <a href={video.watchUrl}>Watch it on {video.platform}</a>
       </p>
-    )}
+    ) : null}
 
     <p class="summary">{video.summary}</p>
 
@@ -105,7 +104,7 @@ const jsonLd = [
         </blockquote>
         <p class="translation">{video.quote.translation}</p>
         <figcaption>
-          <cite>{video.publisher}</cite>, {published}
+          <cite><a href={video.watchUrl}>{video.publisher}</a></cite>, {published}
         </figcaption>
       </figure>
     )}
@@ -131,7 +130,7 @@ const jsonLd = [
         </>
       )}
 
-      <dt>Watch on</dt>
+      <dt>{video.kind === "video" ? "Watch on" : "Read at"}</dt>
       <dd><a href={video.watchUrl}>{video.platform}</a></dd>
     </dl>
 
