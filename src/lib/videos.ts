@@ -7,13 +7,27 @@ export function youtubeId(url?: string) {
   return url?.match(YOUTUBE)?.[1];
 }
 
+const PLATFORMS: [RegExp, string][] = [
+  [/youtu\.be|youtube\.com/, "YouTube"],
+  [/facebook\.com/, "Facebook"],
+  [/instagram\.com/, "Instagram"],
+];
+
+function platformOf(url: string) {
+  return PLATFORMS.find(([re]) => re.test(url))?.[1] ?? new URL(url).hostname;
+}
+
 export async function getVideos() {
   const press = await getCollection("press");
   return press
     .flatMap((entry) => {
-      const id = youtubeId(entry.data.reference);
-      if (!id || !entry.data.video) return [];
+      if (!entry.data.video) return [];
       const { video, ...data } = entry.data;
+      // Only YouTube is embedded. Facebook offers no cookie-free player and no
+      // thumbnail URL that stays valid, so those pages carry the interview's
+      // details and a link out, and no VideoObject: marking up a video the
+      // page cannot play would be a claim the page does not support.
+      const id = youtubeId(data.reference);
       return [{
         ...data,
         ...video,
@@ -21,9 +35,10 @@ export async function getVideos() {
         url: `/press/${data.slug}`,
         // nocookie serves the same player without setting tracking cookies
         // before the visitor has pressed play.
-        embedUrl: `https://www.youtube-nocookie.com/embed/${id}`,
-        watchUrl: `https://www.youtube.com/watch?v=${id}`,
-        thumbUrl: `https://i.ytimg.com/vi/${id}/maxresdefault.jpg`,
+        embedUrl: id ? `https://www.youtube-nocookie.com/embed/${id}` : undefined,
+        thumbUrl: id ? `https://i.ytimg.com/vi/${id}/maxresdefault.jpg` : undefined,
+        watchUrl: data.reference,
+        platform: platformOf(data.reference),
         uploadDate: data.published_at.toISOString().split("T")[0],
       }];
     })

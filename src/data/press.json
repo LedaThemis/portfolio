@@ -1,10 +1,17 @@
 [
   {
     "is_featured": false,
-    "slug": "coverage-of-project-week-at-university-of-thi-qar-by-university-press",
+    "slug": "adil-al-qaba-thi-qar-iraqi-german-project-week",
     "title": "Coverage of Project Week at University of Thi-qar by university press",
     "reference": "https://web.facebook.com/nisreen.mhmo/posts/1981586272631643",
-    "published_at": "2025-11-24"
+    "published_at": "2025-11-24",
+    "video": {
+      "publisher": "University of Thi-Qar press",
+      "language": "ar",
+      "original_title": "ختام مميز للأسبوع العراقي–الألماني في جامعة ذي قار… تعاون علمي ورؤى مستقبلية مشتركة",
+      "headline": "Adil Al Qaba at Thi-Qar Iraqi-German project week",
+      "summary": "Coverage of the Iraqi-German project week at the University of Thi-Qar, which Adil Al Qaba (عادل محمد عدنان) took part in."
+    }
   },
   {
     "is_featured": true,
@@ -58,24 +65,37 @@
   },
   {
     "is_featured": true,
-    "slug": "interview-on-programming-journey-and-winning-the-global-finals-of-huawei-ict-by-manara-tv",
+    "slug": "adil-al-qaba-interview-manara-tv-huawei-ict-global-final",
     "title": "Interview on programming journey and winning the global finals of Huawei ICT by ManaraTV",
     "reference": "https://www.instagram.com/manaratv1/p/DDrgGW-sYyp",
     "published_at": "2024-12-17",
     "mention": {
       "lang": "ar",
       "text": "\"عادل محمد\""
+    },
+    "video": {
+      "publisher": "Manara TV",
+      "language": "ar",
+      "headline": "Adil Al Qaba on Manara TV: Huawei ICT global final",
+      "summary": "Manara TV interviews Adil Al Qaba (عادل محمد عدنان) about his programming journey and winning the Huawei ICT global final."
     }
   },
   {
     "is_featured": true,
-    "slug": "interview-on-journey-in-programming-with-university-of-mosul-press",
+    "slug": "adil-al-qaba-interview-university-of-mosul-press-programming-journey",
     "title": "Interview on journey in programming with University of Mosul Press",
     "reference": "https://www.facebook.com/UniversityofMos/posts/492196716900670",
     "published_at": "2024-08-29",
     "mention": {
       "lang": "ar",
       "text": "\"عادل\""
+    },
+    "video": {
+      "publisher": "University of Mosul",
+      "language": "ar",
+      "original_title": "عادل طالب في قسم هندسة الحاسوب ، لنتعرف على قصته وموهبته في الفيديو",
+      "headline": "Adil Al Qaba interviewed by University of Mosul Press",
+      "summary": "University of Mosul interviews Adil Al Qaba (عادل محمد عدنان), then a computer engineering student, about his programming journey."
     }
   },
   {
@@ -98,13 +118,19 @@
   },
   {
     "is_featured": true,
-    "slug": "interview-on-recent-competition-wins-with-university-of-mosul-president-kossay-alahmady",
+    "slug": "adil-al-qaba-interview-kossay-alahmady-huawei-competition-wins",
     "title": "Interview on recent competition wins with University of Mosul President / Kossay Alahmady",
     "reference": "https://www.facebook.com/Kossay.Alahmady/posts/991199045800226",
     "published_at": "2024-06-29",
     "mention": {
       "lang": "ar",
       "text": "\"عادل محمد عدنان\""
+    },
+    "video": {
+      "publisher": "Kossay Alahmady, President of the University of Mosul",
+      "language": "ar",
+      "headline": "Adil Al Qaba on winning the Huawei ICT global final",
+      "summary": "Adil Al Qaba (عادل محمد عدنان) interviewed about winning the Huawei ICT global final, posted by the President of the University of Mosul."
     }
   },
   {
@@ -149,13 +175,19 @@
   },
   {
     "is_featured": true,
-    "slug": "interview-on-smart-waste-recycling-study-in-iraq-platform-with-university-of-mosul-president-kossay-alahmady",
+    "slug": "adil-al-qaba-interview-smart-waste-recycling-study-in-iraq",
     "title": "Interview on smart waste recycling, \"Study in Iraq\" platform with University of Mosul President / Kossay Alahmady",
     "reference": "https://www.facebook.com/Kossay.Alahmady/posts/793418688911597",
     "published_at": "2023-07-08",
     "mention": {
       "lang": "ar",
       "text": "\"عادل محمد عدنان\""
+    },
+    "video": {
+      "publisher": "Kossay Alahmady, President of the University of Mosul",
+      "language": "ar",
+      "headline": "Adil Al Qaba on the smart waste recycling project",
+      "summary": "Adil Al Qaba (عادل محمد عدنان) interviewed about the smart waste recycling project, for the Study in Iraq platform."
     }
   }
 ]

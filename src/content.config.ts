@@ -34,7 +34,7 @@ const press = defineCollection({
     reference: z.string().optional(),
     video: z.object({
       publisher: z.string(),
-      original_title: z.string(),
+      original_title: z.string().optional(),
       language: z.string(),
       headline: z.string(),
       summary: z.string(),

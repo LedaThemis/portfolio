@@ -49,6 +49,21 @@ test("video page is accessible, and carries its video (axe-core)", async ({ page
   expect(results.violations).toEqual([]);
 });
 
+test("an off-site interview page says so, and claims no video (axe-core)", async ({ page }) => {
+  const res = await page.goto(
+    "/press/adil-al-qaba-interview-university-of-mosul-press-programming-journey",
+  );
+  expect(res?.status()).toBe(200);
+  // Facebook offers no cookie-free player, so this page must carry no iframe
+  // at all - and therefore no VideoObject claiming a video it cannot play.
+  await expect(page.locator("iframe")).toHaveCount(0);
+  const ld = await page.locator('script[type="application/ld+json"]').allTextContents();
+  expect(ld.join("")).not.toContain("VideoObject");
+  await expect(page.getByText(/cannot be played here/)).toBeVisible();
+  const results = await new AxeBuilder({ page }).analyze();
+  expect(results.violations).toEqual([]);
+});
+
 test("photo detail page is accessible (axe-core)", async ({ page }) => {
   const res = await page.goto(
     "/photo-archive/adil-al-qaba-presenting-museum-project-technical-university-brandenburg",

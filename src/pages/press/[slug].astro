@@ -29,7 +29,7 @@ const published = video.published_at.toLocaleDateString("en-US", {
 const page = new URL(video.url, Astro.site).toString();
 
 const jsonLd = [
-  videoObject(video, Astro.site),
+  ...(video.embedUrl ? [videoObject(video, Astro.site)] : []),
   {
     "@type": "WebPage",
     "@id": `${page}#page`,
@@ -58,9 +58,9 @@ const jsonLd = [
   title={video.headline}
   description={video.summary}
   image={video.thumbUrl}
-  imageAlt={video.headline}
-  imageWidth={1280}
-  imageHeight={720}
+  imageAlt={video.thumbUrl ? video.headline : undefined}
+  imageWidth={video.thumbUrl ? 1280 : undefined}
+  imageHeight={video.thumbUrl ? 720 : undefined}
   ogType="video.other"
   jsonLd={jsonLd}
 >
@@ -71,15 +71,22 @@ const jsonLd = [
 
     <h2>{video.headline}</h2>
 
-    <div class="player">
-      <iframe
-        src={video.embedUrl}
-        title={video.headline}
-        loading="lazy"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen
-      ></iframe>
-    </div>
+    {video.embedUrl ? (
+      <div class="player">
+        <iframe
+          src={video.embedUrl}
+          title={video.headline}
+          loading="lazy"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+        ></iframe>
+      </div>
+    ) : (
+      <p class="offsite">
+        This recording is on {video.platform} and cannot be played here.
+        <a href={video.watchUrl} rel="nofollow">Watch it on {video.platform}</a>.
+      </p>
+    )}
 
     <p class="summary">{video.summary}</p>
 
@@ -90,8 +97,12 @@ const jsonLd = [
       <dt>Published by</dt>
       <dd>{video.publisher}</dd>
 
-      <dt>Original title</dt>
-      <dd lang={video.language}>{video.original_title}</dd>
+      {video.original_title && (
+        <>
+          <dt>{video.platform === "YouTube" ? "Original title" : "Original post"}</dt>
+          <dd lang={video.language}>{video.original_title}</dd>
+        </>
+      )}
 
       {video.mention && (
         <>
@@ -101,7 +112,7 @@ const jsonLd = [
       )}
 
       <dt>Watch on</dt>
-      <dd><a href={video.watchUrl} rel="nofollow">YouTube</a></dd>
+      <dd><a href={video.watchUrl} rel="nofollow">{video.platform}</a></dd>
     </dl>
 
     <nav aria-label="Other media" class="adjacent">
@@ -132,6 +143,13 @@ const jsonLd = [
     }
     .summary {
       margin: 0 0 20px;
+    }
+    .offsite {
+      margin: 0 0 20px;
+      padding: 12px 16px;
+      border-left: 3px solid currentColor;
+      font-size: 15px;
+      opacity: 0.9;
     }
     .meta {
       display: grid;
