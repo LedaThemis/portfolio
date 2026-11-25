@@ -41,10 +41,16 @@ const withEvent = [
   takenText,
 ].filter(Boolean);
 
-const description =
-  withEvent.join(". ").length <= 155
-    ? withEvent.join(". ")
-    : descParts.join(". ");
+// Pick the fullest version that fits. Choosing between two candidates was not
+// enough: on 7 pages the shorter one overflowed too, because the alt text alone
+// can exceed the limit.
+const description = (() => {
+  for (const parts of [withEvent, descParts, [photo.alt]]) {
+    const joined = parts.filter(Boolean).join(". ");
+    if (joined.length <= 155) return joined;
+  }
+  return photo.alt.slice(0, 152).replace(/\s+\S*$/, "") + "…";
+})();
 
 // Google truncates around 60 characters, so the name goes at the front
 // when the title does not already carry it.
