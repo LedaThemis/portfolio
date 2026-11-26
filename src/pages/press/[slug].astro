@@ -1,7 +1,7 @@
 ---
 import LayoutMinimal from "../../layouts/LayoutMinimal.astro";
 import { SUBJECT } from "../../lib/photos";
-import { getFeatures, videoObject, RTL, type Feature } from "../../lib/press";
+import { getFeatures, videoObject, type Feature } from "../../lib/press";
 
 export async function getStaticPaths() {
   const features = await getFeatures();
@@ -32,6 +32,17 @@ const published = feature.published_at.toLocaleDateString("en-US", {
 
 const page = new URL(feature.url, Astro.site).toString();
 
+// Without a thumbnail the layout falls back to the site's own share card, so
+// the alt text and the dimensions have to fall back with it.
+const card = feature.thumbUrl
+  ? {
+      image: feature.thumbUrl,
+      imageAlt: feature.headline,
+      imageWidth: 1280,
+      imageHeight: 720,
+    }
+  : {};
+
 const jsonLd = [
   ...(feature.embedUrl ? [videoObject(feature, Astro.site)] : []),
   {
@@ -61,10 +72,7 @@ const jsonLd = [
 <LayoutMinimal
   title={feature.headline}
   description={feature.summary}
-  image={feature.thumbUrl}
-  imageAlt={feature.thumbUrl ? feature.headline : undefined}
-  imageWidth={feature.thumbUrl ? 1280 : undefined}
-  imageHeight={feature.thumbUrl ? 720 : undefined}
+  {...card}
   ogType={feature.kind === "video" ? "video.other" : "article"}
   jsonLd={jsonLd}
 >
@@ -99,7 +107,7 @@ const jsonLd = [
       <figure class="quote">
         <blockquote
           lang={feature.language}
-          dir={RTL.has(feature.language) ? "rtl" : undefined}
+          dir={feature.language === "ar" ? "rtl" : undefined}
           cite={feature.watchUrl}
         >
           {feature.quote.original}
@@ -118,11 +126,7 @@ const jsonLd = [
           <dd><time datetime={feature.uploadDate}>{published}</time></dd>
 
           <dt>Published by</dt>
-          <dd>
-            {feature.kind === "video"
-              ? feature.publisher
-              : <a href={feature.watchUrl}>{feature.publisher}</a>}
-          </dd>
+          <dd>{feature.publisher}</dd>
         </>
       )}
 

@@ -1,27 +1,22 @@
 import { readFileSync } from "node:fs";
 
+import { SUBJECT, altFor } from "./src/lib/subject";
+
 import { defineConfig } from "astro/config";
 import sitemap from "@astrojs/sitemap";
 import mdx from "@astrojs/mdx";
 import tailwindcss from "@tailwindcss/vite";
 
 const SITE = "https://www.alqaba.com";
-const SUBJECT = "Adil Al Qaba";
 
 const photos = JSON.parse(
   readFileSync(new URL("./src/data/photos.json", import.meta.url), "utf8"),
 ).filter((p) => !p.is_hidden);
 
-const caption = (p) => {
-  if (p.title.includes(SUBJECT)) return p.title;
-  if (p.subject_in_frame === false) return p.title;
-  return `${p.title} — ${SUBJECT} pictured`;
-};
-
 const toImg = (p) => ({
   url: `${SITE}${p.file}`,
   title: p.title,
-  caption: caption(p),
+  caption: altFor(p),
 });
 
 const bySlug = new Map(photos.map((p) => [p.slug, p]));

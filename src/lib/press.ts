@@ -12,8 +12,9 @@ const PLATFORMS: [RegExp, string][] = [
   [/instagram\.com/, "Instagram"],
 ];
 
-function platformOf(url: string, fallback: string) {
-  return PLATFORMS.find(([re]) => re.test(url))?.[1] ?? fallback;
+// undefined for an article, which never shows a platform
+function platformOf(url: string) {
+  return PLATFORMS.find(([re]) => re.test(url))?.[1];
 }
 
 export async function getFeatures() {
@@ -38,14 +39,12 @@ export async function getFeatures() {
         embedUrl: id ? `https://www.youtube-nocookie.com/embed/${id}` : undefined,
         thumbUrl: id ? `https://i.ytimg.com/vi/${id}/maxresdefault.jpg` : undefined,
         watchUrl: data.reference,
-        platform: platformOf(data.reference, feature.publisher),
+        platform: platformOf(data.reference),
         uploadDate: data.published_at.toISOString().split("T")[0],
       }];
     })
     .sort((a, b) => b.published_at.getTime() - a.published_at.getTime());
 }
-
-export const RTL = new Set(["ar", "fa", "he", "ur"]);
 
 export type Feature = Awaited<ReturnType<typeof getFeatures>>[number];
 
