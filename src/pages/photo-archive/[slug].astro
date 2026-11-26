@@ -33,24 +33,21 @@ const takenText = photo.takenISO
 
 // Google truncates around 160 characters. The event name often repeats the
 // venue already named in the title, so it is the part that gets dropped.
-const descParts = [photo.alt, photo.where, takenText].filter(Boolean);
-const withEvent = [
+// The title usually names the event already, so repeating it reads badly:
+// "...at DoCH Conference — Adil Al Qaba pictured. Taken at DoCH Conference."
+const sayEvent = photo.event && !photo.title.includes(photo.event.title);
+
+const parts = [
   photo.alt,
-  photo.event ? `Taken at ${photo.event.title}` : null,
+  sayEvent ? `Taken at ${photo.event!.title}` : null,
   photo.where,
   takenText,
 ].filter(Boolean);
 
-// Pick the fullest version that fits. Choosing between two candidates was not
-// enough: on 7 pages the shorter one overflowed too, because the alt text alone
-// can exceed the limit.
-const description = (() => {
-  for (const parts of [withEvent, descParts, [photo.alt]]) {
-    const joined = parts.filter(Boolean).join(". ");
-    if (joined.length <= 155) return joined;
-  }
-  return photo.alt.slice(0, 152).replace(/\s+\S*$/, "") + "…";
-})();
+// Google truncates to the width it has and does not penalise the rest, so
+// there is nothing here to fit. Order is what matters: the name and the event
+// come first, and a cut-off costs the location and the date.
+const description = parts.join(". ");
 
 // Google truncates around 60 characters, so the name goes at the front
 // when the title does not already carry it.
