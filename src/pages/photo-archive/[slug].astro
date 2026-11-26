@@ -33,18 +33,21 @@ const takenText = photo.takenISO
 
 // Google truncates around 160 characters. The event name often repeats the
 // venue already named in the title, so it is the part that gets dropped.
-const descParts = [photo.alt, photo.where, takenText].filter(Boolean);
-const withEvent = [
+// The title usually names the event already, so repeating it reads badly:
+// "...at DoCH Conference — Adil Al Qaba pictured. Taken at DoCH Conference."
+const sayEvent = photo.event && !photo.title.includes(photo.event.title);
+
+const parts = [
   photo.alt,
-  photo.event ? `Taken at ${photo.event.title}` : null,
+  sayEvent ? `Taken at ${photo.event!.title}` : null,
   photo.where,
   takenText,
 ].filter(Boolean);
 
-const description =
-  withEvent.join(". ").length <= 155
-    ? withEvent.join(". ")
-    : descParts.join(". ");
+// Google truncates to the width it has and does not penalise the rest, so
+// there is nothing here to fit. Order is what matters: the name and the event
+// come first, and a cut-off costs the location and the date.
+const description = parts.join(". ");
 
 // Google truncates around 60 characters, so the name goes at the front
 // when the title does not already carry it.
@@ -112,7 +115,7 @@ const jsonLd = [
       <figcaption>
         {photo.title}
         {photo.inFrame && !photo.title.includes(SUBJECT) && (
-          <><br /><strong>Pictured:</strong> {SUBJECT} (<span lang="ar">عادل محمد عدنان</span>)</>
+          <><br /><strong>Pictured:</strong> {SUBJECT} (<span lang="ar" dir="rtl">عادل محمد عدنان</span>)</>
         )}
       </figcaption>
     </figure>

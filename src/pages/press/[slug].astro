@@ -1,0 +1,238 @@
+---
+import LayoutMinimal from "../../layouts/LayoutMinimal.astro";
+import { SUBJECT } from "../../lib/photos";
+import { getFeatures, videoObject, dirFor, type Feature } from "../../lib/press";
+
+export async function getStaticPaths() {
+  const features = await getFeatures();
+  return features.map((feature, i) => ({
+    params: { slug: feature.slug },
+    props: {
+      feature,
+      prev: features[i - 1] ?? null,
+      next: features[i + 1] ?? null,
+    },
+  }));
+}
+
+interface Props {
+  feature: Feature;
+  prev: Feature | null;
+  next: Feature | null;
+}
+
+const { feature, prev, next } = Astro.props;
+
+const published = feature.published_at.toLocaleDateString("en-US", {
+  timeZone: "UTC",
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+});
+
+const page = new URL(feature.url, Astro.site).toString();
+
+// Without a thumbnail the layout falls back to the site's own share card, so
+// the alt text and the dimensions have to fall back with it.
+const card = feature.thumbUrl
+  ? {
+      image: feature.thumbUrl,
+      imageAlt: feature.headline,
+      imageWidth: 1280,
+      imageHeight: 720,
+    }
+  : {};
+
+const jsonLd = [
+  ...(feature.embedUrl ? [videoObject(feature, Astro.site)] : []),
+  {
+    "@type": "WebPage",
+    "@id": `${page}#page`,
+    url: page,
+    name: feature.headline,
+    description: feature.summary,
+    isPartOf: { "@id": "https://www.alqaba.com/#website" },
+    about: { "@id": "https://www.alqaba.com/#person" },
+    breadcrumb: {
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Media mentions",
+          item: new URL("/press", Astro.site).toString(),
+        },
+        { "@type": "ListItem", position: 2, name: feature.headline },
+      ],
+    },
+  },
+];
+---
+
+<LayoutMinimal
+  title={feature.headline}
+  description={feature.summary}
+  {...card}
+  ogType={feature.kind === "video" ? "video.other" : "article"}
+  jsonLd={jsonLd}
+>
+  <main>
+    <nav aria-label="Breadcrumb" class="crumbs">
+      <a href="/press">Media mentions</a>
+    </nav>
+
+    <h2>{feature.headline}</h2>
+
+    {feature.embedUrl ? (
+      <div class="player">
+        <iframe
+          src={feature.embedUrl}
+          title={feature.headline}
+          loading="lazy"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+        ></iframe>
+      </div>
+    ) : null}
+
+    <p class="summary">{feature.summary}</p>
+
+    {!feature.embedUrl && feature.kind === "video" && (
+      <p class="offsite">
+        <a href={feature.watchUrl}>Watch it on {feature.platform}</a>
+      </p>
+    )}
+
+    {feature.quote && (
+      <figure class="quote">
+        <blockquote
+          lang={feature.language}
+          dir={dirFor(feature.language)}
+          cite={feature.watchUrl}
+        >
+          {feature.quote.original}
+        </blockquote>
+        <p class="translation">{feature.quote.translation}</p>
+        <figcaption>
+          <cite><a href={feature.watchUrl}>{feature.publisher}</a></cite>, {published}
+        </figcaption>
+      </figure>
+    )}
+
+    <dl class="meta">
+      {!feature.quote && (
+        <>
+          <dt>Published</dt>
+          <dd><time datetime={feature.uploadDate}>{published}</time></dd>
+
+          <dt>Published by</dt>
+          <dd>{feature.publisher}</dd>
+        </>
+      )}
+
+      {feature.original_title && (
+        <>
+          <dt>{feature.platform === "YouTube" ? "Original title" : "Original post"}</dt>
+          <dd lang={feature.language} dir={dirFor(feature.language)}>{feature.original_title}</dd>
+        </>
+      )}
+
+      {feature.mention && (
+        <>
+          <dt>Named in it as</dt>
+          <dd lang={feature.mention.lang} dir={dirFor(feature.mention.lang)}>{feature.mention.text}</dd>
+        </>
+      )}
+
+      {feature.embedUrl && (
+        <>
+          <dt>Watch on</dt>
+          <dd><a href={feature.watchUrl}>{feature.platform}</a></dd>
+        </>
+      )}
+    </dl>
+
+    <nav aria-label="Other media" class="adjacent">
+      {prev && <a rel="prev" href={prev.url}>← {prev.headline}</a>}
+      {next && <a rel="next" href={next.url}>{next.headline} →</a>}
+    </nav>
+
+    <p class="back"><a href="/press">All media mentions of {SUBJECT} →</a></p>
+  </main>
+
+  <style>
+    .crumbs {
+      font-size: 14px;
+      margin-bottom: 8px;
+    }
+    .player {
+      position: relative;
+      aspect-ratio: 16 / 9;
+      margin: 0 0 20px;
+      background: #000;
+    }
+    .player iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+    .summary {
+      margin: 0 0 20px;
+    }
+    .quote {
+      margin: 0 0 24px;
+      padding: 0;
+    }
+    .quote blockquote {
+      margin: 0;
+      padding: 12px 18px;
+      border-left: 3px solid currentColor;
+      font-size: 17px;
+      line-height: 1.6;
+    }
+    .quote blockquote[dir="rtl"] {
+      border-left: 0;
+      border-right: 3px solid currentColor;
+    }
+    .quote .translation {
+      margin: 10px 0 6px;
+      font-size: 15px;
+      opacity: 0.9;
+    }
+    .quote figcaption {
+      font-size: 14px;
+      opacity: 0.85;
+    }
+    .offsite {
+      margin: 0 0 20px;
+      padding: 12px 16px;
+      border-left: 3px solid currentColor;
+      font-size: 15px;
+      opacity: 0.9;
+    }
+    .meta {
+      display: grid;
+      grid-template-columns: max-content 1fr;
+      gap: 4px 16px;
+      font-size: 15px;
+    }
+    .meta dt {
+      font-weight: 700;
+    }
+    .meta dd {
+      margin: 0;
+    }
+    .adjacent {
+      display: flex;
+      justify-content: space-between;
+      gap: 24px;
+      font-size: 14px;
+      margin: 32px 0 8px;
+    }
+    .adjacent a {
+      max-width: 48%;
+    }
+  </style>
+</LayoutMinimal>

@@ -29,8 +29,21 @@ const press = defineCollection({
   loader: file("src/data/press.json"),
   schema: z.object({
     is_featured: z.boolean().optional(),
+    slug: z.string(),
     title: z.string(),
     reference: z.string().optional(),
+    feature: z.object({
+      kind: z.enum(["video", "article"]),
+      publisher: z.string(),
+      original_title: z.string().optional(),
+      language: z.string(),
+      headline: z.string(),
+      summary: z.string(),
+      quote: z.object({
+        original: z.string(),
+        translation: z.string(),
+      }).optional(),
+    }).optional(),
     published_at: z.coerce.date(),
     mention: z.object({
         lang: z.string(),

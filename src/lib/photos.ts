@@ -1,6 +1,7 @@
 import { getCollection } from "astro:content";
+import { altFor } from "./subject";
 
-export const SUBJECT = "Adil Al Qaba";
+export { SUBJECT } from "./subject";
 
 export type PhotoData = {
   is_featured?: boolean;
@@ -32,13 +33,7 @@ function ogCard(data: PhotoData) {
   return `https://res.cloudinary.com/dj08db9y2/image/${kind}/${OG_CARD}/${src}`;
 }
 
-export function altFor(p: PhotoData) {
-  if (p.title.includes(SUBJECT)) return p.title;
-  if (p.subject_in_frame === false) return p.title;
-  return `${p.title} — ${SUBJECT} pictured`;
-}
-
-export function pageUrl(p: PhotoData) {
+function pageUrl(p: PhotoData) {
   return `/photo-archive/${p.slug}`;
 }
 
