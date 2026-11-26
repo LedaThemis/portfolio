@@ -1,7 +1,7 @@
 ---
 import LayoutMinimal from "../../layouts/LayoutMinimal.astro";
 import { SUBJECT } from "../../lib/photos";
-import { getFeatures, videoObject, type Feature } from "../../lib/press";
+import { getFeatures, videoObject, dirFor, type Feature } from "../../lib/press";
 
 export async function getStaticPaths() {
   const features = await getFeatures();
@@ -107,7 +107,7 @@ const jsonLd = [
       <figure class="quote">
         <blockquote
           lang={feature.language}
-          dir={feature.language === "ar" ? "rtl" : undefined}
+          dir={dirFor(feature.language)}
           cite={feature.watchUrl}
         >
           {feature.quote.original}
@@ -133,14 +133,14 @@ const jsonLd = [
       {feature.original_title && (
         <>
           <dt>{feature.platform === "YouTube" ? "Original title" : "Original post"}</dt>
-          <dd lang={feature.language}>{feature.original_title}</dd>
+          <dd lang={feature.language} dir={dirFor(feature.language)}>{feature.original_title}</dd>
         </>
       )}
 
       {feature.mention && (
         <>
           <dt>Named in it as</dt>
-          <dd lang={feature.mention.lang}>{feature.mention.text}</dd>
+          <dd lang={feature.mention.lang} dir={dirFor(feature.mention.lang)}>{feature.mention.text}</dd>
         </>
       )}
 

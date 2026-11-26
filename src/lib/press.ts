@@ -12,6 +12,11 @@ const PLATFORMS: [RegExp, string][] = [
   [/instagram\.com/, "Instagram"],
 ];
 
+// W3C i18n guidance: set dir wherever you set lang for a right-to-left
+// language. It matters most on the strings that mix Arabic runs with dashes,
+// because a neutral dash takes the container's direction and reorders them.
+export const dirFor = (lang: string) => (lang === "ar" ? "rtl" : undefined);
+
 // undefined for an article, which never shows a platform
 function platformOf(url: string) {
   return PLATFORMS.find(([re]) => re.test(url))?.[1];

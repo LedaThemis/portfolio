@@ -79,6 +79,25 @@ test("a quoted article page carries the quote, in its own script (axe-core)", as
   expect(results.violations).toEqual([]);
 });
 
+// This is here because dir was set on the blockquote alone, where a test
+// checked it, and missed 39 other Arabic elements that no test touched.
+for (const url of [
+  "/press/adil-al-qaba-interview-al-mosuliya-tv-scientists-and-inventors",
+  // a photograph whose title does not already carry the name, so the
+  // Arabic "Pictured" line renders
+  "/photo-archive/adil-al-qaba-in-front-of-german-government-building-informatik-festival-2025",
+]) {
+  test(`every Arabic element on ${url} declares its direction`, async ({ page }) => {
+    const res = await page.goto(url);
+    expect(res?.status()).toBe(200);
+    const undeclared = await page
+      .locator('[lang="ar"]:not([dir="rtl"])')
+      .evaluateAll((els) => els.map((e) => e.outerHTML.slice(0, 90)));
+    expect(undeclared).toEqual([]);
+    await expect(page.locator('[lang="ar"]')).not.toHaveCount(0);
+  });
+}
+
 test("photo detail page is accessible (axe-core)", async ({ page }) => {
   const res = await page.goto(
     "/photo-archive/adil-al-qaba-presenting-museum-project-technical-university-brandenburg",
